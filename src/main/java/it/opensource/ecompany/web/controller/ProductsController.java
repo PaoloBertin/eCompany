@@ -106,8 +106,7 @@ public class ProductsController {
     }
 
     /**
-     * Gestisce la richiesta di visualizzare i prodotti
-     * appartenenti ad una determinata categoria
+     * Visualizzare i prodotti appartenenti ad una determinata categoria per pagine
      *
      * @param categoryId categoria prodotti da visualizzare
      * @param uiModel    dati da visualizzare
@@ -121,7 +120,7 @@ public class ProductsController {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
-
+        int pages= products.getTotalPages();
         Customer customer = userContext.getCurrentCustomer();
 
         uiModel.addAttribute("customer", customer);

@@ -1,87 +1,103 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.thymeleaf.org" 
-      th:with="lang=${#locale.language}" 
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
       th:lang="${lang}"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-      
+
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
     </head>
 
     <body>
-        <div  class="container-fluid p-0">
-         
+        <div class="container-fluid p-0">
+
             <!-- intestazione -->
-            <div th:replace="~{fragments/header :: header}">header</div>       
+            <div th:replace="~{fragments/header :: header}">header</div>
 
             <!-- corpo centrale -->
             <div class="row">
                 <div class="col-lg-2">
                     <div th:replace="~{fragments/left_side :: left_side}">left side</div>
                 </div>
-            
-                <div class="col-lg-7">    
+
+                <div class="col-lg-7">
                     <h4 th:text="#{label.product.listing}">Products Listing</h4>
-                    
-                    <table width="100%" cellspacing="10px" cellpadding="10px" th:with="column=2,elements=${products.getContent().size()}">
+
+                    <table width="100%" cellspacing="10px" cellpadding="10px" th:with="column=2,elements=${products.content.size()}">
                         <tbody>
                             <tr th:each="row : ${#numbers.sequence( 0, elements / column)}">
-                                <td th:each="col : ${#numbers.sequence(row * column, row * column + 1)}" th:if="${elements gt col}" th:width="${100 / column} + '%'" style="vertical-align: text-top">
-                                    <img th:src="@{'/products/photo/' + ${products.getContent().get(col).productid}}" border="0" align="left" style="margin: 0px 10px" width="65" height="92"/>
-                                    <!--  -->  
-                                    <a th:href="@{'/products/' + ${products.getContent().get(col).category.categoryid} + '/' + ${products.getContent().get(col).productid}}">
+                                <td th:each="col : ${#numbers.sequence(row * column, row * column + 1)}" th:if="${elements gt col}"
+                                    th:width="${100 / column} + '%'" style="vertical-align: text-top">
+                                    <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left"
+                                         style="margin: 0px 10px" width="65" height="92"/>
+                                    <!--  -->
+                                    <a th:href="@{'/products/' + ${products.content.get(col).category.categoryid} + '/' + ${products.content.get(col).productid}}">
                                         <span th:text="${products.getContent().get(col).name}"></span>
                                     </a>
                                     <br/>
                                     <p>
                                         <b>
-                                            <span th:text="#{label.product.price} + ':&nbsp;'">Prezzo: </span><span th:text="${products.getContent().get(col).price} + ' &euro;'"></span>
+                                            <span th:text="#{label.product.price} + ':&nbsp;'">Prezzo: </span>
+                                            <span th:text="${products.content.get(col).price} + ' &euro;'"></span>
                                         </b>
-                                    </p>                                 
+                                    </p>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <nav aria-label="navigation">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" th:href="@{/}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" th:href="@{/}" aria-label="Previous">
-                                    <span aria-hidden="true">&lsaquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" th:href="@{/}">1</a>
-                            </li>
-                            <li class="page-item"><span>di</span></li>
-                            <li class="page-item">
-                                <a class="page-link" th:href="@{/}">3</a>
-                            </li>
-                            <li class="page-item">
-                                <a class="page-link" th:href="@{/}" aria-label="Previous">
-                                    <span aria-hidden="true">&rsaquo;</span>
-                                </a>
-                            </li>
-
-                            <li class="page-item">
-                                <a class="page-link" th:href="@{/}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <br/>
+                    <div class="row justify-content-center">
+                        <nav aria-label="navigation" th:if="${products.totalPages gt 1}">
+                            <ul class="pagination" th:with="pages=${products.totalPages}">
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&lsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${page + 1}">-1</a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link">
+                                        <span>di</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${pages}">3</a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&rsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${products.totalPages - 1},size=${size})}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                 </div>
-                            
                 <div class="col-lg-3">
-                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+                    <div th:replace="~{fragments/right_side :: right_side}">right side</div>
                 </div>
             </div>
-        
+
             <!-- pie' pagina -->
             <div class="row">
                 <div class="col-lg-12">
