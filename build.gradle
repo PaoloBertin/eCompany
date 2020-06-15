@@ -1,0 +1,56 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.6.RELEASE'
+	}
+	repositories {
+	    mavenLocal()
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
+apply plugin: 'idea'
+
+group = 'it.opensource'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+    annotationProcessor 'org.projectlombok:lombok:1.18.6'
+    compileOnly 'org.projectlombok:lombok:1.18.6'
+
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+      
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
+    runtimeOnly 'javax.servlet:jstl'
+
+    runtimeOnly "org.webjars:webjars-locator:$locatorVersion"
+    runtimeOnly "org.webjars:bootstrap:$bootstrapVersion"
+    runtimeOnly "org.webjars:jquery:$jqueryVersion"
+    runtimeOnly "org.webjars:popper.js:$popperVersion"
+    runtimeOnly "org.webjars:font-awesome:$fontAwesomeVersion"
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly "com.h2database:h2:$h2Version"
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+
+}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:with="lang=${#locale.language}" 
+      th:lang="${lang}">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>eLisa</title>
+    </head>
+
+    <body>
+        <div th:fragment="right_side_login"></div>
+    </body>
+</html>

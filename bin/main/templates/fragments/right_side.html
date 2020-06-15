@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>eLisa</title>
+    </head>
+
+    <body>
+        <div th:fragment="right_side" th:align="left">
+            <br/>
+            <span class="sidebar-titolo" th:text="#{label.rightside.title}">Area clienti</span><br/>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                <!--  -->
+                <a th:href="@{'/movements/all/customers/' + ${customer.customerid}}" th:text="#{label.movements}"></a>
+                <!--
+                <a th:href="@{'/movements/all/customers/'}" th:text="#{label.movements}"></a>
+                -->
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <a th:href="@{'/movements/all'}" th:text="#{label.movements.all}"></a>
+            </div>
+            <br/>
+        </div>
+    </body>
+</html>

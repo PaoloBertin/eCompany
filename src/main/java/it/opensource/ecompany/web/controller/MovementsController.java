@@ -1,0 +1,110 @@
+package it.opensource.ecompany.web.controller;
+
+import java.util.List;
+
+import it.opensource.ecompany.bean.CartBean;
+import it.opensource.ecompany.domain.Category;
+import it.opensource.ecompany.domain.Customer;
+import it.opensource.ecompany.service.CustomersService;
+import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.web.form.SearchForm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import it.opensource.ecompany.bean.CatalogBean;
+import it.opensource.ecompany.domain.Movement;
+import it.opensource.ecompany.service.CategoriesService;
+import it.opensource.ecompany.service.MovementsService;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequestMapping("/movements")
+@Controller
+public class MovementsController {
+
+    @Autowired
+    private CartBean cartBean;
+
+    @Autowired
+    private CategoriesService categoriesService;
+
+    @Autowired
+    private MovementsService movementsService;
+
+    @Autowired
+    private CustomersService customersService;
+
+    @Autowired
+    private UserContext userContext;
+
+    @GetMapping("/all")
+    public String getAllMovements(Model uiModel) {
+
+        Customer customer = userContext.getCurrentCustomer();
+
+        // TODO il metodo dovrebbe essere accessibile solo all'amministratore
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("cartBean", cartBean);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("movements", movementsService.getAllMovements());
+
+        log.debug("nr. ordini=" + movementsService.getAllMovements().size());
+
+        return "movements/list";
+    }
+
+    @GetMapping("/{movementId}")
+    public String getMovementById(@PathVariable("movementId") Long id, Model uiModel) {
+
+        Customer customer = userContext.getCurrentCustomer();
+
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("cartBean", cartBean);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("movement", movementsService.getMovementById(id));
+
+        Movement movement = movementsService.getMovementById(id);
+
+        log.debug("visualizza ordine=" + movement.getMovementid());
+        log.debug("numero lineItem=" + movement.getLineitems().size());
+
+        return "movements/show";
+    }
+
+    @GetMapping("/all/customers/{customerId}")
+    public String getMovementsByCustomer(@PathVariable("customerId") Long customerId, Model uiModel) {
+
+        Customer customer = userContext.getCurrentCustomer();
+
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("cartBean", cartBean);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+
+        List<Movement> movements = movementsService.getMovementByCustomer(customerId);
+        uiModel.addAttribute("movements", movements);
+
+        return "movements/list";
+    }
+
+    @GetMapping("/all/customers/{customerId}/checkout")
+    public String viewMovements(@PathVariable("customerId") Long customerId, Model uiModel) {
+
+        Customer customer = userContext.getCurrentCustomer();
+        List<Category> categories = categoriesService.getAll();
+
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("cartBean", cartBean);
+        uiModel.addAttribute("categories", categories);
+
+        return "movements/checkout";
+    }
+
+}
