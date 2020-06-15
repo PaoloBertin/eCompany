@@ -19,8 +19,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -132,20 +130,20 @@ public class ProductsController {
         uiModel.addAttribute("size", size);
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
-
         uiModel.addAttribute("products", products);
+
         log.debug("numero prodotti da visualizzare =" + products.getContent().size());
 
         return "catalog/list";
     }
 
     /**
-     * Gestisce la richiesta di visualizzare un prodotto di una determinata
-     * caregoria
+     * Gestisce la richiesta di visualizzare un prodotto di una determinata categoria
      *
      * @param categoryid
      * @param productid
      * @param uiModel
+     * 
      * @return nome vista
      */
     @GetMapping(value = "/{categoryid}/{productid}")
@@ -164,9 +162,10 @@ public class ProductsController {
     }
 
     /**
-     * Gestisce il recupero ed il ritorno dell'immagine di un prodotto
+     * Recupera da db l'immagine di un prodotto
      *
      * @param id identificativo prodotto
+     * 
      * @return immagine prodotto
      */
     @GetMapping(value = "/photo/{id}")
@@ -174,9 +173,6 @@ public class ProductsController {
     public byte[] downloadPhoto(@PathVariable("id") Long id) {
 
         Product product = productsService.getProductById(id);
-
-        if (product.getImage() != null) {
-        }
 
         return product.getImage();
     }
@@ -255,7 +251,6 @@ public class ProductsController {
 
         productsService.save(product);
 
-        //        return "redirect:/contacts/" + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(), httpServletRequest);
         return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(),
                                                                     httpServletRequest);
 
@@ -270,6 +265,7 @@ public class ProductsController {
      * @param httpServletRequest
      * @param redirectAttributes
      * @param locale
+     * 
      * @return vista
      */
     @PostMapping(value = "/{id}", params = "form")
