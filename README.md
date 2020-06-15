@@ -1,2 +1,2 @@
 # eCompany
-application to improve business profitability
+Application to improve business profitability
