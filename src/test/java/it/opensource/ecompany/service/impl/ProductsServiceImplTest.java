@@ -21,7 +21,7 @@ public class ProductsServiceImplTest {
     @Test
     public void getAllProductsTest() {
 
-        int expected = 25;
+        int expected = 47;
         int actual = productsService.getAll().size();
 
         assertThat(actual, is(expected));
@@ -30,7 +30,7 @@ public class ProductsServiceImplTest {
     @Test
     public void getProductsByCategoryId() {
 
-        int expected = 11;
+        int expected = 21;
         int actual   = productsService.getProductsByCategory(1L).size();
 
         assertThat(actual, is(expected));

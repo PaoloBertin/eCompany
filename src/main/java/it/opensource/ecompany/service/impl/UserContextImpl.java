@@ -32,14 +32,14 @@ public class UserContextImpl implements UserContext {
 
         Object object = authentication.getPrincipal();
         if(! (object instanceof User)) {
-            return null;
+            return new Customer();
         }
 
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
 
         if(username == null) {
-            return null;
+            return new Customer();
         }
         Customer customer = customersService.getCustomerByUsername(username);
         if(customer == null) {
