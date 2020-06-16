@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.6.RELEASE'
+		springBootVersion = '2.3.1.RELEASE'
 	}
 	repositories {
 	    mavenLocal()
@@ -28,27 +28,27 @@ repositories {
 }
 
 dependencies {
-    annotationProcessor 'org.projectlombok:lombok:1.18.6'
-    compileOnly 'org.projectlombok:lombok:1.18.6'
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
 
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-      
-    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5:3.0.4.RELEASE'
-    runtimeOnly 'javax.servlet:jstl'
 
-    runtimeOnly "org.webjars:webjars-locator:$locatorVersion"
-    runtimeOnly "org.webjars:bootstrap:$bootstrapVersion"
-    runtimeOnly "org.webjars:jquery:$jqueryVersion"
-    runtimeOnly "org.webjars:popper.js:$popperVersion"
-    runtimeOnly "org.webjars:font-awesome:$fontAwesomeVersion"
+    runtimeOnly "org.webjars:webjars-locator:${locatorVersion}"
+    runtimeOnly "org.webjars:bootstrap:${bootstrapVersion}"
+    runtimeOnly "org.webjars:jquery:${jqueryVersion}"
+    runtimeOnly "org.webjars:popper.js:${popperVersion}"
+    runtimeOnly "org.webjars:font-awesome:${fontAwesomeVersion}"
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	runtimeOnly "com.h2database:h2:$h2Version"
+	runtimeOnly "com.h2database:h2:${h2Version}"
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
