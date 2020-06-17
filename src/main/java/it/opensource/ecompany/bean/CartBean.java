@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.opensource.ecompany.domain.Product;
-import it.opensource.ecompany.service.ProductsService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Paolo Bertin
@@ -16,9 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CartBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-
-    @Autowired
-    private ProductsService productsService;
 
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 

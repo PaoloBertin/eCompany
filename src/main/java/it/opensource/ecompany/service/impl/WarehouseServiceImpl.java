@@ -4,18 +4,15 @@ import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.repository.WarehouseRepository;
 import it.opensource.ecompany.service.WarehouseService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 @Service("warehouseService")
 public class WarehouseServiceImpl implements WarehouseService {
 
-    @Autowired
-    private WarehouseRepository warehouseRepository;
-    //    private final WarehouseRepository warehouseRepository;
+    private final WarehouseRepository warehouseRepository;
 
     @Override
     public Page<Warehouse> getAllItemsByPage(Pageable pageable) {
@@ -33,7 +30,6 @@ public class WarehouseServiceImpl implements WarehouseService {
     public Page<Warehouse> getProductsByNameContainingByPage(String searchText, Pageable pageable) {
 
         return warehouseRepository.findByProductNameContaining(searchText, pageable);
-//        return warehouseRepository.findByProductName(searchText, pageable);
     }
 
     @Override

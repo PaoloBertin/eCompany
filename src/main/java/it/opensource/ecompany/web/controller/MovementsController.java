@@ -5,48 +5,39 @@ import java.util.List;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import it.opensource.ecompany.bean.CatalogBean;
 import it.opensource.ecompany.domain.Movement;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.MovementsService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/movements")
 @Controller
 public class MovementsController {
 
-    @Autowired
-    private CartBean cartBean;
+    private final CartBean cartBean;
 
-    @Autowired
-    private CategoriesService categoriesService;
+    private final CategoriesService categoriesService;
 
-    @Autowired
-    private MovementsService movementsService;
+    private final MovementsService movementsService;
 
-    @Autowired
-    private CustomersService customersService;
-
-    @Autowired
-    private UserContext userContext;
+    private final UserContext userContext;
 
     @GetMapping("/all")
     public String getAllMovements(Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
 
-        // TODO il metodo dovrebbe essere accessibile solo all'amministratore
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);

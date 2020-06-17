@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.opensource.ecompany.bean.CartBean;
-import it.opensource.ecompany.bean.CustomerBean;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
@@ -30,9 +29,6 @@ public class CartController {
 
     @Autowired
     private CartBean cartBean;
-
-    @Autowired
-    private CustomerBean customerBean;
 
     @Autowired
     private ProductsService productsService;

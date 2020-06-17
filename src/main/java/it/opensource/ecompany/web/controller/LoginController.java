@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.opensource.ecompany.bean.CatalogBean;
 import it.opensource.ecompany.service.CategoriesService;
 import lombok.extern.slf4j.Slf4j;
 
