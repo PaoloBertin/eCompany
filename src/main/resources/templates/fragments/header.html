@@ -51,14 +51,18 @@
                 </ul>
                 <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
                     <li class="nav-item">
-                        <span th:text="#{label.customer.user}"></span>
+                        <a class="nav-link">
+                            <span class="navbar-text" th:text="#{label.customer.user}"></span>
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <span th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                        <a class="nav-link">
+                        <span class="navbar-text" th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/logout}">
-                            <span th:text="#{label.header.logout}">logout</span>
+                            <span class="navbar-text" th:text="#{label.header.logout}">logout</span>
                         </a>
                     </li>
                 </ul>
