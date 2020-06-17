@@ -16,12 +16,12 @@
             <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
                 <!--  -->
                 <a th:href="@{'/movements/all/customers/' + ${customer.customerid}}" th:text="#{label.movements}"></a>
-                <!--
-                <a th:href="@{'/movements/all/customers/'}" th:text="#{label.movements}"></a>
-                -->
             </div>
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                 <a th:href="@{'/movements/all'}" th:text="#{label.movements.all}"></a>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <a th:href="@{'/warehouse'}" th:text="#{label.warehouse.all}"></a>
             </div>
             <br/>
         </div>

@@ -46,6 +46,8 @@ public class Warehouse implements Serializable {
     @Column(name = "container")
     private String container;
 
-    @Column(name = "position")
-    private String position;
+    @Column(name = "location")
+    private String location;
+
+
 }

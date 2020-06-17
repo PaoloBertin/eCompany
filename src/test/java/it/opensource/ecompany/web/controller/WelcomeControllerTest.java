@@ -39,10 +39,8 @@ public class WelcomeControllerTest {
 
         mvc
             .perform(get("/"))
-//            .perform(get("/").session(mocksession))
             .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
             .andExpect(view().name("welcome"))
-//            .andDo(print())
             .andExpect(status().isOk());
     }
 

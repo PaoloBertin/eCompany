@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS warehouse (
 
     PRIMARY KEY (warehouseid),
 
-    CONSTRAINT warehouse_id_fk FOREIGN KEY(product_id) REFERENCES products(productid)
+    CONSTRAINT warehouse_fk_01 FOREIGN KEY (product_id) REFERENCES products(productid)
 );
 
 CREATE TABLE IF NOT EXISTS movement (

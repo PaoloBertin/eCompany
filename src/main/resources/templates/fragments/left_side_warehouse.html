@@ -10,8 +10,8 @@
     </head>
 
     <body>
-        <div th:fragment="left_side" style="align-content: left; margin-left: 15px;">
-            <form th:action="@{/products/searchProduct}" th:object="${searchForm}" method="GET">
+        <div th:fragment="left_side_warehouse" style="align-content: left; margin-left: 15px;">
+            <form th:action="@{/warehouse/searchProduct}" th:object="${searchForm}" method="GET">
                 <br/>
                 <div class="form-group">
                     <input id="searchLabel" class="form-control" type="search" placeholder="Search" th:field="*{textToSearch}" aria-label="Search">
@@ -24,7 +24,7 @@
                 <tbody>
                     <tr th:each="category : ${categories}">
                         <td>
-                            <a href="#" th:href="@{/products/{categoryId}(categoryId=${category.categoryid})}">
+                            <a th:href="@{/warehouse/{categoryId}(categoryId=${category.categoryid})}">
                                 <span th:text="${category.name}"></span>
                             </a>
                         </td>

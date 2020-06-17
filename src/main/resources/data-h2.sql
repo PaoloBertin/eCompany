@@ -103,11 +103,11 @@ INSERT INTO products(productid, name, description, isbn, price, image, categoryi
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(47, 'The Eagle', 'Nel 140 d.C. l''Impero Romano si estende fino alla Britannia, anche se non ha il controllo di tutte le regioni e l''estremo nord è governato dalle tribù ribelli della Caledonia.', '8032807067841', 9.99, FILE_READ('classpath:static/images/cover/8032807067841.jpg'), 3);
 
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 1,  1, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 2,  2, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 3,  3, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 4,  4, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 5,  5, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 6,  6, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 2,  2, 'B0002', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 3,  3, 'B0003', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 4,  4, 'B0004', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 5,  5, 'B0005', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 6,  6, 'B0006', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 7,  7, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 8,  8, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 9,  9, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
@@ -141,13 +141,14 @@ INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorde
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(37, 37, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(38, 38, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(39, 39, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(40, 41, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(40, 40, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(41, 41, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(42, 41, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(43, 41, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(44, 41, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(45, 41, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(46, 41, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(42, 42, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(43, 43, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(44, 44, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(45, 45, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(46, 46, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(47, 47, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 
 INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 2);
 INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 2, '2018-10-10 00:00:00',  49.90, 'processato', 2);
