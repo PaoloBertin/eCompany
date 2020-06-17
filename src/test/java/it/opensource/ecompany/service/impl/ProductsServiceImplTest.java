@@ -1,7 +1,6 @@
 package it.opensource.ecompany.service.impl;
 
 import static org.hamcrest.CoreMatchers.is;
-//import static org.junit.Assert.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.junit.Test;
@@ -22,7 +21,7 @@ public class ProductsServiceImplTest {
     @Test
     public void getAllProductsTest() {
 
-        int expected = 47;
+        int expected = 54;
         int actual = productsService.getAll().size();
 
         assertThat(actual, is(expected));
