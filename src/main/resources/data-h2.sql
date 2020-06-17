@@ -168,11 +168,11 @@ INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) V
 INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 3, '2018-10-10 00:00:00',  59.70, 'processato', 2);
 INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 4, '2018-10-10 00:00:00',  74.90, 'processato', 2);
 INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 5, '2018-12-08 00:00:00', 246.60, 'processato', 1);
-INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 6, '2018-10-10 00:00:00', 100.00, 'processato', 1);
-INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 7, '2018-10-10 00:00:00', 150.00, 'processato', 1);
-INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 8, '2018-10-10 00:00:00',  50.00, 'processato', 1);
-INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 9, '2018-10-10 00:00:00',  50.00, 'processato', 3);
-INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES(10, '2018-12-08 00:00:00',  50.00, 'processato', 3);
+INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 6, '2018-10-10 00:00:00',  79.60, 'processato', 1);
+INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 7, '2018-10-10 00:00:00',  39.80, 'processato', 1);
+INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 8, '2018-10-10 00:00:00',  71.60, 'processato', 1);
+INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 9, '2018-10-10 00:00:00', 109.20, 'processato', 3);
+INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES(10, '2018-12-08 00:00:00',  19.00, 'processato', 3);
 
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(1,   1, 1);
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(2,   2, 2);
