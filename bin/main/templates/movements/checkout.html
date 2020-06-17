@@ -1,8 +1,6 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      th:with="lang=${#locale.language}"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" th:with="lang=${#locale.language}"
       th:lang="${lang}">
 
     <head>
@@ -143,8 +141,8 @@
                     </table>
                 </div>
 
-                <div>
-                    <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+                <div class="col-lg-3">
+                    <div th:replace="~{fragments/right_side_checkout :: right_side_checkout}">right side</div>
                 </div>
             </div>
 
