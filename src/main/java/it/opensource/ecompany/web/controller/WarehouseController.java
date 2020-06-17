@@ -1,5 +1,6 @@
 package it.opensource.ecompany.web.controller;
 
+import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.service.CategoriesService;
@@ -8,6 +9,7 @@ import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -27,6 +29,8 @@ public class WarehouseController {
 
     private final UserContext userContext;
 
+    private final CartBean cartBean;
+
     @GetMapping
     public String viewAllItempByPage(@RequestParam(name = "page", defaultValue = "0") int page,
                                      @RequestParam(name = "size", defaultValue = "10") int size,
@@ -40,6 +44,7 @@ public class WarehouseController {
         uiModel.addAttribute("customer", customer);
 
         uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
@@ -66,6 +71,7 @@ public class WarehouseController {
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
         uiModel.addAttribute("categoryId", categoryId);
+        uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("warehouse", warehouse);
 
