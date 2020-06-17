@@ -17,7 +17,7 @@ public class CartBean implements Serializable {
 
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
-    private Float totalAmount = 0.0F;
+    private Float subTtotal = 0.0F;
 
     private Integer numberOfProducts = 0;
 
@@ -28,7 +28,7 @@ public class CartBean implements Serializable {
 
     public Float getTotalAmount() {
 
-        return this.totalAmount;
+        return this.subTtotal;
     }
 
     public void addProductToCart(Product product) {
@@ -75,7 +75,7 @@ public class CartBean implements Serializable {
     private void updateCart() {
 
         numberOfProducts = 0;
-        totalAmount = 0F;
+        subTtotal = 0F;
 
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             Product key = entry.getKey();
@@ -85,7 +85,7 @@ public class CartBean implements Serializable {
 
             numberOfProducts += quantity;
 
-            totalAmount += unitCost;
+            subTtotal += unitCost;
         }
     }
 }
