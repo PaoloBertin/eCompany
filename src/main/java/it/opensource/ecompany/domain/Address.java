@@ -93,7 +93,7 @@ public class Address implements Serializable {
         return houseNumber;
     }
 
-    public void setHouseNumber(String housenumber) {
+    public void setHouseNumber(String houseNumber) {
 
         this.houseNumber = houseNumber;
     }
