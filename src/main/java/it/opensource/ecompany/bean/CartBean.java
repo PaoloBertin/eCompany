@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.opensource.ecompany.domain.Product;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -68,7 +67,7 @@ public class CartBean implements Serializable {
 
         setSubTotal();
 
-        return this.numberProducts;
+        return numberProducts;
     }
 
     public void emptyCart() {
