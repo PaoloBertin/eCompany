@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import it.opensource.ecompany.domain.Product;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
+ *
+ *
  * @author Paolo Bertin
  */
+@Getter
 @Slf4j
 public class CartBean implements Serializable {
 
@@ -19,16 +23,17 @@ public class CartBean implements Serializable {
 
     private Float subTtotal = 0.0F;
 
+    private Float shippingCosts;
+
+    private boolean expressDelivery;
+
+    private Float total = 0.0F;
+
     private Integer numberOfProducts = 0;
 
     public Map<Product, Integer> getProducts() {
 
         return this.products;
-    }
-
-    public Float getTotalAmount() {
-
-        return this.subTtotal;
     }
 
     public void addProductToCart(Product product) {
@@ -45,8 +50,8 @@ public class CartBean implements Serializable {
 
         updateCart();
 
-        log.debug("nuovo totale prodotti in carrello=" + getNumberOfProducts());
-        log.debug("importo totale acquisto=" + getTotalAmount());
+        log.debug("nuovo prodotti in carrello=" + getNumberOfProducts());
+        log.debug("importo subTotale acquisto=" + getSubTtotal());
 
     }
 
