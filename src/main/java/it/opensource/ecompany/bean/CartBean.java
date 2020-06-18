@@ -9,11 +9,10 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- *
+ * Shopping cart
  *
  * @author Paolo Bertin
  */
-@Getter
 @Slf4j
 public class CartBean implements Serializable {
 
@@ -21,15 +20,20 @@ public class CartBean implements Serializable {
 
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
-    private Float subTtotal = 0.0F;
+    private Double subTotal = 0.0;
 
-    private Float shippingCosts;
+    private Double shippingCosts;
 
     private boolean expressDelivery;
 
-    private Float total = 0.0F;
+    private Double totalCost = 0.0;
 
-    private Integer numberOfProducts = 0;
+    private Integer numberProducts = 0;
+
+    public CartBean() {
+
+        this.expressDelivery = false;
+    }
 
     public Map<Product, Integer> getProducts() {
 
@@ -48,10 +52,10 @@ public class CartBean implements Serializable {
             this.products.put(product, 1);
         }
 
-        updateCart();
+        setSubTotal();
 
-        log.debug("nuovo prodotti in carrello=" + getNumberOfProducts());
-        log.debug("importo subTotale acquisto=" + getSubTtotal());
+        log.debug("nuovo prodotti in carrello=" + getNumberProducts());
+        log.debug("importo subTotale acquisto=" + subTotal );
 
     }
 
@@ -61,15 +65,15 @@ public class CartBean implements Serializable {
 
         if (products.containsKey(product)) {
             products.remove(product);
-            updateCart();
+            setSubTotal();
         }
     }
 
-    public Integer getNumberOfProducts() {
+    public Integer getNumberProducts() {
 
-        updateCart();
+        setSubTotal();
 
-        return this.numberOfProducts;
+        return this.numberProducts;
     }
 
     public void emptyCart() {
@@ -77,20 +81,42 @@ public class CartBean implements Serializable {
         products.clear();
     }
 
-    private void updateCart() {
+    private Double getShippingCosts() {
 
-        numberOfProducts = 0;
-        subTtotal = 0F;
+        if (expressDelivery) {
+            return 5.0;
+        } else {
+            if (subTotal >= 25) {
+                return 0.0;
+            }
+            return 3.0;
+        }
+    }
+
+    private Double getTotalCost() {
+
+        return totalCost;
+    }
+
+    private Double getSubTotal() {
+
+        return subTotal;
+    }
+
+    private void setSubTotal() {
+
+        numberProducts = 0;
+        subTotal = 0.0;
 
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             Product key = entry.getKey();
             int quantity = entry.getValue();
-            float price = key.getPrice();
-            float unitCost = price * quantity;
+            double price = key.getPrice();
+            double unitCost = price * quantity;
 
-            numberOfProducts += quantity;
+            numberProducts += quantity;
 
-            subTtotal += unitCost;
+            subTotal += unitCost;
         }
     }
 }
