@@ -18,22 +18,17 @@ public class CartBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private Double totalCost = 0.0;
+
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
     private Double subTotal = 0.0;
 
     private Double shippingCosts;
 
-    private boolean expressDelivery;
-
-    private Double totalCost = 0.0;
+    private boolean expressDelivery = false;
 
     private Integer numberProducts = 0;
-
-    public CartBean() {
-
-        this.expressDelivery = false;
-    }
 
     public Map<Product, Integer> getProducts() {
 
@@ -55,7 +50,7 @@ public class CartBean implements Serializable {
         setSubTotal();
 
         log.debug("nuovo prodotti in carrello=" + getNumberProducts());
-        log.debug("importo subTotale acquisto=" + subTotal );
+        log.debug("importo subTotale acquisto=" + subTotal);
 
     }
 
@@ -81,24 +76,47 @@ public class CartBean implements Serializable {
         products.clear();
     }
 
-    private Double getShippingCosts() {
+    public boolean isExpressDelivery() {
+
+        return expressDelivery;
+    }
+
+    public void setExpressDelivery(Boolean expressDelivery) {
+
+        this.expressDelivery = expressDelivery;
+    }
+
+    public Double getShippingCosts() {
+
+        setShippingCosts();
+
+        return shippingCosts;
+    }
+
+    private void setShippingCosts() {
 
         if (expressDelivery) {
-            return 5.0;
+            shippingCosts = 5.0;
         } else {
             if (subTotal >= 25) {
-                return 0.0;
+                shippingCosts = 0.0;
             }
-            return 3.0;
+            else {
+                shippingCosts = 3.0;
+            }
         }
     }
 
-    private Double getTotalCost() {
+    public Double getTotalCost() {
 
-        return totalCost;
+        setSubTotal();
+        totalCost = subTotal;
+        totalCost += getShippingCosts();
+
+        return this.totalCost;
     }
 
-    private Double getSubTotal() {
+    public Double getSubTotal() {
 
         return subTotal;
     }

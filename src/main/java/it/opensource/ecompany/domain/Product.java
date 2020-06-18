@@ -53,6 +53,15 @@ public class Product implements Serializable {
         this.category = category;
     }
 
+    public Product(Long id, String name, String isbn, Category category, Float price) {
+
+        this.productid = id;
+        this.name = name;
+        this.isbn = isbn;
+        this.category = category;
+        this.price = price;
+    }
+
     public Long getProductid() {
 
         return productid;

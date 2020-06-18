@@ -44,7 +44,7 @@ public class CartController {
         cartBean.addProductToCart(product);
 
         log.debug("aggiunto prodotto al carrello");
-        log.debug("sono presenti " + cartBean.getNumberOfProducts() + " prodotti nel carrello");
+        log.debug("sono presenti " + cartBean.getNumberProducts() + " prodotti nel carrello");
 
         return "redirect:" + referer;
     }

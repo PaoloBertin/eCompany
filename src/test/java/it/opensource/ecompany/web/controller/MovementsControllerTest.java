@@ -55,13 +55,13 @@ public class MovementsControllerTest {
             .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
             .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Books")))))
             .andExpect(model().attributeExists("cartBean"))
-            .andExpect(model().attribute("cartBean", hasProperty("totalAmount", equalTo(0.0F))))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
             .andExpect(view().name("movements/checkout"))
             .andExpect(status().isOk());
     }
 
     @Test
-    public void getAllMovements() throws Exception {
+    public void getAllMovementsTest() throws Exception {
 
         mvc
             .perform(get("/movements/all")
@@ -72,7 +72,7 @@ public class MovementsControllerTest {
             .andExpect(model().attribute("movements", IsCollectionWithSize.hasSize(10)))
             .andExpect(model().attribute("movements", hasItem(hasProperty("totalamount", equalTo(169.5)))))
             .andExpect(model().attributeExists("cartBean"))
-            .andExpect(model().attribute("cartBean", hasProperty("totalAmount", equalTo(0.0F))))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
             .andExpect(view().name("movements/list"))
             .andExpect(status().isOk());
 
@@ -86,7 +86,7 @@ public class MovementsControllerTest {
                 .with(user("mario.rossi").password("user").roles("USER"))
             )
             .andExpect(model().attributeExists("cartBean"))
-            .andExpect(model().attribute("cartBean", hasProperty("totalAmount", equalTo(0.0F))))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost",closeTo(3.0, 0.001))))
             .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
             .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Books")))))
             .andExpect(model().attribute("movement", hasProperty("totalamount", equalTo(49.90))))
@@ -103,7 +103,7 @@ public class MovementsControllerTest {
             )
 //            .andDo(print())
             .andExpect(model().attributeExists("cartBean"))
-            .andExpect(model().attribute("cartBean", hasProperty("totalAmount", equalTo(0.0F))))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
             .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
             .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Books")))))
             .andExpect(model().attribute("movements", IsCollectionWithSize.hasSize(4)))
