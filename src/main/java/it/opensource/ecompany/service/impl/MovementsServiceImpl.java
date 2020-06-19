@@ -36,5 +36,11 @@ public class MovementsServiceImpl implements MovementsService {
 
         return movementsRepository.findByCustomerCustomerid(customerid);
     }
-    
+
+    @Override
+    public void saveMovements() {
+
+    }
+
+
 }

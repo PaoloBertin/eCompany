@@ -11,4 +11,6 @@ public interface MovementsService {
     public Movement getMovementById(Long id);
 
     public List<Movement> getMovementByCustomer(Long customerid);
+
+    public void saveMovements();
 }
