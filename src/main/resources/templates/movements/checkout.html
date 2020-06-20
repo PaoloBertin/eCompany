@@ -26,7 +26,7 @@
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Consegna</h5>
+                                    <h5 class="card-title" th:text="#{label.customer.delivery}">Consegna</h5>
                                     <div>
                                         <span class="card-text" th:text="${customer.firstname}"></span>
                                         <span class="card-text" th:text="${customer.lastname}"></span>
@@ -45,14 +45,14 @@
                                         <span class="card-text" th:text="${customer.address.state}"></span>
                                     </div>
                                     <br/>
-                                    <a href="#" class="btn btn-primary">Edita</a>
+                                    <a href="#" class="btn btn-primary" th:text="#{label.bottom.edited}">Edita</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Intestazione</h5>
+                                    <h5 class="card-title" th:text="#{label.customer.address}">Indirizzo Consegna</h5>
                                     <div>
                                         <span class="card-text" th:text="${customer.firstname}"></span>
                                         <span class="card-text" th:text="${customer.lastname}"></span>
@@ -72,16 +72,16 @@
                                     </div>
 
                                     <br/>
-                                    <a href="#" class="btn btn-primary">Edita</a>
+                                    <a href="#" class="btn btn-primary" th:text="#{label.bottom.edited}">Edita</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Pagamento</h5>
+                                    <h5 class="card-title" th:text="#{label.customer.payment}">Pagamento</h5>
                                     <p class="card-text">Scegli metodo di pagamento</p>
-                                    <a href="#" class="btn btn-primary">Seleziona</a>
+                                    <a href="#" class="btn btn-primary" th:text="#{label.customer.select}">seleziona</a>
                                 </div>
                             </div>
                         </div>
@@ -91,18 +91,18 @@
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <p class="card-title">Espresso: 3.90 &euro;</p>
-                                    <p class="card-text">Consegna tra 2/3 giorni</p>
-                                    <a href="#" class="btn btn-primary">Edita</a>
+                                    <p class="card-title" th:text="#{label.customer.express}">Espresso: 3.90 &euro;</p>
+                                    <p class="card-text" th:text="#{label.customer.express_delivery}">Consegna tra 2/3 giorni</p>
+                                    <a href="#" class="btn btn-primary" th:text="#{label.customer.select}">edita</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Standard: 2.80 &euro;</h5>
-                                    <p class="card-text">Consegna tra 6/7 giorni</p>
-                                    <a href="#" class="btn btn-primary">Edita</a>
+                                    <h5 class="card-title" th:text="#{label.customer.standard}">Standard: 2.80 &euro;</h5>
+                                    <p class="card-text" th:text="#{label.customer.standard_delivery}">Consegna tra 6/7 giorni</p>
+                                    <a href="#" class="btn btn-primary" th:text="#{label.customer.select}">edita</a>
                                 </div>
                             </div>
                         </div>
@@ -113,10 +113,10 @@
                         <thead>
                             <tr>
                                 <th style="width: 20%">&nbsp;</th>
-                                <th style="width: 35%">Products</th>
-                                <th style="width: 15%">Prezzo</th>
-                                <th style="width: 15%">Quantita'</th>
-                                <th style="width: 15%">Totale</th>
+                                <th style="width: 35%" th:text="#{label.product.product}">Products</th>
+                                <th style="width: 15%" th:text="#{label.product.price}">Prezzo</th>
+                                <th style="width: 15%" th:text="#{label.product.quantity}">Quantita'</th>
+                                <th style="width: 15%" th:text="#{label.movements.total}">Totale</th>
                             </tr>
                         </thead>
                         <tbody>
