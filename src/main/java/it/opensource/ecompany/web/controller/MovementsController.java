@@ -1,10 +1,12 @@
 package it.opensource.ecompany.web.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import it.opensource.ecompany.bean.CartBean;
-import it.opensource.ecompany.domain.Category;
-import it.opensource.ecompany.domain.Customer;
+import it.opensource.ecompany.domain.*;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.springframework.stereotype.Controller;
@@ -13,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import it.opensource.ecompany.domain.Movement;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.MovementsService;
 import lombok.RequiredArgsConstructor;
@@ -96,6 +97,37 @@ public class MovementsController {
         uiModel.addAttribute("categories", categories);
 
         return "movements/checkout";
+    }
+
+    @GetMapping("/save")
+    public String saveMovement(Model uiModel) {
+
+        Customer customer = userContext.getCurrentCustomer();
+
+        Movement movement = new Movement();
+        movement.setDatemovement(new Date());
+        movement.setTotalamount(cartBean.getTotalCost());
+        movement.setState(State.nuovo);
+        movement.setCustomer(customer);
+
+        // costruzione lista LineItem
+        List<Lineitem> lineitems = new ArrayList<>();
+        for (Map.Entry<Product, Integer> entry : cartBean.getProducts().entrySet()) {
+            Lineitem lineitem = new Lineitem();
+            lineitem.setProduct(entry.getKey());
+            lineitem.setQuantity(Double.valueOf(entry.getValue()));
+            lineitems.add(lineitem);
+        }
+        movement.setLineitems(lineitems);
+
+        movementsService.saveMovements(movement);
+
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("cartBean", cartBean);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("searchForm", new SearchForm());
+
+        return "welcome";
     }
 
 }

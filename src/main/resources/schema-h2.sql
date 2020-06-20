@@ -168,5 +168,3 @@ CREATE TABLE IF NOT EXISTS movement_lineitems (
     CONSTRAINT movement_lineitem_02 FOREIGN KEY (lineitems_lineitemid) REFERENCES lineitem,
     CONSTRAINT movement_lineitem_03 FOREIGN KEY (Movement_movementid) REFERENCES movement
 );
-
-

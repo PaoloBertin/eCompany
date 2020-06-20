@@ -38,8 +38,9 @@ public class MovementsServiceImpl implements MovementsService {
     }
 
     @Override
-    public void saveMovements() {
+    public void saveMovements(Movement movement) {
 
+        movementsRepository.save(movement);
     }
 
 
