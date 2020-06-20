@@ -43,5 +43,4 @@ public class MovementsServiceImpl implements MovementsService {
         movementsRepository.save(movement);
     }
 
-
 }
