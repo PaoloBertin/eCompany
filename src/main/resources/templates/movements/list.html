@@ -40,7 +40,7 @@
                                 <td>
                                     <a th:href="@{'/movements/' + ${movement.movementid}}" th:text="${#dates.format(movement.datemovement, 'dd-MM-yyyy HH:mm')}"></a>
                                 </td>
-                                <td th:text="${#numbers.formatDecimal(movement.totalamount, 0, 'COMMA', 2, 'POINT')} + ' &euro;'"></td>
+                                <td class="text-xl-right" th:text="${#numbers.formatDecimal(movement.totalamount, 0, 'COMMA', 2, 'POINT')} + ' &euro;'"></td>
                                 <td th:text="${movement.state}"></td>
                             </tr>
                         </tbody>                        
