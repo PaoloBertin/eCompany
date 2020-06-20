@@ -37,6 +37,18 @@
                     </li>
                 </ul>
                 <!--  -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">
+                            <img src="/images/Flag_of_Italy.png" width="35" height="23" alt="italiano">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">
+                            <img src="/images/Flag_of_the_United_Kingdom.png" width="35" height="23" alt="inglese">
+                        </a>
+                    </li>
+                </ul>
                 <ul class="navbar-nav ml-auto" sec:authorize="! isAuthenticated()">
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/login/form}">
