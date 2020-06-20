@@ -2,7 +2,6 @@ package it.opensource.ecompany.web.controller;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,20 +37,21 @@ public class CartControllerTest {
 
     }
 
-    @Ignore
+    // @Ignore
     @Test
     public void addProductToCart() {
 
     }
 
-    @Ignore
+    // @Ignore
     @Test
     public void deleteProductFromToCart() {
 
     }
 
+    // @Ignore
     @Test
-    public void showCart() throws Exception{
+    public void showCart() throws Exception {
 
         mvc
             .perform(get("/cart/show"))
@@ -59,7 +59,7 @@ public class CartControllerTest {
             .andExpect(view().name("cart/show"));
     }
 
-    @Ignore
+    // @Ignore
     @Test
     public void deleteCart() {
 

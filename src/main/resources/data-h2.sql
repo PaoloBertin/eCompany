@@ -47,7 +47,7 @@ INSERT INTO customer_role(customerid, id) VALUES (3, 1);
 INSERT INTO customer_role(customerid, id) VALUES (1, 1);
 INSERT INTO customer_role(customerid, id) VALUES (1, 2);
 
-INSERT INTO categories(categoryid, name) VALUES(1, 'Books');
+INSERT INTO categories(categoryid, name) VALUES(1, 'Libri');
 INSERT INTO categories(categoryid, name) VALUES(2, 'CD');
 INSERT INTO categories(categoryid, name) VALUES(3, 'DVD');
 INSERT INTO categories(categoryid, name) VALUES(4, 'Giochi');
