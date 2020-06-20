@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class WarehouseServiceImplTest {
 
-    @Disabled
+    // @Disabled
     @Test
     void findBySku() {
 
