@@ -12,7 +12,9 @@ import it.opensource.ecompany.domain.Role;
 import it.opensource.ecompany.repository.CustomersRepository;
 import it.opensource.ecompany.repository.RolesRepository;
 import it.opensource.ecompany.service.CustomersService;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service("customersService")
 public class CustomersServiceImpl implements CustomersService {
 
@@ -28,24 +30,28 @@ public class CustomersServiceImpl implements CustomersService {
         return customerRepository.findAll();
     }
 
+    @Transactional(readOnly=true)
     @Override
     public Customer getCustomerById(Long customerId) {
 
         return customerRepository.findById(customerId).get();
     }
 
+    @Transactional(readOnly=true)
     @Override
     public Customer getCustomerByEmail(String email) {
 
         return customerRepository.findByEmail(email);
     }
 
+    @Transactional(readOnly=true)
     @Override
     public Customer getCustomerByUsername(String username) {
 
         return customerRepository.findByUsername(username);
     }
 
+    @Transactional(readOnly=true)
     @Override
     public Customer getCustomerByUsernameAndPassword(String username, String password) {
 
@@ -54,6 +60,7 @@ public class CustomersServiceImpl implements CustomersService {
         return customer;
     }
 
+    @Transactional(readOnly=true)
     @Override
     public boolean verifyCustomer(String username, String password) {
 
