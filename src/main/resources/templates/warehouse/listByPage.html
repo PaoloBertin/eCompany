@@ -26,19 +26,17 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Sku</th>
-                                <th>Cost</th>
-                                <th>Unit</th>
-                                <th>Quantity</th>
-                                <th>Container</th>
-                                <th>Location</th>
+                                <th th:text="#{label.product.name}">name</th>
+                                <th th:text="#{label.product.sku}">Sku</th>
+                                <th th:text="#{label.product.cost}">Cost</th>
+                                <th th:text="#{label.product.unit}">Unit</th>
+                                <th th:text="#{label.product.quantity}">Quantity</th>
+                                <th th:text="#{label.product.container}">Container</th>
+                                <th th:text="#{label.product.location}">Location</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="item : ${warehouse.content}">
-                                <td th:text="${item.warehouseid}">id</td>
                                 <!--
                                  <td>
                                     <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left" style="margin: 0px 10px" width="65" height="92"/>
