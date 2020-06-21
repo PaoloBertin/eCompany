@@ -6,6 +6,7 @@ import it.opensource.ecompany.domain.Product;
 import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -107,7 +108,7 @@ public class MovementsControllerTest {
     }
 
     @Test
-    public void saveMovements(@Autowired MockMvc mvc) throws Exception{
+    public void saveMovements(@Autowired MockMvc mvc) throws Exception {
 
         Category category = new Category(1L, "Books");
         Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
@@ -117,8 +118,26 @@ public class MovementsControllerTest {
         cartBean.addProductToCart(product);
 
         mvc.perform(get("/movements/save").sessionAttr("cartBean", cartBean)
-                   .with(user("mario.rossi").password("user").roles("USER")))
-        .andExpect(status().isOk())
+                        .with(user("mario.rossi").password("user").roles("USER")))
+            .andExpect(status().isOk())
+        ;
+    }
+
+    @Disabled
+    @Test
+    public void saveMovementsAndUpdateWarehouse(@Autowired MockMvc mvc) throws Exception {
+
+        // TODO
+        Category category = new Category(1L, "Books");
+        Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
+        CartBean cartBean = new CartBean();
+        cartBean.addProductToCart(product);
+        product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
+        cartBean.addProductToCart(product);
+
+        mvc.perform(get("/movements/save").sessionAttr("cartBean", cartBean)
+                        .with(user("mario.rossi").password("user").roles("USER")))
+            .andExpect(status().isOk())
         ;
     }
 }
