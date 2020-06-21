@@ -72,7 +72,8 @@ public class MovementsServiceImpl implements MovementsService {
             lineitems.add(lineitem);
         }
         movement.setLineitems(lineitems);
-
         movementsRepository.save(movement);
+
+
     }
 }
