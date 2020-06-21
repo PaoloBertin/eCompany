@@ -5,6 +5,7 @@ import javax.validation.Valid;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,7 @@ import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.web.form.CustomerForm;
 import lombok.extern.slf4j.Slf4j;
 
+@Profile("html")
 @Slf4j
 @RequestMapping("/customers")
 @Controller

@@ -4,6 +4,7 @@ import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.CustomerForm;
 import lombok.extern.slf4j.Slf4j;
 
+@Profile("html")
 @Slf4j
 @Controller
 @RequestMapping("/cart")

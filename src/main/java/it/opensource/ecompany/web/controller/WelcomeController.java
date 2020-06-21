@@ -5,6 +5,7 @@ import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author Paolo Bertin
  */
+@Profile("html")
 @Slf4j
 @RequiredArgsConstructor
 @Controller

@@ -9,6 +9,7 @@ import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.*;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import it.opensource.ecompany.service.MovementsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+@Profile("html")
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/movements")

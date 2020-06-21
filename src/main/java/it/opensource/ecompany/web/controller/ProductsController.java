@@ -15,6 +15,7 @@ import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  * @author Paolo Bertin
  */
+@Profile("html")
 @Slf4j
 @RequestMapping("/products")
 @Controller

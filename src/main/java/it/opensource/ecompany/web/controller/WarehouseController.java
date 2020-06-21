@@ -9,6 +9,7 @@ import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+@Profile("html")
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/warehouse")

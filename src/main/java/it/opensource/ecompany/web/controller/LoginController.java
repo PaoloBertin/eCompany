@@ -3,6 +3,7 @@ package it.opensource.ecompany.web.controller;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import it.opensource.ecompany.service.CategoriesService;
 import lombok.extern.slf4j.Slf4j;
 
+@Profile("html")
 @Slf4j
 @RequestMapping("/login")
 @Controller
