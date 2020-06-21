@@ -102,26 +102,9 @@ public class MovementsController {
     @GetMapping("/save")
     public String saveMovement(Model uiModel) {
 
+        movementsService.saveMovements();
+
         Customer customer = userContext.getCurrentCustomer();
-
-        Movement movement = new Movement();
-        movement.setDatemovement(new Date());
-        movement.setTotalamount(cartBean.getTotalCost());
-        movement.setState(State.nuovo);
-        movement.setCustomer(customer);
-
-        // costruzione lista LineItem
-        List<Lineitem> lineitems = new ArrayList<>();
-        for (Map.Entry<Product, Integer> entry : cartBean.getProducts().entrySet()) {
-            Lineitem lineitem = new Lineitem();
-            lineitem.setProduct(entry.getKey());
-            lineitem.setQuantity(Double.valueOf(entry.getValue()));
-            lineitems.add(lineitem);
-        }
-        movement.setLineitems(lineitems);
-
-        movementsService.saveMovements(movement);
-
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
