@@ -49,5 +49,4 @@ public class Warehouse implements Serializable {
     @Column(name = "location")
     private String location;
 
-
 }

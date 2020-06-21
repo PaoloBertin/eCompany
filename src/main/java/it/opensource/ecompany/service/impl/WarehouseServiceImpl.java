@@ -43,4 +43,13 @@ public class WarehouseServiceImpl implements WarehouseService {
 
         return warehouseRepository.findBySku(sku);
     }
+
+    @Override
+    public Integer reducesProductQuantityInStock(Integer sold) {
+
+        // verifica quantità presente in magazzino
+
+
+        return null;
+    }
 }

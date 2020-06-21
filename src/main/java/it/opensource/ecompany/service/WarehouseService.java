@@ -13,4 +13,6 @@ public interface WarehouseService {
     public Page<Warehouse> getProductsByNameContainingByPage(String searchText, Pageable pageable);
 
     public Warehouse getWarehouseBySku(String sku);
+
+    public Integer reducesProductQuantityInStock(Integer sold);
 }
