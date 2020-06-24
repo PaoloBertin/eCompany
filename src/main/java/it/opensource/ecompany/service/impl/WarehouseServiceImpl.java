@@ -52,4 +52,10 @@ public class WarehouseServiceImpl implements WarehouseService {
 
         return null;
     }
+
+    @Override
+    public void deleteWarehose(Warehouse warehouse) {
+
+        warehouseRepository.delete(warehouse);
+    }
 }

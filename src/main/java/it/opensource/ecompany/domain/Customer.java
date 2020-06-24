@@ -48,6 +48,9 @@ public class Customer implements Principal, Serializable {
     @OneToOne
     private Address address;
 
+    @Version
+    private Long version;
+
     public Set<Role> getRoles() {
 
         return roles;
@@ -163,5 +166,41 @@ public class Customer implements Principal, Serializable {
         return getUsername();
     }
 
+    public Long getVersion() {
+
+        return version;
+    }
+
+    public void setVersion(Long version) {
+
+        this.version = version;
+    }
+
+    @Override
+    public int hashCode() {
+
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((customerid == null) ? 0 : customerid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Customer other = (Customer) obj;
+        if (customerid == null) {
+            if (other.customerid != null)
+                return false;
+        } else if (!customerid.equals(other.customerid))
+            return false;
+        return true;
+    }
 }
 

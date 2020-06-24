@@ -1,10 +1,13 @@
-package it.opensource.ecompany.web.controller;
+package it.opensource.ecompany.web.restcontroller;
 
-import javax.validation.Valid;
-
+import it.opensource.ecompany.bean.CustomerBean;
+import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.service.CategoriesService;
+import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
@@ -13,19 +16,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.opensource.ecompany.bean.CustomerBean;
-import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.service.CustomersService;
-import it.opensource.ecompany.web.form.CustomerForm;
-import lombok.extern.slf4j.Slf4j;
+import javax.validation.Valid;
 
-@Profile("html")
+@Profile("rest")
 @Slf4j
 @RequestMapping("/customers")
-@Controller
-public class CustomerController {
+@RestController
+public class CustomerResource {
 
     @Autowired
     CustomerForm customerForm;

@@ -7,4 +7,10 @@ import it.opensource.ecompany.domain.Category;
 public interface CategoriesService {
     
     public List<Category> getAll();
+
+    public Category getCategoryById(Long id);
+
+    public Category saveCategory(Category category);
+
+    public void deleteCategory(Category category);
 }

@@ -55,6 +55,7 @@ CREATE TABLE IF NOT EXISTS address (
     zip_code VARCHAR(10),
     country VARCHAR(50),
     state VARCHAR(20),
+    version BIGINT(20),
 
     PRIMARY KEY(id)
 );
@@ -64,6 +65,7 @@ CREATE TABLE IF NOT EXISTS contacts (
     email VARCHAR(50) NOT NULL,
     cellular VARCHAR(20),
     landline_phone VARCHAR(20),
+    version BIGINT(20),
 
     PRIMARY KEY(id)
 );
@@ -77,6 +79,7 @@ CREATE TABLE IF NOT EXISTS customers (
     email VARCHAR(25) UNIQUE,
     address_id BIGINT(20),
     contact_id BIGINT(20),
+    version BIGINT(20),
 
     PRIMARY KEY(customerid),
     CONSTRAINT customers_fk_01 FOREIGN KEY (address_id) REFERENCES address(id),
@@ -86,14 +89,16 @@ CREATE TABLE IF NOT EXISTS customers (
 CREATE TABLE IF NOT EXISTS role (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
     name VARCHAR(25),
-    
+    version BIGINT(20),
+
     PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS customer_role (
     customerid BIGINT(20) NOT NULL,
     id BIGINT(20) NOT NULL,
-    
+    version BIGINT(20),
+
     CONSTRAINT fk_customer_role_01 FOREIGN KEY (customerid) REFERENCES customers(customerid),
     CONSTRAINT fk_customer_role_02 FOREIGN KEY (id) REFERENCES role(id)
 );
@@ -101,7 +106,8 @@ CREATE TABLE IF NOT EXISTS customer_role (
 CREATE TABLE IF NOT EXISTS categories (
     categoryid BIGINT(20) NOT NULL AUTO_INCREMENT,
     name VARCHAR(20),
-    
+    version BIGINT(20),
+
     PRIMARY KEY(categoryid)
 );
 
@@ -132,6 +138,7 @@ CREATE TABLE IF NOT EXISTS warehouse (
     reorder BOOLEAN,
     container VARCHAR(15),
     location VARCHAR(15),
+    version BIGINT(20),
 
     PRIMARY KEY (warehouseid),
 
@@ -144,7 +151,8 @@ CREATE TABLE IF NOT EXISTS movement (
     totalamount DOUBLE DEFAULT 0.0,
     state VARCHAR(25),
     customerid BIGINT(20) NOT NULL,
-    
+    version BIGINT(20),
+
     PRIMARY KEY(movementid),
     
     CONSTRAINT movement_fk_01 FOREIGN KEY (customerid) REFERENCES customers
@@ -154,7 +162,8 @@ CREATE TABLE IF NOT EXISTS lineitem (
     lineitemid BIGINT(20) NOT NULL AUTO_INCREMENT,
     productid BIGINT(20) NOT NULL,
     quantity DOUBLE DEFAULT 0.0,
-    
+    version BIGINT(20),
+
     PRIMARY KEY(lineitemid),
     
     CONSTRAINT line_item_fk FOREIGN KEY (productid) REFERENCES products

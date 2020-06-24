@@ -17,11 +17,29 @@ public class CategoriesServiceImpl implements CategoriesService {
     @Autowired
     private CategoriesRepository categoriesRepository;
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public List<Category> getAll() {
 
         return categoriesRepository.findAll();
+    }
+
+    @Override
+    public Category getCategoryById(Long id) {
+
+        return categoriesRepository.findById(id).orElse(new Category());
+    }
+
+    @Override
+    public Category saveCategory(Category category) {
+
+        return categoriesRepository.save(category);
+    }
+
+    @Override
+    public void deleteCategory(Category category) {
+
+        categoriesRepository.delete(category);
     }
 
 }

@@ -25,4 +25,6 @@ public interface ProductsService {
     public Page<Product> getProductsByNameContainingByPage(String searchText, Pageable pageable);
 
     public Product save(Product product);
+
+    public void deleteProduct(Product product);
 }

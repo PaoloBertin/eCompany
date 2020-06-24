@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import it.opensource.ecompany.domain.Customer;
@@ -22,6 +23,7 @@ public class CustomersServiceImplTest {
     @Autowired
     private CustomersService customersService;
 
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getAllCustomersTest() {
 
@@ -31,6 +33,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyAddress() {
 
@@ -40,6 +43,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyContact() {
 

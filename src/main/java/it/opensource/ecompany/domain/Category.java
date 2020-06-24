@@ -2,11 +2,7 @@ package it.opensource.ecompany.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "categories")
 @Entity
@@ -16,18 +12,26 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long              categoryid;
+    private Long categoryid;
 
-    private String            name;
+    private String name;
+
+    @Version
+    private Long version;
 
     public Category() {
 
     }
 
+    public Category(String name) {
+
+        this.name = name;
+    }
+
     public Category(Long id, String name) {
 
         this.categoryid = id;
-        this.name       = name;
+        this.name = name;
     }
 
     public Long getCategoryid() {
@@ -48,6 +52,43 @@ public class Category implements Serializable {
     public void setName(String name) {
 
         this.name = name;
+    }
+
+    public Long getVersion() {
+
+        return version;
+    }
+
+    public void setVersion(Long version) {
+
+        this.version = version;
+    }
+
+    @Override
+    public int hashCode() {
+
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((categoryid == null) ? 0 : categoryid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Category other = (Category) obj;
+        if (categoryid == null) {
+            if (other.categoryid != null)
+                return false;
+        } else if (!categoryid.equals(other.categoryid))
+            return false;
+        return true;
     }
 
 }

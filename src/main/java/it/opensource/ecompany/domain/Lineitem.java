@@ -2,13 +2,7 @@ package it.opensource.ecompany.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "lineitem")
 @Entity
@@ -18,13 +12,16 @@ public class Lineitem implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long              lineitemid;
+    private Long lineitemid;
 
     @OneToOne
     @JoinColumn(name = "productid")
-    private Product           product;
+    private Product product;
 
-    private Double            quantity;
+    private Double quantity;
+
+    @Version
+    private Long version;
 
     public Long getLineitemid() {
 
@@ -56,4 +53,40 @@ public class Lineitem implements Serializable {
         this.quantity = quantity;
     }
 
+    public Long getVersion() {
+
+        return version;
+    }
+
+    public void setVersion(Long version) {
+
+        this.version = version;
+    }
+
+    @Override
+    public int hashCode() {
+
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((lineitemid == null) ? 0 : lineitemid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Lineitem other = (Lineitem) obj;
+        if (lineitemid == null) {
+            if (other.lineitemid != null)
+                return false;
+        } else if (!lineitemid.equals(other.lineitemid))
+            return false;
+        return true;
+    }
 }

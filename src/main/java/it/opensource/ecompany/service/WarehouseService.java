@@ -15,4 +15,6 @@ public interface WarehouseService {
     public Warehouse getWarehouseBySku(String sku);
 
     public Integer reducesProductQuantityInStock(Integer sold);
+
+    public void deleteWarehose(Warehouse warehouse);
 }
