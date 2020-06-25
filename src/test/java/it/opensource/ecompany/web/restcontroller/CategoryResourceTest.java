@@ -3,7 +3,6 @@ package it.opensource.ecompany.web.restcontroller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import it.opensource.ecompany.domain.Category;
-import it.opensource.ecompany.service.ProductsService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -25,9 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 class CategoryResourceTest {
-
-    @Autowired
-    private ProductsService productsService;
 
     @BeforeEach
     public void setUp() {
