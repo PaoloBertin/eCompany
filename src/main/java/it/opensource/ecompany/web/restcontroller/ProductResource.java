@@ -53,7 +53,7 @@ public class ProductResource {
     public Page<Product> viewAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
                                                @RequestParam(name = "size", defaultValue = "10") int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable      pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getAllByPage(pageable);
 
         return products;
@@ -70,14 +70,15 @@ public class ProductResource {
                                                       @RequestParam(name = "page", defaultValue = "0") int page,
                                                       @RequestParam(name = "size", defaultValue = "10") int size) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable      pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
 
         return products;
     }
 
     /**
-     * Gestisce la richiesta di visualizzare un prodotto di una determinata categoria
+     * Gestisce la richiesta di visualizzare un prodotto di una determinata
+     * categoria
      *
      * @param categoryid
      * @param productid
@@ -118,11 +119,8 @@ public class ProductResource {
      * @return nome vista
      */
     @PostMapping(params = "form")
-    public String create(@Valid Product product,
-                         BindingResult bindingResult,
-                         HttpServletRequest httpServletRequest,
-                         RedirectAttributes redirectAttributes,
-                         Locale locale,
+    public String create(@Valid Product product, BindingResult bindingResult, HttpServletRequest httpServletRequest,
+                         RedirectAttributes redirectAttributes, Locale locale,
                          @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Creating product");
@@ -130,7 +128,8 @@ public class ProductResource {
             return "catalog/edit";
         }
 
-        //  redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("product_save_success", new Object[]{}, locale)));
+        // redirectAttributes.addFlashAttribute("message", new Message("success",
+        // messageSource.getMessage("product_save_success", new Object[]{}, locale)));
 
         log.info("Product id: " + product.getProductid());
 
@@ -144,7 +143,7 @@ public class ProductResource {
                 InputStream inputStream = file.getInputStream();
                 if (inputStream == null)
                     log.info("File inputstream is null");
-                //                fileContent = IOUtils.toByteArray(inputStream);
+                // fileContent = IOUtils.toByteArray(inputStream);
                 product.setImage(fileContent);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
@@ -154,8 +153,8 @@ public class ProductResource {
 
         productsService.save(product);
 
-        return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(),
-                                                                    httpServletRequest);
+        return "redirect:/products/"
+                + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(), httpServletRequest);
 
     }
 
@@ -170,22 +169,21 @@ public class ProductResource {
      * @return vista
      */
     @PostMapping(value = "/{id}", params = "form")
-    public String update(@Valid Product product,
-                         BindingResult bindingResult,
-                         HttpServletRequest httpServletRequest,
-                         RedirectAttributes redirectAttributes,
-                         Locale locale,
+    public String update(@Valid Product product, BindingResult bindingResult, HttpServletRequest httpServletRequest,
+                         RedirectAttributes redirectAttributes, Locale locale,
                          @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Updating product");
 
         if (bindingResult.hasErrors()) {
-            // uiModel.addAttribute("message", new Message("error", messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
+            // uiModel.addAttribute("message", new Message("error",
+            // messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
             // uiModel.addAttribute("product", product);
             return "catalog/edit";
         }
 
-        // redirectAttributes.addFlashAttribute("message", new Message("success", messageSource.getMessage("product.save.success", new Object[]{}, locale)));
+        // redirectAttributes.addFlashAttribute("message", new Message("success",
+        // messageSource.getMessage("product.save.success", new Object[]{}, locale)));
         // rende persistenti le modifiche
         productsService.save(product);
 
@@ -202,8 +200,7 @@ public class ProductResource {
      * @return nome vista
      */
     @GetMapping(value = "/{productid}", params = "form")
-    public String updateForm(@PathVariable("productid") Long productid,
-                             @ModelAttribute CustomerForm customerForm) {
+    public String updateForm(@PathVariable("productid") Long productid, @ModelAttribute CustomerForm customerForm) {
 
         log.debug("id prodotto da editare=" + productid);
 
@@ -220,7 +217,7 @@ public class ProductResource {
         String searchText = searchForm.getTextToSearch();
         log.debug("il titolo da cercare deve contenere: " + searchText);
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable      pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByNameContainingByPage(searchText, pageable);
 
         log.debug("numero prodotti da visualizzare = " + products.getContent().size());
