@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>eLisa</title>
+    </head>
+
+    <body>
+        <div th:fragment="left_side" style="align-content: left; margin-left: 15px;">
+            <form th:action="@{/products/searchProduct}" th:object="${searchForm}" method="GET">
+                <br/>
+                <div class="form-group">
+                    <input id="searchLabel" class="form-control" type="search" placeholder="Search" th:field="*{textToSearch}" aria-label="Search">
+                </div>
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+            <br/>
+            <p class="sidebar-titolo" th:text="#{label.categories}"></p>
+            <table>
+                <tbody>
+                    <tr th:each="category : ${categories}">
+                        <td>
+                            <a href="#" th:href="@{/products/{categoryId}(categoryId=${category.categoryid})}">
+                                <span th:text="${category.name}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+
+</html>
