@@ -32,9 +32,6 @@ public class MovementsServiceImpl implements MovementsService {
     @Autowired
     private MovementsRepository movementsRepository;
 
-    @Autowired
-    private WarehouseRepository warehouseRepository;
-
     @Transactional(readOnly = true)
     @Override
     public List<Movement> getAllMovements() {

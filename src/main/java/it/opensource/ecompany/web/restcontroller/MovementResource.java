@@ -1,18 +1,14 @@
 package it.opensource.ecompany.web.restcontroller;
 
 import it.opensource.ecompany.bean.CartBean;
-import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Movement;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.MovementsService;
 import it.opensource.ecompany.service.UserContext;
-import it.opensource.ecompany.web.form.SearchForm;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
