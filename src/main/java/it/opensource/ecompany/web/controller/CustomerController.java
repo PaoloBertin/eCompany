@@ -57,8 +57,7 @@ public class CustomerController {
     }
 
     @PostMapping(value = "/registration")
-    public String signup(@Valid CustomerForm customerForm,
-                         BindingResult result,
+    public String signup(@Valid CustomerForm customerForm, BindingResult result,
                          RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {

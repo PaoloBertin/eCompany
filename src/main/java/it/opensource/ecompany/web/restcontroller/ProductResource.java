@@ -1,20 +1,21 @@
 package it.opensource.ecompany.web.restcontroller;
 
-import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Product;
-import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
-import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.UrlUtil;
-import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
+import it.opensource.ecompany.web.restcontroller.util.PageWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,25 +39,21 @@ import java.util.Locale;
 public class ProductResource {
 
     @Autowired
-    private CategoriesService categoriesService;
-
-    @Autowired
     private ProductsService productsService;
 
     @Autowired
-    private CartBean cartBean;
-
-    @Autowired
-    private UserContext userContext;
+    private MessageSource messageSource;
 
     @GetMapping
-    public Page<Product> viewAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                               @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Page<Product>> viewAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                               @RequestParam(name = "size", defaultValue = "10") int size) {
 
-        Pageable      pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getAllByPage(pageable);
 
-        return products;
+        ResponseEntity<Page<Product>> responseEntity = new ResponseEntity<Page<Product>>(products, HttpStatus.OK);
+
+        return responseEntity;
     }
 
     /**
@@ -70,7 +67,7 @@ public class ProductResource {
                                                       @RequestParam(name = "page", defaultValue = "0") int page,
                                                       @RequestParam(name = "size", defaultValue = "10") int size) {
 
-        Pageable      pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
 
         return products;
@@ -116,9 +113,10 @@ public class ProductResource {
      * @param redirectAttributes
      * @param locale
      * @param file
+     * 
      * @return nome vista
      */
-    @PostMapping(params = "form")
+    @PostMapping
     public String create(@Valid Product product, BindingResult bindingResult, HttpServletRequest httpServletRequest,
                          RedirectAttributes redirectAttributes, Locale locale,
                          @RequestParam(value = "file", required = false) Part file) {
@@ -143,7 +141,6 @@ public class ProductResource {
                 InputStream inputStream = file.getInputStream();
                 if (inputStream == null)
                     log.info("File inputstream is null");
-                // fileContent = IOUtils.toByteArray(inputStream);
                 product.setImage(fileContent);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
@@ -155,7 +152,6 @@ public class ProductResource {
 
         return "redirect:/products/"
                 + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(), httpServletRequest);
-
     }
 
     /**
@@ -168,17 +164,15 @@ public class ProductResource {
      * @param locale
      * @return vista
      */
-    @PostMapping(value = "/{id}", params = "form")
-    public String update(@Valid Product product, BindingResult bindingResult, HttpServletRequest httpServletRequest,
-                         RedirectAttributes redirectAttributes, Locale locale,
+    @PostMapping(value = "/{id}")
+    public String update(@Valid Product product, @PathVariable("id") Long id, BindingResult bindingResult,
+                         HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale,
                          @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Updating product");
 
         if (bindingResult.hasErrors()) {
-            // uiModel.addAttribute("message", new Message("error",
-            // messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
-            // uiModel.addAttribute("product", product);
+            messageSource.getMessage("product.save.fail", new Object[]{}, locale);
             return "catalog/edit";
         }
 
@@ -193,35 +187,47 @@ public class ProductResource {
     }
 
     /**
-     * Recupera campi prodotto da editare ed invia al form per l'editing
+     * Recupera prodotto noto il suo id
      *
      * @param productid
      * @param customerForm
+     * 
      * @return nome vista
      */
-    @GetMapping(value = "/{productid}", params = "form")
-    public String updateForm(@PathVariable("productid") Long productid, @ModelAttribute CustomerForm customerForm) {
+    @GetMapping(value = "/all/{productid}")
+    public ResponseEntity<Product> updateForm(@PathVariable("productid") Long id) {
 
-        log.debug("id prodotto da editare=" + productid);
+        log.debug("recupera prodotto con id=" + id);
 
-        Product product = productsService.getProductById(productid);
+        Product product = productsService.getProductById(id);
+        ResponseEntity<Product> responseEntity = new ResponseEntity<Product>(product, HttpStatus.OK);
 
-        return "catalog/edit";
+        return responseEntity;
     }
 
+    /**
+     * Recupera i prodotti il cui nome contine la stringa data
+     * 
+     * @param searchForm
+     * @param page
+     * @param size
+     * 
+     * @return
+     */
     @GetMapping("/searchProduct")
-    public Page<Product> searchProduct(@ModelAttribute SearchForm searchForm,
-                                       @RequestParam(name = "page", defaultValue = "0") int page,
-                                       @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Page<Product>> searchProduct(SearchForm searchForm,
+                                                       @RequestParam(name = "page", defaultValue = "0") int page,
+                                                       @RequestParam(name = "size", defaultValue = "10") int size) {
 
         String searchText = searchForm.getTextToSearch();
         log.debug("il titolo da cercare deve contenere: " + searchText);
 
-        Pageable      pageable = PageRequest.of(page, size, Sort.by("name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByNameContainingByPage(searchText, pageable);
 
         log.debug("numero prodotti da visualizzare = " + products.getContent().size());
 
-        return products;
+        ResponseEntity<Page<Product>> responseEntity = new ResponseEntity<Page<Product>>(products, HttpStatus.OK);
+        return responseEntity;
     }
 }

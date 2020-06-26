@@ -22,7 +22,7 @@ public class UserContextImpl implements UserContext {
 
     private final UserDetailsService userDetailsService;
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Customer getCurrentCustomer() {
 
@@ -33,19 +33,20 @@ public class UserContextImpl implements UserContext {
         }
 
         Object object = authentication.getPrincipal();
-        if(! (object instanceof User)) {
+        if (!(object instanceof User)) {
             return new Customer();
         }
 
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
 
-        if(username == null) {
+        if (username == null) {
             return new Customer();
         }
         Customer customer = customersService.getCustomerByUsername(username);
-        if(customer == null) {
-            throw new IllegalStateException("Spring Security is not in synch with Customers. Could not find user with username " + username);
+        if (customer == null) {
+            throw new IllegalStateException("Spring Security is not in synch with Customers. Could not find user with username "
+                    + username);
         }
 
         return customer;
@@ -59,7 +60,9 @@ public class UserContextImpl implements UserContext {
         }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(customer.getEmail());
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, customer.getPassword(), userDetails.getAuthorities());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                                                                                                     customer.getPassword(),
+                                                                                                     userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
