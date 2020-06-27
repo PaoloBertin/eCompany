@@ -7,7 +7,6 @@ import java.util.Map;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.*;
-import it.opensource.ecompany.repository.WarehouseRepository;
 import it.opensource.ecompany.service.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

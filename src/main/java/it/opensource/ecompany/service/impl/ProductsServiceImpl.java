@@ -12,7 +12,7 @@ import it.opensource.ecompany.repository.ProductsRepository;
 import it.opensource.ecompany.service.ProductsService;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+//@Transactional
 @Service("productsService")
 public class ProductsServiceImpl implements ProductsService {
 

@@ -1,11 +1,11 @@
 package it.opensource.ecompany.web.rest;
 
-import it.opensource.ecompany.bean.CartBean;
-import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.domain.Movement;
-import it.opensource.ecompany.service.CategoriesService;
+//import it.opensource.ecompany.bean.CartBean;
+//import it.opensource.ecompany.domain.Customer;
+//import it.opensource.ecompany.domain.Movement;
+//import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.MovementsService;
-import it.opensource.ecompany.service.UserContext;
+//import it.opensource.ecompany.service.UserContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+//import java.util.List;
 
 @Profile("rest")
 @RequiredArgsConstructor
@@ -23,20 +23,20 @@ import java.util.List;
 @RestController
 public class MovementResource {
 
-    private final CartBean cartBean;
+    // private final CartBean cartBean;
 
-    private final CategoriesService categoriesService;
+    // private final CategoriesService categoriesService;
 
     private final MovementsService movementsService;
 
-    private final UserContext userContext;
+    // private final UserContext userContext;
 
     @GetMapping("/all")
     public String getAllMovements() {
 
-        Customer customer = userContext.getCurrentCustomer();
+        // Customer customer = userContext.getCurrentCustomer();
 
-        List<Movement> movements = movementsService.getAllMovements();
+        // List<Movement> movements = movementsService.getAllMovements();
 
         log.debug("nr. ordini=" + movementsService.getAllMovements().size());
 
@@ -46,9 +46,9 @@ public class MovementResource {
     @GetMapping("/{movementId}")
     public String getMovementById(@PathVariable("movementId") Long id) {
 
-        Customer customer = userContext.getCurrentCustomer();
+        // Customer customer = userContext.getCurrentCustomer();
 
-        Movement movement = movementsService.getMovementById(id);
+        // Movement movement = movementsService.getMovementById(id);
 
         return "movements/show";
     }
@@ -56,9 +56,10 @@ public class MovementResource {
     @GetMapping("/all/customers/{customerId}")
     public String getMovementsByCustomer(@PathVariable("customerId") Long customerId) {
 
-        Customer customer = userContext.getCurrentCustomer();
+        // Customer customer = userContext.getCurrentCustomer();
 
-        List<Movement> movements = movementsService.getMovementByCustomer(customerId);
+        // List<Movement> movements =
+        // movementsService.getMovementByCustomer(customerId);
 
         return "movements/list";
     }
@@ -66,7 +67,7 @@ public class MovementResource {
     @GetMapping("/all/customers/{customerId}/checkout")
     public String viewMovements(@PathVariable("customerId") Long customerId) {
 
-        Customer customer = userContext.getCurrentCustomer();
+        // Customer customer = userContext.getCurrentCustomer();
 
         return "movements/checkout";
     }
@@ -76,7 +77,7 @@ public class MovementResource {
 
         movementsService.saveMovements();
 
-        Customer customer = userContext.getCurrentCustomer();
+        // Customer customer = userContext.getCurrentCustomer();
 
         return "welcome";
     }

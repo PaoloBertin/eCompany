@@ -2,7 +2,6 @@ package it.opensource.ecompany.web.rest;
 
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
-import it.opensource.ecompany.web.controller.util.UrlUtil;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Locale;
+import java.net.URISyntaxException;
 
 /**
  * Gestisce le richieste relative ai prodotti
@@ -89,7 +87,7 @@ public class ProductResource {
 
         Product product = productsService.getProductById(id);
 
-//        return product.getImage();
+        // return product.getImage();
         return ResponseEntity.ok().body(product);
     }
 
@@ -106,14 +104,17 @@ public class ProductResource {
      * @return nome vista
      */
     @PostMapping("/products")
-    public String createProduct(@Valid Product product,
-                                HttpServletRequest httpServletRequest,
-                                Locale locale,
-                                @RequestParam(value = "file", required = false) Part file) {
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product,
+                                                 @RequestParam(value = "file", required = false) Part file) throws Exception,
+                                                                                                            URISyntaxException {
 
-        log.info("Creating product");
+        log.debug("REST request to save Product : {}", product);
 
-        // Process upload file
+        if (product.getProductid() != null) {
+            throw new Exception();
+        }
+
+        // Process immagine allegata al prodotto
         if (file != null) {
             log.info("File name: " + file.getName());
             log.info("File size: " + file.getSize());
@@ -132,8 +133,9 @@ public class ProductResource {
 
         productsService.save(product);
 
-        return "redirect:/products/"
-                + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(), httpServletRequest);
+        // return ResponseEntity.created(new URI("/api/products/" +
+        // product.getProductid())).body(product);
+        return ResponseEntity.ok(product);
     }
 
     /**
@@ -148,9 +150,9 @@ public class ProductResource {
      * @return vista
      */
     @PostMapping(value = "/products/{id}")
-    public ResponseEntity<Product> update(@Valid @RequestBody Product product,
-                                          @PathVariable("id") Long id,
-                                          @RequestParam(value = "file", required = false) Part file) {
+    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product,
+                                                 @PathVariable("id") Long id,
+                                                 @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Updating product");
 

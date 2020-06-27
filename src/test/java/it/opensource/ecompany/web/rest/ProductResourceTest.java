@@ -7,12 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
+
+import it.opensource.ecompany.domain.Category;
+import it.opensource.ecompany.domain.Product;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;;
 
 @AutoConfigureMockMvc
@@ -29,6 +38,7 @@ class ProductResourceTest {
 
     }
 
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     void getAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -39,6 +49,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     void getProductsByCategory1ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -49,6 +60,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     void getProductsByCategory6ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -60,6 +72,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void getProductByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -68,27 +81,36 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/products/photo/{productid}", 1L)).andDo(print()).andExpect(status().isOk());
     }
 
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    void create() {
+    void createProductTest(@Autowired MockMvc mvc) throws Exception {
+
+        Category category = new Category(1L, "Libri");
+        Product product = new Product("aaaa", "bbbb", category);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        String requestJson = objectMapper.writeValueAsString(product);
+
+        mvc.perform(post("/api/products").contentType(MediaType.APPLICATION_JSON).content(requestJson))
+           // .andExpect(jsonPath("$.productid", equalTo(7)))
+           .andExpect(status().isOk());
+    }
+
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    void updateProduct() {
 
     }
 
-    @Test
-    void update() {
-
-    }
-
-    @Test
-    void updateForm() {
-
-    }
-
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     void searchProduct() {
 

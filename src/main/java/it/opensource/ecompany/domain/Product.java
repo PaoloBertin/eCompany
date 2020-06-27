@@ -29,7 +29,7 @@ public class Product implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     private byte[] image;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "category_id_fk"))
     private Category category;
 
