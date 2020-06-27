@@ -32,29 +32,39 @@ class ProductResourceTest {
     @Test
     void getAllProductsByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/api/products/all").param("page", "0").param("size", "10").contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.content.length()", equalTo(10)))
+        mvc.perform(get("/api/products/all").param("page", "0")
+                                            .param("size", "10")
+                                            .contentType(MediaType.APPLICATION_JSON))
+           .andExpect(jsonPath("$.length()", equalTo(10)))
            .andExpect(status().isOk());
     }
 
     @Test
-    void getProducstByCategoryByPage(@Autowired MockMvc mvc) throws Exception {
+    void getProductsByCategory1ByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/api/products/{categoryId}", 6).param("page", "0")
-                                                    .param("size", "10")
-                                                    .contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.content.length()", equalTo(2)))
+        mvc.perform(get("/api/products/{categoryId}", 1).param("page", "0")
+                                                        .param("size", "10")
+                                                        .contentType(MediaType.APPLICATION_JSON))
+           .andExpect(jsonPath("$.length()", equalTo(10)))
            .andExpect(status().isOk());
     }
 
     @Test
-    void getProductsByCategoryByPage(@Autowired MockMvc mvc) throws Exception {
+    void getProductsByCategory6ByPage(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/api/products/{categoryId}", 6).param("page", "0")
-                                                    .param("size", "10")
-                                                    .contentType(MediaType.APPLICATION_JSON))
+                                                        .param("size", "10")
+                                                        .contentType(MediaType.APPLICATION_JSON))
            .andDo(print())
-           .andExpect(jsonPath("$.content.length()", equalTo(2)))
+           .andExpect(jsonPath("$.length()", equalTo(2)))
+           .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getProductById(@Autowired MockMvc mvc) throws Exception {
+
+        mvc.perform(get("/api/products/all/{productId}", 1L))
+           .andExpect(jsonPath("$.name", equalTo("Da Visual Basic a Java")))
            .andExpect(status().isOk());
     }
 

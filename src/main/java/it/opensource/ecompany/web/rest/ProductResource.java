@@ -37,15 +37,13 @@ public class ProductResource {
     private ProductsService productsService;
 
     @GetMapping("/products/all")
-    public ResponseEntity<Page<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                              @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Iterable<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                                  @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
-        Page<Product> products = productsService.getAllByPage(pageable);
+        Page<Product> pageProducts = productsService.getAllByPage(pageable);
 
-        ResponseEntity<Page<Product>> responseEntity = new ResponseEntity<Page<Product>>(products, HttpStatus.OK);
-
-        return responseEntity;
+        return ResponseEntity.ok().body(pageProducts.getContent());
     }
 
     /**
@@ -55,16 +53,14 @@ public class ProductResource {
      * @return nome vista
      */
     @GetMapping(value = "/products/{categoryId}")
-    public ResponseEntity<Page<Product>> getProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
-                                                                     @RequestParam(name = "page", defaultValue = "0") int page,
-                                                                     @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Iterable<Product>> getProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
+                                                                         @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                         @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
-        Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
+        Page<Product> pageProducts = productsService.getProductsByCategoryByPage(categoryId, pageable);
 
-        ResponseEntity<Page<Product>> responseEntity = new ResponseEntity<Page<Product>>(products, HttpStatus.OK);
-
-        return responseEntity;
+        return ResponseEntity.ok().body(pageProducts.getContent());
     }
 
     /**
@@ -78,9 +74,8 @@ public class ProductResource {
     public ResponseEntity<Product> getProductById(@PathVariable("productid") Long id) {
 
         Product product = productsService.getProductById(id);
-        ResponseEntity<Product> responseEntity = new ResponseEntity<Product>(product, HttpStatus.OK);
 
-        return responseEntity;
+        return ResponseEntity.ok().body(product);
     }
 
     /**
