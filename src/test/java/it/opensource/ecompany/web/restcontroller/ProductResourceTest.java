@@ -13,6 +13,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -29,36 +30,32 @@ class ProductResourceTest {
     }
 
     @Test
-    void viewAllProductsByPage(@Autowired MockMvc mvc) throws Exception {
+    void getAllProductsByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/products")
-                         .param("page", "0")
-                         .param("size", "10")
-                         .contentType(MediaType.APPLICATION_JSON)
-                    )
-            .andExpect(jsonPath("$.content.length()", equalTo(10)))
-            .andExpect(status().isOk())
-        ;
+        mvc.perform(get("/products/all").param("page", "0").param("size", "10").contentType(MediaType.APPLICATION_JSON))
+           .andExpect(jsonPath("$.content.length()", equalTo(10)))
+           .andExpect(status().isOk());
     }
 
     @Test
-    void viewProducstByCategoryByPage(@Autowired MockMvc mvc) throws Exception {
+    void getProducstByCategoryByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/products/{categoryId}", 6)
-                         .param("page", "0")
-                         .param("size", "10")
-                         .contentType(MediaType.APPLICATION_JSON)
-                    )
-            .andExpect(jsonPath("$.content.length()", equalTo(2)))
-            .andExpect(status().isOk())
-        ;
+        mvc.perform(get("/products/{categoryId}", 6).param("page", "0")
+                                                    .param("size", "10")
+                                                    .contentType(MediaType.APPLICATION_JSON))
+           .andExpect(jsonPath("$.content.length()", equalTo(2)))
+           .andExpect(status().isOk());
     }
 
     @Test
-    void viewProduct() {
+    void getProductsByCategoryByPage(@Autowired MockMvc mvc) throws Exception {
 
+        mvc.perform(get("/products/{categoryId}", 6).param("page", "0")
+                                                    .param("size", "10")
+                                                    .contentType(MediaType.APPLICATION_JSON))
+           .andDo(print())
+           .andExpect(jsonPath("$.content.length()", equalTo(2)))
+           .andExpect(status().isOk());
     }
 
     @Test

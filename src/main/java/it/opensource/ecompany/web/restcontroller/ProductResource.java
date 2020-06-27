@@ -4,21 +4,16 @@ import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.controller.util.UrlUtil;
 import it.opensource.ecompany.web.form.SearchForm;
-import it.opensource.ecompany.web.restcontroller.util.PageWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
@@ -41,12 +36,9 @@ public class ProductResource {
     @Autowired
     private ProductsService productsService;
 
-    @Autowired
-    private MessageSource messageSource;
-
-    @GetMapping
-    public ResponseEntity<Page<Product>> viewAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                               @RequestParam(name = "size", defaultValue = "10") int size) {
+    @GetMapping("/all")
+    public ResponseEntity<Page<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                              @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getAllByPage(pageable);
@@ -63,30 +55,32 @@ public class ProductResource {
      * @return nome vista
      */
     @GetMapping(value = "/{categoryId}")
-    public Page<Product> viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
-                                                      @RequestParam(name = "page", defaultValue = "0") int page,
-                                                      @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Page<Product>> getProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
+                                                                     @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                     @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
 
-        return products;
+        ResponseEntity<Page<Product>> responseEntity = new ResponseEntity<Page<Product>>(products, HttpStatus.OK);
+
+        return responseEntity;
     }
 
     /**
-     * Gestisce la richiesta di visualizzare un prodotto di una determinata
-     * categoria
+     * Recupera un prodotto in base al suo id
      *
-     * @param categoryid
      * @param productid
+     * 
      * @return nome vista
      */
-    @GetMapping(value = "/{categoryid}/{productid}")
-    public Product viewProduct(@PathVariable("categoryid") Long categoryid, @PathVariable("productid") Long productid) {
+    @GetMapping(value = "/all/{productid}")
+    public ResponseEntity<Product> getProductById(@PathVariable("productid") Long id) {
 
-        Product product = productsService.getProductById(productid);
+        Product product = productsService.getProductById(id);
+        ResponseEntity<Product> responseEntity = new ResponseEntity<Product>(product, HttpStatus.OK);
 
-        return product;
+        return responseEntity;
     }
 
     /**
@@ -97,7 +91,7 @@ public class ProductResource {
      */
     @GetMapping(value = "/photo/{id}")
     @ResponseBody
-    public byte[] downloadPhoto(@PathVariable("id") Long id) {
+    public byte[] getPhotoByProductId(@PathVariable("id") Long id) {
 
         Product product = productsService.getProductById(id);
 
@@ -117,19 +111,12 @@ public class ProductResource {
      * @return nome vista
      */
     @PostMapping
-    public String create(@Valid Product product, BindingResult bindingResult, HttpServletRequest httpServletRequest,
-                         RedirectAttributes redirectAttributes, Locale locale,
-                         @RequestParam(value = "file", required = false) Part file) {
+    public String createProduct(@Valid Product product,
+                                HttpServletRequest httpServletRequest,
+                                Locale locale,
+                                @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Creating product");
-        if (bindingResult.hasErrors()) {
-            return "catalog/edit";
-        }
-
-        // redirectAttributes.addFlashAttribute("message", new Message("success",
-        // messageSource.getMessage("product_save_success", new Object[]{}, locale)));
-
-        log.info("Product id: " + product.getProductid());
 
         // Process upload file
         if (file != null) {
@@ -162,44 +149,18 @@ public class ProductResource {
      * @param httpServletRequest
      * @param redirectAttributes
      * @param locale
+     * 
      * @return vista
      */
     @PostMapping(value = "/{id}")
-    public String update(@Valid Product product, @PathVariable("id") Long id, BindingResult bindingResult,
-                         HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale,
-                         @RequestParam(value = "file", required = false) Part file) {
+    public ResponseEntity<Product> update(@Valid @RequestBody Product product,
+                                          @PathVariable("id") Long id,
+                                          @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Updating product");
 
-        if (bindingResult.hasErrors()) {
-            messageSource.getMessage("product.save.fail", new Object[]{}, locale);
-            return "catalog/edit";
-        }
-
-        // redirectAttributes.addFlashAttribute("message", new Message("success",
-        // messageSource.getMessage("product.save.success", new Object[]{}, locale)));
         // rende persistenti le modifiche
-        productsService.save(product);
-
-        String url = "redirect:/products/" + product.getCategory().getCategoryid() + "/" + product.getProductid();
-
-        return url;
-    }
-
-    /**
-     * Recupera prodotto noto il suo id
-     *
-     * @param productid
-     * @param customerForm
-     * 
-     * @return nome vista
-     */
-    @GetMapping(value = "/all/{productid}")
-    public ResponseEntity<Product> updateForm(@PathVariable("productid") Long id) {
-
-        log.debug("recupera prodotto con id=" + id);
-
-        Product product = productsService.getProductById(id);
+        product = productsService.save(product);
         ResponseEntity<Product> responseEntity = new ResponseEntity<Product>(product, HttpStatus.OK);
 
         return responseEntity;
