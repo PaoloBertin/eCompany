@@ -32,7 +32,7 @@ class ProductResourceTest {
     @Test
     void getAllProductsByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/products/all").param("page", "0").param("size", "10").contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/products/all").param("page", "0").param("size", "10").contentType(MediaType.APPLICATION_JSON))
            .andExpect(jsonPath("$.content.length()", equalTo(10)))
            .andExpect(status().isOk());
     }
@@ -40,7 +40,7 @@ class ProductResourceTest {
     @Test
     void getProducstByCategoryByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/products/{categoryId}", 6).param("page", "0")
+        mvc.perform(get("/api/products/{categoryId}", 6).param("page", "0")
                                                     .param("size", "10")
                                                     .contentType(MediaType.APPLICATION_JSON))
            .andExpect(jsonPath("$.content.length()", equalTo(2)))
@@ -50,7 +50,7 @@ class ProductResourceTest {
     @Test
     void getProductsByCategoryByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/products/{categoryId}", 6).param("page", "0")
+        mvc.perform(get("/api/products/{categoryId}", 6).param("page", "0")
                                                     .param("size", "10")
                                                     .contentType(MediaType.APPLICATION_JSON))
            .andDo(print())

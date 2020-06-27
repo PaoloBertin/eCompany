@@ -1,4 +1,4 @@
-package it.opensource.ecompany.web.restcontroller.util;
+package it.opensource.ecompany.web.rest.util;
 
 import java.util.List;
 

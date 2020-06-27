@@ -1,4 +1,4 @@
-package it.opensource.ecompany.web.restcontroller;
+package it.opensource.ecompany.web.rest;
 
 import it.opensource.ecompany.bean.CustomerBean;
 import it.opensource.ecompany.domain.Customer;

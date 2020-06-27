@@ -1,4 +1,4 @@
-package it.opensource.ecompany.web.restcontroller;
+package it.opensource.ecompany.web.rest;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
