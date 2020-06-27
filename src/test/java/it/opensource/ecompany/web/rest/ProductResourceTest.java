@@ -30,7 +30,7 @@ class ProductResourceTest {
     }
 
     @Test
-    void getAllProductsByPage(@Autowired MockMvc mvc) throws Exception {
+    void getAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/api/products/all").param("page", "0")
                                             .param("size", "10")
@@ -40,7 +40,7 @@ class ProductResourceTest {
     }
 
     @Test
-    void getProductsByCategory1ByPage(@Autowired MockMvc mvc) throws Exception {
+    void getProductsByCategory1ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/api/products/{categoryId}", 1).param("page", "0")
                                                         .param("size", "10")
@@ -50,18 +50,18 @@ class ProductResourceTest {
     }
 
     @Test
-    void getProductsByCategory6ByPage(@Autowired MockMvc mvc) throws Exception {
+    void getProductsByCategory6ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/api/products/{categoryId}", 6).param("page", "0")
                                                         .param("size", "10")
                                                         .contentType(MediaType.APPLICATION_JSON))
-           .andDo(print())
+           // .andDo(print())
            .andExpect(jsonPath("$.length()", equalTo(2)))
            .andExpect(status().isOk());
     }
 
     @Test
-    public void getProductById(@Autowired MockMvc mvc) throws Exception {
+    public void getProductByIdTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/api/products/all/{productId}", 1L))
            .andExpect(jsonPath("$.name", equalTo("Da Visual Basic a Java")))
@@ -69,8 +69,9 @@ class ProductResourceTest {
     }
 
     @Test
-    void downloadPhoto() {
+    void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
+        mvc.perform(get("/products/photo/{productid}", 1L)).andDo(print()).andExpect(status().isOk());
     }
 
     @Test

@@ -84,13 +84,13 @@ public class ProductResource {
      * @param id identificativo prodotto
      * @return immagine prodotto
      */
-    @GetMapping(value = "/products/photo/{id}")
-    @ResponseBody
-    public byte[] getPhotoByProductId(@PathVariable("id") Long id) {
+    @GetMapping(value = "/api/products/photo/{productid}")
+    public ResponseEntity<Product> getPhotoByProductId(@PathVariable("productid") Long id) {
 
         Product product = productsService.getProductById(id);
 
-        return product.getImage();
+//        return product.getImage();
+        return ResponseEntity.ok().body(product);
     }
 
     /**
