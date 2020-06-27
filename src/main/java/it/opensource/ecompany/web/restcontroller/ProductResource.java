@@ -29,14 +29,14 @@ import java.util.Locale;
  */
 @Profile("rest")
 @Slf4j
-@RequestMapping("/products")
+@RequestMapping("/api")
 @RestController
 public class ProductResource {
 
     @Autowired
     private ProductsService productsService;
 
-    @GetMapping("/all")
+    @GetMapping("/products/all")
     public ResponseEntity<Page<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
                                                               @RequestParam(name = "size", defaultValue = "10") int size) {
 
@@ -54,7 +54,7 @@ public class ProductResource {
      * @param categoryId categoria prodotti da visualizzare
      * @return nome vista
      */
-    @GetMapping(value = "/{categoryId}")
+    @GetMapping(value = "/products/{categoryId}")
     public ResponseEntity<Page<Product>> getProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                                      @RequestParam(name = "page", defaultValue = "0") int page,
                                                                      @RequestParam(name = "size", defaultValue = "10") int size) {
@@ -74,7 +74,7 @@ public class ProductResource {
      * 
      * @return nome vista
      */
-    @GetMapping(value = "/all/{productid}")
+    @GetMapping(value = "/products/all/{productid}")
     public ResponseEntity<Product> getProductById(@PathVariable("productid") Long id) {
 
         Product product = productsService.getProductById(id);
@@ -89,7 +89,7 @@ public class ProductResource {
      * @param id identificativo prodotto
      * @return immagine prodotto
      */
-    @GetMapping(value = "/photo/{id}")
+    @GetMapping(value = "/products/photo/{id}")
     @ResponseBody
     public byte[] getPhotoByProductId(@PathVariable("id") Long id) {
 
@@ -110,7 +110,7 @@ public class ProductResource {
      * 
      * @return nome vista
      */
-    @PostMapping
+    @PostMapping("/products")
     public String createProduct(@Valid Product product,
                                 HttpServletRequest httpServletRequest,
                                 Locale locale,
@@ -152,7 +152,7 @@ public class ProductResource {
      * 
      * @return vista
      */
-    @PostMapping(value = "/{id}")
+    @PostMapping(value = "/products/{id}")
     public ResponseEntity<Product> update(@Valid @RequestBody Product product,
                                           @PathVariable("id") Long id,
                                           @RequestParam(value = "file", required = false) Part file) {
@@ -175,7 +175,7 @@ public class ProductResource {
      * 
      * @return
      */
-    @GetMapping("/searchProduct")
+    @GetMapping("/products/searchProduct")
     public ResponseEntity<Page<Product>> searchProduct(SearchForm searchForm,
                                                        @RequestParam(name = "page", defaultValue = "0") int page,
                                                        @RequestParam(name = "size", defaultValue = "10") int size) {
