@@ -1,5 +1,6 @@
 package it.opensource.ecompany.repository;
 
+import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.Warehouse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,4 +15,6 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
     public Page<Warehouse> findByProductNameContaining(String searchText, Pageable pageable);
 
     public Warehouse findBySku(String sku);
+
+    public Warehouse findByProduct(Product product);
 }

@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
+import it.opensource.ecompany.web.form.SearchForm;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -126,7 +127,19 @@ class ProductResourceTest {
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    void searchProduct() {
+    void searchProducTest(@Autowired MockMvc mvc) throws Exception {
 
+        SearchForm searchForm = new SearchForm();
+        searchForm.setTextToSearch("Java");
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        String requestJson = objectMapper.writeValueAsString(searchForm);
+
+        mvc.perform(get("/api/products/searchProduct").contentType(MediaType.APPLICATION_JSON)
+                                                      .queryParam("page", "0")
+                                                      .queryParam("size", "10")
+                                                      .content(requestJson))
+                                                      .andExpect(jsonPath("$.content.length()", equalTo(6)))
+           .andExpect(status().isOk());
     }
 }

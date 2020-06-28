@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 import java.util.List;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,10 +19,15 @@ import org.springframework.test.context.jdbc.Sql;
 
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.service.ProductsService;
+import it.opensource.ecompany.service.WarehouseService;
 
 @SpringBootTest
 public class ProductsServiceImplTest {
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @Autowired
     private ProductsService productsService;
@@ -159,9 +165,19 @@ public class ProductsServiceImplTest {
         assertThat(productsService.getProductById(1L).getName(), equalTo("Alice"));
     }
 
+    @Disabled
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void deleteProductTest() {
 
+        Product product = productsService.getProductById(1L);
+        Warehouse warehouse = warehouseService.getByProduct(product);
+        warehouseService.deleteWarehose(warehouse);
+        Long expected = 53L;
+        Long actual = warehouseService.getNuberWarehouse();
+
+        assertThat(actual, equalTo(expected));
+
+        productsService.deleteProduct(product);
     }
 }

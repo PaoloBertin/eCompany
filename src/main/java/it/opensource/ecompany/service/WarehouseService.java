@@ -1,12 +1,17 @@
 package it.opensource.ecompany.service;
 
+import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.Warehouse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface WarehouseService {
 
+    public Long getNuberWarehouse();
+
     public Page<Warehouse> getAllItemsByPage(Pageable pageable);
+
+    public Warehouse getByProduct(Product product);
 
     public Page<Warehouse> getByProductCategoryCategoryid(Long id, Pageable pageable);
 
