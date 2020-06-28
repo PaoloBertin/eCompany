@@ -38,21 +38,18 @@ class WarehouseControllerTest {
     @Test
     public void viewAllItempByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/warehouse")
-                         .with(user("paolo.bertin").password("admin").roles("ADMIN")))
-            .andExpect(view().name("warehouse/list"))
-            .andExpect(status().isOk());
+        mvc.perform(get("/warehouse").with(user("paolo.bertin").password("admin").roles("ADMIN")))
+           .andExpect(view().name("warehouse/list"))
+           .andExpect(status().isOk());
     }
 
     @Test
     public void searchProduct(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/warehouse/searchProduct").param("textToSearch", "Java")
-                         .with(user("paolo.bertin").password("admin").roles("ADMIN")))
-            .andExpect(view().name("warehouse/list"))
-            .andExpect(status().isOk());
+        mvc.perform(get("/warehouse/searchProduct").param("textToSearch", "Java")
+                                                   .with(user("paolo.bertin").password("admin").roles("ADMIN")))
+           .andExpect(view().name("warehouse/list"))
+           .andExpect(status().isOk());
     }
 
     @Test
