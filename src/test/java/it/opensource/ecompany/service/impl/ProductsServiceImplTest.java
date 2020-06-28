@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -78,5 +80,17 @@ public class ProductsServiceImplTest {
         String expected = "Da Visual Basic a Java";
         String actual = product.getName();
         assertThat(actual, equalTo(expected));
+    }
+
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    public void getProductsByName(){
+
+        String expected = "Da Visual Basic a Java";
+
+        List<Product> products = productsService.getProductsByName(expected);
+        
+        assertThat(products.size(), equalTo(1));
+        assertThat(products.get(0).getName(), equalTo("Da Visual Basic a Java"));
     }
 }
