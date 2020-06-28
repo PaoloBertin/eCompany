@@ -37,14 +37,14 @@ public class ProductsServiceImplTest {
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    public void getAllProductsByPageTest(){
+    public void getAllProductsByPageTest() {
 
-       Pageable pageable = PageRequest.of(0, 10, Sort.by(Order.asc("name")));
-       
-       Page<Product> page= productsService.getAllByPage(pageable);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Order.asc("name")));
+
+        Page<Product> page = productsService.getAllByPage(pageable);
 
         int expected = 10;
-        int actual =page.getContent().size();
+        int actual = page.getContent().size();
         assertThat(actual, is(expected));
     }
 
@@ -53,7 +53,7 @@ public class ProductsServiceImplTest {
     public void getProductsByCategoryIdTest() {
 
         int expected = 21;
-        int actual   = productsService.getProductsByCategory(1L).size();
+        int actual = productsService.getProductsByCategory(1L).size();
 
         assertThat(actual, is(expected));
     }
@@ -65,15 +65,15 @@ public class ProductsServiceImplTest {
         Long categoryId = 1L;
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Order.asc("name")));
         Page<Product> page = productsService.getProductsByCategoryByPage(categoryId, pageable);
-        
+
         int expected = 10;
         int actual = page.getContent().size();
-        assertThat(actual, is(expected));        
+        assertThat(actual, is(expected));
     }
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    public void getProductById(){
+    public void getProductById() {
 
         Product product = productsService.getProductById(1L);
 
@@ -84,13 +84,24 @@ public class ProductsServiceImplTest {
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    public void getProductsByName(){
+    public void getProductsByNameTest() {
 
         String expected = "Da Visual Basic a Java";
 
         List<Product> products = productsService.getProductsByName(expected);
-        
+
         assertThat(products.size(), equalTo(1));
         assertThat(products.get(0).getName(), equalTo("Da Visual Basic a Java"));
+    }
+
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    public void getProductsByNameContainingTest() {
+
+        String searchText = "Java";
+    
+        int expected = 6;
+        int actual = productsService.getProductsByNameContaining(searchText).size();    
+        assertThat(actual, equalTo(expected));        
     }
 }
