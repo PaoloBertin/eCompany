@@ -154,9 +154,8 @@ public class ProductResource {
 
         // rende persistenti le modifiche
         product = productsService.save(product);
-        ResponseEntity<Product> responseEntity = new ResponseEntity<Product>(product, HttpStatus.OK);
 
-        return responseEntity;
+        return ResponseEntity.ok().body(product);
     }
 
     /**

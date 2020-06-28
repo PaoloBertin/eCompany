@@ -16,6 +16,7 @@ import it.opensource.ecompany.domain.Product;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,7 +46,7 @@ class ProductResourceTest {
         mvc.perform(get("/api/products/all").param("page", "0")
                                             .param("size", "10")
                                             .contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.length()", equalTo(10)))
+           .andExpect(jsonPath("$.content.length()", equalTo(10)))
            .andExpect(status().isOk());
     }
 
@@ -56,7 +57,7 @@ class ProductResourceTest {
         mvc.perform(get("/api/products/{categoryId}", 1).param("page", "0")
                                                         .param("size", "10")
                                                         .contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.length()", equalTo(10)))
+           .andExpect(jsonPath("$.content.length()", equalTo(10)))
            .andExpect(status().isOk());
     }
 
@@ -68,7 +69,7 @@ class ProductResourceTest {
                                                         .param("size", "10")
                                                         .contentType(MediaType.APPLICATION_JSON))
            // .andDo(print())
-           .andExpect(jsonPath("$.length()", equalTo(2)))
+           .andExpect(jsonPath("$.content.length()", equalTo(2)))
            .andExpect(status().isOk());
     }
 
@@ -100,14 +101,28 @@ class ProductResourceTest {
         String requestJson = objectMapper.writeValueAsString(product);
 
         mvc.perform(post("/api/products").contentType(MediaType.APPLICATION_JSON).content(requestJson))
-           // .andExpect(jsonPath("$.productid", equalTo(7)))
            .andExpect(status().isOk());
     }
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    void updateProduct() {
+    void updateProduct(@Autowired MockMvc mvc) throws Exception {
 
+        Category category = new Category();
+        category.setCategoryid(1L);
+        category.setName("Libri");
+        Product product = new Product();
+        product.setProductid(1L);
+        product.setName("Da Basic a Java");
+        product.setCategory(category);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        String requestJson = objectMapper.writeValueAsString(product);
+
+        mvc.perform(put("/api/products/{id}", 1L).contentType(MediaType.APPLICATION_JSON).content(requestJson))
+           .andExpect(jsonPath("$.name", equalTo("Da Basic a Java")))
+           .andExpect(status().isOk());
     }
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
