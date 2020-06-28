@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div class="container-fluid p-0">
+
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>
+
+            <!-- corpo centrale -->
+            <div class="row">
+                <div class="col-lg-2">
+                    <div th:replace="~{fragments/left_side_warehouse :: left_side_warehouse}">left side</div>
+                </div>
+
+                <div class="col-lg-7">
+                    <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th th:text="#{label.product.name}">name</th>
+                                <th th:text="#{label.product.sku}">Sku</th>
+                                <th th:text="#{label.product.cost}">Cost</th>
+                                <th th:text="#{label.product.unit}">Unit</th>
+                                <th th:text="#{label.product.quantity}">Quantity</th>
+                                <th th:text="#{label.product.container}">Container</th>
+                                <th th:text="#{label.product.location}">Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item : ${warehouse.content}">
+                                <!--
+                                 <td>
+                                    <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left" style="margin: 0px 10px" width="65" height="92"/>
+                               </td>
+                               -->
+                                <td th:text="${item.product.name}"></td>
+                                <td th:text="${item.sku}">sku</td>
+                                <td th:text="${item.cost}">cost</td>
+                                <td th:text="${item.unit}">unit</td>
+                                <td th:text="${item.quantity}">quantity</td>
+                                <td th:text="${item.container}">container</td>
+                                <td th:text="${item.location}">location</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div class="row justify-content-center">
+                        <nav aria-label="navigation" th:if="${warehouse.totalPages gt 1}">
+                            <ul class="pagination" th:with="pages=${warehouse.totalPages}">
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link" th:href="@{/warehouse(page=${0},size=${size})}">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link" th:href="@{/warehouse(page=${page - 1},size=${size})}">
+                                        <span aria-hidden="true">&lsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${page + 1}">-1</a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link">
+                                        <span>di</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${pages}">3</a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/warehouse(page=${page + 1},size=${size})}" aria-label="Previous">
+                                        <span aria-hidden="true">&rsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/warehouse(page=${warehouse.totalPages - 1},size=${size})}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+                </div>
+            </div>
+
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

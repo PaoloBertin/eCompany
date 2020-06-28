@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+    </head>
+
+    <body>
+        <!--
+        <nav th:fragment="header" class="navbar navbar-expand-xl navbar-dark" style="background-color: #FFCC33;">
+        -->
+        <nav th:fragment="header" class="navbar navbar-expand-xl navbar-light" style="background-color: #e3f2fd;">
+
+            <a class="navbar-brand" th:href="@{/}">
+                <img src="/images/eCompany_logo.png" alt="Home">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{'/cart/show'}">
+                            <!--   -->
+                            <span style="font-size: 3em;">
+                                <i class="fas fa-shopping-cart">
+                                </i>
+                            </span>
+                            <span class="badge badge-primary" style="font-size: 1em;" th:if="${cartBean != null}"
+                                  th:text="${cartBean.numberProducts}"></span>
+                        </a>
+                    </li>
+                </ul>
+                <!--  -->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/(lang=it)}">
+                            <img src="/images/Flag_of_Italy.png" width="35" height="23" alt="italiano">
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/(lang=en)}">
+                            <img src="/images/Flag_of_the_United_Kingdom.png" width="35" height="23" alt="inglese">
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto" sec:authorize="! isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/login/form}">
+                            <span th:text="#{label.header.login}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/customers/registration}">
+                            <span th:text="#{label.header.registration}"></span>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link">
+                            <span class="navbar-text" th:text="#{label.customer.user}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">
+                        <span class="navbar-text" th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/logout}">
+                            <span class="navbar-text" th:text="#{label.header.logout}">logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+.header {
+    border-width: 1px;
+    border-style: solid;
+    border-color: gray;
+    background-color: #FFCC33;
+}
+
+.footer {
+    background-color: #999999;
+    color: white;
+    /* font-size: 9px; */
+    /* font-size: 1em; */
+    font-size: 75%;
+    font-weight: bold;
+}
+
+.infoProduct {
+    display: grid;
+
+    grid-template-rows: 2em
+}
+
+.sidebar-titolo {
+    font-size: 125%;
+    font-weight: bold;
+}
