@@ -67,7 +67,7 @@ public class ProductsController {
     @Autowired
     private UserContext userContext;
 
-    //    @GetMapping
+    // @GetMapping
     public String viewAllProducts(Model uiModel) {
 
         List<Product> products = productsService.getAll();
@@ -138,7 +138,8 @@ public class ProductsController {
     }
 
     /**
-     * Gestisce la richiesta di visualizzare un prodotto di una determinata categoria
+     * Gestisce la richiesta di visualizzare un prodotto di una determinata
+     * categoria
      *
      * @param categoryid
      * @param productid
@@ -147,7 +148,9 @@ public class ProductsController {
      * @return nome vista
      */
     @GetMapping(value = "/{categoryid}/{productid}")
-    public String viewProduct(@PathVariable("categoryid") Long categoryid, @PathVariable("productid") Long productid, Model uiModel) {
+    public String viewProduct(@PathVariable("categoryid") Long categoryid,
+                              @PathVariable("productid") Long productid,
+                              Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
         uiModel.addAttribute("customer", customer);
@@ -221,13 +224,15 @@ public class ProductsController {
         log.info("Creating product");
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("message",
-                                 new Message("error", messageSource.getMessage("product_save_fail", new Object[]{}, locale)));
+                                 new Message("error",
+                                             messageSource.getMessage("product_save_fail", new Object[] {}, locale)));
             uiModel.addAttribute("product", product);
             return "catalog/edit";
         }
         uiModel.asMap().clear();
         redirectAttributes.addFlashAttribute("message",
-                                             new Message("success", messageSource.getMessage("product_save_success", new Object[]{}, locale)));
+                                             new Message("success", messageSource.getMessage("product_save_success",
+                                                                                             new Object[] {}, locale)));
 
         log.info("Product id: " + product.getProductid());
 
@@ -241,7 +246,7 @@ public class ProductsController {
                 InputStream inputStream = file.getInputStream();
                 if (inputStream == null)
                     log.info("File inputstream is null");
-                //                fileContent = IOUtils.toByteArray(inputStream);
+                // fileContent = IOUtils.toByteArray(inputStream);
                 product.setImage(fileContent);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
@@ -249,10 +254,10 @@ public class ProductsController {
             product.setImage(fileContent);
         }
 
-        productsService.save(product);
+        productsService.saveProduct(product);
 
-        return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(),
-                                                                    httpServletRequest);
+        return "redirect:/products/"
+                + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(), httpServletRequest);
 
     }
 
@@ -281,17 +286,18 @@ public class ProductsController {
 
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("message",
-                                 new Message("error", messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
+                                 new Message("error",
+                                             messageSource.getMessage("product.save.fail", new Object[] {}, locale)));
             uiModel.addAttribute("product", product);
             return "catalog/edit";
         }
 
         uiModel.asMap().clear();
         redirectAttributes.addFlashAttribute("message",
-                                             new Message("success",
-                                                         messageSource.getMessage("product.save.success", new Object[]{}, locale)));
+                                             new Message("success", messageSource.getMessage("product.save.success",
+                                                                                             new Object[] {}, locale)));
         // rende persistenti le modifiche
-        productsService.save(product);
+        productsService.saveProduct(product);
 
         String url = "redirect:/products/" + product.getCategory().getCategoryid() + "/" + product.getProductid();
 

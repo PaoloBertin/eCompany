@@ -16,6 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.jdbc.Sql;
 
+import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
 
@@ -45,6 +46,7 @@ public class ProductsServiceImplTest {
 
         int expected = 10;
         int actual = page.getContent().size();
+
         assertThat(actual, is(expected));
     }
 
@@ -68,6 +70,7 @@ public class ProductsServiceImplTest {
 
         int expected = 10;
         int actual = page.getContent().size();
+
         assertThat(actual, is(expected));
     }
 
@@ -79,6 +82,7 @@ public class ProductsServiceImplTest {
 
         String expected = "Da Visual Basic a Java";
         String actual = product.getName();
+
         assertThat(actual, equalTo(expected));
     }
 
@@ -99,9 +103,65 @@ public class ProductsServiceImplTest {
     public void getProductsByNameContainingTest() {
 
         String searchText = "Java";
-    
+
         int expected = 6;
-        int actual = productsService.getProductsByNameContaining(searchText).size();    
-        assertThat(actual, equalTo(expected));        
+        int actual = productsService.getProductsByNameContaining(searchText).size();
+
+        assertThat(actual, equalTo(expected));
+    }
+
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    public void getProductsByNameContainingByPageTest() {
+
+        String searchText = "Java";
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Order.asc("name")));
+
+        int expected = 6;
+        int actual = productsService.getProductsByNameContainingByPage(searchText, pageable).getContent().size();
+
+        assertThat(actual, equalTo(expected));
+    }
+
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    public void saveProductTest() {
+
+        Category category = new Category();
+        category.setCategoryid(1L);
+        category.setName("Libri");
+        Product product = new Product();
+        product.setName("Alice");
+        product.setIsbn("00000");
+        product.setCategory(category);
+
+        productsService.saveProduct(product);
+
+        int expected = 55;
+        int actual = productsService.getAll().size();
+
+        assertThat(actual, equalTo(expected));
+    }
+
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    public void updateProductTest() {
+
+        Product product = productsService.getProductById(1L);
+        product.setName("Alice");
+
+        productsService.saveProduct(product);
+
+        int expected = 54;
+        int actual = productsService.getAll().size();
+
+        assertThat(actual, equalTo(expected));
+        assertThat(productsService.getProductById(1L).getName(), equalTo("Alice"));
+    }
+
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    public void deleteProductTest() {
+
     }
 }

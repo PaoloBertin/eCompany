@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.service.ProductsService;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -28,6 +29,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @AutoConfigureMockMvc
 @SpringBootTest
 class ProductResourceTest {
+
+    @Autowired
+    private ProductsService productsService;
 
     @BeforeEach
     void setUp() {
@@ -106,15 +110,10 @@ class ProductResourceTest {
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    void updateProduct(@Autowired MockMvc mvc) throws Exception {
+    void updateProductTest(@Autowired MockMvc mvc) throws Exception {
 
-        Category category = new Category();
-        category.setCategoryid(1L);
-        category.setName("Libri");
-        Product product = new Product();
-        product.setProductid(1L);
+        Product product = productsService.getProductById(1L);
         product.setName("Da Basic a Java");
-        product.setCategory(category);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);

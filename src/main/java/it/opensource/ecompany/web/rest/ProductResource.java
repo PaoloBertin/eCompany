@@ -129,7 +129,7 @@ public class ProductResource {
             product.setImage(fileContent);
         }
 
-        productsService.save(product);
+        productsService.saveProduct(product);
 
         return ResponseEntity.ok().body(product);
     }
@@ -152,7 +152,7 @@ public class ProductResource {
         log.info("Updating product");
 
         // rende persistenti le modifiche
-        product = productsService.save(product);
+        product = productsService.saveProduct(product);
 
         return ResponseEntity.ok().body(product);
     }
