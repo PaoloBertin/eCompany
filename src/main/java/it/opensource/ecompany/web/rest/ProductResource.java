@@ -35,13 +35,13 @@ public class ProductResource {
     private ProductsService productsService;
 
     @GetMapping("/products/all")
-    public ResponseEntity<Iterable<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                                  @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Page<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                              @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> pageProducts = productsService.getAllByPage(pageable);
 
-        return ResponseEntity.ok().body(pageProducts.getContent());
+        return ResponseEntity.ok().body(pageProducts);
     }
 
     /**
@@ -51,14 +51,14 @@ public class ProductResource {
      * @return nome vista
      */
     @GetMapping(value = "/products/{categoryId}")
-    public ResponseEntity<Iterable<Product>> getProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
-                                                                         @RequestParam(name = "page", defaultValue = "0") int page,
-                                                                         @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Page<Product>> getProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
+                                                                     @RequestParam(name = "page", defaultValue = "0") int page,
+                                                                     @RequestParam(name = "size", defaultValue = "10") int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> pageProducts = productsService.getProductsByCategoryByPage(categoryId, pageable);
 
-        return ResponseEntity.ok().body(pageProducts.getContent());
+        return ResponseEntity.ok().body(pageProducts);
     }
 
     /**
@@ -87,7 +87,6 @@ public class ProductResource {
 
         Product product = productsService.getProductById(id);
 
-        // return product.getImage();
         return ResponseEntity.ok().body(product);
     }
 
@@ -133,26 +132,23 @@ public class ProductResource {
 
         productsService.save(product);
 
-        // return ResponseEntity.created(new URI("/api/products/" +
-        // product.getProductid())).body(product);
-        return ResponseEntity.ok(product);
+        return ResponseEntity.ok().body(product);
     }
 
     /**
-     * Gestisce l'arrivo di un form con i campi editati
+     * Aggiorna i campi di una entita'
      *
      * @param product
-     * @param bindingResult
-     * @param httpServletRequest
-     * @param redirectAttributes
-     * @param locale
      * 
      * @return vista
      */
-    @PostMapping(value = "/products/{id}")
+    @PutMapping(value = "/products/{productId}")
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product,
-                                                 @PathVariable("id") Long id,
-                                                 @RequestParam(value = "file", required = false) Part file) {
+                                                 @PathVariable("productId") Long id) throws Exception {
+
+        if (product.getProductid() == null) {
+            throw new Exception();
+        }
 
         log.info("Updating product");
 
@@ -173,7 +169,7 @@ public class ProductResource {
      * @return
      */
     @GetMapping("/products/searchProduct")
-    public ResponseEntity<Page<Product>> searchProduct(SearchForm searchForm,
+    public ResponseEntity<Page<Product>> searchProduct(@Valid @RequestBody SearchForm searchForm,
                                                        @RequestParam(name = "page", defaultValue = "0") int page,
                                                        @RequestParam(name = "size", defaultValue = "10") int size) {
 
@@ -181,11 +177,10 @@ public class ProductResource {
         log.debug("il titolo da cercare deve contenere: " + searchText);
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
-        Page<Product> products = productsService.getProductsByNameContainingByPage(searchText, pageable);
+        Page<Product> pageProducts = productsService.getProductsByNameContainingByPage(searchText, pageable);
 
-        log.debug("numero prodotti da visualizzare = " + products.getContent().size());
+        log.debug("numero prodotti trovati = " + pageProducts.getContent().size());
 
-        ResponseEntity<Page<Product>> responseEntity = new ResponseEntity<Page<Product>>(products, HttpStatus.OK);
-        return responseEntity;
+        return ResponseEntity.ok().body(pageProducts);
     }
 }
