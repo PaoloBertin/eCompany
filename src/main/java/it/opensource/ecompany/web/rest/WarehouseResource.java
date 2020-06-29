@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Profile("rest")
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/warehouse")
+@RequestMapping("/api/warehouse")
 @RestController
 public class WarehouseResource {
 

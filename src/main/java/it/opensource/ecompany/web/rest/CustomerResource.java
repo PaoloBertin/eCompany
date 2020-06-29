@@ -22,7 +22,7 @@ import javax.validation.Valid;
 
 @Profile("rest")
 @Slf4j
-@RequestMapping("/customers")
+@RequestMapping("/api/customers")
 @RestController
 public class CustomerResource {
 

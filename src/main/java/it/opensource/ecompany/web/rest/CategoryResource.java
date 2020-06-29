@@ -13,7 +13,7 @@ import java.util.List;
 
 @Profile("rest")
 @Slf4j
-@RequestMapping("/categories")
+@RequestMapping("/api/categories")
 @RestController
 public class CategoryResource {
 

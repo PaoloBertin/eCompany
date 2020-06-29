@@ -26,14 +26,14 @@ import java.net.URISyntaxException;
  */
 @Profile("rest")
 @Slf4j
-@RequestMapping("/api")
+@RequestMapping("/api/products")
 @RestController
 public class ProductResource {
 
     @Autowired
     private ProductsService productsService;
 
-    @GetMapping("/products/all")
+    @GetMapping("/all")
     public ResponseEntity<Page<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
                                                               @RequestParam(name = "size", defaultValue = "10") int size) {
 
@@ -49,7 +49,7 @@ public class ProductResource {
      * @param categoryId categoria prodotti da visualizzare
      * @return nome vista
      */
-    @GetMapping(value = "/products/{categoryId}")
+    @GetMapping(value = "/{categoryId}")
     public ResponseEntity<Page<Product>> getProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                                      @RequestParam(name = "page", defaultValue = "0") int page,
                                                                      @RequestParam(name = "size", defaultValue = "10") int size) {
@@ -67,7 +67,7 @@ public class ProductResource {
      * 
      * @return nome vista
      */
-    @GetMapping(value = "/products/all/{productid}")
+    @GetMapping(value = "/all/{productid}")
     public ResponseEntity<Product> getProductById(@PathVariable("productid") Long id) {
 
         Product product = productsService.getProductById(id);
@@ -81,7 +81,7 @@ public class ProductResource {
      * @param id identificativo prodotto
      * @return immagine prodotto
      */
-    @GetMapping(value = "/api/products/photo/{productid}")
+    @GetMapping(value = "/photo/{productid}")
     public ResponseEntity<Product> getPhotoByProductId(@PathVariable("productid") Long id) {
 
         Product product = productsService.getProductById(id);
@@ -101,7 +101,7 @@ public class ProductResource {
      * 
      * @return nome vista
      */
-    @PostMapping("/products")
+    @PostMapping
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product,
                                                  @RequestParam(value = "file", required = false) Part file) throws Exception,
                                                                                                             URISyntaxException {
@@ -141,7 +141,7 @@ public class ProductResource {
      * 
      * @return vista
      */
-    @PutMapping(value = "/products/{productId}")
+    @PutMapping(value = "/{productId}")
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product,
                                                  @PathVariable("productId") Long id) throws Exception {
 
@@ -166,7 +166,7 @@ public class ProductResource {
      * 
      * @return
      */
-    @GetMapping("/products/searchProduct")
+    @GetMapping("/searchProduct")
     public ResponseEntity<Page<Product>> searchProduct(@Valid @RequestBody SearchForm searchForm,
                                                        @RequestParam(name = "page", defaultValue = "0") int page,
                                                        @RequestParam(name = "size", defaultValue = "10") int size) {
