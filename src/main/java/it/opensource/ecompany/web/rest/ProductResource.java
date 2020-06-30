@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,7 +58,7 @@ public class ProductResource {
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> pageProducts = productsService.getProductsByCategoryByPage(categoryId, pageable);
 
-        return ResponseEntity.ok().body(pageProducts);
+        return new ResponseEntity<>(pageProducts, HttpStatus.OK);
     }
 
     /**
