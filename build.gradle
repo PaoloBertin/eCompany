@@ -16,6 +16,10 @@ configurations {
     }
 }
 
+bootJar {
+	layered()
+}
+
 repositories {
     mavenLocal()
 	mavenCentral()
