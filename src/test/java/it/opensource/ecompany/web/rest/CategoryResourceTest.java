@@ -84,10 +84,6 @@ class CategoryResourceTest {
     @Test
     public void deleteCategoryTest(@Autowired MockMvc mvc) throws Exception {
 
-        // TODO eliminare una categoria richiede
-        //  l'eliminazione dei prodotti ad essa corrispondenti
-        //  e del record warehouse associato ai prodotti
-
         Category category = new Category(7L, "Arredamento");
 
         ObjectMapper objectMapper = new ObjectMapper();

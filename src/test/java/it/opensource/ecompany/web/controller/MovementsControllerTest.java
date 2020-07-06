@@ -120,7 +120,6 @@ public class MovementsControllerTest {
     @Test
     public void saveMovementsAndUpdateWarehouse(@Autowired MockMvc mvc) throws Exception {
 
-        // TODO
         Category category = new Category(1L, "Books");
         Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
         CartBean cartBean = new CartBean();

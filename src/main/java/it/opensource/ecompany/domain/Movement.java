@@ -20,12 +20,12 @@ public class Movement implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long movementid; // TODO usare id come nome variabile
+    private Long movementid;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date datemovement; // TODO usare dateMovement come nome variabile e date_movement come nome colonna
+    private Date datemovement;
 
-    private Double totalamount; // TODO usare totalAmount come nome variabile
+    private Double totalamount;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 25)
@@ -36,7 +36,7 @@ public class Movement implements Serializable {
     private Customer customer;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<Lineitem> lineitems = new ArrayList<>(); // TODO usare lineItems come nome variabile
+    private List<Lineitem> lineitems = new ArrayList<>();
 
     @Version
     private Long version;
