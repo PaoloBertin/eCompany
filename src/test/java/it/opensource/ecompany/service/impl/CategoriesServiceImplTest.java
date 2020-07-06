@@ -56,11 +56,26 @@ public class CategoriesServiceImplTest {
 
         Category category = new Category();
         category.setName("eBooks");
+        categoriesService.saveCategory(category);
 
         int expected = 7;
         int actual = categoriesService.getAll().size();
 
-        assertThat(expected, equalTo(actual));
+        assertThat(actual, equalTo(expected));
+    }
 
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Test
+    public void updateCategory() {
+
+        Category category = categoriesService.getCategoryById(1L);
+        category.setName("Books");
+
+        categoriesService.saveCategory(category);
+
+        int expected = 6;
+        int actual = categoriesService.getAll().size();
+
+        assertThat(expected, equalTo(actual));
     }
 }
