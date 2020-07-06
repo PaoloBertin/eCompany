@@ -24,12 +24,14 @@ public class CategoriesServiceImpl implements CategoriesService {
         return categoriesRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Category getCategoryById(Long id) {
 
         return categoriesRepository.findById(id).orElse(new Category());
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Category getCategoryByName(String name) {
 
@@ -47,5 +49,5 @@ public class CategoriesServiceImpl implements CategoriesService {
 
         categoriesRepository.delete(category);
     }
-    
+
 }

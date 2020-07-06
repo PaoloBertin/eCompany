@@ -17,4 +17,6 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
     public Warehouse findBySku(String sku);
 
     public Warehouse findByProduct(Product product);
+
+    public Warehouse findByProductProductid(Long productid);
 }

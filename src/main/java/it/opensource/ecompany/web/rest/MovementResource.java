@@ -75,7 +75,7 @@ public class MovementResource {
     @GetMapping("/save")
     public String saveMovement() {
 
-        movementsService.saveMovements();
+        movementsService.saveMovement();
 
         // Customer customer = userContext.getCurrentCustomer();
 

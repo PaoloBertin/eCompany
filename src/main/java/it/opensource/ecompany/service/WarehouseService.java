@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface WarehouseService {
 
-    public Long getNuberWarehouse();
+    public Long getNumberWarehouse();
 
     public Page<Warehouse> getAllItemsByPage(Pageable pageable);
 
@@ -17,9 +17,11 @@ public interface WarehouseService {
 
     public Page<Warehouse> getProductsByNameContainingByPage(String searchText, Pageable pageable);
 
+    public Warehouse getWarehouseByProductProductId(Long productId);
+
     public Warehouse getWarehouseBySku(String sku);
 
-    public Integer reducesProductQuantityInStock(Integer sold);
+    public void reducesProductQuantityInStock(Long productId, Integer sold);
 
     public void deleteWarehose(Warehouse warehouse);
 }

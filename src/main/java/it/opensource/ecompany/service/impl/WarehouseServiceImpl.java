@@ -33,6 +33,13 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Transactional(readOnly = true)
     @Override
+    public Warehouse getWarehouseByProductProductId(Long productId) {
+
+        return warehouseRepository.findByProductProductid(productId);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
     public Page<Warehouse> getProductsByNameContainingByPage(String searchText, Pageable pageable) {
 
         return warehouseRepository.findByProductNameContaining(searchText, pageable);
@@ -46,11 +53,13 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Integer reducesProductQuantityInStock(Integer sold) {
+    public void reducesProductQuantityInStock(Long productId, Integer sold) {
 
-        // verifica quantità presente in magazzino
+        Warehouse warehouse = warehouseRepository.findByProductProductid(productId);
 
-        return null;
+        Integer charge = warehouse.getQuantity();
+        warehouse.setQuantity(charge - sold);
+        warehouseRepository.save(warehouse);
     }
 
     @Override
@@ -66,8 +75,9 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Long getNuberWarehouse() {
+    public Long getNumberWarehouse() {
 
         return warehouseRepository.count();
     }
+
 }

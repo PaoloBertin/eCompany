@@ -8,10 +8,13 @@ import java.util.Map;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.*;
 import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.service.WarehouseService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.opensource.ecompany.repository.MovementsRepository;
+import it.opensource.ecompany.repository.WarehouseRepository;
 import it.opensource.ecompany.service.MovementsService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +33,9 @@ public class MovementsServiceImpl implements MovementsService {
 
     @Autowired
     private MovementsRepository movementsRepository;
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @Transactional(readOnly = true)
     @Override
@@ -53,7 +59,7 @@ public class MovementsServiceImpl implements MovementsService {
 
     @Transactional(readOnly = true)
     @Override
-    public void saveMovements() {
+    public void saveMovement() {
 
         Customer customer = userContext.getCurrentCustomer();
 
@@ -63,7 +69,7 @@ public class MovementsServiceImpl implements MovementsService {
         movement.setState(State.nuovo);
         movement.setCustomer(customer);
 
-        // costruzione lista LineItem
+        // costruzione lista LineItem associata all'acquisto
         List<Lineitem> lineitems = new ArrayList<>();
         for (Map.Entry<Product, Integer> entry : cartBean.getProducts().entrySet()) {
             Lineitem lineitem = new Lineitem();
@@ -74,7 +80,13 @@ public class MovementsServiceImpl implements MovementsService {
         movement.setLineitems(lineitems);
         movementsRepository.save(movement);
 
-        // scala quantità prodotti in magazzino
+        // scala prodotti dal magazzino
+        for (Map.Entry<Product, Integer> entry : cartBean.getProducts().entrySet()) {
+            Product product = entry.getKey();
+            Integer quantity = entry.getValue();
+            warehouseService.reducesProductQuantityInStock(product.getProductid(), quantity);            
+        }
 
     }
+
 }
