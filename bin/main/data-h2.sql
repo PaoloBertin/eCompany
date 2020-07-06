@@ -109,7 +109,7 @@ INSERT INTO products(productid, name, description, isbn, price, image, categoryi
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(53, 'Carte Da Gioco Ramino Italia', 'L''astuccio Ramino Italia Dal Negro include due mazzi da poker in cartoncino.', '8020320036222', 12.00, FILE_READ('classpath:static/images/cover/8020320036222.jpg'), 4);
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(54, 'Apple iPhone 11', 'Un nuovo sistema a doppia fotocamera, per inquadrare più cose intorno a te.', '0190199221130', 796, FILE_READ('classpath:static/images/cover/0190199221130.jpg'), 6);
 
-INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 1,  1, 'B0001', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
+INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 1,  1, '8883780450', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 2,  2, 'B0002', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 3,  3, 'B0003', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES( 4,  4, 'B0004', 20, 'pz', 10, 5, 25.0, false, 'T032', 'F2S1');
