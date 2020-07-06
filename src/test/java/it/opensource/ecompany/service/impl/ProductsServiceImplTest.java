@@ -161,7 +161,9 @@ public class ProductsServiceImplTest {
         int expected = 54;
         int actual = productsService.getAll().size();
 
+        // verifica non sia stato aggiunto prodotto
         assertThat(actual, equalTo(expected));
+        // verifica che il nuovo titolo sia stato salvato correttamente
         assertThat(productsService.getProductById(1L).getName(), equalTo("Alice"));
     }
 
