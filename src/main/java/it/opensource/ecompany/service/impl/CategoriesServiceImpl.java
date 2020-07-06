@@ -31,6 +31,12 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
+    public Category getCategoryByName(String name) {
+
+        return categoriesRepository.findByName(name);
+    }
+
+    @Override
     public Category saveCategory(Category category) {
 
         return categoriesRepository.save(category);
@@ -41,5 +47,5 @@ public class CategoriesServiceImpl implements CategoriesService {
 
         categoriesRepository.delete(category);
     }
-
+    
 }
