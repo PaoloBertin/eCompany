@@ -56,7 +56,7 @@ public class MovementsServiceImpl implements MovementsService {
         return movementsRepository.findByCustomerCustomerid(customerid);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public void saveMovement() {
 

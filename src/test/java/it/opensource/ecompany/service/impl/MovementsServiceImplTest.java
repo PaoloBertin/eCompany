@@ -54,4 +54,13 @@ public class MovementsServiceImplTest {
 
         assertThat(actual).isEqualTo(expected);
     }
+
+    @Test
+    public void getMovementByCustomer() {
+
+        int expected = 4;
+        int actual = movementsService.getMovementByCustomer(2L).size();
+
+        assertThat(actual).isEqualTo(expected);
+    }
 }
