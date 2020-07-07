@@ -105,7 +105,7 @@ CREATE TABLE IF NOT EXISTS customer_role (
 
 CREATE TABLE IF NOT EXISTS categories (
     categoryid BIGINT(20) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(20),
+    name VARCHAR(254),
     version BIGINT(20) DEFAULT 0,
 
     PRIMARY KEY(categoryid)

@@ -47,12 +47,18 @@ INSERT INTO customer_role(customerid, id) VALUES (3, 1);
 INSERT INTO customer_role(customerid, id) VALUES (1, 1);
 INSERT INTO customer_role(customerid, id) VALUES (1, 2);
 
-INSERT INTO categories(categoryid, name, version) VALUES(1, 'Libri', 0);
-INSERT INTO categories(categoryid, name, version) VALUES(2, 'CD', 0);
-INSERT INTO categories(categoryid, name, version) VALUES(3, 'DVD', 0);
-INSERT INTO categories(categoryid, name, version) VALUES(4, 'Giochi', 0);
-INSERT INTO categories(categoryid, name, version) VALUES(5, 'Cartoleria', 0);
-INSERT INTO categories(categoryid, name, version) VALUES(6, 'Elettronica', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 1, 'Libri', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 2, 'CD', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 3, 'DVD', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 4, 'Giochi', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 5, 'Cartoleria', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 6, 'Elettronica', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 7, 'Frutta e Verdura', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 8, 'Carne e Pesce', 0);
+INSERT INTO categories(categoryid, name, version) VALUES( 9, 'Salumi e Formaggi', 0);
+INSERT INTO categories(categoryid, name, version) VALUES(10, 'Latte, Burro e Uova', 0);
+INSERT INTO categories(categoryid, name, version) VALUES(11, 'Pane, Pizza e Grissini', 0);
+INSERT INTO categories(categoryid, name, version) VALUES(12, 'Pasta, Riso e Farina', 0);
 
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(1, 'Da Visual Basic a Java', 'Con Visual Basic oggi si possono produrre applicazioni allo stato dell''arte: event-driven, Internet-ready, con logica ad oggetti, o meglio a componenti. Tuttavia Visual Basic ha una limitazione evidente: funziona solo in ambienti Microsoft', '8883780450', 29.90, FILE_READ('classpath:static/images/cover/vb2java.jpg'),1);
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(2, 'Resurrection', 'Even though it under performed at the box office last Christmas, I really enjoyed "Star Trek: Insurrection." Maybe it was the title. Maybe it was the time of year.', '8883780451', 39.90, FILE_READ('classpath:static/images/cover/resurrection.jpg'), 2);

@@ -37,11 +37,11 @@ public class WelcomeControllerTest {
     }
 
     @Test
-    public void welcome() throws Exception {
+    public void welcomeTest() throws Exception {
 
         mvc
             .perform(get("/"))
-            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(12)))
             .andExpect(view().name("welcome"))
             .andExpect(status().isOk());
     }

@@ -37,18 +37,18 @@ class CategoryResourceTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    public void getAllCategories(@Autowired MockMvc mvc) throws Exception {
+    public void getAllCategoriesTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc
             .perform(get("/api/categories").contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", equalTo(6)))
+            .andExpect(jsonPath("$.length()", equalTo(12)))
             .andExpect(status().isOk())
         ;
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    public void getCategoryById(@Autowired MockMvc mvc) throws Exception {
+    public void getCategoryByIdTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc
             .perform(get("/api/categories/{categoryId}", 1L).contentType(MediaType.APPLICATION_JSON))
@@ -74,7 +74,7 @@ class CategoryResourceTest {
                          .contentType(MediaType.APPLICATION_JSON)
                          .content(requestJson)
                     )
-            .andExpect(jsonPath("$.categoryid", equalTo(7)))
+            .andExpect(jsonPath("$.categoryid", equalTo(13)))
             .andExpect(status().isOk())
         ;
     }
