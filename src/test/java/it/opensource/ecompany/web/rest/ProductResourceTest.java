@@ -114,6 +114,7 @@ class ProductResourceTest {
         Product product = new Product();
         product.setProductid(1L);
         product.setName("Da Basic a Java");
+        product.setIsbn("8883780450");
         product.setCategory(category);
 
         ObjectMapper objectMapper = new ObjectMapper();
