@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.service.ProductsService;
+import it.opensource.ecompany.web.form.SearchForm;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -25,9 +28,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;;
 
+@ActiveProfiles("rest")
 @AutoConfigureMockMvc
 @SpringBootTest
 class ProductResourceTest {
+
+    @Autowired
+    private ProductsService productsService;
 
     @BeforeEach
     void setUp() {
@@ -106,16 +113,10 @@ class ProductResourceTest {
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    void updateProduct(@Autowired MockMvc mvc) throws Exception {
+    void updateProductTest(@Autowired MockMvc mvc) throws Exception {
 
-        Category category = new Category();
-        category.setCategoryid(1L);
-        category.setName("Libri");
-        Product product = new Product();
-        product.setProductid(1L);
+        Product product = productsService.getProductById(1L);
         product.setName("Da Basic a Java");
-        product.setIsbn("8883780450");
-        product.setCategory(category);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
@@ -128,7 +129,19 @@ class ProductResourceTest {
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
-    void searchProduct() {
+    void searchProducTest(@Autowired MockMvc mvc) throws Exception {
 
+        SearchForm searchForm = new SearchForm();
+        searchForm.setTextToSearch("Java");
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+        String requestJson = objectMapper.writeValueAsString(searchForm);
+
+        mvc.perform(get("/api/products/searchProduct").contentType(MediaType.APPLICATION_JSON)
+                                                      .queryParam("page", "0")
+                                                      .queryParam("size", "10")
+                                                      .content(requestJson))
+                                                      .andExpect(jsonPath("$.content.length()", equalTo(6)))
+           .andExpect(status().isOk());
     }
 }

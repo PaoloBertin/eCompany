@@ -40,7 +40,7 @@ class CategoryResourceTest {
     public void getAllCategories(@Autowired MockMvc mvc) throws Exception {
 
         mvc
-            .perform(get("/categories").contentType(MediaType.APPLICATION_JSON))
+            .perform(get("/api/categories").contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.length()", equalTo(6)))
             .andExpect(status().isOk())
         ;
@@ -51,7 +51,7 @@ class CategoryResourceTest {
     public void getCategoryById(@Autowired MockMvc mvc) throws Exception {
 
         mvc
-            .perform(get("/categories/{categoryId}", 1L).contentType(MediaType.APPLICATION_JSON))
+            .perform(get("/api/categories/{categoryId}", 1L).contentType(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$.categoryid", equalTo(1)))
             .andExpect(jsonPath("$.name", equalTo("Libri")))
             .andExpect(status().isOk())
@@ -70,7 +70,7 @@ class CategoryResourceTest {
         String requestJson = objectMapper.writeValueAsString(category);
 
         mvc
-            .perform(post("/categories")
+            .perform(post("/api/categories")
                          .contentType(MediaType.APPLICATION_JSON)
                          .content(requestJson)
                     )
@@ -83,10 +83,6 @@ class CategoryResourceTest {
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void deleteCategoryTest(@Autowired MockMvc mvc) throws Exception {
-
-        // TODO eliminare una categoria richiede
-        //  l'eliminazione dei prodotti ad essa corrispondenti
-        //  e del record warehouse associato ai prodotti
 
         Category category = new Category(7L, "Arredamento");
 

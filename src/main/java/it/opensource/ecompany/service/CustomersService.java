@@ -18,7 +18,6 @@ public interface CustomersService {
 
     public boolean verifyCustomer(String username, String password);
     
-//    public Customer createCustomer(final Customer customer);
     public Long createCustomer(final Customer customer);
 
     public Customer getCurrentCustomer();

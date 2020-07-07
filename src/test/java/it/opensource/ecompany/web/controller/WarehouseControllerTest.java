@@ -55,7 +55,7 @@ class WarehouseControllerTest {
     @Test
     void findBySku() {
 
-        String actual = warehouseService.getWarehouseBySku("B0002").getUnit();
+        String actual = warehouseService.getWarehouseBySku("8883780450").getUnit();
         String expected = "pz";
 
         assertThat(actual, equalTo(expected));

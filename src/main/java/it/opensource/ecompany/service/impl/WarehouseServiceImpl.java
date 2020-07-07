@@ -1,5 +1,6 @@
 package it.opensource.ecompany.service.impl;
 
+import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.repository.WarehouseRepository;
 import it.opensource.ecompany.service.WarehouseService;
@@ -16,28 +17,35 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     private final WarehouseRepository warehouseRepository;
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Page<Warehouse> getAllItemsByPage(Pageable pageable) {
 
         return warehouseRepository.findAll(pageable);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Page<Warehouse> getByProductCategoryCategoryid(Long id, Pageable pageable) {
 
         return warehouseRepository.findByProductCategoryCategoryid(id, pageable);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
+    @Override
+    public Warehouse getWarehouseByProductProductId(Long productId) {
+
+        return warehouseRepository.findByProductProductid(productId);
+    }
+
+    @Transactional(readOnly = true)
     @Override
     public Page<Warehouse> getProductsByNameContainingByPage(String searchText, Pageable pageable) {
 
         return warehouseRepository.findByProductNameContaining(searchText, pageable);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Warehouse getWarehouseBySku(String sku) {
 
@@ -45,12 +53,13 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public Integer reducesProductQuantityInStock(Integer sold) {
+    public void reducesProductQuantityInStock(Long productId, Integer sold) {
 
-        // verifica quantità presente in magazzino
+        Warehouse warehouse = warehouseRepository.findByProductProductid(productId);
 
-
-        return null;
+        Integer charge = warehouse.getQuantity();
+        warehouse.setQuantity(charge - sold);
+        warehouseRepository.save(warehouse);
     }
 
     @Override
@@ -58,4 +67,17 @@ public class WarehouseServiceImpl implements WarehouseService {
 
         warehouseRepository.delete(warehouse);
     }
+
+    @Override
+    public Warehouse getByProduct(Product product) {
+
+        return warehouseRepository.findByProduct(product);
+    }
+
+    @Override
+    public Long getNumberWarehouse() {
+
+        return warehouseRepository.count();
+    }
+
 }

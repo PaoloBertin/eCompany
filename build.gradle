@@ -1,26 +1,24 @@
-buildscript {
-	ext {
-		springBootVersion = '2.3.1.RELEASE'
-	}
-	repositories {
-	    mavenLocal()
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
 }
-
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'java'
-apply plugin: 'idea'
 
 group = 'it.opensource'
 version = '0.0.1-SNAPSHOT'
 
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+bootJar {
+	layered()
+}
 
 repositories {
     mavenLocal()
@@ -29,9 +27,10 @@ repositories {
 
 dependencies {
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
 
-    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
     implementation 'org.springframework.boot:spring-boot-starter-validation'

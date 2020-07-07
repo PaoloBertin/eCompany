@@ -10,6 +10,8 @@ public interface CategoriesService {
 
     public Category getCategoryById(Long id);
 
+    public Category getCategoryByName(String name);
+
     public Category saveCategory(Category category);
 
     public void deleteCategory(Category category);

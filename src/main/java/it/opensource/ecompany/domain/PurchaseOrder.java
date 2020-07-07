@@ -1,7 +1,5 @@
 package it.opensource.ecompany.domain;
 
-// TODO
-
 import javax.persistence.Version;
 
 public class PurchaseOrder {

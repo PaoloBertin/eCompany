@@ -141,6 +141,7 @@ public class Product implements Serializable {
         this.version = version;
     }
 
+/*
     @Override
     public int hashCode() {
 
@@ -167,5 +168,5 @@ public class Product implements Serializable {
             return false;
         return true;
     }
-
+*/
 }

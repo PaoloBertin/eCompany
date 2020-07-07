@@ -12,7 +12,7 @@ import it.opensource.ecompany.repository.ProductsRepository;
 import it.opensource.ecompany.service.ProductsService;
 import org.springframework.transaction.annotation.Transactional;
 
-//@Transactional
+@Transactional
 @Service("productsService")
 public class ProductsServiceImpl implements ProductsService {
 
@@ -76,7 +76,7 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     @Override
-    public Product save(Product product) {
+    public Product saveProduct(Product product) {
 
         return productsRepository.save(product);
     }

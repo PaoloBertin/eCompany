@@ -101,7 +101,7 @@ public class MovementsController {
     @GetMapping("/save")
     public String saveMovement(Model uiModel) {
 
-        movementsService.saveMovements();
+        movementsService.saveMovement();
 
         Customer customer = userContext.getCurrentCustomer();
         uiModel.addAttribute("customer", customer);
