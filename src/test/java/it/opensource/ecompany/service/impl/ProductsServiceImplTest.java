@@ -176,7 +176,7 @@ public class ProductsServiceImplTest {
         Warehouse warehouse = warehouseService.getByProduct(product);
         warehouseService.deleteWarehose(warehouse);
         Long expected = 53L;
-        Long actual = warehouseService.getNuberWarehouse();
+        Long actual = warehouseService.getNumberWarehouse();
 
         assertThat(actual, equalTo(expected));
 

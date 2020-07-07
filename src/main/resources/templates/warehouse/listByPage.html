@@ -26,6 +26,7 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th th:text="#{label.product.category.name}">category name</th>
                                 <th th:text="#{label.product.name}">name</th>
                                 <th th:text="#{label.product.sku}">Sku</th>
                                 <th th:text="#{label.product.cost}">Cost</th>
@@ -42,7 +43,8 @@
                                     <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left" style="margin: 0px 10px" width="65" height="92"/>
                                </td>
                                -->
-                                <td th:text="${item.product.name}"></td>
+                               <td th:text="${item.product.category.name}"></td>
+                                <td th:text="${item.product.name}"></td>                                
                                 <td th:text="${item.sku}">sku</td>
                                 <td th:text="${item.cost}">cost</td>
                                 <td th:text="${item.unit}">unit</td>

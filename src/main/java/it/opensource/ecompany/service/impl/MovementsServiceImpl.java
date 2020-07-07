@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import it.opensource.ecompany.repository.MovementsRepository;
-import it.opensource.ecompany.repository.WarehouseRepository;
 import it.opensource.ecompany.service.MovementsService;
 import org.springframework.transaction.annotation.Transactional;
 
