@@ -26,7 +26,7 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th th:text="#{label.product.category.name}">category name</th>
+                                <th th:text="#{label.categories.name}">category name</th>
                                 <th th:text="#{label.product.name}">name</th>
                                 <th th:text="#{label.product.sku}">Sku</th>
                                 <th th:text="#{label.product.cost}">Cost</th>
@@ -64,7 +64,7 @@
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},(page=${page - 1},size=${size})}">
+                                    <a class="page-link" th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
                                 </li>
