@@ -79,6 +79,8 @@ public class CartController {
 
         cartBean.emptyCart();
 
+        Customer customer = userContext.getCurrentCustomer();
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("categories", categoriesServices.getAll());
         uiModel.addAttribute("cartBean", cartBean);
