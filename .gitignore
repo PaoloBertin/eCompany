@@ -5,6 +5,7 @@ bin/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+java_formatting.xml
 
 ### STS ###
 .apt_generated
