@@ -17,7 +17,7 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Transactional
-@Service
+@Service("purchaseOrdersService")
 public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
 
     private final CartBean cartBean;

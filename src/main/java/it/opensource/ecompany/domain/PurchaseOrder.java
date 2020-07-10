@@ -36,6 +36,9 @@ public class PurchaseOrder implements Serializable {
     @JoinColumn(name = "customerid")
     private Customer customer;
 
+    @JoinTable(name = "purchase_orders_lineitems",
+        joinColumns = @JoinColumn(name = "purchase_orders_id"),
+        inverseJoinColumns = @JoinColumn(name = "lineitems_lineitemid"))
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Lineitem> lineitems = new ArrayList<>();
 

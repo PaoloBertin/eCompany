@@ -181,6 +181,17 @@ INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) V
 INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES( 9, '2018-10-10 00:00:00', 109.20, 'processato', 3);
 INSERT INTO movement(movementid, datemovement, totalamount, state, customerid) VALUES(10, '2018-12-08 00:00:00',  19.00, 'processato', 3);
 
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 2);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 2, '2018-10-10 00:00:00',  49.90, 'processato', 2);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 3, '2018-10-10 00:00:00',  59.70, 'processato', 2);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 4, '2018-10-10 00:00:00',  74.90, 'processato', 2);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 5, '2018-12-08 00:00:00', 246.60, 'processato', 1);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 6, '2018-10-10 00:00:00',  79.60, 'processato', 1);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 7, '2018-10-10 00:00:00',  39.80, 'processato', 1);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 8, '2018-10-10 00:00:00',  71.60, 'processato', 1);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES( 9, '2018-10-10 00:00:00', 109.20, 'processato', 3);
+INSERT INTO purchase_orders(id, date_movement, total_amount, state, customerid) VALUES(10, '2018-12-08 00:00:00',  19.00, 'processato', 3);
+
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(1,   1, 1);
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(2,   2, 2);
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(3,   3, 2);
@@ -222,3 +233,24 @@ INSERT INTO movement_lineitems(Movement_movementid, lineitems_lineitemid) VALUES
 INSERT INTO movement_lineitems(Movement_movementid, lineitems_lineitemid) VALUES(9, 18);
 INSERT INTO movement_lineitems(Movement_movementid, lineitems_lineitemid) VALUES(9, 19);
 INSERT INTO movement_lineitems(Movement_movementid, lineitems_lineitemid) VALUES(10, 20);
+
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(1, 1);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(1, 2);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(1, 3);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(2, 4);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(3, 5);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(4, 6);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(4, 7);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(5, 8);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(5, 9);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(5, 10);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(6, 11);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(6, 12);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(7, 13);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(8, 14);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(8, 15);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(9, 16);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(9, 17);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(9, 18);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(9, 19);
+INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(10, 20);
