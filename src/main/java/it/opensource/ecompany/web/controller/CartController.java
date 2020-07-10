@@ -89,11 +89,5 @@ public class CartController {
         return "welcome";
     }
 
-    @GetMapping("/numberProducts")
-    public Integer numberProductinCart(){
-
-        Integer numberProducts = cartBean.getNumberProducts();
-        return numberProducts;
-    }
 }
 
