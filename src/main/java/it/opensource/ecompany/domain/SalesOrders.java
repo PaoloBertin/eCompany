@@ -1,12 +1,10 @@
 package it.opensource.ecompany.domain;
 
-import javax.persistence.Version;
 
-public class PurchaseOrder {
+public class SalesOrders {
 
     private Long id;
 
-    @Version
     private Long version;
 
     public Long getId() {
@@ -47,7 +45,7 @@ public class PurchaseOrder {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        PurchaseOrder other = (PurchaseOrder) obj;
+        SalesOrders other = (SalesOrders) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

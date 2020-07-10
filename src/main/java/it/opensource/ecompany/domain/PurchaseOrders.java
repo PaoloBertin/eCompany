@@ -1,10 +1,21 @@
 package it.opensource.ecompany.domain;
 
+import lombok.Getter;
+import lombok.Setter;
 
-public class SalesOrder {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Version;
+
+@Setter
+@Getter
+@Table(name = "purchase_orders")
+@Entity
+public class PurchaseOrders {
 
     private Long id;
 
+    @Version
     private Long version;
 
     public Long getId() {
@@ -45,7 +56,7 @@ public class SalesOrder {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        SalesOrder other = (SalesOrder) obj;
+        PurchaseOrders other = (PurchaseOrders) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
