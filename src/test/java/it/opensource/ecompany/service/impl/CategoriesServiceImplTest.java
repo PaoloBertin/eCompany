@@ -28,7 +28,7 @@ public class CategoriesServiceImplTest {
 
         List<Category> categories = categoriesService.getAll();
 
-        assertThat(categories.size(), equalTo(12));
+        assertThat(categories.size(), equalTo(6));
     }
 
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
@@ -58,7 +58,7 @@ public class CategoriesServiceImplTest {
         category.setName("eBooks");
         categoriesService.saveCategory(category);
 
-        int expected = 13;
+        int expected = 7;
         int actual = categoriesService.getAll().size();
 
         assertThat(actual, equalTo(expected));
@@ -73,7 +73,7 @@ public class CategoriesServiceImplTest {
 
         categoriesService.saveCategory(category);
 
-        int expected = 12;
+        int expected = 6;
         int actual = categoriesService.getAll().size();
 
         assertThat(expected, equalTo(actual));

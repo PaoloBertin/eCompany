@@ -39,7 +39,7 @@ public class WelcomeControllerTest {
 
         mvc
             .perform(get("/"))
-            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(12)))
+            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
             .andExpect(view().name("welcome"))
             .andExpect(status().isOk());
     }

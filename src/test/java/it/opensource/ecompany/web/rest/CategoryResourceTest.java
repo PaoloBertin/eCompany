@@ -41,7 +41,7 @@ class CategoryResourceTest {
 
         mvc
             .perform(get("/api/categories").contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", equalTo(12)))
+            .andExpect(jsonPath("$.length()", equalTo(6)))
             .andExpect(status().isOk())
         ;
     }
@@ -74,7 +74,7 @@ class CategoryResourceTest {
                          .contentType(MediaType.APPLICATION_JSON)
                          .content(requestJson)
                     )
-            .andExpect(jsonPath("$.categoryid", equalTo(13)))
+            .andExpect(jsonPath("$.categoryid", equalTo(7)))
             .andExpect(status().isOk())
         ;
     }
