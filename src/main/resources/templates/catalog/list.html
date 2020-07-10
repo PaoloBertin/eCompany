@@ -40,7 +40,7 @@
                                     <p>
                                         <b>
                                             <span th:text="#{label.product.price} + ':&nbsp;'">Prezzo: </span>
-                                            <span th:text="${products.content.get(col).price} + ' &euro;'"></span>
+                                            <span th:text="${#numbers.formatDecimal(products.content.get(col).price, 0, 'COMMA', 2, 'POINT')}  + ' &euro;'"></span>
                                         </b>
                                     </p>
                                 </td>

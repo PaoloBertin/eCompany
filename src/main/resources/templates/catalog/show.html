@@ -46,8 +46,12 @@
                             </div>
             
                             <div class="row">
-                                <div class="col-lg-3" ><span style="font-weight: 600;" th:text="#{label.product.price}"></span> </div>
-                                <div class="col-lg-9" ><span th:text="${product.price} + ' &euro;'"></span></div>
+                                <div class="col-lg-3" >
+                                    <span style="font-weight: 600;" th:text="#{label.product.price}"></span>
+                                </div>
+                                <div class="col-lg-9" >
+                                    <span th:text="${#numbers.formatDecimal(product.price, 0, 'COMMA', 2, 'POINT')}  + ' &euro;'"></span>
+                                </div>
                             </div>
 
                             <div class="row">
