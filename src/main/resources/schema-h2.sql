@@ -9,6 +9,9 @@ DROP TABLE IF EXISTS warehouse;
 DROP TABLE IF EXISTS movement;
 DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS movement_lineitems;
+DROP TABLE IF EXISTS purchase_orders;
+DROP TABLE IF EXISTS lineitem;
+DROP TABLE IF EXISTS purchase_orders_lineitems;
 
 -- CREATE TABLE IF NOT EXISTS users(
 --    username VARCHAR(256) NOT NULL,
@@ -158,6 +161,19 @@ CREATE TABLE IF NOT EXISTS movement (
     CONSTRAINT movement_fk_01 FOREIGN KEY (customerid) REFERENCES customers
 );
 
+CREATE TABLE IF NOT EXISTS purchase_orders (
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    date_movement TIMESTAMP,
+    total_amount DOUBLE DEFAULT 0.0,
+    state VARCHAR(25),
+    customerid BIGINT(20) NOT NULL,
+    version BIGINT(20) DEFAULT 0,
+
+    PRIMARY KEY(id),
+
+    CONSTRAINT purchase_orders_fk_01 FOREIGN KEY (customerid) REFERENCES customers(customerid)
+);
+
 CREATE TABLE IF NOT EXISTS lineitem (
     lineitemid BIGINT(20) NOT NULL AUTO_INCREMENT,
     productid BIGINT(20) NOT NULL,
@@ -176,4 +192,13 @@ CREATE TABLE IF NOT EXISTS movement_lineitems (
     CONSTRAINT movement_lineitem_01 UNIQUE (lineitems_lineitemid),
     CONSTRAINT movement_lineitem_02 FOREIGN KEY (lineitems_lineitemid) REFERENCES lineitem,
     CONSTRAINT movement_lineitem_03 FOREIGN KEY (Movement_movementid) REFERENCES movement
+);
+
+CREATE TABLE IF NOT EXISTS purchase_orders_lineitems (
+    lineitems_lineitemid BIGINT(20) NOT NULL,
+    purchase_orders_id BIGINT(20) NOT NULL,
+
+    CONSTRAINT purchase_orders_lineitem_01 UNIQUE (lineitems_lineitemid),
+    CONSTRAINT purchase_orders_lineitem_02 FOREIGN KEY (lineitems_lineitemid) REFERENCES lineitem(lineitemid),
+    CONSTRAINT purchase_orders_lineitem_03 FOREIGN KEY (purchase_orders_id) REFERENCES purchase_orders(id)
 );
