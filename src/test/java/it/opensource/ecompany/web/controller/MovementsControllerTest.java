@@ -28,10 +28,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MovementsControllerTest {
 
     @Autowired
-    CartBean cartBean = new CartBean();
+    private CartBean cartBean;
 
     @Autowired
-    MockHttpSession session;
+    private MockHttpSession session;
 
     @BeforeEach
     public void setUp() throws Exception {

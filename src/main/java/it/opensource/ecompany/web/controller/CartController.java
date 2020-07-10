@@ -47,6 +47,7 @@ public class CartController {
 
         log.debug("aggiunto prodotto al carrello");
         log.debug("sono presenti " + cartBean.getNumberProducts() + " prodotti nel carrello");
+        Integer number = cartBean.getNumberProducts();
 
         return "redirect:" + referer;
     }
@@ -86,6 +87,13 @@ public class CartController {
         uiModel.addAttribute("cartBean", cartBean);
 
         return "welcome";
+    }
+
+    @GetMapping("/numberProducts")
+    public Integer numberProductinCart(){
+
+        Integer numberProducts = cartBean.getNumberProducts();
+        return numberProducts;
     }
 }
 

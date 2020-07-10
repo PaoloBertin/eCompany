@@ -57,7 +57,7 @@ public class CartBean implements Serializable {
 
         log.debug("elimina prodotto dal carrello con id=" + product.getProductid());
 
-        if (products.containsKey(product)) {
+        if (this.products.containsKey(product)) {
             products.remove(product);
             setSubTotal();
         }

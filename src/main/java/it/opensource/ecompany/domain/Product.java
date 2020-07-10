@@ -141,32 +141,37 @@ public class Product implements Serializable {
         this.version = version;
     }
 
-/*
+    /* */
+    @Override
+    public boolean equals(Object otherObject) {
+
+        if (this == otherObject)
+            return true;
+
+        if (otherObject == null)
+            return false;
+
+        if (getClass() != otherObject.getClass())
+            return false;
+
+        Product otherProduct = (Product) otherObject;
+        if (productid == null) {
+            if (otherProduct.productid != null)
+                return false;
+        } else if (!productid.equals(otherProduct.productid))
+            return false;
+
+        return true;
+    }
+
     @Override
     public int hashCode() {
 
         final int prime = 31;
         int result = 1;
         result = prime * result + ((productid == null) ? 0 : productid.hashCode());
+
         return result;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Product other = (Product) obj;
-        if (productid == null) {
-            if (other.productid != null)
-                return false;
-        } else if (!productid.equals(other.productid))
-            return false;
-        return true;
-    }
-*/
 }

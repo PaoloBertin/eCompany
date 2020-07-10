@@ -32,6 +32,15 @@ public class ProductsServiceImplTest {
     @Autowired
     private ProductsService productsService;
 
+    @Test
+    public void equality_products(){
+
+        Product product1 = productsService.getProductById(1L);
+        Product product2 = productsService.getProductById(1L);
+
+        assertThat(product2, equalTo(product1));
+    }
+
     @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void getAllProductsTest() {

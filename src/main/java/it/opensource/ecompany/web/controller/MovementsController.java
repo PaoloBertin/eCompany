@@ -84,8 +84,8 @@ public class MovementsController {
         return "movements/list";
     }
 
-    @GetMapping("/all/customers/{customerId}/checkout")
-    public String viewMovements(@PathVariable("customerId") Long customerId, Model uiModel) {
+    @GetMapping("/all/customers/checkout")
+    public String viewMovements(Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
         List<Category> categories = categoriesService.getAll();
