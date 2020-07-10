@@ -3,7 +3,6 @@ package it.opensource.ecompany.web.controller;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.domain.Movement;
 import it.opensource.ecompany.domain.PurchaseOrder;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.PurchaseOrdersService;

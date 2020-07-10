@@ -1,6 +1,5 @@
 package it.opensource.ecompany.web.controller;
 
-import it.opensource.ecompany.bean.CartBean;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -21,17 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 public class CartControllerTest {
 
-    @Autowired
-    private CartBean cartBean;
-
-    @Autowired
-    private MockHttpSession session;
-
-    @Autowired
-    private CartController cartController;
-
-
-    @BeforeEach
+     @BeforeEach
     public void setUp() throws Exception {
 
     }

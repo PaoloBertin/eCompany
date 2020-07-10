@@ -1,7 +1,6 @@
 package it.opensource.ecompany.service.impl;
 
 import it.opensource.ecompany.service.PurchaseOrdersService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,7 +35,7 @@ class PurchaseOrdersServiceImplTest {
         int expected = 10;
         int actual = purchaseOrdersService.getAllPurchaseOrders().size();
 
-        assertThat(actual, equalTo(10));
+        assertThat(actual, equalTo(expected));
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
