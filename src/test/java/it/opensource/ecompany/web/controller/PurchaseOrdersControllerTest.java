@@ -1,5 +1,7 @@
 package it.opensource.ecompany.web.controller;
 
+import it.opensource.ecompany.domain.Category;
+import it.opensource.ecompany.domain.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -27,8 +29,20 @@ public class PurchaseOrdersControllerTest {
     private CartBean cartBean;
 
     @Test
-    public void getAllPurchaseordersTest() {
+    public void getAllPurchaseordersTest(@Autowired MockMvc mvc) throws Exception {
 
+        mvc
+            .perform(get("/movements/all").with(user("mario.rossi")
+                                                    .password("user")
+                                                    .roles("USER")))
+            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
+            .andExpect(model().attribute("movements", IsCollectionWithSize.hasSize(10)))
+            .andExpect(model().attribute("movements", hasItem(hasProperty("totalamount", equalTo(169.5)))))
+            .andExpect(model().attributeExists("cartBean"))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+            .andExpect(view().name("movements/list"))
+            .andExpect(status().isOk());
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -64,8 +78,21 @@ public class PurchaseOrdersControllerTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    public void saveMovementTest() {
+    public void saveMovementTest(@Autowired MockMvc mvc) throws Exception {
 
+        Category category = new Category(1L, "Books");
+        Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
+        CartBean cartBean = new CartBean();
+        cartBean.addProductToCart(product);
+        product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
+        cartBean.addProductToCart(product);
+
+        mvc
+            .perform(get("/purchaseorders/save")
+                         .sessionAttr("cartBean", cartBean)
+                         .with(user("mario.rossi")
+                                   .password("user")
+                                   .roles("USER")))
+            .andExpect(status().isOk());
     }
-
 }

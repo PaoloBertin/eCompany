@@ -4,7 +4,6 @@ package it.opensource.ecompany.web.rest;
 //import it.opensource.ecompany.domain.Customer;
 //import it.opensource.ecompany.domain.Movement;
 //import it.opensource.ecompany.service.CategoriesService;
-import it.opensource.ecompany.service.MovementsService;
 //import it.opensource.ecompany.service.UserContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/movements")
-@RestController
+//@RestController
 public class MovementResource {
 
     // private final CartBean cartBean;
 
     // private final CategoriesService categoriesService;
 
-    private final MovementsService movementsService;
+//    private final MovementsService movementsService;
 
     // private final UserContext userContext;
 
@@ -38,7 +37,7 @@ public class MovementResource {
 
         // List<Movement> movements = movementsService.getAllMovements();
 
-        log.debug("nr. ordini=" + movementsService.getAllMovements().size());
+//        log.debug("nr. ordini=" + movementsService.getAllMovements().size());
 
         return "movements/list";
     }
@@ -75,7 +74,7 @@ public class MovementResource {
     @GetMapping("/save")
     public String saveMovement() {
 
-        movementsService.saveMovement();
+//        movementsService.saveMovement();
 
         // Customer customer = userContext.getCurrentCustomer();
 

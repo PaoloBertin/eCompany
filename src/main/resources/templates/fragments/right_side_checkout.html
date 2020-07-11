@@ -14,28 +14,28 @@
             <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
                 <br/>
                 <span class="sidebar-titolo" th:text="#{label.rightside.checkout.title}">Area clienti</span><br/>
-                <form name="movementSaveForm" th:action="@{/movements/save}" method="get">
+                <form name="purchaseOrderSaveForm" th:action="@{/purchaseorders/save}" method="get">
                     <div class="form-group row">
-                        <label for="subTotal" class="col-xl-5 col-form-label" th:text="#{label.movements.subTotal}">subTotal</label>
+                        <label for="subTotal" class="col-xl-5 col-form-label" th:text="#{label.purchaseorder.subtotal}">subTotal</label>
                         <div class="col-xl-7">
                             <input id="subTotal" type="text" class="form-control-plaintext" th:value="${#numbers.formatDecimal(cartBean.subTotal, 0, 'POINT', 2, 'POINT') + ' &euro;'}" readonly>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="shippingCost" class="col-xl-5 col-form-label" th:text="#{label.movements.shippingCost}">shippingCost</label>
+                        <label for="shippingCost" class="col-xl-5 col-form-label" th:text="#{label.purchaseorder.shippingCost}">shippingCost</label>
                         <div class="col-xl-7">
                             <input id="shippingCost" type="text" class="form-control-plaintext" th:value="${#numbers.formatDecimal(cartBean.shippingCosts, 0, 'POINT', 2, 'POINT') + ' &euro;'}" readonly>
                         </div>
                     </div>
                     <br/>
                     <div class="form-group row">
-                        <label for="total" class="col-xl-5 col-form-label" th:text="#{label.movements.total}">total</label>
+                        <label for="total" class="col-xl-5 col-form-label" th:text="#{label.purchaseorder.total}">total</label>
                         <div class="col-xl-7">
                             <input id="total" type="text" class="form-control-plaintext" th:value="${#numbers.formatDecimal(cartBean.totalCost, 0, 'POINT', 2, 'POINT')}" readonly>
                         </div>
                     </div>
                     <br/>
-                    <button type="submit" class="btn btn-primary mb-2" th:text="#{label.movements.cash}">Alla cassa</button>
+                    <button type="submit" class="btn btn-primary mb-2" th:text="#{label.purchaseorder.cash}">Alla cassa</button>
                 </form>
             </div>
             <br/>
