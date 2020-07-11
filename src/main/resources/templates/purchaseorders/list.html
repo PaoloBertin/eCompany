@@ -23,25 +23,25 @@
             
                 <div class="col-lg-7">
                     <br/>
-                    <h4 th:text="#{label.movements.listing}">Movements Listing</h4>
+                    <h4 th:text="#{label.purchaseorder.listing}">Purchase Orders Listing</h4>
                     <br/>
                     <table class="table">
                         <thead>
                             <tr>
-                                <th th:text="#{label.movements.username}">Username</th>
-                                <th th:text="#{label.movements.purchase_date}">Date Movement</th>
-                                <th th:text="#{label.movements.total}">Total Amount</th>
-                                <th th:text="#{label.movements.state}">State</th>
+                                <th th:text="#{label.purchaseorder.username}">Username</th>
+                                <th th:text="#{label.purchaseorder.purchase_date}">Purchase Order Date</th>
+                                <th th:text="#{label.purchaseorder.total}">Total Amount</th>
+                                <th th:text="#{label.purchaseorder.state}">State</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="movement : ${movements}">
-                                <td th:text="${movement.customer.username}" scope="row"></td>
+                            <tr th:each="purchaseOrder : ${purchaseOrders}">
+                                <td th:text="${purchaseOrder.customer.username}" scope="row"></td>
                                 <td>
-                                    <a th:href="@{'/movements/' + ${movement.movementid}}" th:text="${#dates.format(movement.datemovement, 'dd-MM-yyyy HH:mm')}"></a>
+                                    <a th:href="@{'/purchaseorders/' + ${purchaseOrder.id}}" th:text="${#dates.format(purchaseOrder.datePurchase, 'dd-MM-yyyy HH:mm')}"></a>
                                 </td>
-                                <td class="text-xl-right" th:text="${#numbers.formatDecimal(movement.totalamount, 0, 'COMMA', 2, 'POINT')} + ' &euro;'"></td>
-                                <td th:text="${movement.state}"></td>
+                                <td class="text-xl-right" th:text="${#numbers.formatDecimal(purchaseOrder.totalAmount, 0, 'COMMA', 2, 'POINT')} + ' &euro;'"></td>
+                                <td th:text="${purchaseOrder.state}"></td>
                             </tr>
                         </tbody>                        
                     </table>

@@ -178,7 +178,7 @@ CREATE TABLE IF NOT EXISTS lineitem (
     lineitemid BIGINT(20) NOT NULL AUTO_INCREMENT,
     productid BIGINT(20) NOT NULL,
     quantity DOUBLE DEFAULT 0.0,
-    version BIGINT(20),
+    version BIGINT(20) DEFAULT 0,
 
     PRIMARY KEY(lineitemid),
     

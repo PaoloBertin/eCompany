@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/movements")
-@Controller
+//@Controller
 public class MovementsController {
 
     private final CartBean cartBean;

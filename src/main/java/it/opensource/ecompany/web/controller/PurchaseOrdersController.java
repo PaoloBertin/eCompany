@@ -78,7 +78,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("categories", categoriesService.getAll());
 
         List<PurchaseOrder> purchaseOrders = purchaseOrdersService.getPurchaseOrderByCustomer(customerId);
-        uiModel.addAttribute("purchaseorders", purchaseOrders);
+        uiModel.addAttribute("purchaseOrders", purchaseOrders);
 
         return "purchaseorders/list";
     }
