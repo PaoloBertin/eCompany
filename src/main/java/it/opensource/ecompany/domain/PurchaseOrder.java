@@ -21,9 +21,9 @@ public class PurchaseOrder implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "date_movement")
+    @Column(name = "date_purchase")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date dateMovement;
+    private Date datePurchase;
 
     @Column(name = "total_amount")
     private Double totalAmount;
@@ -44,76 +44,6 @@ public class PurchaseOrder implements Serializable {
 
     @Version
     private Long version;
-
-    public Long getId() {
-
-        return id;
-    }
-
-    public void setId(Long id) {
-
-        this.id = id;
-    }
-
-    public Date getDateMovement() {
-
-        return dateMovement;
-    }
-
-    public void setDateMovement(Date dateMovement) {
-
-        this.dateMovement = dateMovement;
-    }
-
-    public Double getTotalAmount() {
-
-        return totalAmount;
-    }
-
-    public void setTotalAmount(Double totalAmount) {
-
-        this.totalAmount = totalAmount;
-    }
-
-    public State getState() {
-
-        return state;
-    }
-
-    public void setState(State state) {
-
-        this.state = state;
-    }
-
-    public Customer getCustomer() {
-
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-
-        this.customer = customer;
-    }
-
-    public List<Lineitem> getLineitems() {
-
-        return lineitems;
-    }
-
-    public void setLineitems(List<Lineitem> lineitems) {
-
-        this.lineitems = lineitems;
-    }
-
-    public Long getVersion() {
-
-        return version;
-    }
-
-    public void setVersion(Long version) {
-
-        this.version = version;
-    }
 
     @Override
     public int hashCode() {

@@ -39,56 +39,67 @@ public class MovementsControllerTest {
 
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void viewMovementsTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/movements/all/customers/checkout").with(user("mario.rossi").password("user").roles("USER")))
-           .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
-           .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-           .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(view().name("movements/checkout"))
-           .andExpect(status().isOk());
+        mvc
+            .perform(get("/movements/all/customers/checkout").with(user("mario.rossi")
+                                                                       .password("user")
+                                                                       .roles("USER")))
+            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
+            .andExpect(model().attributeExists("cartBean"))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+            .andExpect(view().name("movements/checkout"))
+            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getAllMovementsTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/movements/all").with(user("mario.rossi").password("user").roles("USER")))
-           .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
-           .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-           .andExpect(model().attribute("movements", IsCollectionWithSize.hasSize(10)))
-           .andExpect(model().attribute("movements", hasItem(hasProperty("totalamount", equalTo(169.5)))))
-           .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(view().name("movements/list"))
-           .andExpect(status().isOk());
+        mvc
+            .perform(get("/movements/all").with(user("mario.rossi")
+                                                    .password("user")
+                                                    .roles("USER")))
+            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
+            .andExpect(model().attribute("movements", IsCollectionWithSize.hasSize(10)))
+            .andExpect(model().attribute("movements", hasItem(hasProperty("totalamount", equalTo(169.5)))))
+            .andExpect(model().attributeExists("cartBean"))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+            .andExpect(view().name("movements/list"))
+            .andExpect(status().isOk());
 
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getMovementByIdTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/movements/{id}", 2L).sessionAttr("cartBean", cartBean)
-                                              .with(user("mario.rossi").password("user").roles("USER")))
-           .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
-           .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-           .andExpect(model().attribute("movement", hasProperty("totalamount", equalTo(49.90))))
-           .andExpect(view().name("movements/show"))
-           .andExpect(status().isOk());
+        mvc
+            .perform(get("/movements/{id}", 2L)
+                         .sessionAttr("cartBean", cartBean)
+                         .with(user("mario.rossi")
+                                   .password("user")
+                                   .roles("USER")))
+            .andExpect(model().attributeExists("cartBean"))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
+            .andExpect(model().attribute("movement", hasProperty("totalamount", equalTo(49.90))))
+            .andExpect(view().name("movements/show"))
+            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getMovementsByCustomerTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/movements/all/customers/{customerId}", 2L).with(user("mario.rossi").password("user")
-                                                                                             .roles("USER")))
+        mvc.perform(get("/movements/all/customers/{customerId}", 2L).with(user("mario.rossi")
+                                                                              .password("user")
+                                                                              .roles("USER")))
            // .andDo(print())
            .andExpect(model().attributeExists("cartBean"))
            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
@@ -102,7 +113,8 @@ public class MovementsControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Disabled
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void saveMovements(@Autowired MockMvc mvc) throws Exception {
 
@@ -113,13 +125,17 @@ public class MovementsControllerTest {
         product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
         cartBean.addProductToCart(product);
 
-        mvc.perform(get("/movements/save").sessionAttr("cartBean", cartBean)
-                                          .with(user("mario.rossi").password("user").roles("USER")))
-           .andExpect(status().isOk());
+        mvc
+            .perform(get("/movements/save")
+                         .sessionAttr("cartBean", cartBean)
+                         .with(user("mario.rossi")
+                                   .password("user")
+                                   .roles("USER")))
+            .andExpect(status().isOk());
     }
 
     @Disabled
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void saveMovementsAndUpdateWarehouse(@Autowired MockMvc mvc) throws Exception {
 
@@ -130,8 +146,12 @@ public class MovementsControllerTest {
         product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
         cartBean.addProductToCart(product);
 
-        mvc.perform(get("/movements/save").sessionAttr("cartBean", cartBean)
-                                          .with(user("mario.rossi").password("user").roles("USER")))
-           .andExpect(status().isOk());
+        mvc
+            .perform(get("/movements/save")
+                         .sessionAttr("cartBean", cartBean)
+                         .with(user("mario.rossi")
+                                   .password("user")
+                                   .roles("USER")))
+            .andExpect(status().isOk());
     }
 }

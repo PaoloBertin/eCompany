@@ -158,12 +158,12 @@ CREATE TABLE IF NOT EXISTS movement (
 
     PRIMARY KEY(movementid),
     
-    CONSTRAINT movement_fk_01 FOREIGN KEY (customerid) REFERENCES customers
+    CONSTRAINT movement_fk_01 FOREIGN KEY (customerid) REFERENCES customers(customerid)
 );
 
 CREATE TABLE IF NOT EXISTS purchase_orders (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
-    date_movement TIMESTAMP,
+    date_purchase TIMESTAMP,
     total_amount DOUBLE DEFAULT 0.0,
     state VARCHAR(25),
     customerid BIGINT(20) NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS lineitem (
 
     PRIMARY KEY(lineitemid),
     
-    CONSTRAINT line_item_fk FOREIGN KEY (productid) REFERENCES products
+    CONSTRAINT line_item_fk FOREIGN KEY (productid) REFERENCES products(productid)
 );
 
 CREATE TABLE IF NOT EXISTS movement_lineitems (
@@ -190,8 +190,8 @@ CREATE TABLE IF NOT EXISTS movement_lineitems (
     lineitems_lineitemid BIGINT(20) NOT NULL,
 
     CONSTRAINT movement_lineitem_01 UNIQUE (lineitems_lineitemid),
-    CONSTRAINT movement_lineitem_02 FOREIGN KEY (lineitems_lineitemid) REFERENCES lineitem,
-    CONSTRAINT movement_lineitem_03 FOREIGN KEY (Movement_movementid) REFERENCES movement
+    CONSTRAINT movement_lineitem_02 FOREIGN KEY (lineitems_lineitemid) REFERENCES lineitem(lineitemid),
+    CONSTRAINT movement_lineitem_03 FOREIGN KEY (Movement_movementid) REFERENCES movement(movementid)
 );
 
 CREATE TABLE IF NOT EXISTS purchase_orders_lineitems (

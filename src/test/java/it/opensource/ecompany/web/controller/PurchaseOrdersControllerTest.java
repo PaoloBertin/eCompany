@@ -31,36 +31,38 @@ public class PurchaseOrdersControllerTest {
 
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getPurchaseOrderByIdTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/purchaseorders/{purchaseordersId}", 2L).sessionAttr("cartBean", cartBean)
-                                                                 .with(user("mario.rossi").password("user")
-                                                                                          .roles("USER")))
-           .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
-           .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(model().attribute("purchaseorder", hasProperty("totalamount", equalTo(49.90))))
-           .andExpect(view().name("purchaseorders/checkout"))
-           .andExpect(status().isOk());
-
+        mvc
+            .perform(get("/purchaseorders/{purchaseordersId}", 2L)
+                         .sessionAttr("cartBean", cartBean)
+                         .with(user("mario.rossi")
+                                   .password("user")
+                                   .roles("USER")))
+            .andExpect(model().attributeExists("cartBean"))
+            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
+            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+            .andExpect(model().attribute("purchaseorder", hasProperty("totalAmount", equalTo(49.90))))
+            .andExpect(view().name("purchaseorders/show"))
+            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getpurchaseordersByCustomerTest() {
 
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void viewMovementsTest() {
 
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void saveMovementTest() {
 

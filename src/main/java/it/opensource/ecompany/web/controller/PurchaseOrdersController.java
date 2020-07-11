@@ -59,7 +59,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("purchaseorders", purchaseOrder);
+        uiModel.addAttribute("purchaseorder", purchaseOrder);
 
         log.debug("visualizza ordine con id=" + purchaseOrder.getId());
         log.debug("numero lineItem=" + purchaseOrder.getLineitems().size());

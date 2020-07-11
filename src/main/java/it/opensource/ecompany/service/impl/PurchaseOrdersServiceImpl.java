@@ -55,7 +55,7 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
         Customer customer = userContext.getCurrentCustomer();
 
         PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder.setDateMovement(new Date());
+        purchaseOrder.setDatePurchase(new Date());
         purchaseOrder.setTotalAmount(cartBean.getTotalCost());
         purchaseOrder.setState(State.nuovo);
         purchaseOrder.setCustomer(customer);
