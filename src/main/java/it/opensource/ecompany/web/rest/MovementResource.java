@@ -6,18 +6,15 @@ package it.opensource.ecompany.web.rest;
 //import it.opensource.ecompany.service.CategoriesService;
 //import it.opensource.ecompany.service.UserContext;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 //import java.util.List;
 
 @Profile("rest")
 @RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/api/movements")
 //@RestController
 public class MovementResource {

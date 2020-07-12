@@ -32,16 +32,16 @@ public class PurchaseOrdersControllerTest {
     public void getAllPurchaseordersTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc
-            .perform(get("/movements/all").with(user("mario.rossi")
+            .perform(get("/purchaseorders/all").with(user("mario.rossi")
                                                     .password("user")
                                                     .roles("USER")))
             .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
             .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-            .andExpect(model().attribute("movements", IsCollectionWithSize.hasSize(10)))
-            .andExpect(model().attribute("movements", hasItem(hasProperty("totalamount", equalTo(169.5)))))
+            .andExpect(model().attribute("purchaseorders", IsCollectionWithSize.hasSize(10)))
+            .andExpect(model().attribute("purchaseorders", hasItem(hasProperty("totalAmount", equalTo(169.5)))))
             .andExpect(model().attributeExists("cartBean"))
             .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-            .andExpect(view().name("movements/list"))
+            .andExpect(view().name("purchaseorders/list"))
             .andExpect(status().isOk());
     }
 
