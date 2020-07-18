@@ -1,40 +1,43 @@
---INSERT INTO users (username, password, enabled) VALUES ('paolo.bertin', 'admin', 1);
---INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','user1',1);
---INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','user2',1);
---INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','user3',1);
+INSERT INTO users (username, password, enabled) VALUES ('paolo.bertin', 'admin', 1);
+INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','user1',1);
+INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','user2',1);
+INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','user3',1);
 
---INSERT INTO authorities(username,authority) VALUES ('paolo.bertin','ROLE_ADMIN');
---INSERT INTO authorities(username,authority) VALUES ('mario.rossi','ROLE_USER');
---INSERT INTO authorities(username,authority) VALUES ('giuseppe.verdi','ROLE_USER');
---INSERT INTO authorities(username,authority) VALUES ('giuseppe.garibaldi','ROLE_USER');
+INSERT INTO authorities(username,authority) VALUES ('paolo.bertin','ROLE_ADMIN');
+INSERT INTO authorities(username,authority) VALUES ('mario.rossi','ROLE_USER');
+INSERT INTO authorities(username,authority) VALUES ('giuseppe.verdi','ROLE_USER');
+INSERT INTO authorities(username,authority) VALUES ('giuseppe.garibaldi','ROLE_USER');
 
 -- Create the Groups
---INSERT INTO groups(group_name) values ('Users');
---INSERT INTO groups(group_name) values ('Administrators');
+INSERT INTO groups(group_name) values ('Users');
+INSERT INTO groups(group_name) values ('Administrators');
 
 -- Map the Groups to Roles
---INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_USER' FROM groups WHERE group_name='Users';
+INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_USER' FROM groups WHERE group_name='Users';
 -- Administrators are both a ROLE_USER and ROLE_ADMIN
---INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_USER' FROM groups WHERE group_name='Administrators';
---INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_ADMIN' FROM groups WHERE group_name='Administrators';
+INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_USER' FROM groups WHERE group_name='Administrators';
+INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_ADMIN' FROM groups WHERE group_name='Administrators';
 
 -- Map the users to Groups
---INSERT INTO group_members(group_id, username) SELECT id,'paolo.bertin' FROM groups WHERE group_name='Administrators';
---INSERT INTO group_members(group_id, username) SELECT id,'mario.rossi' FROM groups WHERE group_name='Users';
---INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.verdi' FROM groups WHERE group_name='Users';
---INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.garibaldi' FROM groups WHERE group_name='Users';
+INSERT INTO group_members(group_id, username) SELECT id,'paolo.bertin' FROM groups WHERE group_name='Administrators';
+INSERT INTO group_members(group_id, username) SELECT id,'mario.rossi' FROM groups WHERE group_name='Users';
+INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.verdi' FROM groups WHERE group_name='Users';
+INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.garibaldi' FROM groups WHERE group_name='Users';
 
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(1, 'Battaglia Terme', 'Via G. Mazzini', '6', '35041', 'Padova', 'Italia');
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(2, 'Battaglia Terme', 'Vicolo Pio X', '11', '35041', 'Padova', 'Italia');
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(3, 'Battaglia Terme', 'Via A. Volta', '7', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(4, 'Battaglia Terme', 'Via G. Garibaldi', '21', '35041', 'Padova', 'Italia');
 
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (1, 'paolo.bertin@dmail.com', '3338323285', '0429779334');
-INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (2, 'mario.rossi@dmail.com', '3458323285', '0497793348');
-INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (3, 'giuseppe.verdi@dmail.com', '3628323285', '0429776334');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (2, 'mario.rossi@dmail.com', '3458323286', '0497793348');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (3, 'giuseppe.verdi@dmail.com', '3628323287', '0429776335');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (4, 'giuseppe.garibaldi@dmail.com', '3628323288', '0429776336');
 
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(1, 'Paolo', 'Bertin', 'paolo.bertin', 'admin', 'paolo.bertin@dmail.com', 1, 1);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(2, 'Mario', 'Rossi', 'mario.rossi', 'user', 'mario.rossi@dmail.com', 2, 2);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(3, 'Giuseppe', 'Verdi', 'giuseppe.verdi', 'user', 'giuseppe.verdi@dmail.com', 3, 3);
+INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(4, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', 'user', 'giuseppe.garibaldi@dmail.com', 4, 4);
 
 INSERT INTO role(id, name) VALUES (1, 'ROLE_USER');
 INSERT INTO role(id, name) VALUES (2, 'ROLE_ADMIN');
