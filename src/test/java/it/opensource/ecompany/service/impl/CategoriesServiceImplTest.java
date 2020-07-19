@@ -22,7 +22,7 @@ public class CategoriesServiceImplTest {
     @Autowired
     CategoriesService categoriesService;
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getAllCategoriesTest() {
 
@@ -31,7 +31,7 @@ public class CategoriesServiceImplTest {
         assertThat(categories.size(), equalTo(6));
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getCategoryByIdTest() {
 
@@ -40,7 +40,7 @@ public class CategoriesServiceImplTest {
         assertThat("Libri", equalTo(category.getName()));
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getCategoryByNameTest() {
 
@@ -50,7 +50,7 @@ public class CategoriesServiceImplTest {
         assertThat(expected, equalTo(actual));
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void saveCategoryTest() {
 
@@ -64,7 +64,7 @@ public class CategoriesServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void updateCategory() {
 

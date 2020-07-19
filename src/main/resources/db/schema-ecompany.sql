@@ -1,59 +1,3 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS authorities;
-DROP TABLE IF EXISTS groups;
-DROP TABLE IF EXISTS group_authorities;
-DROP TABLE IF EXISTS group_members;
-DROP TABLE IF EXISTS address;
-DROP TABLE IF EXISTS contacts;
-DROP TABLE IF EXISTS customers;
-DROP TABLE IF EXISTS role;
-DROP TABLE IF EXISTS customer_role;
-DROP TABLE IF EXISTS categories;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS warehouse;
-DROP TABLE IF EXISTS lineitem;
-DROP TABLE IF EXISTS purchase_orders;
-DROP TABLE IF EXISTS lineitem;
-DROP TABLE IF EXISTS purchase_orders_lineitems;
-
-CREATE TABLE IF NOT EXISTS users(
-    username VARCHAR(256) NOT NULL,
-    password VARCHAR(256) NOT NULL,
-    enabled BOOLEAN NOT NULL,
-    
-    PRIMARY KEY(username)
-);
-
-CREATE TABLE authorities (
-    username VARCHAR(256) NOT NULL,
-    authority VARCHAR(256) NOT NULL,
-
-    CONSTRAINT un_authoritues_01 UNIQUE (username,authority),
-    CONSTRAINT fk_authorities_01 FOREIGN KEY(username) REFERENCES users(username)
-);
-
-CREATE TABLE IF NOT EXISTS groups (
-    id BIGINT(20) NOT NULL AUTO_INCREMENT,
-    group_name varchar(256) not NULL,
-    
-    PRIMARY KEY(id)
-);
-
-CREATE TABLE IF NOT EXISTS group_authorities (
-    group_id BIGINT(20) NOT NULL,
-    authority varchar(256) not null,
-
-    CONSTRAINT fk_group_authorities_group FOREIGN KEY(group_id) REFERENCES groups(id)
-);
-
-CREATE TABLE IF NOT EXISTS group_members (
-    id BIGINT NOT NULL AUTO_INCREMENT primary key,
-    username VARCHAR(256) NOT NULL,
-    group_id BIGINT(20) NOT NULL,
-
-    CONSTRAINT fk_group_members_group FOREIGN KEY(group_id) REFERENCES groups(id)
-);
-
 CREATE TABLE IF NOT EXISTS address (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
     city VARCHAR(50),
@@ -127,9 +71,9 @@ CREATE TABLE IF NOT EXISTS products (
     image BLOB,
     categoryid BIGINT(20),
     version BIGINT(20) DEFAULT 0,
-    
+
     PRIMARY KEY (productid),
-    
+
     CONSTRAINT category_id_fk FOREIGN KEY (categoryid) REFERENCES categories(categoryid)
 );
 
@@ -172,7 +116,7 @@ CREATE TABLE IF NOT EXISTS lineitem (
     version BIGINT(20) DEFAULT 0,
 
     PRIMARY KEY(lineitemid),
-    
+
     CONSTRAINT line_item_fk FOREIGN KEY (productid) REFERENCES products(productid)
 );
 

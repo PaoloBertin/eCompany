@@ -45,7 +45,7 @@ public class PurchaseOrdersControllerTest {
             .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getPurchaseOrderByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -64,19 +64,19 @@ public class PurchaseOrdersControllerTest {
             .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getpurchaseordersByCustomerTest() {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void viewMovementsTest() {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void saveMovementTest(@Autowired MockMvc mvc) throws Exception {
 

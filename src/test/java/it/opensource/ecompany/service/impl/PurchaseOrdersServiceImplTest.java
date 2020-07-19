@@ -28,7 +28,7 @@ class PurchaseOrdersServiceImplTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getAllPurchaseOrdersTest() {
 
@@ -38,7 +38,7 @@ class PurchaseOrdersServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getPurchaseOrderByIdTest() {
 
@@ -48,7 +48,7 @@ class PurchaseOrdersServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getPurchaseOrderByCustomerIdTest() {
 
@@ -58,7 +58,7 @@ class PurchaseOrdersServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void savePurchaseOrder() {
 

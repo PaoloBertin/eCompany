@@ -35,7 +35,7 @@ class CategoryResourceTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getAllCategoriesTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -46,7 +46,7 @@ class CategoryResourceTest {
         ;
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getCategoryByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -59,7 +59,7 @@ class CategoryResourceTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void createCategoryTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -80,7 +80,7 @@ class CategoryResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void deleteCategoryTest(@Autowired MockMvc mvc) throws Exception {
 

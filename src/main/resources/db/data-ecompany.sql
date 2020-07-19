@@ -1,29 +1,3 @@
-INSERT INTO users (username, password, enabled) VALUES ('paolo.bertin', 'admin', 1);
-INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','user',1);
-INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','user',1);
-INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','user',1);
-
-INSERT INTO authorities(username,authority) VALUES ('paolo.bertin','ROLE_ADMIN');
-INSERT INTO authorities(username,authority) VALUES ('mario.rossi','ROLE_USER');
-INSERT INTO authorities(username,authority) VALUES ('giuseppe.verdi','ROLE_USER');
-INSERT INTO authorities(username,authority) VALUES ('giuseppe.garibaldi','ROLE_USER');
-
--- Create the Groups
-INSERT INTO groups(group_name) values ('Users');
-INSERT INTO groups(group_name) values ('Administrators');
-
--- Map the Groups to Roles
-INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_USER' FROM groups WHERE group_name='Users';
--- Administrators are both a ROLE_USER and ROLE_ADMIN
-INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_USER' FROM groups WHERE group_name='Administrators';
-INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_ADMIN' FROM groups WHERE group_name='Administrators';
-
--- Map the users to Groups
-INSERT INTO group_members(group_id, username) SELECT id,'paolo.bertin' FROM groups WHERE group_name='Administrators';
-INSERT INTO group_members(group_id, username) SELECT id,'mario.rossi' FROM groups WHERE group_name='Users';
-INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.verdi' FROM groups WHERE group_name='Users';
-INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.garibaldi' FROM groups WHERE group_name='Users';
-
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(1, 'Battaglia Terme', 'Via G. Mazzini', '6', '35041', 'Padova', 'Italia');
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(2, 'Battaglia Terme', 'Vicolo Pio X', '11', '35041', 'Padova', 'Italia');
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(3, 'Battaglia Terme', 'Via A. Volta', '7', '35041', 'Padova', 'Italia');

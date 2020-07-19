@@ -46,7 +46,7 @@ class ProductResourceTest {
 
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     void getAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -57,7 +57,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     void getProductsByCategory1ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -68,7 +68,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     void getProductsByCategory6ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -80,7 +80,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getProductByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -89,14 +89,14 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/products/photo/{productid}", 1L)).andDo(print()).andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -111,7 +111,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     void updateProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -127,7 +127,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     void searchProducTest(@Autowired MockMvc mvc) throws Exception {
 

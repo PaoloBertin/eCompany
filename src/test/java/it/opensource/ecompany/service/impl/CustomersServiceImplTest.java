@@ -23,7 +23,7 @@ public class CustomersServiceImplTest {
     @Autowired
     private CustomersService customersService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getAllCustomersTest() {
 
@@ -33,7 +33,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getCustomerByIdVerifyAddress() {
 
@@ -43,7 +43,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void getCustomerByIdVerifyContact() {
 
