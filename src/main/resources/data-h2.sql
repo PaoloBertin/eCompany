@@ -1,7 +1,7 @@
 INSERT INTO users (username, password, enabled) VALUES ('paolo.bertin', 'admin', 1);
-INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','user1',1);
-INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','user2',1);
-INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','user3',1);
+INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','user',1);
+INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','user',1);
+INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','user',1);
 
 INSERT INTO authorities(username,authority) VALUES ('paolo.bertin','ROLE_ADMIN');
 INSERT INTO authorities(username,authority) VALUES ('mario.rossi','ROLE_USER');

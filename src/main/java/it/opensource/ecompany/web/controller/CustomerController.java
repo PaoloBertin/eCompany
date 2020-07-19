@@ -1,10 +1,13 @@
 package it.opensource.ecompany.web.controller;
 
-import javax.validation.Valid;
-
+import it.opensource.ecompany.bean.CustomerBean;
+import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.service.CategoriesService;
+import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
@@ -15,11 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import it.opensource.ecompany.bean.CustomerBean;
-import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.service.CustomersService;
-import it.opensource.ecompany.web.form.CustomerForm;
-import lombok.extern.slf4j.Slf4j;
+import javax.validation.Valid;
 
 @Profile("html")
 @Slf4j
@@ -56,9 +55,8 @@ public class CustomerController {
 
     }
 
-    @PostMapping(value = "/registration")
-    public String signup(@Valid CustomerForm customerForm, BindingResult result,
-                         RedirectAttributes redirectAttributes) {
+    @PostMapping("/registration")
+    public String signup(@Valid CustomerForm customerForm, BindingResult result, RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             return "/customers/registration";
@@ -79,9 +77,11 @@ public class CustomerController {
         customer.setUsername(username);
         customer.setPassword(customerForm.getPassword());
 
-        customersService.createCustomer(customer);
+        long id = customersService.createCustomer(customer);
+        customer.setCustomerid(id);
 
-        customersService.setCurrentCustomer(customer);
+        // aggiunge nuovo utente alla lista delle credenziali in memoria
+        userContext.setCurrentCustomer(customer);
 
         redirectAttributes.addFlashAttribute("message", "Success");
 

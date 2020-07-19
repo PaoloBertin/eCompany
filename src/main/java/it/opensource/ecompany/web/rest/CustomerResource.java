@@ -79,9 +79,11 @@ public class CustomerResource {
         customer.setUsername(username);
         customer.setPassword(customerForm.getPassword());
 
-        customersService.createCustomer(customer);
+        long id = customersService.createCustomer(customer);
+        customer.setCustomerid(id);
 
-        customersService.setCurrentCustomer(customer);
+        // aggiunge nuovo utente alla lista delle credenziali in memoria
+        userContext.setCurrentCustomer(customer);
 
         redirectAttributes.addFlashAttribute("message", "Success");
 

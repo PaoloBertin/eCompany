@@ -20,7 +20,4 @@ public interface CustomersService {
     
     public Long createCustomer(final Customer customer);
 
-    public Customer getCurrentCustomer();
-
-    public void setCurrentCustomer(Customer customer);
 }

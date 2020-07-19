@@ -2,7 +2,6 @@ package it.opensource.ecompany.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -32,33 +31,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-
-        auth.
-                inMemoryAuthentication()
-            .withUser("mario.rossi").password("{noop}user").roles("USER")
-            .and()
-            .withUser("giuseppe.verdi").password("{noop}user").roles("USER")
-            .and()
-            .withUser("paolo.bertin").password("{noop}admin").roles("USER", "ADMIN");
-    }
-
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
             .authorizeRequests()
             .antMatchers("/h2-console/**").permitAll()
             .antMatchers("/resources/**").permitAll()
+            .antMatchers("/images/**").permitAll()
+            .antMatchers("/css/**").permitAll()
+            .antMatchers("/webjars/**").permitAll()
             .antMatchers("/").permitAll()
             .antMatchers("/login/**").permitAll()
             .antMatchers("/logout/**").permitAll()
             .antMatchers("/logout/**").permitAll()
+            .antMatchers("/customers/**").permitAll()
             .antMatchers("/products/**").permitAll()
             .antMatchers("/cart/**").permitAll()
             .antMatchers("/errors/**").permitAll()
             .antMatchers("/purchaseorders/**").hasAnyRole("USER", "ADMIN")
             .antMatchers("/warehouse/**").hasRole("ADMIN")
+            .antMatchers("/**").hasRole("USER")
 
             .and()
             .formLogin()
@@ -90,4 +82,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 }
-

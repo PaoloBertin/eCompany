@@ -1,26 +1,31 @@
 package it.opensource.ecompany.service.impl;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Role;
 import it.opensource.ecompany.repository.CustomersRepository;
 import it.opensource.ecompany.repository.RolesRepository;
 import it.opensource.ecompany.service.CustomersService;
+import it.opensource.ecompany.service.impl.util.CustomerUserAuthorityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Transactional
 @Service("customersService")
-public class CustomersServiceImpl implements CustomersService {
+public class CustomersServiceImpl implements CustomersService, UserDetailsService {
 
     @Autowired
     private CustomersRepository customerRepository;
-    
+
     @Autowired
     private RolesRepository rolesRepository;
 
@@ -30,28 +35,28 @@ public class CustomersServiceImpl implements CustomersService {
         return customerRepository.findAll();
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Customer getCustomerById(Long customerId) {
 
         return customerRepository.findById(customerId).get();
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Customer getCustomerByEmail(String email) {
 
         return customerRepository.findByEmail(email);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Customer getCustomerByUsername(String username) {
 
         return customerRepository.findByUsername(username);
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public Customer getCustomerByUsernameAndPassword(String username, String password) {
 
@@ -60,11 +65,11 @@ public class CustomersServiceImpl implements CustomersService {
         return customer;
     }
 
-    @Transactional(readOnly=true)
+    @Transactional(readOnly = true)
     @Override
     public boolean verifyCustomer(String username, String password) {
 
-        boolean  verify   = false;
+        boolean verify = false;
 
         Customer customer = customerRepository.findByUsernameAndPassword(username, password);
 
@@ -85,64 +90,71 @@ public class CustomersServiceImpl implements CustomersService {
         if (customer.getCustomerid() != null) {
             throw new IllegalArgumentException("customer.getCustomerid() must be null when creating a " + Customer.class.getName());
         }
-        
+
         Set<Role> roles = new HashSet<>();
-//        roles.add(rolesRepository.findOne(0));
         roles.add(rolesRepository.findById(0L).get());
-        
+
         customer.setRoles(roles);
         Customer result = customerRepository.save(customer);
         customerRepository.flush();
-        
+
         return result.getCustomerid();
     }
 
-    @Override
-    public Customer getCurrentCustomer() {
-
-//        SecurityContext context        = SecurityContextHolder.getContext();
-//        Authentication  authentication = context.getAuthentication();
-
-//        if (authentication == null) {
-//            return null;
-//        }
-
-//        if (authentication.getPrincipal() == "anonymousUser") {
-//            return null;
-//        }
-
-////        String email = authentication.getName();
-//        String username = authentication.getName();
-
-          return null;
-
-
-//        return customerRepository.findByUsername(username);
-
-//        return (Customer) authentication.getPrincipal();
-
-    }
 
     @Override
-    public void setCurrentCustomer(Customer customer) {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-//        if (customer == null) {
-//            throw new IllegalArgumentException("user cannot be null");
-//        }
+        Customer customer = customerRepository.findByEmail(username);
+        if (customer == null) {
+            throw new UsernameNotFoundException("Invalid username/password.");
+        }
+        Collection<? extends GrantedAuthority> authorities = CustomerUserAuthorityUtils.createAuthorities(customer);
 
-//         UserDetails    userDetails    = userDetailsService.loadUserByUsername(customer.getUsername());
-
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, customer.getPassword(), userDetails.getAuthorities());
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-//        Collection<? extends GrantedAuthority> authorities    = ElisaCustomerAuthorityUtils.createAuthorities(customer);
-//        UsernamePasswordAuthenticationToken    authentication = new UsernamePasswordAuthenticationToken(customer, customer.getPassword(), authorities);
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-//        Collection     authorities    = ElisaCustomerAuthorityUtils.createAuthorities(customer);
-//        Authentication authentication = new UsernamePasswordAuthenticationToken(customer, customer.getPassword(), authorities);
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-
+        return new CustomerDetails(customer);
     }
 
+    private final class CustomerDetails extends Customer implements UserDetails {
+
+        private static final long serialVersionUID = 1L;
+
+        CustomerDetails(Customer customer) {
+
+            setCustomerid(customer.getCustomerid());
+            setEmail(customer.getEmail());
+            setFirstname(customer.getFirstname());
+            setLastname(customer.getLastname());
+            setPassword(customer.getPassword());
+        }
+
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+
+            return CustomerUserAuthorityUtils.createAuthorities(this);
+        }
+
+        public String getUsername() {
+
+            return getEmail();
+        }
+
+        public boolean isAccountNonExpired() {
+
+            return true;
+        }
+
+        public boolean isAccountNonLocked() {
+
+            return true;
+        }
+
+        public boolean isCredentialsNonExpired() {
+
+            return true;
+        }
+
+        public boolean isEnabled() {
+
+            return true;
+        }
+    }
 }
