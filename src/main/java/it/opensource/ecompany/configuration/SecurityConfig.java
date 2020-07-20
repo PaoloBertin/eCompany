@@ -16,6 +16,11 @@ import javax.sql.DataSource;
 @EnableWebSecurity(debug = false)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private static String GROUP_AUTHORITIES_BY_USERNAME_QUERY = " " +
+        "select g.id, g.group_name, ga.authority " +
+        "from groups g, group_members gm, group_authorities ga " +
+        "where gm.username = ? " + "and g.id = ga.group_id and g.id = gm.group_id";
+
     private final DataSource dataSource;
 
     public SecurityConfig(DataSource dataSource) {
@@ -29,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth
             .jdbcAuthentication()
             .dataSource(dataSource)
+            .groupAuthoritiesByUsername(GROUP_AUTHORITIES_BY_USERNAME_QUERY)
         ;
     }
 
