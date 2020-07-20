@@ -32,18 +32,19 @@ public class UserContextImpl implements UserContext {
 
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
-        String principal = authentication.getPrincipal().toString();
+
+        String principal = authentication.getName();
         if (authentication == null || principal.equals("anonymousUser")) {
             return null;
         }
+        User user = (User) authentication.getPrincipal();
 
-        Customer customer = (Customer) authentication.getPrincipal();
-        String username = customer.getUsername();
+        String username = user.getUsername();
 
         if (username == null) {
             return null;
         }
-
+        Customer customer = customersService.getCustomerByUsername(username);
         if (customer == null) {
             throw new IllegalStateException("Spring Security is not in synch with Customer. Could not find user with username " + username);
         }

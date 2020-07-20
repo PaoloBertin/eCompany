@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 
-@Component
+//@Component
 public class CustomerAuthenticationProvider implements AuthenticationProvider {
 
     private final CustomersService customersService;

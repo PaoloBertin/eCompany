@@ -37,10 +37,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td th:text="${purchaseorder.customer.username}"></td>
-                                <td th:text="${purchaseorder.datePurchase}"></td>
-                                <td th:text="${purchaseorder.totalAmount} + ' &euro;'"></td>
-                                <td th:text="${purchaseorder.state}"></td>
+                                <td th:text="${purchaseOrder.customer.username}"></td>
+                                <td th:text="${purchaseOrder.datePurchase}"></td>
+                                <td th:text="${purchaseOrder.totalAmount} + ' &euro;'"></td>
+                                <td th:text="${purchaseOrder.state}"></td>
                             </tr>
                         </tbody>
                     </table>    
@@ -58,7 +58,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="lineItem : ${purchaseorder.lineitems}">
+                            <tr th:each="lineItem : ${purchaseOrder.lineitems}">
                                 <td th:text="${lineItem.product.category.name}"></td>
                                 <td th:text="${lineItem.product.name}"></td>
                                 <td th:text="${lineItem.product.isbn}"></td>

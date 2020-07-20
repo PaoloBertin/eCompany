@@ -43,7 +43,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("purchaseorders", purchaseOrdersService.getAllPurchaseOrders());
+        uiModel.addAttribute("purchaseOrders", purchaseOrdersService.getAllPurchaseOrders());
 
         return "purchaseorders/list";
     }
@@ -59,7 +59,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("purchaseorder", purchaseOrder);
+        uiModel.addAttribute("purchaseOrder", purchaseOrder);
 
         log.debug("visualizza ordine con id=" + purchaseOrder.getId());
         log.debug("numero lineItem=" + purchaseOrder.getLineitems().size());
