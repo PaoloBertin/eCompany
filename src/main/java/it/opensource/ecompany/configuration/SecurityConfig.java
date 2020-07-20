@@ -2,6 +2,8 @@ package it.opensource.ecompany.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,13 +23,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.dataSource = dataSource;
     }
 
+    @Override
+    public void configure(final AuthenticationManagerBuilder auth) throws Exception {
+
+        auth
+            .jdbcAuthentication()
+            .dataSource(dataSource)
+        ;
+    }
+
     @Bean
     @Override
     public UserDetailsManager userDetailsService() {
 
         JdbcUserDetailsManager manager = new JdbcUserDetailsManager();
         manager.setDataSource(dataSource);
+
         return manager;
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+
+        return super.authenticationManagerBean();
     }
 
     @Override
@@ -78,7 +97,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             // Enable <frameset> in order to use H2 web console
             .headers()
-            .frameOptions().disable(); // necessario per h2 console (?)
+            .frameOptions().disable()  // necessario per h2 console (?)
+        ;
     }
-
 }
