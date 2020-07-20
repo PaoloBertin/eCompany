@@ -3,23 +3,23 @@ package it.opensource.ecompany.web.controller;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 @ActiveProfiles("html")
 @AutoConfigureMockMvc
 @SpringBootTest
 public class CartControllerTest {
 
-     @BeforeEach
+    @BeforeEach
     public void setUp() throws Exception {
 
     }
@@ -41,7 +41,10 @@ public class CartControllerTest {
     @Test
     public void showCartTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/cart/show"))
+        mvc.perform(get("/cart/show")
+                        .with(user("mario.rossi")
+                                  .password("user")
+                                  .roles("USER")))
            .andExpect(model().attribute("customer", notNullValue()))
            .andExpect(view().name("cart/show"));
     }

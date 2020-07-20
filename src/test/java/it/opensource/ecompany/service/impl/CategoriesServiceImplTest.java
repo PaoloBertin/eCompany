@@ -1,7 +1,7 @@
 package it.opensource.ecompany.service.impl;
 
-import java.util.List;
-
+import it.opensource.ecompany.domain.Category;
+import it.opensource.ecompany.service.CategoriesService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import it.opensource.ecompany.domain.Category;
-import it.opensource.ecompany.service.CategoriesService;
+import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -22,7 +21,8 @@ public class CategoriesServiceImplTest {
     @Autowired
     CategoriesService categoriesService;
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getAllCategoriesTest() {
 
@@ -31,7 +31,8 @@ public class CategoriesServiceImplTest {
         assertThat(categories.size(), equalTo(6));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getCategoryByIdTest() {
 
@@ -40,7 +41,8 @@ public class CategoriesServiceImplTest {
         assertThat("Libri", equalTo(category.getName()));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getCategoryByNameTest() {
 
@@ -50,7 +52,8 @@ public class CategoriesServiceImplTest {
         assertThat(expected, equalTo(actual));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void saveCategoryTest() {
 
@@ -64,7 +67,8 @@ public class CategoriesServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void updateCategory() {
 

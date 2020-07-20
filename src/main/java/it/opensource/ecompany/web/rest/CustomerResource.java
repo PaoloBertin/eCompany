@@ -79,7 +79,7 @@ public class CustomerResource {
         customer.setUsername(username);
         customer.setPassword(customerForm.getPassword());
 
-        long id = customersService.createCustomer(customer);
+        long id = customersService.save(customer);
         customer.setCustomerid(id);
 
         // aggiunge nuovo utente alla lista delle credenziali in memoria

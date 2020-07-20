@@ -1,5 +1,11 @@
 package it.opensource.ecompany.web.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import it.opensource.ecompany.domain.Category;
+import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.service.ProductsService;
+import it.opensource.ecompany.web.form.SearchForm;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,22 +17,13 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
-import it.opensource.ecompany.domain.Category;
-import it.opensource.ecompany.domain.Product;
-import it.opensource.ecompany.service.ProductsService;
-import it.opensource.ecompany.web.form.SearchForm;
-
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;;
+;
 
 @ActiveProfiles("rest")
 @AutoConfigureMockMvc
@@ -46,7 +43,8 @@ class ProductResourceTest {
 
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     void getAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -57,7 +55,8 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     void getProductsByCategory1ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -68,7 +67,8 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     void getProductsByCategory6ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -80,7 +80,8 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getProductByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -89,14 +90,16 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/products/photo/{productid}", 1L)).andDo(print()).andExpect(status().isOk());
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -111,7 +114,8 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     void updateProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -127,7 +131,8 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     void searchProducTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -141,7 +146,7 @@ class ProductResourceTest {
                                                       .queryParam("page", "0")
                                                       .queryParam("size", "10")
                                                       .content(requestJson))
-                                                      .andExpect(jsonPath("$.content.length()", equalTo(6)))
+           .andExpect(jsonPath("$.content.length()", equalTo(6)))
            .andExpect(status().isOk());
     }
 }

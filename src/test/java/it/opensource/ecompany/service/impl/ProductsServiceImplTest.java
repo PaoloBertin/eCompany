@@ -32,6 +32,8 @@ public class ProductsServiceImplTest {
     @Autowired
     private ProductsService productsService;
 
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void equality_products(){
 
@@ -41,7 +43,8 @@ public class ProductsServiceImplTest {
         assertThat(product2, equalTo(product1));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getAllProductsTest() {
 
@@ -51,7 +54,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getAllProductsByPageTest() {
 
@@ -65,7 +69,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getProductsByCategoryIdTest() {
 
@@ -75,7 +80,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getProductsByCategoryByPage() {
 
@@ -89,7 +95,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getProductById() {
 
@@ -101,7 +108,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getProductsByNameTest() {
 
@@ -113,7 +121,8 @@ public class ProductsServiceImplTest {
         assertThat(products.get(0).getName(), equalTo("Da Visual Basic a Java"));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getProductsByNameContainingTest() {
 
@@ -125,7 +134,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void getProductsByNameContainingByPageTest() {
 
@@ -138,7 +148,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void saveProductTest() {
 
@@ -158,7 +169,8 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Test
     public void updateProductTest() {
 
@@ -176,8 +188,9 @@ public class ProductsServiceImplTest {
         assertThat(productsService.getProductById(1L).getName(), equalTo("Alice"));
     }
 
+    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
+        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
     @Disabled
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
     @Test
     public void deleteProductTest() {
 

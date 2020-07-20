@@ -77,20 +77,12 @@ public class CustomerController {
         customer.setUsername(username);
         customer.setPassword(customerForm.getPassword());
 
-        long id = customersService.createCustomer(customer);
-        customer.setCustomerid(id);
+        long id = customersService.save(customer);
 
-        // aggiunge nuovo utente alla lista delle credenziali in memoria
         userContext.setCurrentCustomer(customer);
 
         redirectAttributes.addFlashAttribute("message", "Success");
 
         return "redirect:/";
-    }
-
-    @GetMapping("/current")
-    public Customer getCurrentCustomer() {
-
-        return userContext.getCurrentCustomer();
     }
 }

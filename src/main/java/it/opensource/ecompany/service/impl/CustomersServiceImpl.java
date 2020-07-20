@@ -6,11 +6,13 @@ import it.opensource.ecompany.repository.CustomersRepository;
 import it.opensource.ecompany.repository.RolesRepository;
 import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.impl.util.CustomerUserAuthorityUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +25,19 @@ import java.util.Set;
 @Service("customersService")
 public class CustomersServiceImpl implements CustomersService, UserDetailsService {
 
-    @Autowired
-    private CustomersRepository customerRepository;
+    private final CustomersRepository customerRepository;
 
-    @Autowired
-    private RolesRepository rolesRepository;
+    private final RolesRepository rolesRepository;
+
+    private final UserDetailsManager userDetailsManager;
+
+    public CustomersServiceImpl(CustomersRepository customerRepository, RolesRepository rolesRepository,
+                                UserDetailsManager userDetailsManager) {
+
+        this.customerRepository = customerRepository;
+        this.rolesRepository = rolesRepository;
+        this.userDetailsManager = userDetailsManager;
+    }
 
     @Override
     public List<Customer> getAll() {
@@ -81,7 +91,7 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
     }
 
     @Override
-    public Long createCustomer(final Customer customer) {
+    public Long save(final Customer customer) {
 
         if (customer == null) {
             throw new IllegalArgumentException("customer cannot be null");
@@ -92,20 +102,25 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
         }
 
         Set<Role> roles = new HashSet<>();
-        roles.add(rolesRepository.findById(0L).get());
+        Role role = rolesRepository.findById(1L).get();
+        roles.add(role);
 
         customer.setRoles(roles);
         Customer result = customerRepository.save(customer);
         customerRepository.flush();
 
-        return result.getCustomerid();
-    }
+        List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+        UserDetails userDetails = new User(customer.getUsername(), customer.getPassword(), authorities);
+        userDetailsManager.createUser(userDetails);
 
+        return result.getCustomerid();
+
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        Customer customer = customerRepository.findByEmail(username);
+        Customer customer = customerRepository.findByUsername(username);
         if (customer == null) {
             throw new UsernameNotFoundException("Invalid username/password.");
         }
