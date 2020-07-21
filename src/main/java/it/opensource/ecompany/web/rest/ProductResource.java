@@ -64,7 +64,7 @@ public class ProductResource {
     /**
      * Recupera un prodotto in base al suo id
      *
-     * @param productid
+     * @param id
      * 
      * @return nome vista
      */
@@ -94,10 +94,6 @@ public class ProductResource {
      * Rende persistente i campi del form ricevuto
      *
      * @param product
-     * @param bindingResult
-     * @param httpServletRequest
-     * @param redirectAttributes
-     * @param locale
      * @param file
      * 
      * @return nome vista

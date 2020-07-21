@@ -3,8 +3,6 @@ package it.opensource.ecompany.web.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import it.opensource.ecompany.domain.Category;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +14,16 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ActiveProfiles("rest")
 @AutoConfigureMockMvc
 @SpringBootTest
 class CategoryResourceTest {
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        , "/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getAllCategoriesTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -37,8 +34,7 @@ class CategoryResourceTest {
         ;
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        , "/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCategoryByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -51,8 +47,7 @@ class CategoryResourceTest {
 
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        , "/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void createCategoryTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -65,15 +60,14 @@ class CategoryResourceTest {
         mvc
             .perform(post("/api/categories")
                          .contentType(MediaType.APPLICATION_JSON)
-                         .content(requestJson)
-                    )
+                         .content(requestJson))
             .andExpect(jsonPath("$.categoryid", equalTo(7)))
             .andExpect(status().isOk())
         ;
     }
 
     @Disabled
-    @Sql({"/db/schema-groups.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void deleteCategoryTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -85,8 +79,7 @@ class CategoryResourceTest {
         mvc
             .perform(delete("/categories")
                          .contentType(MediaType.APPLICATION_JSON)
-                         .content(requestJson)
-                    )
+                         .content(requestJson))
             .andExpect(status().isOk())
         ;
     }

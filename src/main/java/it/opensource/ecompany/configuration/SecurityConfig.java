@@ -35,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .jdbcAuthentication()
             .dataSource(dataSource)
             .groupAuthoritiesByUsername(GROUP_AUTHORITIES_BY_USERNAME_QUERY)
+//            .passwordEncoder(passwordEncoder())
         ;
     }
 
@@ -87,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/purchaseorders/**").hasAnyRole("USER", "ADMIN")
             .antMatchers("/api/warehouse/**").hasRole("ADMIN")
 
-            .antMatchers("/**").hasRole("USER")
+            //.antMatchers("/**").hasRole("USER")
 
             .and()
             .formLogin()

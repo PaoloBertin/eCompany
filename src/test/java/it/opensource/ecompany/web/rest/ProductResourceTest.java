@@ -6,8 +6,6 @@ import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.SearchForm;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -33,18 +31,7 @@ class ProductResourceTest {
     @Autowired
     private ProductsService productsService;
 
-    @BeforeEach
-    void setUp() {
-
-    }
-
-    @AfterEach
-    void tearDown() {
-
-    }
-
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -55,8 +42,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getProductsByCategory1ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -67,8 +53,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getProductsByCategory6ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -80,8 +65,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getProductByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -90,16 +74,14 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/products/photo/{productid}", 1L)).andDo(print()).andExpect(status().isOk());
+        mvc.perform(get("/api/products/photo/{productid}", 1L)).andDo(print()).andExpect(status().isOk());
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -114,8 +96,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void updateProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -131,8 +112,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void searchProducTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -142,11 +122,12 @@ class ProductResourceTest {
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         String requestJson = objectMapper.writeValueAsString(searchForm);
 
-        mvc.perform(get("/api/products/searchProduct").contentType(MediaType.APPLICATION_JSON)
-                                                      .queryParam("page", "0")
-                                                      .queryParam("size", "10")
-                                                      .content(requestJson))
-           .andExpect(jsonPath("$.content.length()", equalTo(6)))
-           .andExpect(status().isOk());
+        mvc
+            .perform(get("/api/products/searchProduct").contentType(MediaType.APPLICATION_JSON)
+                                                       .queryParam("page", "0")
+                                                       .queryParam("size", "10")
+                                                       .content(requestJson))
+            .andExpect(jsonPath("$.content.length()", equalTo(6)))
+            .andExpect(status().isOk());
     }
 }

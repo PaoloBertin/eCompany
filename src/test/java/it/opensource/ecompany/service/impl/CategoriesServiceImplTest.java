@@ -21,8 +21,7 @@ public class CategoriesServiceImplTest {
     @Autowired
     CategoriesService categoriesService;
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getAllCategoriesTest() {
 
@@ -31,8 +30,7 @@ public class CategoriesServiceImplTest {
         assertThat(categories.size(), equalTo(6));
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCategoryByIdTest() {
 
@@ -41,8 +39,7 @@ public class CategoriesServiceImplTest {
         assertThat("Libri", equalTo(category.getName()));
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCategoryByNameTest() {
 
@@ -52,8 +49,7 @@ public class CategoriesServiceImplTest {
         assertThat(expected, equalTo(actual));
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void saveCategoryTest() {
 
@@ -67,8 +63,7 @@ public class CategoriesServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void updateCategory() {
 

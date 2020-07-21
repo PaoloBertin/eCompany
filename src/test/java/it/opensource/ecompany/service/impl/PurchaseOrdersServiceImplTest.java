@@ -28,8 +28,7 @@ class PurchaseOrdersServiceImplTest {
 
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
      @Test
     public void getAllPurchaseOrdersTest() {
 
@@ -39,8 +38,7 @@ class PurchaseOrdersServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getPurchaseOrderByIdTest() {
 
@@ -50,8 +48,7 @@ class PurchaseOrdersServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getPurchaseOrderByCustomerIdTest() {
 
@@ -61,8 +58,7 @@ class PurchaseOrdersServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void savePurchaseOrder() {
 

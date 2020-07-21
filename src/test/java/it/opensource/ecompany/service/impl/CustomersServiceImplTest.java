@@ -23,8 +23,7 @@ public class CustomersServiceImplTest {
     @Autowired
     private CustomersService customersService;
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getAllCustomersTest() {
 
@@ -34,8 +33,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyAddress() {
 
@@ -45,8 +43,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyContact() {
 
@@ -56,8 +53,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCustomerTest() {
 
@@ -71,8 +67,7 @@ public class CustomersServiceImplTest {
 
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void verifyCustomerTest() {
 
@@ -82,8 +77,7 @@ public class CustomersServiceImplTest {
         assertThat(expected).isEqualTo(actual);
     }
 
-    @Sql({"/db/init.sql", "/db/schema-ecompany.sql", "/db/schema-users.sql", "/db/schema-groups.sql", "/db/data-groups.sql"
-        ,"/db/data-ecompany.sql", "/db/data-users.sql", "/db/data-authorities.sql", "/db/data-groups.sql"})
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void notVerifyCustomerTest() {
 
