@@ -67,7 +67,7 @@ public class ProductsController {
     @Autowired
     private UserContext userContext;
 
-    // @GetMapping
+    @GetMapping("/all/all")
     public String viewAllProducts(Model uiModel) {
 
         List<Product> products = productsService.getAll();
