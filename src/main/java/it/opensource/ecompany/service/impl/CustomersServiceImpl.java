@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,12 +32,15 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
 
     private final UserDetailsManager userDetailsManager;
 
+    private final PasswordEncoder passwordEncoder;
+
     public CustomersServiceImpl(CustomersRepository customerRepository, RolesRepository rolesRepository,
-                                UserDetailsManager userDetailsManager) {
+                                UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
 
         this.customerRepository = customerRepository;
         this.rolesRepository = rolesRepository;
         this.userDetailsManager = userDetailsManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -106,6 +110,9 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
         roles.add(role);
 
         customer.setRoles(roles);
+
+        String encodedPassword = passwordEncoder.encode(customer.getPassword());
+        customer.setPassword(encodedPassword);
         Customer result = customerRepository.save(customer);
         customerRepository.flush();
 
