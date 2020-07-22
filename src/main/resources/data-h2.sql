@@ -1,4 +1,5 @@
 INSERT INTO users (username, password, enabled) VALUES ('admin.ecompany', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 1);
+INSERT INTO users (username, password, enabled) VALUES ('user.ecompany',  '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 1);
 INSERT INTO users (username, password, enabled) VALUES ('paolo.bertin', 'admin', 1);
 INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','user',1);
 INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','user',1);
@@ -22,6 +23,7 @@ INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_ADMIN' FROM g
 
 -- Map the users to Groups
 INSERT INTO group_members(group_id, username) SELECT id,'admin.ecompany' FROM groups WHERE group_name='Administrators';
+INSERT INTO group_members(group_id, username) SELECT id,'user.ecompany' FROM groups WHERE group_name='Users';
 INSERT INTO group_members(group_id, username) SELECT id,'paolo.bertin' FROM groups WHERE group_name='Administrators';
 INSERT INTO group_members(group_id, username) SELECT id,'mario.rossi' FROM groups WHERE group_name='Users';
 INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.verdi' FROM groups WHERE group_name='Users';
@@ -32,18 +34,21 @@ INSERT INTO address(id, city, street, house_number, zip_code, country, state) VA
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(3, 'Battaglia Terme', 'Via A. Volta', '7', '35041', 'Padova', 'Italia');
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(4, 'Battaglia Terme', 'Via G. Garibaldi', '21', '35041', 'Padova', 'Italia');
 INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(5, 'Battaglia Terme', 'Via A. Ecompany', '8', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(6, 'Battaglia Terme', 'Via U. Ecompany', '7', '35041', 'Padova', 'Italia');
 
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (1, 'paolo.bertin@dmail.com', '3338323285', '0429779334');
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (2, 'mario.rossi@dmail.com', '3458323286', '0497793348');
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (3, 'giuseppe.verdi@dmail.com', '3628323287', '0429776335');
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (4, 'giuseppe.garibaldi@dmail.com', '3628323288', '0429776336');
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (5, 'admin.ecompany@dmail.com', '3628323289', '0429776337');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (6, 'user.ecompany@dmail.com', '3628323299', '0429776339');
 
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(1, 'Paolo', 'Bertin', 'paolo.bertin', 'admin', 'paolo.bertin@dmail.com', 1, 1);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(2, 'Mario', 'Rossi', 'mario.rossi', 'user', 'mario.rossi@dmail.com', 2, 2);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(3, 'Giuseppe', 'Verdi', 'giuseppe.verdi', 'user', 'giuseppe.verdi@dmail.com', 3, 3);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(4, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', 'user', 'giuseppe.garibaldi@dmail.com', 4, 4);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(5, 'Admin', 'Ecompany', 'admin.ecompany', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 5, 5);
+INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(6, 'User', 'Ecompany', 'user.ecompany', '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 'user.ecompany@dmail.com', 6, 6);
 
 INSERT INTO role(id, name) VALUES (1, 'ROLE_USER');
 INSERT INTO role(id, name) VALUES (2, 'ROLE_ADMIN');
