@@ -27,7 +27,7 @@ public class CustomersServiceImplTest {
     @Test
     public void getAllCustomersTest() {
 
-        int expected = 4;
+        int expected = 5;
         int actual = customersService.getAll().size();
 
         assertThat(actual).isEqualTo(expected);
@@ -37,7 +37,7 @@ public class CustomersServiceImplTest {
     @Test
     public void getCustomerByIdVerifyAddress() {
 
-        expected = "Via A. Volta";
+        expected = "Vicolo Pio X";
         actual = customersService.getCustomerById(3L).getAddress().getStreet();
 
         assertThat(actual).isEqualTo(expected);
@@ -47,7 +47,7 @@ public class CustomersServiceImplTest {
     @Test
     public void getCustomerByIdVerifyContact() {
 
-        expected = "mario.rossi@dmail.com";
+        expected = "user.ecompany@dmail.com";
         actual = customersService.getCustomerById(2L).getContact().getEmail();
 
         assertThat(actual).isEqualTo(expected);

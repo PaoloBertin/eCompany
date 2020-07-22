@@ -6,6 +6,7 @@ import it.opensource.ecompany.repository.CustomersRepository;
 import it.opensource.ecompany.repository.RolesRepository;
 import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.impl.util.CustomerUserAuthorityUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Transactional
 @Service("customersService")
 public class CustomersServiceImpl implements CustomersService, UserDetailsService {
@@ -112,6 +114,7 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
         customer.setRoles(roles);
 
         String encodedPassword = passwordEncoder.encode(customer.getPassword());
+        log.debug("password=" + customer.getPassword());
         customer.setPassword(encodedPassword);
         Customer result = customerRepository.save(customer);
         customerRepository.flush();
