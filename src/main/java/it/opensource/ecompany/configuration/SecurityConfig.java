@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -44,8 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
 
-        // PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        // PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
 
         return passwordEncoder;
     }
