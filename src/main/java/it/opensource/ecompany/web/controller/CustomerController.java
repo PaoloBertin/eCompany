@@ -67,7 +67,7 @@ public class CustomerController {
         if (customersService.getCustomerByUsername(username) != null) {
             result.rejectValue("username", "label.errors.registraion.username", "Username is already in use.");
             redirectAttributes.addFlashAttribute("error", "Username is already in use.");
-            return "/customers/registration";
+            return "redirect:/customers/registration";
         }
 
         Customer customer = new Customer();

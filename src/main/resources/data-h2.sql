@@ -1,8 +1,8 @@
 INSERT INTO users (username, password, enabled) VALUES ('admin.ecompany', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 1);
 INSERT INTO users (username, password, enabled) VALUES ('user.ecompany',  '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 1);
-INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','user',1);
-INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','user',1);
-INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','user',0);
+INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','$2a$10$AN9KMoBs3GLy9ttjE4jsGODh25qA5xVo1IfX3kyHdFaC5JP2eJ45C',1);
+INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','$2a$10$6ougvztJT0if6CTPXPytQuFESws6sq4VEmxkWkg3shNUU/CSbJZ6y',1);
+INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','$2a$10$rYz10KiusKJ0EQ14b6zyVeVb1fxq617nAZOLE0HHpHtb8VZwGHusG',0);
 
 INSERT INTO authorities(username,authority) VALUES ('admin.ecompany','ROLE_ADMIN');
 INSERT INTO authorities(username,authority) VALUES ('user.ecompany','ROLE_USER');
@@ -41,9 +41,9 @@ INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (5, 'giuseppe.g
 
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(1, 'Admin', 'Ecompany', 'admin.ecompany', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 1, 1);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(2, 'User', 'Ecompany', 'user.ecompany', '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 'user.ecompany@dmail.com', 2, 2);
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(3, 'Mario', 'Rossi', 'mario.rossi', 'user', 'mario.rossi@dmail.com', 3, 3);
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(4, 'Giuseppe', 'Verdi', 'giuseppe.verdi', 'user', 'giuseppe.verdi@dmail.com', 4, 4);
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(5, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', 'user', 'giuseppe.garibaldi@dmail.com', 5, 5);
+INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(3, 'Mario', 'Rossi', 'mario.rossi', '$2a$10$AN9KMoBs3GLy9ttjE4jsGODh25qA5xVo1IfX3kyHdFaC5JP2eJ45C', 'mario.rossi@dmail.com', 3, 3);
+INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(4, 'Giuseppe', 'Verdi', 'giuseppe.verdi', '$2a$10$6ougvztJT0if6CTPXPytQuFESws6sq4VEmxkWkg3shNUU/CSbJZ6y', 'giuseppe.verdi@dmail.com', 4, 4);
+INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(5, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', '$2a$10$rYz10KiusKJ0EQ14b6zyVeVb1fxq617nAZOLE0HHpHtb8VZwGHusG', 'giuseppe.garibaldi@dmail.com', 5, 5);
 
 INSERT INTO role(id, name) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO role(id, name) VALUES (2, 'ROLE_USER');
@@ -173,16 +173,16 @@ INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorde
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(53, 53, '8001097210435',   7, 'pz', 10, 5,    7, false, 'T004', 'D0007');
 INSERT INTO warehouse(warehouseid, product_id, sku, cost, unit, quantity, reorder_quantity, inventory_value, reorder, container, location) VALUES(54, 54, '0190199221130', 500, 'pz', 10, 5,  500, false, 'T006', 'F0002');
 
-INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 2);
-INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 2, '2018-10-10 00:00:00',  49.90, 'processato', 2);
-INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 3, '2018-10-10 00:00:00',  59.70, 'processato', 2);
-INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 4, '2018-10-10 00:00:00',  74.90, 'processato', 2);
+INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 3);
+INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 2, '2018-10-10 00:00:00',  49.90, 'processato', 3);
+INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 3, '2018-10-10 00:00:00',  59.70, 'processato', 3);
+INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 4, '2018-10-10 00:00:00',  74.90, 'processato', 3);
 INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 5, '2018-12-08 00:00:00', 246.60, 'processato', 1);
 INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 6, '2018-10-10 00:00:00',  79.60, 'processato', 1);
 INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 7, '2018-10-10 00:00:00',  39.80, 'processato', 1);
 INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 8, '2018-10-10 00:00:00',  71.60, 'processato', 1);
-INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 9, '2018-10-10 00:00:00', 109.20, 'processato', 3);
-INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES(10, '2018-12-08 00:00:00',  19.00, 'processato', 3);
+INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES( 9, '2018-10-10 00:00:00', 109.20, 'processato', 2);
+INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid) VALUES(10, '2018-12-08 00:00:00',  19.00, 'processato', 2);
 
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(1,   1, 1);
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(2,   2, 2);

@@ -43,16 +43,16 @@ public class LoginController {
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("categories", categoriesService.getAll());
 
-        String errorMessge = null;
+        String message = null;
         if (error != null) {
-            errorMessge = "Username or Password is incorrect !!";
+            message = "Username or Password is incorrect !!";
         }
 
         if (logout != null) {
-            errorMessge = "You have been successfully logged out !!";
+            message = "You have been successfully logged out !!";
         }
 
-        uiModel.addAttribute("errorMessge", errorMessge);
+        uiModel.addAttribute("message", message);
 
         log.debug("visualizza pagina login");
 
