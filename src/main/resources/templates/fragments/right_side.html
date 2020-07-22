@@ -23,7 +23,7 @@
                 <a th:href="@{'/purchaseorders/all'}" th:text="#{label.purchaseorder.listing.all}"></a>
             </div>
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                <a th:href="@{'/warehouse'}" th:text="#{label.warehouse.all}"></a>
+                <a th:href="@{'/admin/warehouse'}" th:text="#{label.warehouse.all}"></a>
             </div>
             <br/>
         </div>
