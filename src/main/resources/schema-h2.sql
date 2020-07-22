@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS group_members;
 DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS suppliers;
 DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS customer_role;
 DROP TABLE IF EXISTS categories;
@@ -93,6 +94,22 @@ CREATE TABLE IF NOT EXISTS customers (
     PRIMARY KEY(customerid),
     CONSTRAINT customers_fk_01 FOREIGN KEY (address_id) REFERENCES address(id),
     CONSTRAINT customers_fk_02 FOREIGN KEY (contact_id) REFERENCES contacts(id)
+);
+
+CREATE TABLE IF NOT EXISTS suppliers (
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    vat VARCHAR(11),
+    legal_form VARCHAR(55),
+    registered_office VARCHAR(55),
+    address_id BIGINT(20),
+    contact_id BIGINT(20),
+
+    version BIGINT(20) DEFAULT 0,
+
+    PRIMARY KEY(id),
+    CONSTRAINT suppliers_fk_01 FOREIGN KEY (address_id) REFERENCES address(id),
+    CONSTRAINT suppliers_fk_02 FOREIGN KEY (contact_id) REFERENCES contacts(id)
 );
 
 CREATE TABLE IF NOT EXISTS role (
