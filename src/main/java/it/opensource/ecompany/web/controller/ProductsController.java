@@ -1,13 +1,6 @@
 package it.opensource.ecompany.web.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Locale;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
-import javax.validation.Valid;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
@@ -22,22 +15,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
-import it.opensource.ecompany.web.controller.util.Message;
-import it.opensource.ecompany.web.controller.util.UrlUtil;
-import it.opensource.ecompany.web.form.CustomerForm;
 
 import lombok.extern.slf4j.Slf4j;
 

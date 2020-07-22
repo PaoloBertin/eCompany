@@ -1,4 +1,4 @@
-package it.opensource.ecompany.web.controller;
+package it.opensource.ecompany.web.controller.admin;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @Profile("html")
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/warehouse")
+@RequestMapping("/admin/warehouse")
 @Controller
 public class WarehouseController {
 
