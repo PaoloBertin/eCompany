@@ -163,7 +163,7 @@ public class ProductsController {
      * 
      * @return immagine prodotto
      */
-    @GetMapping(value = "/photo/{id}")
+    @GetMapping(value = "/products/photo/{id}")
     @ResponseBody
     public byte[] downloadPhoto(@PathVariable("id") Long id) {
 
