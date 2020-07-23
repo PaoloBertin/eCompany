@@ -1,4 +1,4 @@
-package it.opensource.ecompany.web.controller.admin;
+package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
