@@ -25,14 +25,14 @@
 
                 <div class="col-lg-4">
                     <br/>
-                    <h4 th:text="#{label.categories.listing}">Categories Listing</h4>
+                    <h4 th:text="#{label.categories.listing}">categories listing</h4>
 
                     <table width="100%" cellspacing="10px" cellpadding="10px">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
+                                <th th:text="#{label.categories.name}">name</th>
+                                <th th:text="#{label.edit}">edit</th>
+                                <th  th:text="#{label.delete}">delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -40,15 +40,12 @@
                                 <td th:text="${category.name}">name</td>
                                 <td>
                                     <a th:href="@{'/admin/catalog/updateCategory/' + ${category.categoryid}}">
-                                        <!--
-                                        <i class="far fa-edit"></i>
-                                        -->
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
                                 </td>
                                 <td>
                                     <a th:href="@{'/admin/catalog/deleteCategory/' + ${category.categoryid}}">
-                                        <span class="fa fa-trash fa-lg"></span>
+                                        <i class="fa fa-trash fa-lg"></i>
                                     </a>
                                 </td>
                             </tr>

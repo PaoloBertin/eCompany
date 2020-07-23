@@ -12,7 +12,7 @@
     <body>
         <div th:fragment="right_side_admin" th:align="left">
             <br/>
-            <span class="sidebar-titolo" th:text="#{label.rightside_admin.title}">Area clienti</span><br/>
+            <span class="sidebar-titolo" th:text="#{label.resource}">Area clienti</span><br/>
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                 <!--  -->
                 <a th:href="@{/admin/catalog}" >Catalog</a>
