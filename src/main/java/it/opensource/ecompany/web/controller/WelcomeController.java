@@ -31,7 +31,7 @@ public class WelcomeController {
     private final CartBean cartBean;
 
     /**
-     * Processa la richiesta alla home page
+     * Indirizza la richiesta alla home page
      *
      * @return modelAndView nome vista
      */
@@ -49,4 +49,22 @@ public class WelcomeController {
         return "welcome";
     }
 
+    /**
+     * Indirizza la richiesta alla home page amministrativa
+     *
+     * @return modelAndView nome vista
+     */
+    @GetMapping(value = "/admin")
+    public String welcomeAdmin(Model uiModel) {
+
+        Customer customer = userContext.getCurrentCustomer();
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("cartBean", cartBean);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("searchForm", new SearchForm());
+
+        log.debug("visualizza home page amministrativa");
+
+        return "welcomeAdmin";
+    }
 }
