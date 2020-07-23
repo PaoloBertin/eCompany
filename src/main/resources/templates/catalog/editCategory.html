@@ -18,14 +18,16 @@
             <!-- corpo centrale -->
             <div class="row">               
                 <div class="col-lg-2">
+                    <!--
                     <div th:replace="~{fragments/left_side :: left_side}">left side</div>
+                    -->
                 </div>
                 <div class="col-lg-4"> 
                     <br/>   
                     <h5>Product Edit</h5>
                     <br/>
 
-                    <form name="editForm" method="post" th:object="${product}" th:action="@{/products/${product.productid}?form}">
+                    <form name="editCategoryForm" method="post" th:object="${category}" th:action="@{/catalog/${product.productid}?form}">
                         <div class="form-group">
                             <label for="product_name" th:text="#{label.product.name}">name</label>
                             <input  class="form-control" id="product_name" type="text" th:field="*{name}"/>
@@ -58,7 +60,9 @@
                     <br/>                             
                 </div>                       
                 <div class="col-lg-6">
+                    <!--
                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+                    -->
                 </div>
             </div>
             
