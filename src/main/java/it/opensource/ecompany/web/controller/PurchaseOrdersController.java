@@ -22,7 +22,6 @@ import java.util.List;
 @Profile("html")
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/purchaseorders")
 @Controller
 public class PurchaseOrdersController {
 
@@ -34,7 +33,7 @@ public class PurchaseOrdersController {
 
     private final UserContext userContext;
 
-    @GetMapping("/all")
+    @GetMapping("/admin/purchaseorders/all")
     public String getAllPurchaseOrders(Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
@@ -48,7 +47,7 @@ public class PurchaseOrdersController {
         return "purchaseorders/list";
     }
 
-    @GetMapping("/{purchaseorderId}")
+    @GetMapping("/purchaseorders/{purchaseorderId}")
     public String getPurchaseOrderById(@PathVariable("purchaseorderId") Long id, Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
@@ -67,7 +66,7 @@ public class PurchaseOrdersController {
         return "purchaseorders/show";
     }
 
-    @GetMapping("/all/customers/{customerId}")
+    @GetMapping("/purchaseorders/all/customers/{customerId}")
     public String getPurchaseOrdersByCustomer(@PathVariable("customerId") Long customerId, Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
@@ -83,7 +82,7 @@ public class PurchaseOrdersController {
         return "purchaseorders/list";
     }
 
-    @GetMapping("/all/customers/checkout")
+    @GetMapping("/purchaseorders/all/customers/checkout")
     public String viewPurchaseOrders(Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
@@ -97,7 +96,7 @@ public class PurchaseOrdersController {
         return "purchaseorders/checkout";
     }
 
-    @GetMapping("/save")
+    @GetMapping("/purchaseorders/save")
     public String savePurchaseOrdewr(Model uiModel) {
 
         purchaseOrdersService.savePurchaseOrder();
@@ -110,5 +109,4 @@ public class PurchaseOrdersController {
 
         return "welcome";
     }
-
 }

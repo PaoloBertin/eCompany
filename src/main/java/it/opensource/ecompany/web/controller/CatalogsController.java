@@ -30,4 +30,15 @@ public class CatalogsController {
 
         return "catalog/list";
     }
+
+    @GetMapping("/admin/catalog")
+    public String getAllCategoriesAdmin(Model uiModel) {
+
+        List<Category> categories = categoriesService.getAll();
+        uiModel.addAttribute("categories", categories);
+
+        log.debug("visualizza tutte le categorie");
+
+        return "catalog/categoriesListAdmin";
+    }
 }
