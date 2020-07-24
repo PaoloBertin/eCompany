@@ -11,12 +11,12 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 @ActiveProfiles("html")
 @AutoConfigureMockMvc
@@ -40,7 +40,8 @@ class WarehouseControllerTest {
     @Test
     public void viewAllItempByPage(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/warehouse").with(user("admin.ecompany").password("admin").roles("ADMIN")))
+        mvc.perform(get("/warehouse").with(user("admin.ecompany").password("admin")
+                                                                 .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
@@ -49,7 +50,8 @@ class WarehouseControllerTest {
     public void searchProduct(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/warehouse/searchProduct").param("textToSearch", "Java")
-                                                   .with(user("admin.ecompany").password("admin").roles("ADMIN")))
+                                                   .with(user("admin.ecompany").password("admin")
+                                                                               .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
@@ -57,7 +59,8 @@ class WarehouseControllerTest {
     @Test
     void findBySku() {
 
-        String actual = warehouseService.getWarehouseBySku("8883780450").getUnit();
+        String actual = warehouseService.getWarehouseBySku("8883780450")
+                                        .getUnit();
         String expected = "pz";
 
         assertThat(actual, equalTo(expected));

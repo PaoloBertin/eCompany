@@ -26,28 +26,33 @@
                     <br/>
                     <h4 th:text="#{label.categories.listing}">categories listing</h4>
 
-                    <a class="btn btn-primary" th:href="@{/admin/catalog?form}" role="button" th:text="#{label.categories.new}">new category</a>
+                    <a class="btn btn-primary" th:href="@{/admin/catalog?form}" role="button"
+                       th:text="#{label.categories.new}">new category</a>
 
                     <table width="100%" cellspacing="10px" cellpadding="10px">
                         <thead>
                             <tr>
                                 <th th:text="#{label.categories.name}">name</th>
                                 <th th:text="#{label.edit}">edit</th>
-                                <th  th:text="#{label.delete}">delete</th>
+                                <th th:text="#{label.delete}">delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="category : ${categories}">
                                 <td th:text="${category.name}">name</td>
                                 <td>
-                                    <a th:href="@{'/admin/catalog/updateCategory/' + ${category.categoryid}}">
+                                    <a th:href="@{'/admin/catalog/' + ${category.categoryid}} + '?form'">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <a th:href="@{'/admin/catalog/deleteCategory/' + ${category.categoryid}}">
-                                        <i class="fa fa-trash fa-lg"></i>
-                                    </a>
+                                    <form th:action="@{'/admin/catalog/'}" th:method="delete">
+                                        <input type="hidden" name="categoryid" th:value="${category.categoryid}"/>
+                                        <button class="btn">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                    </form>
+
                                 </td>
                             </tr>
                         </tbody>
@@ -55,19 +60,17 @@
                     <br/>
                     <!--
                     <div class="row justify-content-center">
-                        <nav aria-label="navigation" th:if="${products.totalPages gt 1}">
-                            <ul class="pagination" th:with="pages=${products.totalPages}">
+                        <nav aria-label="navigation" th:if="${warehouse.totalPages gt 1}">
+                            <ul class="pagination" th:with="pages=${warehouse.totalPages}">
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}"
-                                       aria-label="Previous">
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}"
-                                       aria-label="Previous">
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
                                 </li>
@@ -82,16 +85,17 @@
                                 <li class="page-item" th:classappend="disabled">
                                     <a class="page-link" th:text="${pages}">3</a>
                                 </li>
-                                <li class="page-item" th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                                <li class="page-item"
+                                    th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}"
-                                       aria-label="Previous">
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
-                                <li class="page-item" th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                                <li class="page-item"
+                                    th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${products.totalPages - 1},size=${size})}"
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${warehouse.totalPages - 1},size=${size})}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>

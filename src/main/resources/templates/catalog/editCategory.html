@@ -27,7 +27,7 @@
                     <h5>Category Edit</h5>
                     <br/>
 
-                    <form name="editCategoryForm" method="post" th:object="${category}" th:action="@{/admin/catalog?form}">
+                    <form name="editCategoryForm" th:method="post" th:object="${category}" th:action="@{/admin/catalog?form}">
                         <div class="form-group">
                             <label for="product_name" th:text="#{label.product.name}">name</label>
                             <input  class="form-control" id="product_name" type="text" th:field="*{name}"/>

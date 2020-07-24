@@ -57,13 +57,10 @@ class CategoryResourceTest {
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         String requestJson = objectMapper.writeValueAsString(category);
 
-        mvc
-            .perform(post("/api/categories")
-                         .contentType(MediaType.APPLICATION_JSON)
-                         .content(requestJson))
-            .andExpect(jsonPath("$.categoryid", equalTo(7)))
-            .andExpect(status().isOk())
-        ;
+        mvc.perform(post("/api/categories").contentType(MediaType.APPLICATION_JSON)
+                                           .content(requestJson))
+           .andExpect(jsonPath("$.categoryid", equalTo(7)))
+           .andExpect(status().isOk());
     }
 
     @Disabled
