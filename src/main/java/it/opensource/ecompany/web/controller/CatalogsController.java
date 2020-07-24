@@ -35,17 +35,6 @@ public class CatalogsController {
     private MessageSource messageSource;
 
     @GetMapping("/catalog")
-    public String getAllCategories(Model uiModel) {
-
-        List<Category> categories = categoriesService.getAll();
-        uiModel.addAttribute("categories", categories);
-
-        log.debug("visualizza tutte le categorie");
-
-        return "catalog/list";
-    }
-
-    @GetMapping("/admin/catalog")
     public String getAllCategoriesAdmin(Model uiModel) {
 
         List<Category> categories = categoriesService.getAll();
@@ -66,10 +55,6 @@ public class CatalogsController {
 
         Category category = new Category();
 
-        //        Customer customer = userContext.getCurrentCustomer();
-
-        //        uiModel.addAttribute("customer", customer);
-        //        uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
 
