@@ -3,6 +3,7 @@ package it.opensource.ecompany.domain;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Table(name = "categories")
 @Entity
@@ -14,6 +15,7 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryid;
 
+    @NotNull
     private String name;
 
     @Version

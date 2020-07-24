@@ -58,7 +58,7 @@ public class CatalogsController {
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
 
-        return "/catalog/editCategory";
+        return "catalog/editCategory";
     }
 
     /**
