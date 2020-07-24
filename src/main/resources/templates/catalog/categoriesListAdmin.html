@@ -2,8 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}"
-      th:lang="${lang}"
->
+      th:lang="${lang}">
 
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
@@ -17,15 +16,17 @@
 
             <!-- corpo centrale -->
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <!--
                     <div th:replace="~{fragments/left_side :: left_side}">left side</div>
                      -->
                 </div>
 
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <br/>
                     <h4 th:text="#{label.categories.listing}">categories listing</h4>
+
+                    <a class="btn btn-primary" th:href="@{/admin/catalog?form}" role="button" th:text="#{label.categories.new}">new category</a>
 
                     <table width="100%" cellspacing="10px" cellpadding="10px">
                         <thead>
@@ -100,7 +101,7 @@
                     </div>
                     -->
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <!--
                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
                     -->

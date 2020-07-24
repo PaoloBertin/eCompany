@@ -88,9 +88,13 @@
                     </ul>
                 </div>
             </nav>
-            <!-- Standard messages -->
+            <!-- Standard messages
             <div th:if="${#vars['message'] != null}" class="alert alert-success">
                 <span th:text="${#vars['message']}"></span>
+            </div>
+            -->
+            <div th:if="${message != null}" class="{message.type}">
+                <span th:text="#{message.message}"></span>
             </div>
         </div>
     </body>

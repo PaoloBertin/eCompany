@@ -4,7 +4,6 @@ import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.web.controller.util.Message;
-import it.opensource.ecompany.web.controller.util.UrlUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -95,21 +94,23 @@ public class CatalogsController {
         log.info("Creating category");
         if (bindingResult.hasErrors()) {
             uiModel.addAttribute("message", new Message("error",
-                                                        messageSource.getMessage("category_save_fail", new Object[]{},
+                                                        messageSource.getMessage("category.save.fail", new Object[]{},
                                                                                  locale)));
             uiModel.addAttribute("category", category);
             return "catalog/editCategory";
         }
         uiModel.asMap().clear();
         redirectAttributes.addFlashAttribute("message", new Message("success",
-                                                                    messageSource.getMessage("category_save_success",
+                                                                    messageSource.getMessage("category.save.success",
                                                                                              new Object[]{}, locale)));
 
         Category result = categoriesService.saveCategory(category);
         log.info("category id: " + result.getCategoryid());
 
-        return "redirect:/admin/catalog/" + UrlUtil.encodeUrlPathSegment(category.getCategoryid().toString(),
-                                                                    httpServletRequest);
+        //        String urlRedirect = "redirect:/admin/catalog/" + UrlUtil.encodeUrlPathSegment(category.getCategoryid().toString(), httpServletRequest);
+        String urlRedirect = "redirect:/admin/catalog/";
+
+        return urlRedirect;
     }
 
 }

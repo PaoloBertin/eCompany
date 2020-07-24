@@ -1,8 +1,12 @@
 package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
+import it.opensource.ecompany.service.CategoriesService;
+import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.form.SearchForm;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,8 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import it.opensource.ecompany.service.CategoriesService;
-import lombok.extern.slf4j.Slf4j;
+import java.util.Locale;
 
 @Profile("html")
 @Slf4j
@@ -25,6 +28,9 @@ public class LoginController {
     @Autowired
     private CategoriesService categoriesService;
 
+    @Autowired
+    private MessageSource messageSource;
+
     @GetMapping("/form")
     public String login(Model uiModel) {
 
@@ -37,22 +43,24 @@ public class LoginController {
 
     @GetMapping
     public String loginError(@RequestParam(value = "error", required = false) String error,
-                             @RequestParam(value = "logout", required = false) String logout,
-                             Model uiModel) {
+                             @RequestParam(value = "logout", required = false) String logout, Model uiModel,
+                             Locale locale) {
 
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("categories", categoriesService.getAll());
 
-        String message = null;
+        Message message = null;
         if (error != null) {
-            message = "Username or Password is incorrect !!";
+            uiModel.addAttribute("message", new Message("error",
+                                                        messageSource.getMessage("login.save.fail", new Object[]{},
+                                                                                 locale)));
         }
 
         if (logout != null) {
-            message = "You have been successfully logged out !!";
+            uiModel.addAttribute("message", new Message("error",
+                                                        messageSource.getMessage("logout.save.success", new Object[]{},
+                                                                                 locale)));
         }
-
-        uiModel.addAttribute("message", message);
 
         log.debug("visualizza pagina login");
 
