@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Profile("html")
 @Slf4j
 @ControllerAdvice
 public class ErrorController {

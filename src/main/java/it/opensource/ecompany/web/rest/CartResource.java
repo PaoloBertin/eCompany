@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Profile("rest")
 @Slf4j
 @RestController
 @RequestMapping("/api/cart")

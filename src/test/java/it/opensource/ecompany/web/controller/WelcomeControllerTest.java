@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-@ActiveProfiles("html")
+// @ActiveProfiles("html")
 @EnableWebMvc
 @AutoConfigureMockMvc
 @SpringBootTest

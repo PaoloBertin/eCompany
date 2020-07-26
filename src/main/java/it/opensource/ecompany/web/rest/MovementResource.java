@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 //import java.util.List;
 
-@Profile("rest")
 @RequiredArgsConstructor
 @RequestMapping("/api/movements")
 //@RestController

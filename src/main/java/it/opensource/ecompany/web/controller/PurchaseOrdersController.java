@@ -8,19 +8,14 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.PurchaseOrdersService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@Profile("html")
-@RequiredArgsConstructor
 @Slf4j
 @Controller
 public class PurchaseOrdersController {
@@ -32,6 +27,15 @@ public class PurchaseOrdersController {
     private final PurchaseOrdersService purchaseOrdersService;
 
     private final UserContext userContext;
+
+    public PurchaseOrdersController(CategoriesService categoriesService, CartBean cartBean,
+                                    PurchaseOrdersService purchaseOrdersService, UserContext userContext) {
+
+        this.categoriesService = categoriesService;
+        this.cartBean = cartBean;
+        this.purchaseOrdersService = purchaseOrdersService;
+        this.userContext = userContext;
+    }
 
     @GetMapping("/admin/purchaseorders/all")
     public String getAllPurchaseOrders(Model uiModel) {
@@ -61,7 +65,8 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
 
         log.debug("visualizza ordine con id=" + purchaseOrder.getId());
-        log.debug("numero lineItem=" + purchaseOrder.getLineitems().size());
+        log.debug("numero lineItem=" + purchaseOrder.getLineitems()
+                                                    .size());
 
         return "purchaseorders/show";
     }

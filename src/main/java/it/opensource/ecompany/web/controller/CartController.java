@@ -20,7 +20,6 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.CustomerForm;
 import lombok.extern.slf4j.Slf4j;
 
-@Profile("html")
 @Slf4j
 @Controller
 @RequestMapping("/cart")

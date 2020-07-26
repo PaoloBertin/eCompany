@@ -2,21 +2,19 @@ package it.opensource.ecompany.web.rest;
 
 //import it.opensource.ecompany.bean.CartBean;
 //import it.opensource.ecompany.domain.Customer;
+
 import it.opensource.ecompany.domain.Warehouse;
-//import it.opensource.ecompany.service.CategoriesService;
-//import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-@Profile("rest")
-@RequiredArgsConstructor
+//import it.opensource.ecompany.service.CategoriesService;
+//import it.opensource.ecompany.service.UserContext;
+
 @Slf4j
 @RequestMapping("/api/warehouse")
 @RestController
@@ -25,6 +23,11 @@ public class WarehouseResource {
     // private final CategoriesService categoriesService;
 
     private final WarehouseService warehouseService;
+
+    public WarehouseResource(WarehouseService warehouseService) {
+
+        this.warehouseService = warehouseService;
+    }
 
     // private final UserContext userContext;
 
@@ -55,7 +58,8 @@ public class WarehouseResource {
         Page<Warehouse> warehouse = warehouseService.getByProductCategoryCategoryid(categoryId, pageable);
         // Customer customer = userContext.getCurrentCustomer();
 
-        log.debug("numero prodotti in magazzino da visualizzare = " + warehouse.getContent().size());
+        log.debug("numero prodotti in magazzino da visualizzare = " + warehouse.getContent()
+                                                                               .size());
 
         return "warehouse/listByPage";
     }
@@ -73,7 +77,8 @@ public class WarehouseResource {
 
         // Customer customer = userContext.getCurrentCustomer();
 
-        log.debug("numero prodotti da visualizzare = " + warehouse.getContent().size());
+        log.debug("numero prodotti da visualizzare = " + warehouse.getContent()
+                                                                  .size());
 
         return "warehouse/list";
     }

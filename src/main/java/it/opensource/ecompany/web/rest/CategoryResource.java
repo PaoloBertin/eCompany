@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Profile("rest")
 @Slf4j
 @RequestMapping("/api/categories")
 @RestController

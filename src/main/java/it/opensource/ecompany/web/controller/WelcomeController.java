@@ -2,25 +2,20 @@ package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
+import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Profile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import it.opensource.ecompany.service.CategoriesService;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Gestisce richiesta alla home page
  *
  * @author Paolo Bertin
  */
-@Profile("html")
 @Slf4j
-@RequiredArgsConstructor
 @Controller
 public class WelcomeController {
 
@@ -29,6 +24,13 @@ public class WelcomeController {
     private final CategoriesService categoriesService;
 
     private final CartBean cartBean;
+
+    public WelcomeController(UserContext userContext, CategoriesService categoriesService, CartBean cartBean) {
+
+        this.userContext = userContext;
+        this.categoriesService = categoriesService;
+        this.cartBean = cartBean;
+    }
 
     /**
      * Indirizza la richiesta alla home page

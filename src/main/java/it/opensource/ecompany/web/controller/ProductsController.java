@@ -1,20 +1,17 @@
 package it.opensource.ecompany.web.controller;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.List;
-import java.util.Locale;
-
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
+import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.service.CategoriesService;
+import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.controller.util.UrlUtil;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,42 +20,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import it.opensource.ecompany.domain.Product;
-import it.opensource.ecompany.service.CategoriesService;
-import it.opensource.ecompany.service.ProductsService;
-
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Gestisce le richieste relative ai prodotti
  *
  * @author Paolo Bertin
  */
-@Profile("html")
 @Slf4j
 @Controller
 public class ProductsController {
 
-    @Autowired
-    private CategoriesService categoriesService;
+    private final CategoriesService categoriesService;
 
-    @Autowired
-    private ProductsService productsService;
+    private final ProductsService productsService;
 
-    @Autowired
-    private CartBean cartBean;
+    private final CartBean cartBean;
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
-    @Autowired
-    private UserContext userContext;
+    private final UserContext userContext;
+
+    public ProductsController(CategoriesService categoriesService, ProductsService productsService, CartBean cartBean,
+                              MessageSource messageSource, UserContext userContext) {
+
+        this.categoriesService = categoriesService;
+        this.productsService = productsService;
+        this.cartBean = cartBean;
+        this.messageSource = messageSource;
+        this.userContext = userContext;
+    }
 
     @GetMapping("/products/all/all")
     public String viewAllProducts(Model uiModel) {
@@ -79,8 +78,7 @@ public class ProductsController {
 
     @GetMapping("/products")
     public String viewAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                        @RequestParam(name = "size", defaultValue = "10") int size,
-                                        Model uiModel) {
+                                        @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size);
 
@@ -125,7 +123,8 @@ public class ProductsController {
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("products", products);
 
-        log.debug("numero prodotti da visualizzare =" + products.getContent().size());
+        log.debug("numero prodotti da visualizzare =" + products.getContent()
+                                                                .size());
 
         return "catalog/list";
     }
@@ -136,12 +135,10 @@ public class ProductsController {
      * @param categoryid
      * @param productid
      * @param uiModel
-     * 
      * @return nome vista
      */
     @GetMapping(value = "/products/{categoryid}/{productid}")
-    public String viewProduct(@PathVariable("categoryid") Long categoryid,
-                              @PathVariable("productid") Long productid,
+    public String viewProduct(@PathVariable("categoryid") Long categoryid, @PathVariable("productid") Long productid,
                               Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
@@ -160,7 +157,6 @@ public class ProductsController {
      * Recupera da db l'immagine di un prodotto
      *
      * @param id identificativo prodotto
-     * 
      * @return immagine prodotto
      */
     @GetMapping(value = "/products/photo/{id}")
@@ -175,8 +171,7 @@ public class ProductsController {
     @GetMapping("/products/searchProduct")
     public String searchProduct(@ModelAttribute SearchForm searchForm,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
-                                @RequestParam(name = "size", defaultValue = "10") int size,
-                                Model uiModel) {
+                                @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         String searchText = searchForm.getTextToSearch();
         log.debug("il titolo da cercare deve contenere: " + searchText);
@@ -193,7 +188,8 @@ public class ProductsController {
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("products", products);
 
-        log.debug("numero prodotti da visualizzare = " + products.getContent().size());
+        log.debug("numero prodotti da visualizzare = " + products.getContent()
+                                                                 .size());
 
         return "catalog/list";
     }
@@ -243,7 +239,8 @@ public class ProductsController {
             uiModel.addAttribute("product", product);
             return "catalog/edit";
         }
-        uiModel.asMap().clear();
+        uiModel.asMap()
+               .clear();
         redirectAttributes.addFlashAttribute("message", new Message("success",
                                                                     messageSource.getMessage("product_save_success",
                                                                                              new Object[]{}, locale)));
@@ -270,8 +267,8 @@ public class ProductsController {
 
         productsService.saveProduct(product);
 
-        return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(),
-                                                                    httpServletRequest);
+        return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid()
+                                                                           .toString(), httpServletRequest);
     }
 
     /**
@@ -300,14 +297,16 @@ public class ProductsController {
             return "catalog/edit";
         }
 
-        uiModel.asMap().clear();
+        uiModel.asMap()
+               .clear();
         redirectAttributes.addFlashAttribute("message", new Message("success",
                                                                     messageSource.getMessage("product.save.success",
                                                                                              new Object[]{}, locale)));
         // rende persistenti le modifiche
         productsService.saveProduct(product);
 
-        String url = "redirect:/products/" + product.getCategory().getCategoryid() + "/" + product.getProductid();
+        String url = "redirect:/products/" + product.getCategory()
+                                                    .getCategoryid() + "/" + product.getProductid();
 
         return url;
     }

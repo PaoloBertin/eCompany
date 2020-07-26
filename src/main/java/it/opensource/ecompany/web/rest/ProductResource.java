@@ -5,7 +5,6 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +24,6 @@ import java.net.URISyntaxException;
  *
  * @author Paolo Bertin
  */
-@Profile("rest")
 @Slf4j
 @RequestMapping("/api/products")
 @RestController
@@ -41,7 +39,8 @@ public class ProductResource {
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> pageProducts = productsService.getAllByPage(pageable);
 
-        return ResponseEntity.ok().body(pageProducts);
+        return ResponseEntity.ok()
+                             .body(pageProducts);
     }
 
     /**
@@ -65,7 +64,6 @@ public class ProductResource {
      * Recupera un prodotto in base al suo id
      *
      * @param id
-     * 
      * @return nome vista
      */
     @GetMapping(value = "/all/{productid}")
@@ -73,7 +71,8 @@ public class ProductResource {
 
         Product product = productsService.getProductById(id);
 
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok()
+                             .body(product);
     }
 
     /**
@@ -87,7 +86,8 @@ public class ProductResource {
 
         Product product = productsService.getProductById(id);
 
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok()
+                             .body(product);
     }
 
     /**
@@ -95,13 +95,12 @@ public class ProductResource {
      *
      * @param product
      * @param file
-     * 
      * @return nome vista
      */
     @PostMapping
     public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product,
-                                                 @RequestParam(value = "file", required = false) Part file) throws Exception,
-                                                                                                            URISyntaxException {
+                                                 @RequestParam(value = "file", required = false) Part file)
+        throws Exception, URISyntaxException {
 
         log.debug("REST request to save Product : {}", product);
 
@@ -128,14 +127,14 @@ public class ProductResource {
 
         productsService.saveProduct(product);
 
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok()
+                             .body(product);
     }
 
     /**
      * Aggiorna i campi di una entita'
      *
      * @param product
-     * 
      * @return vista
      */
     @PutMapping(value = "/{productId}")
@@ -151,16 +150,16 @@ public class ProductResource {
         // rende persistenti le modifiche
         product = productsService.saveProduct(product);
 
-        return ResponseEntity.ok().body(product);
+        return ResponseEntity.ok()
+                             .body(product);
     }
 
     /**
      * Recupera i prodotti il cui nome contine la stringa data
-     * 
+     *
      * @param searchForm
      * @param page
      * @param size
-     * 
      * @return
      */
     @GetMapping("/searchProduct")
@@ -174,8 +173,10 @@ public class ProductResource {
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> pageProducts = productsService.getProductsByNameContainingByPage(searchText, pageable);
 
-        log.debug("numero prodotti trovati = " + pageProducts.getContent().size());
+        log.debug("numero prodotti trovati = " + pageProducts.getContent()
+                                                             .size());
 
-        return ResponseEntity.ok().body(pageProducts);
+        return ResponseEntity.ok()
+                             .body(pageProducts);
     }
 }

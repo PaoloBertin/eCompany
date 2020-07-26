@@ -20,7 +20,6 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 
-@Profile("html")
 @Slf4j
 @Controller
 public class CatalogsController {

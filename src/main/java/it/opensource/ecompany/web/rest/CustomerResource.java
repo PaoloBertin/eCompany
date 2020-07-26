@@ -20,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-@Profile("rest")
 @Slf4j
 @RequestMapping("/api/customers")
 @RestController

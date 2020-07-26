@@ -7,9 +7,7 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,8 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Profile("html")
-@RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/admin/warehouse")
 @Controller
@@ -32,10 +28,18 @@ public class WarehouseController {
 
     private final CartBean cartBean;
 
+    public WarehouseController(CategoriesService categoriesService, WarehouseService warehouseService,
+                               UserContext userContext, CartBean cartBean) {
+
+        this.categoriesService = categoriesService;
+        this.warehouseService = warehouseService;
+        this.userContext = userContext;
+        this.cartBean = cartBean;
+    }
+
     @GetMapping
     public String viewAllItempByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                     @RequestParam(name = "size", defaultValue = "10") int size,
-                                     Model uiModel) {
+                                     @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size);
 
@@ -76,7 +80,8 @@ public class WarehouseController {
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("warehouse", warehouse);
 
-        log.debug("numero prodotti da visualizzare = " + warehouse.getContent().size());
+        log.debug("numero prodotti da visualizzare = " + warehouse.getContent()
+                                                                  .size());
 
         return "warehouse/listByPage";
     }
@@ -84,8 +89,7 @@ public class WarehouseController {
     @GetMapping("/searchProduct")
     public String searchProduct(@ModelAttribute SearchForm searchForm,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
-                                @RequestParam(name = "size", defaultValue = "10") int size,
-                                Model uiModel) {
+                                @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         String searchText = searchForm.getTextToSearch();
         log.debug("il prodotto da cercare deve contenere: " + searchText);
@@ -101,7 +105,8 @@ public class WarehouseController {
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("warehouse", warehouse);
 
-        log.debug("numero prodotti da visualizzare = " + warehouse.getContent().size());
+        log.debug("numero prodotti da visualizzare = " + warehouse.getContent()
+                                                                  .size());
 
         return "warehouse/list";
     }
