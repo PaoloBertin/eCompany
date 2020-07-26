@@ -38,8 +38,7 @@ class WarehouseControllerTest {
     @Test
     public void viewAllItempByPageTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/admin/warehouse").with(user("admin.ecompany").password("admin")
-                                                                       .roles("ADMIN")))
+        mvc.perform(get("/admin/warehouse").with(user("admin.ecompany").password("admin").roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
@@ -48,8 +47,7 @@ class WarehouseControllerTest {
     public void searchProductTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/admin/warehouse/searchProduct").param("textToSearch", "Java")
-                                                         .with(user("admin.ecompany").password("admin")
-                                                                                     .roles("ADMIN")))
+                                                         .with(user("admin.ecompany").password("admin").roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
@@ -57,8 +55,7 @@ class WarehouseControllerTest {
     @Test
     void findBySkuTest() {
 
-        String actual = warehouseService.getWarehouseBySku("8883780450")
-                                        .getUnit();
+        String actual = warehouseService.getWarehouseBySku("8883780450").getUnit();
         String expected = "pz";
 
         assertThat(actual, equalTo(expected));

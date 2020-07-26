@@ -9,23 +9,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
-// @ActiveProfiles("html")
 @AutoConfigureMockMvc
 @SpringBootTest
 class CustomerControllerTest {
 
-
     @Test
     public void signupTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(post("/customers/registration").param("firstname", "Giusepp")
-                                                    .param("lastname", "Mazzini")
-                                                    .param("email", "giuseppe.mazzini@dummy.com")
-                                                    .param("username", "giuseppe.mazzini")
-                                                    .param("password", "user"))
-            .andExpect(redirectedUrl("/"))
-        ;
+        mvc.perform(post("/customers/registration").param("firstname", "Giusepp")
+                                                   .param("lastname", "Mazzini")
+                                                   .param("email", "giuseppe.mazzini@dummy.com")
+                                                   .param("username", "giuseppe.mazzini")
+                                                   .param("password", "user"))
+           .andExpect(redirectedUrl("/"));
     }
 
 }

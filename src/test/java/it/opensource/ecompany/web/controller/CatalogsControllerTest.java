@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class CatalogsControllerTest {
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void getAllCategoriesAdmin(@Autowired MockMvc mvc) throws Exception {
 
@@ -34,46 +34,41 @@ class CatalogsControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void createCategoryForm(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/admin/catalog").param("form", "")
-                                         .with(user("admin.ecompany").password("admin")
-                                                                     .roles("ADMIN")))
+                                         .with(user("admin.ecompany").password("admin").roles("ADMIN")))
            .andExpect(view().name("catalog/editCategory"))
            .andExpect(status().isOk());
 
-
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void createCategorySuccessTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(post("/admin/catalog").param("form", "")
                                           .param("name", "eBook")
-                                          .with(user("admin.ecompany").password("admin")
-                                                                      .roles("ADMIN")))
-           .andExpect(MockMvcResultMatchers.flash()
-                                           .attribute("message", hasProperty("type", equalTo("success"))))
+                                          .with(user("admin.ecompany").password("admin").roles("ADMIN")))
+           .andExpect(MockMvcResultMatchers.flash().attribute("message", hasProperty("type", equalTo("success"))))
            .andExpect(redirectedUrl("/catalog"));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void createCategoryErrorTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(post("/admin/catalog").param("form", "")
-                                          .with(user("admin.ecompany").password("admin")
-                                                                      .roles("ADMIN")))
+                                          .with(user("admin.ecompany").password("admin").roles("ADMIN")))
            .andExpect(model().attribute("message", hasProperty("type", equalTo("error"))))
            .andExpect(view().name("catalog/editCategory"))
            .andExpect(status().isOk());
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({ "/schema-h2.sql", "/data-h2.sql" })
     @Test
     public void deleteCategoryTest(@Autowired MockMvc mvc) throws Exception {
 
