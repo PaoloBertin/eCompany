@@ -29,11 +29,12 @@ class PurchaseOrdersServiceImplTest {
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
-     @Test
+    @Test
     public void getAllPurchaseOrdersTest() {
 
         int expected = 10;
-        int actual = purchaseOrdersService.getAllPurchaseOrders().size();
+        int actual = purchaseOrdersService.getAllPurchaseOrders()
+                                          .size();
 
         assertThat(actual, equalTo(expected));
     }
@@ -43,7 +44,8 @@ class PurchaseOrdersServiceImplTest {
     public void getPurchaseOrderByIdTest() {
 
         double expected = 169.50;
-        double actual = purchaseOrdersService.getPurchaseOrderById(1L).getTotalAmount();
+        double actual = purchaseOrdersService.getPurchaseOrderById(1L)
+                                             .getTotalAmount();
 
         assertThat(actual, equalTo(expected));
     }
@@ -52,8 +54,9 @@ class PurchaseOrdersServiceImplTest {
     @Test
     public void getPurchaseOrderByCustomerIdTest() {
 
-        int expected = 4;
-        int actual = purchaseOrdersService.getPurchaseOrderByCustomer(2L).size();
+        int expected = 2;
+        int actual = purchaseOrdersService.getPurchaseOrderByCustomer(2L)
+                                          .size();
 
         assertThat(actual, equalTo(expected));
     }

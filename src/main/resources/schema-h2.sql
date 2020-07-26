@@ -154,6 +154,7 @@ CREATE TABLE IF NOT EXISTS products (
 
 CREATE TABLE IF NOT EXISTS warehouse (
     warehouseid BIGINT(20) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255),
     product_id BIGINT(20) NOT NULL,
     sku VARCHAR(50) NOT NULL,
     cost DECIMAL(12,4),

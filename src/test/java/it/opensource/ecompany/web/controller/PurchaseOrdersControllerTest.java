@@ -31,29 +31,30 @@ public class PurchaseOrdersControllerTest {
     @Test
     public void getAllPurchaseOrdersTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/purchaseorders/all").with(user("mario.rossi").password("user").roles("USER")))
-            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
-            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(10)))
-            .andExpect(model().attribute("purchaseOrders", hasItem(hasProperty("totalAmount", equalTo(169.5)))))
-            .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
-            .andExpect(request().sessionAttribute("scopedTarget.cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-            .andExpect(view().name("purchaseorders/list"))
-            .andExpect(status().isOk());
+        mvc.perform(get("/admin/purchaseorders/all").with(user("admin.ecompany").password("admin")
+                                                                                .roles("ADMIN")))
+           .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+           .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
+           .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(10)))
+           .andExpect(model().attribute("purchaseOrders", hasItem(hasProperty("totalAmount", equalTo(169.5)))))
+           .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
+           .andExpect(
+               request().sessionAttribute("scopedTarget.cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+           .andExpect(view().name("purchaseorders/list"))
+           .andExpect(status().isOk());
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getPurchaseOrderByIdTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/purchaseorders/{purchaseordersId}", 2L).with(user("mario.rossi").password("user").roles("USER")))
-            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
-            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-            .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
-            .andExpect(view().name("purchaseorders/show"))
-            .andExpect(status().isOk());
+        mvc.perform(get("/purchaseorders/{purchaseordersId}", 2L).with(user("mario.rossi").password("user")
+                                                                                          .roles("USER")))
+           .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+           .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
+           .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
+           .andExpect(view().name("purchaseorders/show"))
+           .andExpect(status().isOk());
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -79,9 +80,9 @@ public class PurchaseOrdersControllerTest {
         product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
         cartBean.addProductToCart(product);
 
-        mvc
-            .perform(get("/purchaseorders/save").sessionAttr("cartBean", cartBean)
-                                                .with(user("mario.rossi").password("user").roles("USER")))
-            .andExpect(status().isOk());
+        mvc.perform(get("/purchaseorders/save").sessionAttr("cartBean", cartBean)
+                                               .with(user("mario.rossi").password("user")
+                                                                        .roles("USER")))
+           .andExpect(status().isOk());
     }
 }

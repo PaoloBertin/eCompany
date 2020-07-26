@@ -38,26 +38,26 @@ class WarehouseControllerTest {
     }
 
     @Test
-    public void viewAllItempByPage(@Autowired MockMvc mvc) throws Exception {
+    public void viewAllItempByPageTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/warehouse").with(user("admin.ecompany").password("admin")
-                                                                 .roles("ADMIN")))
+        mvc.perform(get("/admin/warehouse").with(user("admin.ecompany").password("admin")
+                                                                       .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
 
     @Test
-    public void searchProduct(@Autowired MockMvc mvc) throws Exception {
+    public void searchProductTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/warehouse/searchProduct").param("textToSearch", "Java")
-                                                   .with(user("admin.ecompany").password("admin")
-                                                                               .roles("ADMIN")))
+        mvc.perform(get("/admin/warehouse/searchProduct").param("textToSearch", "Java")
+                                                         .with(user("admin.ecompany").password("admin")
+                                                                                     .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
 
     @Test
-    void findBySku() {
+    void findBySkuTest() {
 
         String actual = warehouseService.getWarehouseBySku("8883780450")
                                         .getUnit();

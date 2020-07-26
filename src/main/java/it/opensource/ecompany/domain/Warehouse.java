@@ -18,20 +18,18 @@ public class Warehouse implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long warehouseid;
 
+    private String name;
+
     @JoinColumn(name = "product_id")
     @OneToOne
     private Product product;
 
-    @Column(name = "sku")
     private String sku;
 
-    @Column(name = "cost")
     private Float cost;
 
-    @Column(name = "unit")
     private String unit;
 
-    @Column(name = "quantity")
     private Integer quantity;
 
     @Column(name = "reorder_quantity")
@@ -40,13 +38,10 @@ public class Warehouse implements Serializable {
     @Column(name = "inventory_value")
     private Float inventoryValue;
 
-    @Column(name = "reorder")
     private Boolean reorder;
 
-    @Column(name = "container")
     private String container;
 
-    @Column(name = "location")
     private String location;
 
     @Version
