@@ -85,7 +85,7 @@ public class WarehouseController {
         return "warehouse/listByPage";
     }
 
-    @GetMapping("/searchProduct")
+    @GetMapping("/admin/warehouse/searchProduct")
     public String searchProduct(@ModelAttribute SearchForm searchForm,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {

@@ -22,7 +22,9 @@
                 </div>
 
                 <div class="col-lg-7">
+                    <br/>
                     <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
+                    <!-- 
                     <table class="table">
                         <thead>
                             <tr>
@@ -38,11 +40,6 @@
                         </thead>
                         <tbody>
                             <tr th:each="item : ${warehouse.content}">
-                                <!--
-                                 <td>
-                                    <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left" style="margin: 0px 10px" width="65" height="92"/>
-                               </td>
-                               -->
                                <td th:text="${item.product.category.name}"></td>
                                 <td th:text="${item.product.name}"></td>
                                 <td th:text="${item.sku}">sku</td>
@@ -95,6 +92,7 @@
                             </ul>
                         </nav>
                     </div>
+                    -->
                 </div>
                 <div class="col-lg-3">
                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
