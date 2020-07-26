@@ -42,7 +42,6 @@ public class WarehouseController {
                                      @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size);
-
         Page<Warehouse> warehouse = warehouseService.getAllItemsByPage(pageable);
 
         Customer customer = userContext.getCurrentCustomer();

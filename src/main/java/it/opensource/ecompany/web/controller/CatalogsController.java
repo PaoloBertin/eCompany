@@ -39,7 +39,7 @@ public class CatalogsController {
         this.messageSource = messageSource;
     }
 
-    @GetMapping("/catalog")
+    @GetMapping("/admin/catalog")
     public String getAllCategoriesAdmin(Model uiModel) {
 
         List<Category> categories = categoriesService.getAll();
@@ -59,8 +59,6 @@ public class CatalogsController {
     public String createCategoryForm(Model uiModel) {
 
         Category category = new Category();
-
-        uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
 
         return "catalog/editCategory";
