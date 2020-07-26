@@ -52,15 +52,13 @@ public class LoginController {
 
         Message message = null;
         if (error != null) {
-            uiModel.addAttribute("message", new Message("error",
-                                                        messageSource.getMessage("login.save.fail", new Object[]{},
-                                                                                 locale)));
+            message = new Message("error", messageSource.getMessage("login.save.fail", new Object[]{}, locale));
+            uiModel.addAttribute("message", message);
         }
 
         if (logout != null) {
-            uiModel.addAttribute("message", new Message("error",
-                                                        messageSource.getMessage("logout.save.success", new Object[]{},
-                                                                                 locale)));
+            message = new Message("error", messageSource.getMessage("logout.save.success", new Object[]{}, locale));
+            uiModel.addAttribute("message", message);
         }
 
         log.debug("visualizza pagina login");

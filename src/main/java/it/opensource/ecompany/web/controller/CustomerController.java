@@ -81,6 +81,7 @@ public class CustomerController {
         customer.setPassword(customerForm.getPassword());
 
         long id = customersService.save(customer);
+        log.debug("salvato customer con id=" + id);
 
         userContext.setCurrentCustomer(customer);
 
