@@ -4,8 +4,6 @@ import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginResource {
 
-    @Autowired
     private CartBean cartBean;
 
-    @Autowired
     private CategoriesService categoriesService;
+
+    public LoginResource(CartBean cartBean, CategoriesService categoriesService) {
+
+        this.cartBean = cartBean;
+        this.categoriesService = categoriesService;
+    }
 
     @GetMapping("/form")
     public String login(Model uiModel) {
@@ -35,8 +37,7 @@ public class LoginResource {
 
     @GetMapping
     public String loginError(@RequestParam(value = "error", required = false) String error,
-                             @RequestParam(value = "logout", required = false) String logout,
-                             Model uiModel) {
+                             @RequestParam(value = "logout", required = false) String logout, Model uiModel) {
 
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("categories", categoriesService.getAll());

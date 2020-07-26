@@ -4,7 +4,6 @@ import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,8 +28,12 @@ import java.net.URISyntaxException;
 @RestController
 public class ProductResource {
 
-    @Autowired
-    private ProductsService productsService;
+    private final ProductsService productsService;
+
+    public ProductResource(ProductsService productsService) {
+
+        this.productsService = productsService;
+    }
 
     @GetMapping("/all")
     public ResponseEntity<Page<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,

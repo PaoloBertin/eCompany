@@ -7,9 +7,7 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.controller.util.Message;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,17 +22,22 @@ import java.util.Locale;
 @Controller
 public class CatalogsController {
 
-    @Autowired
-    private CategoriesService categoriesService;
+    private final CategoriesService categoriesService;
 
-    @Autowired
-    private ProductsService productsService;
+    private final ProductsService productsService;
 
-    @Autowired
-    private CartBean cartBean;
+    private final CartBean cartBean;
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
+
+    public CatalogsController(CategoriesService categoriesService, ProductsService productsService, CartBean cartBean,
+                              MessageSource messageSource) {
+
+        this.categoriesService = categoriesService;
+        this.productsService = productsService;
+        this.cartBean = cartBean;
+        this.messageSource = messageSource;
+    }
 
     @GetMapping("/catalog")
     public String getAllCategoriesAdmin(Model uiModel) {
@@ -103,7 +106,7 @@ public class CatalogsController {
     public String deleteCategory(@RequestParam("categoryid") Long id, Model uiModel) {
 
         List<Product> products = productsService.getProductsByCategory(id);
-        for (Product product: products) {
+        for (Product product : products) {
             productsService.deleteProduct(product);
         }
         Category category = categoriesService.getCategoryById(id);

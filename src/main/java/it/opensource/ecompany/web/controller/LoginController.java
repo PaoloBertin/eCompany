@@ -5,7 +5,6 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +19,18 @@ import java.util.Locale;
 @Controller
 public class LoginController {
 
-    @Autowired
-    private CartBean cartBean;
+    private final CartBean cartBean;
 
-    @Autowired
-    private CategoriesService categoriesService;
+    private final CategoriesService categoriesService;
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
+
+    public LoginController(CartBean cartBean, CategoriesService categoriesService, MessageSource messageSource) {
+
+        this.cartBean = cartBean;
+        this.categoriesService = categoriesService;
+        this.messageSource = messageSource;
+    }
 
     @GetMapping("/form")
     public String login(Model uiModel) {

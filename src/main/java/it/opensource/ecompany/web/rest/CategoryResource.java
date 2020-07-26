@@ -3,8 +3,6 @@ package it.opensource.ecompany.web.rest;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.service.CategoriesService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,12 +14,16 @@ import java.util.List;
 @RestController
 public class CategoryResource {
 
-    @Autowired
-    private CategoriesService categoriesService;
+    private final CategoriesService categoriesService;
+
+    public CategoryResource(CategoriesService categoriesService) {
+
+        this.categoriesService = categoriesService;
+    }
 
     /**
      * Ritorna elenco di tutte le categorie
-     * 
+     *
      * @return entityResponse
      */
     @GetMapping
@@ -36,7 +38,7 @@ public class CategoryResource {
 
     /**
      * Ritorna categoria con id dato
-     * 
+     *
      * @param id identificatore categoria da recuperare dal db
      * @return responseEntity
      */
@@ -53,7 +55,7 @@ public class CategoryResource {
 
     /**
      * Rende persistente nuova/modificata categoria
-     * 
+     *
      * @param category categoria da rendere persistente
      * @return responseEntity
      */
@@ -68,7 +70,7 @@ public class CategoryResource {
 
     /**
      * Cancella categoria dal db
-     * 
+     *
      * @param category categoria da eliminare
      */
     @DeleteMapping

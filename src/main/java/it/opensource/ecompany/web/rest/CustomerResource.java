@@ -8,8 +8,6 @@ import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,20 +23,25 @@ import javax.validation.Valid;
 @RestController
 public class CustomerResource {
 
-    @Autowired
-    CustomerForm customerForm;
+    private CustomerForm customerForm;
 
-    @Autowired
-    CustomerBean customerBean;
+    private CustomerBean customerBean;
 
-    @Autowired
-    CustomersService customersService;
+    private CustomersService customersService;
 
-    @Autowired
-    UserContext userContext;
+    private UserContext userContext;
 
-    @Autowired
     private CategoriesService categoriesService;
+
+    public CustomerResource(CustomerForm customerForm, CustomerBean customerBean, CustomersService customersService,
+                            UserContext userContext, CategoriesService categoriesService) {
+
+        this.customerForm = customerForm;
+        this.customerBean = customerBean;
+        this.customersService = customersService;
+        this.userContext = userContext;
+        this.categoriesService = categoriesService;
+    }
 
     @GetMapping("/registration")
     public String customerRegistrationForm(Model uiModel) {
@@ -55,8 +58,7 @@ public class CustomerResource {
     }
 
     @PostMapping(value = "/registration")
-    public String signup(@Valid CustomerForm customerForm,
-                         BindingResult result,
+    public String signup(@Valid CustomerForm customerForm, BindingResult result,
                          RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {

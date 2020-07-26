@@ -8,8 +8,6 @@ import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,20 +23,25 @@ import javax.validation.Valid;
 @Controller
 public class CustomerController {
 
-    @Autowired
-    CustomerForm customerForm;
+    private final CustomerForm customerForm;
 
-    @Autowired
-    CustomerBean customerBean;
+    private final CustomerBean customerBean;
 
-    @Autowired
-    CustomersService customersService;
+    private final CustomersService customersService;
 
-    @Autowired
-    UserContext userContext;
+    private final UserContext userContext;
 
-    @Autowired
-    private CategoriesService categoriesService;
+    private final CategoriesService categoriesService;
+
+    public CustomerController(CustomerForm customerForm, CustomerBean customerBean, CustomersService customersService,
+                              UserContext userContext, CategoriesService categoriesService) {
+
+        this.customerForm = customerForm;
+        this.customerBean = customerBean;
+        this.customersService = customersService;
+        this.userContext = userContext;
+        this.categoriesService = categoriesService;
+    }
 
     @GetMapping("/registration")
     public String customerRegistrationForm(Model uiModel) {
@@ -55,7 +58,8 @@ public class CustomerController {
     }
 
     @PostMapping("/registration")
-    public String signup(@Valid CustomerForm customerForm, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String signup(@Valid CustomerForm customerForm, BindingResult result,
+                         RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             return "/customers/registration";

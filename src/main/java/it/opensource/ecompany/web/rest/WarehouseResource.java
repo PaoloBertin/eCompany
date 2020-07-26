@@ -1,9 +1,9 @@
 package it.opensource.ecompany.web.rest;
 
-//import it.opensource.ecompany.bean.CartBean;
-//import it.opensource.ecompany.domain.Customer;
-
+import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Warehouse;
+import it.opensource.ecompany.service.CategoriesService;
+import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
@@ -12,26 +12,27 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-//import it.opensource.ecompany.service.CategoriesService;
-//import it.opensource.ecompany.service.UserContext;
-
 @Slf4j
 @RequestMapping("/api/warehouse")
 @RestController
 public class WarehouseResource {
 
-    // private final CategoriesService categoriesService;
+    private final CategoriesService categoriesService;
 
     private final WarehouseService warehouseService;
 
-    public WarehouseResource(WarehouseService warehouseService) {
+    private final UserContext userContext;
 
+    private final CartBean cartBean;
+
+    public WarehouseResource(CategoriesService categoriesService, WarehouseService warehouseService,
+                             UserContext userContext, CartBean cartBean) {
+
+        this.categoriesService = categoriesService;
         this.warehouseService = warehouseService;
+        this.userContext = userContext;
+        this.cartBean = cartBean;
     }
-
-    // private final UserContext userContext;
-
-    // private final CartBean cartBean;
 
     @GetMapping
     public String viewAllItempByPage(@RequestParam(name = "page", defaultValue = "0") int page,

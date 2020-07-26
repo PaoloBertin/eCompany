@@ -1,44 +1,43 @@
 package it.opensource.ecompany.web.controller;
 
-import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.service.UserContext;
-import it.opensource.ecompany.web.form.SearchForm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import it.opensource.ecompany.bean.CartBean;
+import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
+import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.CustomerForm;
+import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
-    @Autowired
-    private CategoriesService categoriesServices;
+    private final CategoriesService categoriesServices;
 
-    @Autowired
-    private CartBean cartBean;
+    private final CartBean cartBean;
 
-    @Autowired
-    private ProductsService productsService;
+    private final ProductsService productsService;
 
-    @Autowired
-    private UserContext userContext;
+    private final UserContext userContext;
+
+    public CartController(CategoriesService categoriesServices, CartBean cartBean, ProductsService productsService,
+                          UserContext userContext) {
+
+        this.categoriesServices = categoriesServices;
+        this.cartBean = cartBean;
+        this.productsService = productsService;
+        this.userContext = userContext;
+    }
 
     @GetMapping("/add/{productid}")
-    public String addProductToCart(@PathVariable("productid") Long productid, @RequestHeader("referer") String referer) {
+    public String addProductToCart(@PathVariable("productid") Long productid,
+                                   @RequestHeader("referer") String referer) {
 
         Product product = productsService.getProductById(productid);
 
@@ -51,7 +50,8 @@ public class CartController {
     }
 
     @GetMapping("/deleteproduct/{productid}")
-    public String deleteProductFromToCart(@PathVariable("productid") Long productid, @RequestHeader("referer") String referer) {
+    public String deleteProductFromToCart(@PathVariable("productid") Long productid,
+                                          @RequestHeader("referer") String referer) {
 
         Product product = productsService.getProductById(productid);
         cartBean.deleteProductToCart(product);

@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+@RequestMapping("/default")
 @Controller
 public class DefaultController {
 
-    @GetMapping("/default")
+    @GetMapping
     public String defaultAfterLogin(HttpServletRequest request) {
 
         if (request.isUserInRole("ADMIN")) {
