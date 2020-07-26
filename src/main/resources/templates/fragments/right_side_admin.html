@@ -11,10 +11,10 @@
 
     <body>
         <div th:fragment="right_side_admin" th:align="left">
+            <!--
             <br/>
             <span class="sidebar-titolo" th:text="#{label.resource}">Area clienti</span><br/>
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                <!--  -->
                 <a th:href="@{/catalog}">Catalog</a>
                 <br/>
                 <a th:href="@{'/admin/purchaseorders/all'}" th:text="#{label.purchaseorder.listing}"></a>
@@ -22,6 +22,7 @@
                 <a th:href="@{/admin/warehouse}" th:text="#{label.warehouse.all}"></a>
             </div>
             <br/>
+            -->
         </div>
     </body>
 </html>

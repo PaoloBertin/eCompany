@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}"
       th:lang="${lang}"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
@@ -22,6 +22,7 @@
                 </div>
 
                 <div class="col-lg-7">
+                    <br/>
                     <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
                     <table class="table">
                         <thead>
@@ -43,8 +44,8 @@
                                     <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left" style="margin: 0px 10px" width="65" height="92"/>
                                </td>
                                -->
-                               <td th:text="${item.product.category.name}"></td>
-                                <td th:text="${item.product.name}"></td>                                
+                                <td th:text="${item.product.category.name}"></td>
+                                <td th:text="${item.product.name}"></td>
                                 <td th:text="${item.sku}">sku</td>
                                 <td th:text="${item.cost}">cost</td>
                                 <td th:text="${item.unit}">unit</td>
@@ -60,12 +61,14 @@
                         <nav aria-label="navigation" th:if="${warehouse.totalPages gt 1}">
                             <ul class="pagination" th:with="pages=${warehouse.totalPages}">
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
+                                    <a class="page-link"
+                                       th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
+                                    <a class="page-link"
+                                       th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
                                 </li>
@@ -80,13 +83,17 @@
                                 <li class="page-item" th:classappend="disabled">
                                     <a class="page-link" th:text="${pages}">3</a>
                                 </li>
-                                <li class="page-item" th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
+                                <li class="page-item"
+                                    th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
-                                <li class="page-item" th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${warehouse.totalPages - 1},size=${size})}"
+                                <li class="page-item"
+                                    th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${warehouse.totalPages - 1},size=${size})}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
