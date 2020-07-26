@@ -5,8 +5,6 @@ package it.opensource.ecompany.web.rest;
 //import it.opensource.ecompany.domain.Movement;
 //import it.opensource.ecompany.service.CategoriesService;
 //import it.opensource.ecompany.service.UserContext;
-import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Profile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

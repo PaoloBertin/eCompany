@@ -55,16 +55,17 @@
                         </tbody>
                     </table>
                     <br/>
+                    <!-- Paginazione -->
                     <div class="row justify-content-center">
                         <nav aria-label="navigation" th:if="${warehouse.totalPages gt 1}">
                             <ul class="pagination" th:with="pages=${warehouse.totalPages}">
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
+                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
+                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
                                 </li>
@@ -80,12 +81,12 @@
                                     <a class="page-link" th:text="${pages}">3</a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
+                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${warehouse.totalPages - 1},size=${size})}"
+                                    <a class="page-link" th:href="@{/admin/warehouse/{categoryId}(categoryId=${categoryId},page=${warehouse.totalPages - 1},size=${size})}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
