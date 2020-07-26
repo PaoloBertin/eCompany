@@ -134,7 +134,7 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
         if (customer == null) {
             throw new UsernameNotFoundException("Invalid username/password.");
         }
-        
+        // TODO
         Collection<? extends GrantedAuthority> authorities = CustomerUserAuthorityUtils.createAuthorities(customer);
 
         return new CustomerDetails(customer);
