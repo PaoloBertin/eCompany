@@ -17,21 +17,21 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class WarehouseResource {
 
-    private final CategoriesService categoriesService;
+    // private final CategoriesService categoriesService;
 
     private final WarehouseService warehouseService;
 
-    private final UserContext userContext;
+    // private final UserContext userContext;
 
-    private final CartBean cartBean;
+    // private final CartBean cartBean;
 
     public WarehouseResource(CategoriesService categoriesService, WarehouseService warehouseService,
                              UserContext userContext, CartBean cartBean) {
 
-        this.categoriesService = categoriesService;
+//        this.categoriesService = categoriesService;
         this.warehouseService = warehouseService;
-        this.userContext = userContext;
-        this.cartBean = cartBean;
+//        this.userContext = userContext;
+//        this.cartBean = cartBean;
     }
 
     @GetMapping
