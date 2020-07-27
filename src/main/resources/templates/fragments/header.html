@@ -93,8 +93,7 @@
                 <span th:text="${#vars['message']}"></span>
             </div>
             -->
-            <div th:if="${message != null}" class="{message.type}">
-                <span th:text="#{message.message}"></span>
+            <div th:if="${message != null}" th:class="'alert alert-' + ${message.type}" th:text="${message.message}" role="alert">
             </div>
         </div>
     </body>
