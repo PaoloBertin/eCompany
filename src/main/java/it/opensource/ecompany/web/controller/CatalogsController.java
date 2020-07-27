@@ -39,7 +39,7 @@ public class CatalogsController {
         this.messageSource = messageSource;
     }
 
-    @GetMapping("/catalog")
+    @GetMapping("/admin/catalog/all")
     public String getAllCategoriesAdmin(Model uiModel) {
 
         List<Category> categories = categoriesService.getAll();
@@ -75,8 +75,8 @@ public class CatalogsController {
      * @return nome vista
      */
     @PostMapping(path = "/admin/catalog", params = "form")
-    public String create(@Valid Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                         Model uiModel, Locale locale) {
+    public String create(@Valid Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model uiModel,
+                         Locale locale) {
 
         log.info("Creating category");
         Message message = null;
@@ -95,7 +95,7 @@ public class CatalogsController {
         redirectAttributes.addFlashAttribute("message", message);
         log.info("category id: " + result.getCategoryid());
 
-        String urlRedirect = "redirect:/catalog";
+        String urlRedirect = "redirect:/admin/catalog/all";
 
         return urlRedirect;
     }

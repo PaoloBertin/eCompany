@@ -47,7 +47,7 @@ public class WarehouseController {
                                                 @RequestParam(name = "size", defaultValue = "10") int size,
                                                 @RequestParam(name = "warehouseId") Long warehouseId, Model uiModel) {
 
-        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
         Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
 
         Customer customer = userContext.getCurrentCustomer();
@@ -73,7 +73,7 @@ public class WarehouseController {
                                                        @RequestParam(name = "size", defaultValue = "10") int size,
                                                        Model uiModel) {
 
-        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
         Page<Ware> wares = waresService.getWaresByCategoryCategoryid(warehouseId, categoryId, pageable);
         Customer customer = userContext.getCurrentCustomer();
 
@@ -101,7 +101,7 @@ public class WarehouseController {
         String searchText = searchForm.getTextToSearch();
         log.debug("il prodotto da cercare deve contenere nel titolo: " + searchText);
 
-        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
         Page<Ware> wares = waresService.getByWarehouseWarehouseidAndProductNameContaining(warehouseId, searchText,
                                                                                           pageable);
 
