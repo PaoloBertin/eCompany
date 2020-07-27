@@ -1,8 +1,9 @@
 package it.opensource.ecompany.web.controller;
 
+import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.service.WarehouseService;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -17,6 +18,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.List;
+
 @AutoConfigureMockMvc
 @EnableWebMvc
 @SpringBootTest
@@ -24,16 +27,6 @@ class WarehouseControllerTest {
 
     @Autowired
     private WarehouseService warehouseService;
-
-    @BeforeEach
-    void setUp() {
-
-    }
-
-    @AfterEach
-    void tearDown() {
-
-    }
 
     @Test
     public void viewAllItempByPageTest(@Autowired MockMvc mvc) throws Exception {
@@ -43,6 +36,7 @@ class WarehouseControllerTest {
            .andExpect(status().isOk());
     }
 
+    @Disabled
     @Test
     public void searchProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -53,7 +47,7 @@ class WarehouseControllerTest {
     }
 
     @Test
-    void findBySkuTest() {
+    public void getBySkuTest() {
 
         String actual = warehouseService.getWarehouseBySku("8883780450").getUnit();
         String expected = "pz";
@@ -61,4 +55,11 @@ class WarehouseControllerTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @Test
+    public void getAllReduced() {
+
+        List<Object[]> actual = warehouseService.getAllReduced();
+
+        assertThat(actual.size(), equalTo(54));
+    }
 }

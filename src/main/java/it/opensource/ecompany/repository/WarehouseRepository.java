@@ -25,5 +25,5 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
     public Warehouse findByProductProductid(Long productid);
 
     @Query(value = "SELECT warehouseid, name FROM warehouse", nativeQuery = true)
-    public List<Warehouse> findAllReduced();
+    public List<Object[]> findAllReduced();
 }

@@ -5,6 +5,9 @@ import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.repository.WarehouseRepository;
 import it.opensource.ecompany.service.WarehouseService;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -78,6 +81,12 @@ public class WarehouseServiceImpl implements WarehouseService {
     public Long getNumberWarehouse() {
 
         return warehouseRepository.count();
+    }
+
+    @Override
+    public List<Object[]> getAllReduced() {
+
+        return warehouseRepository.findAllReduced();
     }
 
 }

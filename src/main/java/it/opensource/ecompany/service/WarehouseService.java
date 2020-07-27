@@ -2,6 +2,9 @@ package it.opensource.ecompany.service;
 
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.Warehouse;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -24,4 +27,6 @@ public interface WarehouseService {
     public void reducesProductQuantityInStock(Long productId, Integer sold);
 
     public void deleteWarehose(Warehouse warehouse);
+
+    public List<Object[]> getAllReduced();
 }
