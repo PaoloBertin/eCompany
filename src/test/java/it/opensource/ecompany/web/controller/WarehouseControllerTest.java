@@ -1,9 +1,6 @@
 package it.opensource.ecompany.web.controller;
 
-import it.opensource.ecompany.domain.Warehouse;
-import it.opensource.ecompany.service.WarehouseService;
-
-import org.junit.jupiter.api.Disabled;
+import it.opensource.ecompany.service.WaresService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,30 +15,34 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.List;
-
 @AutoConfigureMockMvc
 @EnableWebMvc
 @SpringBootTest
 class WarehouseControllerTest {
 
     @Autowired
-    private WarehouseService warehouseService;
+    private WaresService waresService;
 
     @Test
-    public void viewAllItempByPageTest(@Autowired MockMvc mvc) throws Exception {
+    public void viewAllWareInWarehouseByPageTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/admin/warehouse").with(user("admin.ecompany").password("admin").roles("ADMIN")))
+        mvc.perform(get("/admin/warehouse/wares").param("page", "0")
+                                                 .param("size", "10")
+                                                 .param("warehouseId", "1")
+                                                 .with(user("admin.ecompany").password("admin")
+                                                                             .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
 
-    @Disabled
     @Test
     public void searchProductTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/admin/warehouse/searchProduct").param("textToSearch", "Java")
-                                                         .with(user("admin.ecompany").password("admin").roles("ADMIN")))
+        mvc.perform(get("/admin/warehouse/{warehouseId}/wares/searchProduct", 1L).param("page", "0")
+                                                                                 .param("size", "10")
+                                                                                 .param("textToSearch", "Java")
+                                                                                 .with(user("admin.ecompany").password("admin")
+                                                                                                             .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
@@ -49,7 +50,7 @@ class WarehouseControllerTest {
     @Test
     public void getBySkuTest() {
 
-        String actual = warehouseService.getWarehouseBySku("8883780450").getUnit();
+        String actual = waresService.getWareBySku("8883780450").getUnit();
         String expected = "pz";
 
         assertThat(actual, equalTo(expected));
@@ -58,8 +59,8 @@ class WarehouseControllerTest {
     @Test
     public void getAllReduced() {
 
-        List<Object[]> actual = warehouseService.getAllReduced();
+        //        List<Object[]> actual = warehouseService.getAllReduced();
 
-        assertThat(actual.size(), equalTo(54));
+        //        assertThat(actual.size(), equalTo(54));
     }
 }

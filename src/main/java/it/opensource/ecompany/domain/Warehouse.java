@@ -1,14 +1,9 @@
 package it.opensource.ecompany.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Setter
-@Getter
-@Table(name = "warehouse")
+@Table(name = "warehouses")
 @Entity
 public class Warehouse implements Serializable {
 
@@ -20,32 +15,38 @@ public class Warehouse implements Serializable {
 
     private String name;
 
-    @JoinColumn(name = "product_id")
-    @OneToOne
-    private Product product;
-
-    private String sku;
-
-    private Float cost;
-
-    private String unit;
-
-    private Integer quantity;
-
-    @Column(name = "reorder_quantity")
-    private Integer reorderQuantity;
-
-    @Column(name = "inventory_value")
-    private Float inventoryValue;
-
-    private Boolean reorder;
-
-    private String container;
-
-    private String location;
-
     @Version
     private Long version;
+
+    public Long getWarehouseid() {
+
+        return warehouseid;
+    }
+
+    public void setWarehouseid(Long warehouseid) {
+
+        this.warehouseid = warehouseid;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
+    public Long getVersion() {
+
+        return version;
+    }
+
+    public void setVersion(Long version) {
+
+        this.version = version;
+    }
 
     @Override
     public int hashCode() {

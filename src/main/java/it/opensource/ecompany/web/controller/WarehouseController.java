@@ -2,15 +2,17 @@ package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.domain.Warehouse;
+import it.opensource.ecompany.domain.Ware;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
+import it.opensource.ecompany.service.WaresService;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,25 +26,29 @@ public class WarehouseController {
 
     private final WarehouseService warehouseService;
 
+    private final WaresService waresService;
+
     private final UserContext userContext;
 
     private final CartBean cartBean;
 
     public WarehouseController(CategoriesService categoriesService, WarehouseService warehouseService,
-                               UserContext userContext, CartBean cartBean) {
+                               WaresService waresService, UserContext userContext, CartBean cartBean) {
 
         this.categoriesService = categoriesService;
         this.warehouseService = warehouseService;
+        this.waresService = waresService;
         this.userContext = userContext;
         this.cartBean = cartBean;
     }
 
-    @GetMapping
-    public String viewAllItempByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                     @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
+    @GetMapping("/wares")
+    public String viewAllWaresInWarehouseByPage(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                @RequestParam(name = "size", defaultValue = "10") int size,
+                                                @RequestParam(name = "warehouseId") Long warehouseId, Model uiModel) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Warehouse> warehouse = warehouseService.getAllItemsByPage(pageable);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
 
         Customer customer = userContext.getCurrentCustomer();
         uiModel.addAttribute("customer", customer);
@@ -52,22 +58,23 @@ public class WarehouseController {
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
-        uiModel.addAttribute("warehouse", warehouse);
+        uiModel.addAttribute("wares", wares);
 
-        log.debug("visualizza pagina prodotti n. " + page + 1);
+        log.debug("visualizza pagina articoli n. " + page + 1);
 
         return "warehouse/list";
 
     }
 
-    @GetMapping(value = "/{categoryId}")
-    public String viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
-                                               @RequestParam(name = "page", defaultValue = "0") int page,
-                                               @RequestParam(name = "size", defaultValue = "10") int size,
-                                               Model uiModel) {
+    @GetMapping(value = "/{warehouseId}/wares/{categoryId}")
+    public String viewWaresInWarehouseByCategoryByPage(@PathVariable("warehouseId") Long warehouseId,
+                                                       @PathVariable("categoryId") Long categoryId,
+                                                       @RequestParam(name = "page", defaultValue = "0") int page,
+                                                       @RequestParam(name = "size", defaultValue = "10") int size,
+                                                       Model uiModel) {
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Warehouse> warehouse = warehouseService.getByProductCategoryCategoryid(categoryId, pageable);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Page<Ware> wares = waresService.getWaresByCategoryCategoryid(warehouseId, categoryId, pageable);
         Customer customer = userContext.getCurrentCustomer();
 
         uiModel.addAttribute("customer", customer);
@@ -77,24 +84,26 @@ public class WarehouseController {
         uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("warehouse", warehouse);
+        uiModel.addAttribute("wares", wares);
 
-        log.debug("numero prodotti da visualizzare = " + warehouse.getContent()
-                                                                  .size());
+        log.debug("numero prodotti da visualizzare = " + wares.getContent()
+                                                              .size());
 
         return "warehouse/listByPage";
     }
 
-    @GetMapping("/admin/warehouse/searchProduct")
-    public String searchProduct(@ModelAttribute SearchForm searchForm,
+    @GetMapping("/{warehouseId}/wares/searchProduct")
+    public String searchProduct(@PathVariable("warehouseId") Long warehouseId,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
-                                @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
+                                @RequestParam(name = "size", defaultValue = "10") int size,
+                                @ModelAttribute SearchForm searchForm, Model uiModel) {
 
         String searchText = searchForm.getTextToSearch();
-        log.debug("il prodotto da cercare deve contenere: " + searchText);
+        log.debug("il prodotto da cercare deve contenere nel titolo: " + searchText);
 
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Warehouse> warehouse = warehouseService.getProductsByNameContainingByPage(searchText, pageable);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Page<Ware> wares = waresService.getByWarehouseWarehouseidAndProductNameContaining(warehouseId, searchText,
+                                                                                          pageable);
 
         Customer customer = userContext.getCurrentCustomer();
         uiModel.addAttribute("searchForm", new SearchForm());
@@ -102,10 +111,10 @@ public class WarehouseController {
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
         uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("warehouse", warehouse);
+        uiModel.addAttribute("wares", wares);
 
-        log.debug("numero prodotti da visualizzare = " + warehouse.getContent()
-                                                                  .size());
+        log.debug("numero prodotti da visualizzare = " + wares.getContent()
+                                                              .size());
 
         return "warehouse/list";
     }

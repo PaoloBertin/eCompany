@@ -74,7 +74,8 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
         for (Map.Entry<Product, Integer> entry : cartBean.getProducts().entrySet()) {
             Product product = entry.getKey();
             Integer quantity = entry.getValue();
-            warehouseService.reducesProductQuantityInStock(product.getProductid(), quantity);
+            // TODO
+            // warehouseService.reducesProductQuantityInStock(product.getProductid(), quantity);
         }
 
     }

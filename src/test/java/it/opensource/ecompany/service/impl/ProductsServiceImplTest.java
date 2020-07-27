@@ -1,11 +1,9 @@
 package it.opensource.ecompany.service.impl;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-
-import java.util.List;
-
+import it.opensource.ecompany.domain.Category;
+import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.service.ProductsService;
+import it.opensource.ecompany.service.WarehouseService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +15,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.jdbc.Sql;
 
-import it.opensource.ecompany.domain.Category;
-import it.opensource.ecompany.domain.Product;
-import it.opensource.ecompany.domain.Warehouse;
-import it.opensource.ecompany.service.ProductsService;
-import it.opensource.ecompany.service.WarehouseService;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest
 public class ProductsServiceImplTest {
@@ -34,7 +32,7 @@ public class ProductsServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    public void equality_products(){
+    public void equality_products() {
 
         Product product1 = productsService.getProductById(1L);
         Product product2 = productsService.getProductById(1L);
@@ -47,7 +45,8 @@ public class ProductsServiceImplTest {
     public void getAllProductsTest() {
 
         int expected = 54;
-        int actual = productsService.getAll().size();
+        int actual = productsService.getAll()
+                                    .size();
 
         assertThat(actual, is(expected));
     }
@@ -61,7 +60,8 @@ public class ProductsServiceImplTest {
         Page<Product> page = productsService.getAllByPage(pageable);
 
         int expected = 10;
-        int actual = page.getContent().size();
+        int actual = page.getContent()
+                         .size();
 
         assertThat(actual, is(expected));
     }
@@ -71,7 +71,8 @@ public class ProductsServiceImplTest {
     public void getProductsByCategoryIdTest() {
 
         int expected = 21;
-        int actual = productsService.getProductsByCategory(1L).size();
+        int actual = productsService.getProductsByCategory(1L)
+                                    .size();
 
         assertThat(actual, is(expected));
     }
@@ -85,7 +86,8 @@ public class ProductsServiceImplTest {
         Page<Product> page = productsService.getProductsByCategoryByPage(categoryId, pageable);
 
         int expected = 10;
-        int actual = page.getContent().size();
+        int actual = page.getContent()
+                         .size();
 
         assertThat(actual, is(expected));
     }
@@ -111,7 +113,8 @@ public class ProductsServiceImplTest {
         List<Product> products = productsService.getProductsByName(expected);
 
         assertThat(products.size(), equalTo(1));
-        assertThat(products.get(0).getName(), equalTo("Da Visual Basic a Java"));
+        assertThat(products.get(0)
+                           .getName(), equalTo("Da Visual Basic a Java"));
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -121,7 +124,8 @@ public class ProductsServiceImplTest {
         String searchText = "Java";
 
         int expected = 6;
-        int actual = productsService.getProductsByNameContaining(searchText).size();
+        int actual = productsService.getProductsByNameContaining(searchText)
+                                    .size();
 
         assertThat(actual, equalTo(expected));
     }
@@ -134,7 +138,9 @@ public class ProductsServiceImplTest {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Order.asc("name")));
 
         int expected = 6;
-        int actual = productsService.getProductsByNameContainingByPage(searchText, pageable).getContent().size();
+        int actual = productsService.getProductsByNameContainingByPage(searchText, pageable)
+                                    .getContent()
+                                    .size();
 
         assertThat(actual, equalTo(expected));
     }
@@ -154,7 +160,8 @@ public class ProductsServiceImplTest {
         productsService.saveProduct(product);
 
         int expected = 55;
-        int actual = productsService.getAll().size();
+        int actual = productsService.getAll()
+                                    .size();
 
         assertThat(actual, equalTo(expected));
     }
@@ -169,12 +176,14 @@ public class ProductsServiceImplTest {
         productsService.saveProduct(product);
 
         int expected = 54;
-        int actual = productsService.getAll().size();
+        int actual = productsService.getAll()
+                                    .size();
 
         // verifica non sia stato aggiunto prodotto
         assertThat(actual, equalTo(expected));
         // verifica che il nuovo titolo sia stato salvato correttamente
-        assertThat(productsService.getProductById(1L).getName(), equalTo("Alice"));
+        assertThat(productsService.getProductById(1L)
+                                  .getName(), equalTo("Alice"));
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -182,14 +191,14 @@ public class ProductsServiceImplTest {
     @Test
     public void deleteProductTest() {
 
-        Product product = productsService.getProductById(1L);
-        Warehouse warehouse = warehouseService.getByProduct(product);
-        warehouseService.deleteWarehose(warehouse);
-        Long expected = 53L;
-        Long actual = warehouseService.getNumberWarehouse();
+        //        Product product = productsService.getProductById(1L);
+        //        Warehouse warehouse = warehouseService.getByProduct(product);
+        //        warehouseService.deleteWarehose(warehouse);
+        //        Long expected = 53L;
+        //        Long actual = warehouseService.getNumberWarehouse();
 
-        assertThat(actual, equalTo(expected));
+        //        assertThat(actual, equalTo(expected));
 
-        productsService.deleteProduct(product);
+        //        productsService.deleteProduct(product);
     }
 }

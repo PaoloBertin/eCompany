@@ -11,7 +11,8 @@ DROP TABLE IF EXISTS role;
 DROP TABLE IF EXISTS customer_role;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS warehouse;
+DROP TABLE IF EXISTS warehouses;
+DROP TABLE IF EXISTS wares;
 DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS purchase_orders;
 DROP TABLE IF EXISTS lineitem;
@@ -152,9 +153,17 @@ CREATE TABLE IF NOT EXISTS products (
     CONSTRAINT category_id_fk FOREIGN KEY (categoryid) REFERENCES categories(categoryid)
 );
 
-CREATE TABLE IF NOT EXISTS warehouse (
+CREATE TABLE IF NOT EXISTS warehouses (
     warehouseid BIGINT(20) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255),
+    name VARCHAR(55),
+    version BIGINT(20) DEFAULT 0,
+
+    PRIMARY KEY (warehouseid),
+);
+
+CREATE  TABLE IF NOT EXISTS wares (
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    warehouse_id BIGINT(20) NOT NULL,
     product_id BIGINT(20) NOT NULL,
     sku VARCHAR(50) NOT NULL,
     cost DECIMAL(12,4),
@@ -167,9 +176,10 @@ CREATE TABLE IF NOT EXISTS warehouse (
     location VARCHAR(15),
     version BIGINT(20) DEFAULT 0,
 
-    PRIMARY KEY (warehouseid),
+    PRIMARY KEY(id),
 
-    CONSTRAINT warehouse_fk_01 FOREIGN KEY (product_id) REFERENCES products(productid)
+    CONSTRAINT wares_fk_01 FOREIGN KEY (warehouse_id) REFERENCES warehouses(warehouseid),
+    CONSTRAINT wares_fk_02 FOREIGN KEY (product_id) REFERENCES products(productid)
 );
 
 CREATE TABLE IF NOT EXISTS purchase_orders (

@@ -1,32 +1,14 @@
 package it.opensource.ecompany.service;
 
-import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.Warehouse;
-
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface WarehouseService {
 
-    public Long getNumberWarehouse();
+    public Page<Warehouse> getAllWarehousesByPage(Pageable pageable);
 
-    public Page<Warehouse> getAllItemsByPage(Pageable pageable);
+    public Warehouse getWarehouseById(Long warehouseId);
 
-    public Warehouse getByProduct(Product product);
-
-    public Page<Warehouse> getByProductCategoryCategoryid(Long id, Pageable pageable);
-
-    public Page<Warehouse> getProductsByNameContainingByPage(String searchText, Pageable pageable);
-
-    public Warehouse getWarehouseByProductProductId(Long productId);
-
-    public Warehouse getWarehouseBySku(String sku);
-
-    public void reducesProductQuantityInStock(Long productId, Integer sold);
-
-    public void deleteWarehose(Warehouse warehouse);
-
-    public List<Object[]> getAllReduced();
+    public Warehouse getWarehouseByName(String name);
 }

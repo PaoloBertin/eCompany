@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="item : ${warehouse.content}">
+                            <tr th:each="item : ${wares.content}">
                                <td th:text="${item.product.category.name}"></td>
                                 <td th:text="${item.product.name}"></td>
                                 <td th:text="${item.sku}">sku</td>

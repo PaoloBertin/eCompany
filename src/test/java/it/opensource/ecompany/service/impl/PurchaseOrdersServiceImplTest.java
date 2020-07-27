@@ -18,16 +18,6 @@ class PurchaseOrdersServiceImplTest {
     @Autowired
     private PurchaseOrdersService purchaseOrdersService;
 
-    @BeforeEach
-    public void setUp() {
-
-    }
-
-    @AfterEach
-    public void tearDown() {
-
-    }
-
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getAllPurchaseOrdersTest() {

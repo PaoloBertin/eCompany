@@ -39,7 +39,7 @@ public class CatalogsController {
         this.messageSource = messageSource;
     }
 
-    @GetMapping("/admin/catalog")
+    @GetMapping("/catalog")
     public String getAllCategoriesAdmin(Model uiModel) {
 
         List<Category> categories = categoriesService.getAll();
