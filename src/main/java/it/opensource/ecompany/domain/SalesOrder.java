@@ -1,10 +1,18 @@
 package it.opensource.ecompany.domain;
 
+import javax.persistence.*;
 
-public class SalesOrders {
+@Table(name = "sales_orders")
+@Entity
+public class SalesOrder {
 
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Version
     private Long version;
 
     public Long getId() {
@@ -45,7 +53,7 @@ public class SalesOrders {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        SalesOrders other = (SalesOrders) obj;
+        SalesOrder other = (SalesOrder) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -53,5 +61,4 @@ public class SalesOrders {
             return false;
         return true;
     }
-
 }
