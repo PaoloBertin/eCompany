@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div class="container-fluid p-0">
+
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>
+
+            <!-- corpo centrale -->
+            <div class="row">
+                <div class="col-lg-3">
+                    <!--
+                    <div th:replace="~{fragments/left_side :: left_side}">left side</div>
+                     -->
+                </div>
+
+                <div class="col-lg-6">
+                    <br/>
+                    <h4 th:text="#{label.customers.listing}">categories listing</h4>
+
+                    <a class="btn btn-primary" th:href="@{/admin/customers?form}" role="button"
+                       th:text="#{label.categories.new}">new customer</a>
+
+                    <table width="100%" cellspacing="10px" cellpadding="10px">
+                        <thead>
+                            <tr>
+                                <th th:text="#{label.customers.firstname}">firstname</th>
+                                <th th:text="#{label.customers.lastname}">lastname</th>
+                                <th th:text="#{label.customers.username}">username</th>
+                                <th th:text="#{label.customers.password}">password</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="customer : ${customers}">
+                                <td th:text="${customer.firstname}">firstname</td>
+                                <td th:text="${customer.lastname}">lastname</td>
+                                <td th:text="${customer.username}">username</td>
+                                <td th:text="${customer.password}">password</td>
+                                <td>
+                                    <a th:href="@{'/admin/customers/' + ${customer.customerid}} + '?form'">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form th:action="@{'/admin/customers/'}" th:method="delete">
+                                        <input type="hidden" name="customerid" th:value="${customer.customerid}"/>
+                                        <button class="btn">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <!--
+                    <div class="row justify-content-center">
+                        <nav aria-label="navigation" th:if="${warehouse.totalPages gt 1}">
+                            <ul class="pagination" th:with="pages=${warehouse.totalPages}">
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
+                                        <span aria-hidden="true">&lsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${page + 1}">-1</a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link">
+                                        <span>di</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${pages}">3</a>
+                                </li>
+                                <li class="page-item"
+                                    th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
+                                        <span aria-hidden="true">&rsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"
+                                    th:classappend="${page eq (warehouse.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{/warehouse/{categoryId}(categoryId=${categoryId},page=${warehouse.totalPages - 1},size=${size})}"
+                                       aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    -->
+                </div>
+                <div class="col-lg-3">
+                    <!--
+                    <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+                    -->
+                </div>
+            </div>
+
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

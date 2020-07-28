@@ -13,13 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
-@RequestMapping("/customers")
 @Controller
 public class CustomerController {
 
@@ -43,7 +42,7 @@ public class CustomerController {
         this.categoriesService = categoriesService;
     }
 
-    @GetMapping("/registration")
+    @GetMapping("/customers/registration")
     public String customerRegistrationForm(Model uiModel) {
 
         uiModel.addAttribute("categories", categoriesService.getAll());
@@ -57,7 +56,7 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/registration")
+    @PostMapping("/customers/registration")
     public String signup(@Valid CustomerForm customerForm, BindingResult result,
                          RedirectAttributes redirectAttributes) {
 
@@ -88,5 +87,14 @@ public class CustomerController {
         redirectAttributes.addFlashAttribute("message", "Success");
 
         return "redirect:/";
+    }
+
+    @GetMapping("/admin/customers")
+    public String viewAllCustomers(Model uiModel) {
+
+        List<Customer> customers = customersService.getAll();
+        uiModel.addAttribute("customers", customers);
+
+        return "customers/listCustomersAdmin";
     }
 }
