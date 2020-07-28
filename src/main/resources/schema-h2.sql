@@ -109,6 +109,7 @@ CREATE TABLE IF NOT EXISTS suppliers (
     version BIGINT(20) DEFAULT 0,
 
     PRIMARY KEY(id),
+
     CONSTRAINT suppliers_fk_01 FOREIGN KEY (address_id) REFERENCES address(id),
     CONSTRAINT suppliers_fk_02 FOREIGN KEY (contact_id) REFERENCES contacts(id)
 );
