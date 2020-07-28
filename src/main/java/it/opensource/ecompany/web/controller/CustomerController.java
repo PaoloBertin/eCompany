@@ -95,6 +95,6 @@ public class CustomerController {
         List<Customer> customers = customersService.getAll();
         uiModel.addAttribute("customers", customers);
 
-        return "customers/listCustomersAdmin";
+        return "customers/customersListAdmin";
     }
 }

@@ -16,26 +16,21 @@
 
             <!-- corpo centrale -->
             <div class="row">
-                <div class="col-lg-3">
-                    <!--
-                    <div th:replace="~{fragments/left_side :: left_side}">left side</div>
-                     -->
+                <div class="col-lg-4">
+                    <!--   -->
+                    <div th:replace="~{fragments/left_side_customerAdmin :: left_side_customerAdmin}">left side</div>
                 </div>
 
                 <div class="col-lg-6">
                     <br/>
                     <h4 th:text="#{label.customers.listing}">categories listing</h4>
-
-                    <a class="btn btn-primary" th:href="@{/admin/customers?form}" role="button"
-                       th:text="#{label.categories.new}">new customer</a>
-
                     <table width="100%" cellspacing="10px" cellpadding="10px">
                         <thead>
                             <tr>
-                                <th th:text="#{label.customers.firstname}">firstname</th>
-                                <th th:text="#{label.customers.lastname}">lastname</th>
-                                <th th:text="#{label.customers.username}">username</th>
-                                <th th:text="#{label.customers.password}">password</th>
+                                <th th:text="#{label.customer.firstname}">firstname</th>
+                                <th th:text="#{label.customer.lastname}">lastname</th>
+                                <th th:text="#{label.customer.username}">username</th>
+                                <th th:text="#{label.customer.password}">password</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,7 +38,8 @@
                                 <td th:text="${customer.firstname}">firstname</td>
                                 <td th:text="${customer.lastname}">lastname</td>
                                 <td th:text="${customer.username}">username</td>
-                                <td th:text="${customer.password}">password</td>
+                                <!-- <td th:text="${customer.password}">password</td> -->
+                                <td>*****</td>
                                 <td>
                                     <a th:href="@{'/admin/customers/' + ${customer.customerid}} + '?form'">
                                         <i class="fa fa-edit fa-lg"></i>
@@ -109,10 +105,8 @@
                     </div>
                     -->
                 </div>
-                <div class="col-lg-3">
-                    <!--
-                    <div th:replace="~{fragments/right_side :: right_side}">right side</div>
-                    -->
+                <div class="col-lg-2">
+                    <!-- <div th:replace="~{fragments/right_side :: right_side}">right side</div> -->
                 </div>
             </div>
 

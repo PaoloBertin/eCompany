@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>eLisa</title>
+    </head>
+
+    <body>
+        <div th:fragment="left_side_customerAdmin" style="align-content: left; margin-left: 15px;">
+            <br/>
+            <h5>Registrazione nuovo cliente</h5>
+            <br/>
+            <form name="registrationForm" th:attr="action=@{/customers/registration}" method="post">
+                <div class="form-group">
+                    <label id="labelFirstnameId" for="inpuFirstnameId" th:text="#{label.customer.firstname}"></label>
+                    <input type="text" name="firstname" class="form-control" id="inpuFirstnameId"/>
+                </div>
+
+                <div class="form-group">
+                    <label id="labeLastnameId" for="inputLastnameId" th:text="#{label.customer.lastname}"></label>
+                    <input type="text" name="lastname" class="form-control" id="inputLastnameId"/>
+                </div>
+
+                <div class="form-group">
+                    <label id="labelEmailId" for="inputEmailId" th:text="#{label.email}"></label>
+                    <input type="text" name="email" class="form-control" id="inputEmailId"/>
+                </div>
+
+                <div class="form-group">
+                    <label id="labelUsernameId" for="inputUsernameId" th:text="#{label.username}"></label>
+                    <input type="text" name="username" class="form-control" id="inputUsernameId"/>
+                </div>
+
+                <div class="form-group">
+                    <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}"></label>
+                    <input type="password" name="password" class="form-control" id="inputPasswordId"/>
+                </div>
+
+                <div class="form-group">
+                    <label id="labelPasswordId2" for="inputPasswordId2" th:text="#{label.password2}"></label>
+                    <input type="password" name="password2" class="form-control" id="inputPasswordId2"/>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+                <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
+            </form>
+            <br/>
+
+        </div>
+    </body>
+</html>
