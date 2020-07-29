@@ -32,17 +32,21 @@ INSERT INTO group_members(group_id, username) SELECT id,'mario.rossi' FROM group
 INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.verdi' FROM groups WHERE group_name='Users';
 INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.garibaldi' FROM groups WHERE group_name='Users';
 
-INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(1, 'Battaglia Terme', 'Via A. Ecompany', '8', '35041', 'Padova', 'Italia');
-INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(2, 'Battaglia Terme', 'Via U. Ecompany', '7', '35041', 'Padova', 'Italia');
-INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(3, 'Battaglia Terme', 'Vicolo Pio X', '11', '35041', 'Padova', 'Italia');
-INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(4, 'Battaglia Terme', 'Via A. Volta', '7', '35041', 'Padova', 'Italia');
-INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(5, 'Battaglia Terme', 'Via G. Garibaldi', '21', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(  1, 'Battaglia Terme', 'Via A. Ecompany', '8', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(  2, 'Battaglia Terme', 'Via U. Ecompany', '7', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(  3, 'Battaglia Terme', 'Vicolo Pio X', '11', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(  4, 'Battaglia Terme', 'Via A. Volta', '7', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(  5, 'Battaglia Terme', 'Via G. Garibaldi', '21', '35041', 'Padova', 'Italia');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(101, 'Pontault-Combault', 'Route de Paris', '21', '77340', 'Pontault', 'France');
+INSERT INTO address(id, city, street, house_number, zip_code, country, state) VALUES(102, 'Asti', 'Piazza Vittorio Veneto', '45', '35041', 'Asti', 'Italia');
 
-INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (1, 'admin.ecompany@dmail.com', '3628323289', '0429776337');
-INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (2, 'user.ecompany@dmail.com', '3628323299', '0429776339');
-INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (3, 'mario.rossi@dmail.com', '3458323286', '0497793348');
-INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (4, 'giuseppe.verdi@dmail.com', '3628323287', '0429776335');
-INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (5, 'giuseppe.garibaldi@dmail.com', '3628323288', '0429776336');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (  1, 'admin.ecompany@dmail.com', '3628323289', '0429776337');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (  2, 'user.ecompany@dmail.com', '3628323299', '0429776339');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (  3, 'mario.rossi@dmail.com', '3458323286', '0497793348');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (  4, 'giuseppe.verdi@dmail.com', '3628323287', '0429776335');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (  5, 'giuseppe.garibaldi@dmail.com', '3628323288', '0429776336');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (101, 'miamland@dmail.com', '3658323288', '0429876336');
+INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (102, 'kui@dmail.com', '3628326288', '0429796336');
 
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(1, 'Admin', 'Ecompany', 'admin.ecompany', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 1, 1);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(2, 'User', 'Ecompany', 'user.ecompany', '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 'user.ecompany@dmail.com', 2, 2);
@@ -60,6 +64,9 @@ INSERT INTO customer_role(customerid, id) VALUES (2, 2);
 -- Admin has two roles
 INSERT INTO customer_role(customerid, id) VALUES (1, 1);
 INSERT INTO customer_role(customerid, id) VALUES (1, 2);
+
+INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (1, 'MIAMLAND', 'FR818007445', 'S.P.A', '26 Route de Paris 77340 Pontault-Combault', 101, 101, 0);
+INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (2, 'KUI S.R.L', 'IT09376250016', 'S.R.L', 'piazza Vittorio Alfieri, 45', 102, 102, 0);
 
 INSERT INTO categories(categoryid, name, version) VALUES( 1, 'Libri', 0);
 INSERT INTO categories(categoryid, name, version) VALUES( 2, 'CD', 0);

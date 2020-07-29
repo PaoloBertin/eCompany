@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS customers (
 CREATE TABLE IF NOT EXISTS suppliers (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    vat VARCHAR(11),
+    vat VARCHAR(15),
     legal_form VARCHAR(55),
     registered_office VARCHAR(55),
     address_id BIGINT(20),
