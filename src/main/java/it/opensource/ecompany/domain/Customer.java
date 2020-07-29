@@ -41,11 +41,11 @@ public class Customer implements Principal, Serializable {
     private String description;
 
     @JoinColumn(name = "contact_id")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Contact contact;
 
     @JoinColumn(name = "address_id")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     @Version

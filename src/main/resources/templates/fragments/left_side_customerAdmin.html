@@ -6,50 +6,142 @@
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>eLisa</title>
+        <title>eCompany</title>
     </head>
 
     <body>
         <div th:fragment="left_side_customerAdmin" style="align-content: left; margin-left: 15px;">
             <br/>
-            <h5>Registrazione nuovo cliente</h5>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Cliente</h4>
+                </div>
+                <form name="registrationForm" th:attr="action=@{/customers/registration}" method="post">
+
+                    <div class="card-body">
+                        <div class="accordion" id="accordionPersonalData">
+                            <div class="card">
+                                <div class="card-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                                data-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                            Dati Personali
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                     data-parent="#accordionPersonalData">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label id="labelFirstnameId" for="inpuFirstnameId"
+                                                   th:text="#{label.customer.firstname}"></label>
+                                            <input type="text" name="firstname" class="form-control" id="inpuFirstnameId"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label id="labeLastnameId" for="inputLastnameId" th:text="#{label.customer.lastname}"></label>
+                                            <input type="text" name="lastname" class="form-control" id="inputLastnameId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelUsernameId" for="inputUsernameId" th:text="#{label.username}"></label>
+                                            <input type="text" name="username" class="form-control" id="inputUsernameId"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}"></label>
+                                            <input type="password" name="password" class="form-control" id="inputPasswordId"/>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label id="labelPasswordId2" for="inputPasswordId2" th:text="#{label.password2}"></label>
+                                            <input type="password" name="password2" class="form-control" id="inputPasswordId2"/>
+                                        </div>
+                                        <br/>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header" id="headingTwo">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                                data-target="#collapseTwo"
+                                                aria-expanded="true" aria-controls="collapseTwo">
+                                            Contatto
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
+                                     data-parent="#accordionPersonalData">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label id="labelEmailId" for="inputEmailId" th:text="#{label.contact.email}"></label>
+                                            <input type="text" name="email" class="form-control" id="inputEmailId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelCellularId" for="inputCellularId" th:text="#{label.contact.cellular}"></label>
+                                            <input type="text" name="cellular" class="form-control" id="inputCellularId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelLandlinePhoneId" for="inpuLandlinePhoneId"
+                                                   th:text="#{label.contact.landlinePhone}"></label>
+                                            <input type="text" name="landlinePhone" class="form-control" id="inpuLandlinePhoneId"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-header" id="headingThree">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                                                data-target="#collapseThree"
+                                                aria-expanded="true" aria-controls="collapseThree">
+                                            Indirizzo
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree"
+                                     data-parent="#accordionPersonalData">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label id="labelCityId" for="inputCityId" th:text="#{label.address.city}"></label>
+                                            <input type="text" name="city" class="form-control" id="inputCityId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelStreetId" for="inputStreetId" th:text="#{label.address.street}"></label>
+                                            <input type="text" name="street" class="form-control" id="inputStreetId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelHouseNumberId" for="inputHouseNumberId" th:text="#{label.address.houseNumber}"></label>
+                                            <input type="text" name="houseNumber" class="form-control" id="inputHouseNumberId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelZipCodeId" for="inputZipCodeId" th:text="#{label.address.zipCode}"></label>
+                                            <input type="text" name="zipCode" class="form-control" id="inputZipCodeId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelCountrytId" for="inputCountryId" th:text="#{label.address.country}"></label>
+                                            <input type="text" name="country" class="form-control" id="inputCountryId"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label id="labelStateId" for="inputStateId" th:text="#{label.address.state}"></label>
+                                            <input type="text" name="state" class="form-control" id="inputStateId"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+                        <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
+                    </div>
+                </form>
+            </div>
             <br/>
-            <form name="registrationForm" th:attr="action=@{/customers/registration}" method="post">
-                <div class="form-group">
-                    <label id="labelFirstnameId" for="inpuFirstnameId" th:text="#{label.customer.firstname}"></label>
-                    <input type="text" name="firstname" class="form-control" id="inpuFirstnameId"/>
-                </div>
-
-                <div class="form-group">
-                    <label id="labeLastnameId" for="inputLastnameId" th:text="#{label.customer.lastname}"></label>
-                    <input type="text" name="lastname" class="form-control" id="inputLastnameId"/>
-                </div>
-
-                <div class="form-group">
-                    <label id="labelEmailId" for="inputEmailId" th:text="#{label.email}"></label>
-                    <input type="text" name="email" class="form-control" id="inputEmailId"/>
-                </div>
-
-                <div class="form-group">
-                    <label id="labelUsernameId" for="inputUsernameId" th:text="#{label.username}"></label>
-                    <input type="text" name="username" class="form-control" id="inputUsernameId"/>
-                </div>
-
-                <div class="form-group">
-                    <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}"></label>
-                    <input type="password" name="password" class="form-control" id="inputPasswordId"/>
-                </div>
-
-                <div class="form-group">
-                    <label id="labelPasswordId2" for="inputPasswordId2" th:text="#{label.password2}"></label>
-                    <input type="password" name="password2" class="form-control" id="inputPasswordId2"/>
-                </div>
-                <br/>
-                <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
-                <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
-            </form>
-            <br/>
-
         </div>
     </body>
 </html>

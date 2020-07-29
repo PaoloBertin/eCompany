@@ -5,9 +5,11 @@ import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Locale;
 
 @Slf4j
 @Controller
@@ -32,14 +35,19 @@ public class CustomerController {
 
     private final CategoriesService categoriesService;
 
+    private final MessageSource messageSource;
+
+    private Message message = null;
+
     public CustomerController(CustomerForm customerForm, CustomerBean customerBean, CustomersService customersService,
-                              UserContext userContext, CategoriesService categoriesService) {
+                              UserContext userContext, CategoriesService categoriesService, MessageSource messageSource) {
 
         this.customerForm = customerForm;
         this.customerBean = customerBean;
         this.customersService = customersService;
         this.userContext = userContext;
         this.categoriesService = categoriesService;
+        this.messageSource = messageSource;
     }
 
     @GetMapping("/customers/registration")
@@ -57,34 +65,35 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/registration")
-    public String signup(@Valid CustomerForm customerForm, BindingResult result,
-                         RedirectAttributes redirectAttributes) {
+    public String signup(@Valid CustomerForm customerForm, BindingResult result, RedirectAttributes redirectAttributes, Locale locale) {
 
         if (result.hasErrors()) {
+            message = new Message("danger", messageSource.getMessage("customer.save.fail", new Object[]{}, locale));
+            redirectAttributes.addFlashAttribute("message", message);
+
             return "/customers/registration";
         }
 
         String username = customerForm.getUsername();
 
+        message = null;
         if (customersService.getCustomerByUsername(username) != null) {
-            result.rejectValue("username", "label.errors.registraion.username", "Username is already in use.");
+            // result.rejectValue("username", "label.errors.registration.username", "Username is already in use.");
             redirectAttributes.addFlashAttribute("error", "Username is already in use.");
+            message = new Message("danger", messageSource.getMessage("customer.form.username.fail", new Object[]{}, locale));
+            redirectAttributes.addFlashAttribute("message", message);
+
             return "redirect:/customers/registration";
         }
 
-        Customer customer = new Customer();
-        customer.setFirstname(customerForm.getFirstname());
-        customer.setLastname(customerForm.getLastname());
-        customer.setEmail(customerForm.getEmail());
-        customer.setUsername(username);
-        customer.setPassword(customerForm.getPassword());
-
+        Customer customer = customerForm.getCustomer();
         long id = customersService.save(customer);
+        message = new Message("success", messageSource.getMessage("customer.save.success", new Object[]{}, locale));
+        redirectAttributes.addFlashAttribute("message", message);
+
         log.debug("salvato customer con id=" + id);
 
         userContext.setCurrentCustomer(customer);
-
-        redirectAttributes.addFlashAttribute("message", "Success");
 
         return "redirect:/";
     }
