@@ -33,6 +33,7 @@
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                      data-parent="#accordionPersonalData">
                                     <div class="card-body">
+                                        <input type="hidden" name="customerid" th:field="*{customerid}"/>
                                         <div class="form-group">
                                             <label id="labelFirstnameId" for="inpuFirstnameId"
                                                    th:text="#{label.customer.firstname}"></label>
