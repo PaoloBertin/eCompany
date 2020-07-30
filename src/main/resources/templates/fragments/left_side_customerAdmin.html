@@ -51,12 +51,12 @@
 
                                         <div class="form-group">
                                             <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}"></label>
-                                            <input type="password" name="password" class="form-control" id="inputPasswordId" />
+                                            <input type="password" name="password" class="form-control" id="inputPasswordId" th:field="*{password}"/>
                                         </div>
 
                                         <div class="form-group">
                                             <label id="labelPasswordId2" for="inputPasswordId2" th:text="#{label.password2}"></label>
-                                            <input type="password" name="password2" class="form-control" id="inputPasswordId2"/>
+                                            <input type="password" name="password2" class="form-control" id="inputPasswordId2" th:field="*{password}"/>
                                         </div>
                                         <br/>
 
