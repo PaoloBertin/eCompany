@@ -108,8 +108,7 @@ public class ProductsController {
     @GetMapping(value = "/products/{categoryId}")
     public String viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                @RequestParam(name = "page", defaultValue = "0") int page,
-                                               @RequestParam(name = "size", defaultValue = "10") int size,
-                                               Model uiModel) {
+                                               @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
@@ -138,8 +137,7 @@ public class ProductsController {
      * @return nome vista
      */
     @GetMapping(value = "/products/{categoryid}/{productid}")
-    public String viewProduct(@PathVariable("categoryid") Long categoryid, @PathVariable("productid") Long productid,
-                              Model uiModel) {
+    public String viewProduct(@PathVariable("categoryid") Long categoryid, @PathVariable("productid") Long productid, Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
         uiModel.addAttribute("customer", customer);
@@ -169,8 +167,7 @@ public class ProductsController {
     }
 
     @GetMapping("/products/searchProduct")
-    public String searchProduct(@ModelAttribute SearchForm searchForm,
-                                @RequestParam(name = "page", defaultValue = "0") int page,
+    public String searchProduct(@ModelAttribute SearchForm searchForm, @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         String searchText = searchForm.getTextToSearch();
@@ -227,23 +224,21 @@ public class ProductsController {
      * @return nome vista
      */
     @PostMapping(path = "/admin/products", params = "form")
-    public String create(@Valid Product product, BindingResult bindingResult, RedirectAttributes attributes,
-                         RedirectAttributes redirectAttributes, Model uiModel, HttpServletRequest httpServletRequest,
-                         Locale locale, @RequestParam(value = "file", required = false) Part file) {
+    public String createProduct(@Valid Product product, BindingResult bindingResult, RedirectAttributes attributes,
+                                RedirectAttributes redirectAttributes, Model uiModel, HttpServletRequest httpServletRequest, Locale locale,
+                                @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Creating product");
         if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("message", new Message("error",
-                                                        messageSource.getMessage("product_save_fail", new Object[]{},
-                                                                                 locale)));
+            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("product_save_fail", new Object[]{}, locale)));
             uiModel.addAttribute("product", product);
             return "catalog/edit";
         }
         uiModel.asMap()
                .clear();
         redirectAttributes.addFlashAttribute("message", new Message("success",
-                                                                    messageSource.getMessage("product_save_success",
-                                                                                             new Object[]{}, locale)));
+                                                                    messageSource.getMessage("product_save_success", new Object[]{},
+                                                                                             locale)));
 
         log.info("Product id: " + product.getProductid());
 
@@ -283,16 +278,14 @@ public class ProductsController {
      * @return vista
      */
     @PostMapping(path = "/admin/products/{id}", params = "form")
-    public String update(@Valid Product product, BindingResult bindingResult, Model uiModel,
-                         HttpServletRequest httpServletRequest, RedirectAttributes redirectAttributes, Locale locale,
-                         @RequestParam(value = "file", required = false) Part file) {
+    public String updateProduct(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest,
+                                RedirectAttributes redirectAttributes, Locale locale,
+                                @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Updating product");
 
         if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("message", new Message("error",
-                                                        messageSource.getMessage("product.save.fail", new Object[]{},
-                                                                                 locale)));
+            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
             uiModel.addAttribute("product", product);
             return "catalog/edit";
         }
@@ -300,8 +293,8 @@ public class ProductsController {
         uiModel.asMap()
                .clear();
         redirectAttributes.addFlashAttribute("message", new Message("success",
-                                                                    messageSource.getMessage("product.save.success",
-                                                                                             new Object[]{}, locale)));
+                                                                    messageSource.getMessage("product.save.success", new Object[]{},
+                                                                                             locale)));
         // rende persistenti le modifiche
         productsService.saveProduct(product);
 
@@ -314,18 +307,17 @@ public class ProductsController {
     /**
      * Recupera campi prodotto da editare ed invia al form per l'editing
      *
-     * @param productid
+     * @param productId
      * @param customerForm
      * @param uiModel
      * @return nome vista
      */
     @GetMapping(path = "/admin/products/{productid}", params = "form")
-    public String updateForm(@PathVariable("productid") Long productid, @ModelAttribute CustomerForm customerForm,
-                             Model uiModel) {
+    public String updateForm(@PathVariable("productid") Long productId, @ModelAttribute CustomerForm customerForm, Model uiModel) {
 
-        log.debug("id prodotto da editare=" + productid);
+        log.debug("id prodotto da editare=" + productId);
 
-        Product product = productsService.getProductById(productid);
+        Product product = productsService.getProductById(productId);
 
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("categories", categoriesService.getAll());

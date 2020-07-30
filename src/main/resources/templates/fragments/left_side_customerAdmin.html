@@ -16,7 +16,7 @@
                 <div class="card-header">
                     <h4>Cliente</h4>
                 </div>
-                <form name="registrationForm" th:attr="action=@{/customers/registration}" method="post">
+                <form name="registrationForm" th:object="${customerForm}" th:attr="action=@{/customers/registration}" method="post">
 
                     <div class="card-body">
                         <div class="accordion" id="accordionPersonalData">
@@ -36,21 +36,21 @@
                                         <div class="form-group">
                                             <label id="labelFirstnameId" for="inpuFirstnameId"
                                                    th:text="#{label.customer.firstname}"></label>
-                                            <input type="text" name="firstname" class="form-control" id="inpuFirstnameId"/>
+                                            <input class="form-control" id="inpuFirstnameId" type="text" name="firstname" th:field="*{firstname}"/>
                                         </div>
 
                                         <div class="form-group">
                                             <label id="labeLastnameId" for="inputLastnameId" th:text="#{label.customer.lastname}"></label>
-                                            <input type="text" name="lastname" class="form-control" id="inputLastnameId"/>
+                                            <input type="text" name="lastname" class="form-control" id="inputLastnameId" th:field="*{lastname}"/>
                                         </div>
                                         <div class="form-group">
                                             <label id="labelUsernameId" for="inputUsernameId" th:text="#{label.username}"></label>
-                                            <input type="text" name="username" class="form-control" id="inputUsernameId"/>
+                                            <input type="text" name="username" class="form-control" id="inputUsernameId" th:field="*{username}"/>
                                         </div>
 
                                         <div class="form-group">
                                             <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}"></label>
-                                            <input type="password" name="password" class="form-control" id="inputPasswordId"/>
+                                            <input type="password" name="password" class="form-control" id="inputPasswordId" />
                                         </div>
 
                                         <div class="form-group">
@@ -78,16 +78,15 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label id="labelEmailId" for="inputEmailId" th:text="#{label.contact.email}"></label>
-                                            <input type="text" name="email" class="form-control" id="inputEmailId"/>
+                                            <input type="text" name="email" class="form-control" id="inputEmailId" th:field="*{email}"/>
                                         </div>
                                         <div class="form-group">
                                             <label id="labelCellularId" for="inputCellularId" th:text="#{label.contact.cellular}"></label>
-                                            <input type="text" name="cellular" class="form-control" id="inputCellularId"/>
+                                            <input type="text" name="cellular" class="form-control" id="inputCellularId" th:field="*{cellular}"/>
                                         </div>
                                         <div class="form-group">
-                                            <label id="labelLandlinePhoneId" for="inpuLandlinePhoneId"
-                                                   th:text="#{label.contact.landlinePhone}"></label>
-                                            <input type="text" name="landlinePhone" class="form-control" id="inpuLandlinePhoneId"/>
+                                            <label id="labelLandlinePhoneId" for="inpuLandlinePhoneId" th:text="#{label.contact.landlinePhone}"></label>
+                                            <input type="text" name="landlinePhone" class="form-control" id="inpuLandlinePhoneId" th:field="*{landlinePhone}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -108,27 +107,27 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label id="labelCityId" for="inputCityId" th:text="#{label.address.city}"></label>
-                                            <input type="text" name="city" class="form-control" id="inputCityId"/>
+                                            <input type="text" name="city" class="form-control" id="inputCityId" th:field="*{city}"/>
                                         </div>
                                         <div class="form-group">
                                             <label id="labelStreetId" for="inputStreetId" th:text="#{label.address.street}"></label>
-                                            <input type="text" name="street" class="form-control" id="inputStreetId"/>
+                                            <input type="text" name="street" class="form-control" id="inputStreetId" th:field="*{street}"/>
                                         </div>
                                         <div class="form-group">
                                             <label id="labelHouseNumberId" for="inputHouseNumberId" th:text="#{label.address.houseNumber}"></label>
-                                            <input type="text" name="houseNumber" class="form-control" id="inputHouseNumberId"/>
+                                            <input type="text" name="houseNumber" class="form-control" id="inputHouseNumberId" th:field="*{houseNumber}"/>
                                         </div>
                                         <div class="form-group">
                                             <label id="labelZipCodeId" for="inputZipCodeId" th:text="#{label.address.zipCode}"></label>
-                                            <input type="text" name="zipCode" class="form-control" id="inputZipCodeId"/>
+                                            <input type="text" name="zipCode" class="form-control" id="inputZipCodeId" th:field="*{zipCode}"/>
                                         </div>
                                         <div class="form-group">
                                             <label id="labelCountrytId" for="inputCountryId" th:text="#{label.address.country}"></label>
-                                            <input type="text" name="country" class="form-control" id="inputCountryId"/>
+                                            <input type="text" name="country" class="form-control" id="inputCountryId" th:field="*{country}"/>
                                         </div>
                                         <div class="form-group">
                                             <label id="labelStateId" for="inputStateId" th:text="#{label.address.state}"></label>
-                                            <input type="text" name="state" class="form-control" id="inputStateId"/>
+                                            <input type="text" name="state" class="form-control" id="inputStateId" th:field="*{state}"/>
                                         </div>
                                     </div>
                                 </div>

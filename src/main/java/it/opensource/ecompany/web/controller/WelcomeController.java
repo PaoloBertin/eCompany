@@ -4,6 +4,7 @@ import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -64,6 +65,7 @@ public class WelcomeController {
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("customerForm", new CustomerForm());
 
         log.debug("visualizza home page amministrativa");
 

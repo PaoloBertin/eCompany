@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,8 +26,6 @@ import java.util.Locale;
 @Slf4j
 @Controller
 public class CustomerController {
-
-    private final CustomerForm customerForm;
 
     private final CustomerBean customerBean;
 
@@ -39,10 +39,9 @@ public class CustomerController {
 
     private Message message = null;
 
-    public CustomerController(CustomerForm customerForm, CustomerBean customerBean, CustomersService customersService,
+    public CustomerController(CustomerBean customerBean, CustomersService customersService,
                               UserContext userContext, CategoriesService categoriesService, MessageSource messageSource) {
 
-        this.customerForm = customerForm;
         this.customerBean = customerBean;
         this.customersService = customersService;
         this.userContext = userContext;
@@ -52,6 +51,8 @@ public class CustomerController {
 
     @GetMapping("/customers/registration")
     public String customerRegistrationForm(Model uiModel) {
+
+        CustomerForm customerForm = new CustomerForm();
 
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("searchForm", new SearchForm());
@@ -77,7 +78,7 @@ public class CustomerController {
         String username = customerForm.getUsername();
 
         message = null;
-        if (customersService.getCustomerByUsername(username) != null) {
+        if (customerForm.getCustomerid() == null && customersService.getCustomerByUsername(username) != null) {
             // result.rejectValue("username", "label.errors.registration.username", "Username is already in use.");
             redirectAttributes.addFlashAttribute("error", "Username is already in use.");
             message = new Message("danger", messageSource.getMessage("customer.form.username.fail", new Object[]{}, locale));
@@ -103,6 +104,23 @@ public class CustomerController {
 
         List<Customer> customers = customersService.getAll();
         uiModel.addAttribute("customers", customers);
+        uiModel.addAttribute("customerForm", new CustomerForm());
+
+        return "customers/customersListAdmin";
+    }
+
+    @GetMapping(value = "/admin/customers/{customerId}", params = "form")
+    public String updateCustomerForm(@PathVariable("customerId") Long customerId, Model uiModel){
+
+        log.debug("cliente da editare id=" + customerId);
+        Customer customer = customersService.getCustomerById(customerId);
+        CustomerForm customerForm = new CustomerForm();
+        customerForm.setCustomer(customer);
+
+        List<Customer> customers = customersService.getAll();
+
+        uiModel.addAttribute("customers", customers);
+        uiModel.addAttribute("customerForm", customerForm);
 
         return "customers/customersListAdmin";
     }

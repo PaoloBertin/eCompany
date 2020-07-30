@@ -4,15 +4,14 @@ import it.opensource.ecompany.domain.Address;
 import it.opensource.ecompany.domain.Contact;
 import it.opensource.ecompany.domain.Customer;
 
-import javax.validation.constraints.NotNull;
-
 public class CustomerForm {
+
+    private Long customerid;
 
     private String firstname;
 
     private String lastname;
 
-    @NotNull
     private String username;
 
     private String password;
@@ -37,11 +36,15 @@ public class CustomerForm {
 
     private String state;
 
-    private Customer customer = new Customer();
+    public Long getCustomerid() {
 
-    private Address address = new Address();
+        return customerid;
+    }
 
-    private Contact contact = new Contact();
+    public void setCustomerid(Long customerid) {
+
+        this.customerid = customerid;
+    }
 
     public String getFirstname() {
 
@@ -183,34 +186,75 @@ public class CustomerForm {
         this.state = state;
     }
 
-    private void setAddress() {
+    public Address getAddress() {
 
+        Address address = new Address();
         address.setCity(getCity());
         address.setStreet(getStreet());
         address.setHouseNumber(getHouseNumber());
         address.setZipCode(getZipCode());
         address.setCountry(getCountry());
         address.setState(getState());
+
+        return address;
     }
 
-    private void setContact() {
+    public void setAddress(Address address) {
 
+        this.city = address.getCity();
+        this.street = address.getCity();
+        this.houseNumber = address.getHouseNumber();
+        this.zipCode = address.getZipCode();
+        this.country = address.getCountry();
+        this.state = address.getState();
+    }
+
+    public Contact getContact() {
+
+        Contact contact = new Contact();
         contact.setEmail(getEmail());
         contact.setCellular(getCellular());
         contact.setLandlinePhone(getLandlinePhone());
+
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+
+        this.email = contact.getEmail();
+        this.cellular = contact.getCellular();
+        this.landlinePhone = contact.getLandlinePhone();
     }
 
     public Customer getCustomer() {
 
-        setAddress();
-        setContact();
-        customer.setAddress(address);
-        customer.setContact(contact);
+        Customer customer = new Customer();
+        customer.setCustomerid(getCustomerid());
         customer.setFirstname(getFirstname());
         customer.setLastname(getLastname());
         customer.setUsername(getUsername());
         customer.setPassword(getPassword());
+        customer.setAddress(getAddress());
+        customer.setContact(getContact());
 
         return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+
+        this.customerid = customer.getCustomerid();
+        this.firstname = customer.getFirstname();
+        this.lastname = customer.getLastname();
+        this.username = customer.getUsername();
+        this.password = customer.getPassword();
+        this.city = customer.getAddress().getCity();
+        this.street = customer.getAddress().getCity();
+        this.houseNumber = customer.getAddress().getHouseNumber();
+        this.zipCode = customer.getAddress().getZipCode();
+        this.country = customer.getAddress().getCountry();
+        this.state = customer.getAddress().getState();
+        this.email = customer.getContact().getEmail();
+        this.cellular = customer.getContact().getCellular();
+        this.landlinePhone = customer.getContact().getLandlinePhone();
     }
 }
