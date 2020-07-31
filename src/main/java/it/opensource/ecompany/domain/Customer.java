@@ -26,12 +26,6 @@ public class Customer implements Principal, Serializable {
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "customer_role",
-        joinColumns = @JoinColumn(name = "customerid"),
-        inverseJoinColumns = @JoinColumn(name = "id"))
-    private Set<Role> roles;
-
     private String email;
 
     @Transient
@@ -50,16 +44,6 @@ public class Customer implements Principal, Serializable {
 
     @Version
     private Long version;
-
-    public Set<Role> getRoles() {
-
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-
-        this.roles = roles;
-    }
 
     public Long getCustomerid() {
 

@@ -7,8 +7,6 @@ DROP TABLE IF EXISTS address;
 DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS suppliers;
-DROP TABLE IF EXISTS role;
-DROP TABLE IF EXISTS customer_role;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS warehouses;
@@ -112,23 +110,6 @@ CREATE TABLE IF NOT EXISTS suppliers (
 
     CONSTRAINT suppliers_fk_01 FOREIGN KEY (address_id) REFERENCES address(id),
     CONSTRAINT suppliers_fk_02 FOREIGN KEY (contact_id) REFERENCES contacts(id)
-);
-
-CREATE TABLE IF NOT EXISTS role (
-    id BIGINT(20) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(25),
-    version BIGINT(20) DEFAULT 0,
-
-    PRIMARY KEY(id)
-);
-
-CREATE TABLE IF NOT EXISTS customer_role (
-    customerid BIGINT(20) NOT NULL,
-    id BIGINT(20) NOT NULL,
-    version BIGINT(20) DEFAULT 0,
-
-    CONSTRAINT fk_customer_role_01 FOREIGN KEY (customerid) REFERENCES customers(customerid),
-    CONSTRAINT fk_customer_role_02 FOREIGN KEY (id) REFERENCES role(id)
 );
 
 CREATE TABLE IF NOT EXISTS categories (

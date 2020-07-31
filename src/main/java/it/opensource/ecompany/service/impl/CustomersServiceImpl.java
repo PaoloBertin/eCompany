@@ -1,9 +1,7 @@
 package it.opensource.ecompany.service.impl;
 
 import it.opensource.ecompany.domain.Customer;
-import it.opensource.ecompany.domain.Role;
 import it.opensource.ecompany.repository.CustomersRepository;
-import it.opensource.ecompany.repository.RolesRepository;
 import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.impl.util.CustomerUserAuthorityUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -19,9 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 @Transactional
@@ -30,17 +26,14 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
 
     private final CustomersRepository customerRepository;
 
-    private final RolesRepository rolesRepository;
-
     private final UserDetailsManager userDetailsManager;
 
     private final PasswordEncoder passwordEncoder;
 
-    public CustomersServiceImpl(CustomersRepository customerRepository, RolesRepository rolesRepository,
-                                UserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
+    public CustomersServiceImpl(CustomersRepository customerRepository, UserDetailsManager userDetailsManager,
+                                PasswordEncoder passwordEncoder) {
 
         this.customerRepository = customerRepository;
-        this.rolesRepository = rolesRepository;
         this.userDetailsManager = userDetailsManager;
         this.passwordEncoder = passwordEncoder;
     }
@@ -55,7 +48,8 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
     @Override
     public Customer getCustomerById(Long customerId) {
 
-        return customerRepository.findById(customerId).get();
+        return customerRepository.findById(customerId)
+                                 .get();
     }
 
     @Transactional(readOnly = true)
@@ -106,12 +100,6 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
         if (customer.getCustomerid() != null) {
             throw new IllegalArgumentException("customer.getCustomerid() must be null when creating a " + Customer.class.getName());
         }
-
-        Set<Role> roles = new HashSet<>();
-        Role role = rolesRepository.findById(1L).get();
-        roles.add(role);
-
-        customer.setRoles(roles);
 
         String encodedPassword = passwordEncoder.encode(customer.getPassword());
         log.debug("password=" + customer.getPassword());

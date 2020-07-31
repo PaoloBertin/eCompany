@@ -54,17 +54,6 @@ INSERT INTO customers(customerid, firstname, lastname, username, password, email
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(4, 'Giuseppe', 'Verdi', 'giuseppe.verdi', '$2a$10$6ougvztJT0if6CTPXPytQuFESws6sq4VEmxkWkg3shNUU/CSbJZ6y', 'giuseppe.verdi@dmail.com', 4, 4);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(5, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', '$2a$10$rYz10KiusKJ0EQ14b6zyVeVb1fxq617nAZOLE0HHpHtb8VZwGHusG', 'giuseppe.garibaldi@dmail.com', 5, 5);
 
-INSERT INTO role(id, name) VALUES (1, 'ROLE_ADMIN');
-INSERT INTO role(id, name) VALUES (2, 'ROLE_USER');
-
--- User have one role
-INSERT INTO customer_role(customerid, id) VALUES (1, 1);
-INSERT INTO customer_role(customerid, id) VALUES (2, 2);
-
--- Admin has two roles
-INSERT INTO customer_role(customerid, id) VALUES (1, 1);
-INSERT INTO customer_role(customerid, id) VALUES (1, 2);
-
 INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (1, 'MIAMLAND', 'FR818007445', 'S.P.A', '26 Route de Paris 77340 Pontault-Combault', 101, 101, 0);
 INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (2, 'KUI S.R.L', 'IT09376250016', 'S.R.L', 'piazza Vittorio Alfieri, 45', 102, 102, 0);
 
