@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"
-      th:with="lang=${#locale.language}"
+<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
       th:lang="${lang}">
 
     <head>
@@ -30,8 +29,7 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                     data-parent="#accordionPersonalData">
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionPersonalData">
                                     <div class="card-body">
                                         <input type="hidden" name="customerid" th:field="*{customerid}"/>
                                         <div class="form-group">
@@ -74,9 +72,9 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo"
-                                     data-parent="#accordionPersonalData">
+                                <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionPersonalData">
                                     <div class="card-body">
+                                        <input type="hidden" name="contactId" th:field="*{contactId}"/>
                                         <div class="form-group">
                                             <label id="labelEmailId" for="inputEmailId" th:text="#{label.contact.email}"></label>
                                             <input type="text" name="email" class="form-control" id="inputEmailId" th:field="*{email}"/>
@@ -103,9 +101,9 @@
                                         </button>
                                     </h2>
                                 </div>
-                                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree"
-                                     data-parent="#accordionPersonalData">
+                                <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#accordionPersonalData">
                                     <div class="card-body">
+                                        <input type="hidden" name="addressId" th:field="*{addressId}"/>
                                         <div class="form-group">
                                             <label id="labelCityId" for="inputCityId" th:text="#{label.address.city}"></label>
                                             <input type="text" name="city" class="form-control" id="inputCityId" th:field="*{city}"/>

@@ -18,11 +18,15 @@ public class CustomerForm {
 
     private String password2;
 
+    private Long contactId;
+
     private String email;
 
     private String cellular;
 
     private String landlinePhone;
+
+    private Long addressId;
 
     private String city;
 
@@ -96,6 +100,16 @@ public class CustomerForm {
         this.password2 = password2;
     }
 
+    public Long getContactId(){
+
+        return contactId;
+    }
+
+    public void setContactId(Long contactId){
+
+        this.contactId = contactId;
+    }
+
     public String getEmail() {
 
         return email;
@@ -124,6 +138,16 @@ public class CustomerForm {
     public void setLandlinePhone(String landlinePhone) {
 
         this.landlinePhone = landlinePhone;
+    }
+
+    public Long getAddressId() {
+
+        return addressId;
+    }
+
+    public void setAddressId(Long addressId){
+
+        this.addressId = addressId;
     }
 
     public String getCity() {
@@ -189,6 +213,7 @@ public class CustomerForm {
     public Address getAddress() {
 
         Address address = new Address();
+        address.setId(getAddressId());
         address.setCity(getCity());
         address.setStreet(getStreet());
         address.setHouseNumber(getHouseNumber());
@@ -201,6 +226,7 @@ public class CustomerForm {
 
     public void setAddress(Address address) {
 
+        this.addressId = address.getId();
         this.city = address.getCity();
         this.street = address.getCity();
         this.houseNumber = address.getHouseNumber();
@@ -212,6 +238,7 @@ public class CustomerForm {
     public Contact getContact() {
 
         Contact contact = new Contact();
+        contact.setId(getContactId());
         contact.setEmail(getEmail());
         contact.setCellular(getCellular());
         contact.setLandlinePhone(getLandlinePhone());
@@ -221,6 +248,7 @@ public class CustomerForm {
 
     public void setContact(Contact contact) {
 
+        this.contactId = contact.getId();
         this.email = contact.getEmail();
         this.cellular = contact.getCellular();
         this.landlinePhone = contact.getLandlinePhone();
@@ -247,12 +275,14 @@ public class CustomerForm {
         this.lastname = customer.getLastname();
         this.username = customer.getUsername();
         this.password = customer.getPassword();
+        this.addressId = customer.getAddress().getId();
         this.city = customer.getAddress().getCity();
         this.street = customer.getAddress().getCity();
         this.houseNumber = customer.getAddress().getHouseNumber();
         this.zipCode = customer.getAddress().getZipCode();
         this.country = customer.getAddress().getCountry();
         this.state = customer.getAddress().getState();
+        this.contactId = customer.getContact().getId();
         this.email = customer.getContact().getEmail();
         this.cellular = customer.getContact().getCellular();
         this.landlinePhone = customer.getContact().getLandlinePhone();

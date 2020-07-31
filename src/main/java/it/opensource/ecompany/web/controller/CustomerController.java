@@ -14,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -39,8 +38,8 @@ public class CustomerController {
 
     private Message message = null;
 
-    public CustomerController(CustomerBean customerBean, CustomersService customersService,
-                              UserContext userContext, CategoriesService categoriesService, MessageSource messageSource) {
+    public CustomerController(CustomerBean customerBean, CustomersService customersService, UserContext userContext,
+                              CategoriesService categoriesService, MessageSource messageSource) {
 
         this.customerBean = customerBean;
         this.customersService = customersService;
@@ -66,10 +65,13 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/registration")
-    public String signup(@Valid CustomerForm customerForm, BindingResult result, RedirectAttributes redirectAttributes, Locale locale) {
+    public String signup(@Valid CustomerForm customerForm,
+                         BindingResult result,
+                         RedirectAttributes redirectAttributes,
+                         Locale locale) {
 
         if (result.hasErrors()) {
-            message = new Message("danger", messageSource.getMessage("customer.save.fail", new Object[]{}, locale));
+            message = new Message("danger", messageSource.getMessage("customer.save.fail", new Object[] {}, locale));
             redirectAttributes.addFlashAttribute("message", message);
 
             return "/customers/registration";
@@ -79,9 +81,11 @@ public class CustomerController {
 
         message = null;
         if (customerForm.getCustomerid() == null && customersService.getCustomerByUsername(username) != null) {
-            // result.rejectValue("username", "label.errors.registration.username", "Username is already in use.");
+            // result.rejectValue("username", "label.errors.registration.username",
+            // "Username is already in use.");
             redirectAttributes.addFlashAttribute("error", "Username is already in use.");
-            message = new Message("danger", messageSource.getMessage("customer.form.username.fail", new Object[]{}, locale));
+            message = new Message("danger",
+                                  messageSource.getMessage("customer.form.username.fail", new Object[] {}, locale));
             redirectAttributes.addFlashAttribute("message", message);
 
             return "redirect:/customers/registration";
@@ -89,7 +93,7 @@ public class CustomerController {
 
         Customer customer = customerForm.getCustomer();
         long id = customersService.save(customer);
-        message = new Message("success", messageSource.getMessage("customer.save.success", new Object[]{}, locale));
+        message = new Message("success", messageSource.getMessage("customer.save.success", new Object[] {}, locale));
         redirectAttributes.addFlashAttribute("message", message);
 
         log.debug("salvato customer con id=" + id);
@@ -110,7 +114,7 @@ public class CustomerController {
     }
 
     @GetMapping(value = "/admin/customers/{customerId}", params = "form")
-    public String updateCustomerForm(@PathVariable("customerId") Long customerId, Model uiModel){
+    public String updateCustomerForm(@PathVariable("customerId") Long customerId, Model uiModel) {
 
         log.debug("cliente da editare id=" + customerId);
         Customer customer = customersService.getCustomerById(customerId);
