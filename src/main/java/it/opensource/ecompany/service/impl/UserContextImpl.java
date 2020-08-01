@@ -40,14 +40,14 @@ public class UserContextImpl implements UserContext {
 
         User user = (User) authentication.getPrincipal();
 
-        String email = user.getUsername();
+        String username = user.getUsername();
 
-        if (email == null) {
+        if (username == null) {
             return null;
         }
-        Customer customer = customersService.getCustomerByEmail(email);
+        Customer customer = customersService.getCustomerByUsername(username);
         if (customer == null) {
-            throw new IllegalStateException("Spring Security is not in synch with Customer. Could not find user with username " + email);
+            throw new IllegalStateException("Spring Security is not in synch with Customer. Could not find user with username " + username);
         }
 
         return customer;
