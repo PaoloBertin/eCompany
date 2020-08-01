@@ -78,7 +78,6 @@ public class CustomerController {
         }
 
         String username = customerForm.getUsername();
-
         message = null;
         if (customerForm.getCustomerid() == null && customersService.getCustomerByUsername(username) != null) {
             // result.rejectValue("username", "label.errors.registration.username",
@@ -91,11 +90,21 @@ public class CustomerController {
             return "redirect:/customers/registration";
         }
 
+        String email = customerForm.getEmail();
+        message = null;
+        if (customerForm.getCustomerid() == null && customersService.getCustomerByEmail(email) != null) {
+            redirectAttributes.addFlashAttribute("error", "Email is already in use.");
+            message = new Message("danger",
+                                  messageSource.getMessage("customer.form.email.fail", new Object[] {}, locale));
+            redirectAttributes.addFlashAttribute("message", message);
+
+            return "redirect:/customers/registration";
+        }
+
         Customer customer = customerForm.getCustomer();
-        long id = customersService.save(customer);
+        long id = customersService.saveCustomer(customer);
         message = new Message("success", messageSource.getMessage("customer.save.success", new Object[] {}, locale));
         redirectAttributes.addFlashAttribute("message", message);
-
         log.debug("salvato customer con id=" + id);
 
         userContext.setCurrentCustomer(customer);

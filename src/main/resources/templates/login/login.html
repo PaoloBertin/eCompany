@@ -37,12 +37,12 @@
                         <div th:if="${param.logout != null}" class="alert alert-success">You have been logged out.</div>                    
                     
                         <div class="form-group">
-                            <label id="labelUsernameId" for="inputUsernameId" th:text="#{label.username}"></label>  
+                            <label id="labelUsernameId" for="inputUsernameId" th:text="#{label.username}">username</label>
                             <input type="text" name="username" class="form-control" id="inputUsernameId"/>
                         </div>
         
                         <div class="form-group">                    
-                            <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}"></label>
+                            <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}">password</label>
                             <input type="password" name="password" class="form-control" id="inputPasswordId"/>         
                         </div>
 

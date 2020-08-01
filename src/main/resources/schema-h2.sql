@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS purchase_orders_lineitems;
 
 CREATE TABLE IF NOT EXISTS users(
-    username VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     enabled BOOLEAN NOT NULL,
 
@@ -83,9 +83,11 @@ CREATE TABLE IF NOT EXISTS customers (
     customerid BIGINT(20) NOT NULL AUTO_INCREMENT,
     firstname VARCHAR(15),
     lastname VARCHAR(25),
-    username VARCHAR(255) UNIQUE,
-    password VARCHAR(255),
     email VARCHAR(255) UNIQUE,
+    username VARCHAR(255),
+    password VARCHAR(255),
+    fiscal_code VARCHAR(16) UNIQUE,
+    description VARCHAR(255),
     address_id BIGINT(20),
     contact_id BIGINT(20),
     version BIGINT(20) DEFAULT 0,

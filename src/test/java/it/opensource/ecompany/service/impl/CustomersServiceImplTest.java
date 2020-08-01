@@ -49,7 +49,6 @@ public class CustomersServiceImplTest {
 
         String expected = "user.ecompany@dmail.com";
         String actual = customersService.getCustomerById(2L)
-                                        .getContact()
                                         .getEmail();
 
         assertThat(actual).isEqualTo(expected);

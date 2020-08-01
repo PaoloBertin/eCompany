@@ -37,16 +37,17 @@ public class UserContextImpl implements UserContext {
         if (authentication == null || principal.equals("anonymousUser")) {
             return null;
         }
+
         User user = (User) authentication.getPrincipal();
 
-        String username = user.getUsername();
+        String email = user.getUsername();
 
-        if (username == null) {
+        if (email == null) {
             return null;
         }
-        Customer customer = customersService.getCustomerByUsername(username);
+        Customer customer = customersService.getCustomerByEmail(email);
         if (customer == null) {
-            throw new IllegalStateException("Spring Security is not in synch with Customer. Could not find user with username " + username);
+            throw new IllegalStateException("Spring Security is not in synch with Customer. Could not find user with username " + email);
         }
 
         return customer;
@@ -58,7 +59,7 @@ public class UserContextImpl implements UserContext {
         if (customer == null) {
             throw new IllegalArgumentException("user cannot be null");
         }
-        UserDetails userDetails = userDetailsService.loadUserByUsername(customer.getUsername());
+        UserDetails userDetails = userDetailsService.loadUserByUsername(customer.getEmail());
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
                                                                                                      customer.getPassword(),
                                                                                                      userDetails.getAuthorities());

@@ -1,12 +1,10 @@
 package it.opensource.ecompany.domain;
 
-import java.io.Serializable;
-import java.security.Principal;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.io.Serializable;
+import java.security.Principal;
 
 @Table(name = "customers")
 @Entity
@@ -22,16 +20,15 @@ public class Customer implements Principal, Serializable {
 
     private String lastname;
 
-    private String username;
-
-    private String password;
-
     private String email;
 
-    @Transient
-    private String fiscalcode;
+    private String username;
 
-    @Transient
+     private String password;
+
+    @Column(name = "fiscal_code")
+    private String fiscalCode;
+
     private String description;
 
     @JoinColumn(name = "contact_id")
@@ -75,6 +72,16 @@ public class Customer implements Principal, Serializable {
         this.lastname = lastname;
     }
 
+    public String getEmail() {
+
+        return email;
+    }
+
+    public void setEmail(String email) {
+
+        this.email = email;
+    }
+
     public String getUsername() {
 
         return username;
@@ -95,25 +102,14 @@ public class Customer implements Principal, Serializable {
         this.password = password;
     }
 
-    public String getEmail() {
+    public String getFiscalCode() {
 
-        return email;
+        return fiscalCode;
     }
 
+    public void setFiscalCode(String fiscalCode) {
 
-    public void setEmail(String email) {
-
-        this.email = email;
-    }
-
-    public String getFiscalcode() {
-
-        return fiscalcode;
-    }
-
-    public void setFiscalcode(String fiscalcode) {
-
-        this.fiscalcode = fiscalcode;
+        this.fiscalCode = fiscalCode;
     }
 
     public String getDescription() {
@@ -147,7 +143,7 @@ public class Customer implements Principal, Serializable {
     @Override
     public String getName() {
 
-        return getUsername();
+        return firstname + " " + lastname;
     }
 
     public Long getVersion() {

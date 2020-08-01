@@ -18,6 +18,6 @@ public interface CustomersService {
 
     public boolean verifyCustomer(String username, String password);
     
-    public Long save(final Customer customer);
+    public Long saveCustomer(final Customer customer);
 
 }

@@ -77,10 +77,9 @@ public class CustomerResource {
         customer.setFirstname(customerForm.getFirstname());
         customer.setLastname(customerForm.getLastname());
         customer.setEmail(customerForm.getEmail());
-        customer.setUsername(username);
-        customer.setPassword(customerForm.getPassword());
+        customer.setEmail(username);
 
-        long id = customersService.save(customer);
+        long id = customersService.saveCustomer(customer);
         customer.setCustomerid(id);
 
         // aggiunge nuovo utente alla lista delle credenziali in memoria

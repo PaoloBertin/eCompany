@@ -260,6 +260,7 @@ public class CustomerForm {
         customer.setCustomerid(getCustomerid());
         customer.setFirstname(getFirstname());
         customer.setLastname(getLastname());
+        customer.setEmail(getEmail());
         customer.setUsername(getUsername());
         customer.setPassword(getPassword());
         customer.setAddress(getAddress());
@@ -273,6 +274,7 @@ public class CustomerForm {
         this.customerid = customer.getCustomerid();
         this.firstname = customer.getFirstname();
         this.lastname = customer.getLastname();
+        this.email = customer.getEmail();
         this.username = customer.getUsername();
         this.password = customer.getPassword();
         this.addressId = customer.getAddress().getId();
@@ -283,7 +285,7 @@ public class CustomerForm {
         this.country = customer.getAddress().getCountry();
         this.state = customer.getAddress().getState();
         this.contactId = customer.getContact().getId();
-        this.email = customer.getContact().getEmail();
+        this.email = customer.getEmail();
         this.cellular = customer.getContact().getCellular();
         this.landlinePhone = customer.getContact().getLandlinePhone();
     }

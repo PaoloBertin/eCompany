@@ -3,26 +3,22 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.repository.CustomersRepository;
 import it.opensource.ecompany.service.CustomersService;
-import it.opensource.ecompany.service.impl.util.CustomerUserAuthorityUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 
 @Slf4j
 @Transactional
 @Service("customersService")
-public class CustomersServiceImpl implements CustomersService, UserDetailsService {
+public class CustomersServiceImpl implements CustomersService {
 
     private final CustomersRepository customerRepository;
 
@@ -91,84 +87,24 @@ public class CustomersServiceImpl implements CustomersService, UserDetailsServic
     }
 
     @Override
-    public Long save(final Customer customer) {
+    public Long saveCustomer(final Customer customer) {
 
         if (customer == null) {
             throw new IllegalArgumentException("customer cannot be null");
         }
 
-        if (customer.getCustomerid() != null) {
-            throw new IllegalArgumentException("customer.getCustomerid() must be null when creating a " + Customer.class.getName());
-        }
-
         String encodedPassword = passwordEncoder.encode(customer.getPassword());
-        log.debug("password=" + customer.getPassword());
         customer.setPassword(encodedPassword);
+        // rende persistente il cliente
         Customer result = customerRepository.save(customer);
         customerRepository.flush();
 
         List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
-        UserDetails userDetails = new User(customer.getUsername(), customer.getPassword(), authorities);
+        UserDetails userDetails = new User(customer.getEmail(), customer.getPassword(), authorities);
+        // rende persistenti le credenziali del cliente
         userDetailsManager.createUser(userDetails);
 
         return result.getCustomerid();
 
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        Customer customer = customerRepository.findByUsername(username);
-        if (customer == null) {
-            throw new UsernameNotFoundException("Invalid username/password.");
-        }
-        // TODO
-        Collection<? extends GrantedAuthority> authorities = CustomerUserAuthorityUtils.createAuthorities(customer);
-
-        return new CustomerDetails(customer);
-    }
-
-    private final class CustomerDetails extends Customer implements UserDetails {
-
-        private static final long serialVersionUID = 1L;
-
-        CustomerDetails(Customer customer) {
-
-            setCustomerid(customer.getCustomerid());
-            setEmail(customer.getEmail());
-            setFirstname(customer.getFirstname());
-            setLastname(customer.getLastname());
-            setPassword(customer.getPassword());
-        }
-
-        public Collection<? extends GrantedAuthority> getAuthorities() {
-
-            return CustomerUserAuthorityUtils.createAuthorities(this);
-        }
-
-        public String getUsername() {
-
-            return getEmail();
-        }
-
-        public boolean isAccountNonExpired() {
-
-            return true;
-        }
-
-        public boolean isAccountNonLocked() {
-
-            return true;
-        }
-
-        public boolean isCredentialsNonExpired() {
-
-            return true;
-        }
-
-        public boolean isEnabled() {
-
-            return true;
-        }
     }
 }

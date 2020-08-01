@@ -16,7 +16,7 @@ class CustomerControllerTest {
     @Test
     public void signupTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(post("/customers/registration").param("firstname", "Giusepp")
+        mvc.perform(post("/customers/registration").param("firstname", "Giuseppe")
                                                    .param("lastname", "Mazzini")
                                                    .param("email", "giuseppe.mazzini@dummy.com")
                                                    .param("username", "giuseppe.mazzini")
