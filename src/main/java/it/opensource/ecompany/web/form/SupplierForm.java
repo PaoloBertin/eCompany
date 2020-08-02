@@ -258,4 +258,22 @@ public class SupplierForm {
         this.landlinePhone = supplier.getContact()
                                      .getLandlinePhone();
     }
+
+    public void clear() {
+
+        this.supplierId = null;
+        this.name = null;
+        this.vat = null;
+        this.addressId = null;
+        this.city = null;
+        this.street = null;
+        this.houseNumber = null;
+        this.zipCode = null;
+        this.country = null;
+        this.state = null;
+        this.contactId = null;
+        this.email = null;
+        this.cellular = null;
+        this.landlinePhone = null;
+    }
 }

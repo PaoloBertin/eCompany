@@ -16,5 +16,5 @@ public interface SuppliersService {
 
     public Supplier getSupplierByUsernameAndPassword(String username, String password);
 
-    public Supplier save(final Supplier supplier);
+    public Supplier saveSupplier(final Supplier supplier);
 }
