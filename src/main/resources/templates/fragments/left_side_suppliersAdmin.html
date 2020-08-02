@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org" th:with="lang=${#locale.language}"
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
       th:lang="${lang}">
 
     <head>
@@ -9,13 +10,14 @@
     </head>
 
     <body>
-        <div th:fragment="left_side_customerAdmin" style="align-content: left; margin-left: 15px;">
+        <div th:fragment="left_side_suppliersAdmin" style="align-content: left; margin-left: 15px;">
             <br/>
             <div class="card">
                 <div class="card-header">
-                    <h4>Cliente</h4>
+                    <h4 th:text="#{label.supplier}">Supplier</h4>
                 </div>
-                <form name="registrationForm" th:object="${customerForm}" th:attr="action=@{/customers/registration}" method="post">
+                <!--   -->
+                <form name="registrationForm" th:object="${supplierForm}" th:attr="action=@{/suppliers/}" method="post">
 
                     <div class="card-body">
                         <div class="accordion" id="accordionPersonalData">
@@ -31,33 +33,16 @@
                                 </div>
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionPersonalData">
                                     <div class="card-body">
-                                        <input type="hidden" name="customerid" th:field="*{customerid}"/>
+                                        <input type="hidden" name="supplierId" th:field="*{supplierId}"/>
                                         <div class="form-group">
-                                            <label id="labelFirstnameId" for="inpuFirstnameId"
-                                                   th:text="#{label.customer.firstname}"></label>
-                                            <input class="form-control" id="inpuFirstnameId" type="text" name="firstname" th:field="*{firstname}"/>
+                                            <label id="labelNameId" for="inputNameId" th:text="#{label.supplier.name}"></label>
+                                            <input class="form-control" id="inputNameId" type="text" name="name" th:field="*{name}"/>
                                         </div>
 
                                         <div class="form-group">
-                                            <label id="labeLastnameId" for="inputLastnameId" th:text="#{label.customer.lastname}"></label>
-                                            <input type="text" name="lastname" class="form-control" id="inputLastnameId" th:field="*{lastname}"/>
+                                            <label id="labeVatId" for="inputVatId" th:text="#{label.supplier.vat}"></label>
+                                            <input type="text" name="vat" class="form-control" id="inputVatId" th:field="*{vat}"/>
                                         </div>
-                                        <div class="form-group">
-                                            <label id="labelUsernameId" for="inputUsernameId" th:text="#{label.username}"></label>
-                                            <input type="text" name="username" class="form-control" id="inputUsernameId" th:field="*{username}"/>
-                                        </div>
-<!--
-                                        <div class="form-group">
-                                            <label id="labelPasswordId" for="inputPasswordId" th:text="#{label.password}"></label>
-                                            <input type="password" name="password" class="form-control" id="inputPasswordId" th:field="*{password}"/>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label id="labelPasswordId2" for="inputPasswordId2" th:text="#{label.password2}"></label>
-                                            <input type="password" name="password2" class="form-control" id="inputPasswordId2" th:field="*{password}"/>
-                                        </div>
-                                        <br/>
--->
                                     </div>
                                 </div>
                             </div>
@@ -134,12 +119,11 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <!--
                         <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
                         <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
-                        -->
                     </div>
                 </form>
+
             </div>
             <br/>
         </div>

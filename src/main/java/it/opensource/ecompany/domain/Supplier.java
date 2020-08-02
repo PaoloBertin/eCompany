@@ -22,14 +22,14 @@ public class Supplier implements Serializable {
     private String legalForm;
 
     @Column(name = "registered_office")
-    private Address registeredOffice;
+    private String registeredOffice;
 
     @JoinColumn(name = "contact_id")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Contact contact;
 
     @JoinColumn(name = "address_id")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     public Long getId() {
@@ -72,12 +72,12 @@ public class Supplier implements Serializable {
         this.legalForm = legalForm;
     }
 
-    public Address getRegisteredOffice() {
+    public String getRegisteredOffice() {
 
         return registeredOffice;
     }
 
-    public void setRegisteredOffice(Address registeredOffice) {
+    public void setRegisteredOffice(String registeredOffice) {
 
         this.registeredOffice = registeredOffice;
     }

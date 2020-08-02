@@ -29,8 +29,8 @@ public class PurchaseOrdersControllerTest {
     @Test
     public void getAllPurchaseOrdersTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/admin/purchaseorders/all").with(user("admin.ecompany@dmail.com").password("admin")
-                                                                                          .roles("ADMIN")))
+        mvc.perform(get("/admin/purchaseorders/all").with(user("admin.ecompany").password("admin")
+                                                                                .roles("ADMIN")))
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(10)))
@@ -45,8 +45,8 @@ public class PurchaseOrdersControllerTest {
     @Test
     public void getPurchaseOrderByIdTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/purchaseorders/{purchaseordersId}", 2L).with(user("mario.rossi@dmail.com").password("user")
-                                                                                                    .roles("USER")))
+        mvc.perform(get("/purchaseorders/{purchaseordersId}", 2L).with(user("mario.rossi").password("user")
+                                                                                          .roles("USER")))
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
@@ -78,8 +78,8 @@ public class PurchaseOrdersControllerTest {
         cartBean.addProductToCart(product);
 
         mvc.perform(get("/purchaseorders/save").sessionAttr("cartBean", cartBean)
-                                               .with(user("mario.rossi@dmail.com").password("user")
-                                                                                  .roles("USER")))
+                                               .with(user("mario.rossi").password("user")
+                                                                        .roles("USER")))
            .andExpect(status().isOk());
     }
 }

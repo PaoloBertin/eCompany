@@ -18,7 +18,7 @@ public class SuppliersServiceImpl implements SuppliersService {
     }
 
     @Override
-    public List<Supplier> getAll() {
+    public List<Supplier> getAllSuppliers() {
 
         return suppliersRepository.findAll();
     }

@@ -2,6 +2,7 @@ package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.domain.Supplier;
 import it.opensource.ecompany.service.SuppliersService;
+import it.opensource.ecompany.web.form.SupplierForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +22,10 @@ public class SuppliersController {
     @GetMapping("/admin/suppliers")
     public String viewAllSupplier(Model uiModel) {
 
-        List<Supplier> suppliers = suppliersService.getAll();
+        List<Supplier> suppliers = suppliersService.getAllSuppliers();
 
         uiModel.addAttribute("suppliers", suppliers);
+        uiModel.addAttribute("supplierForm", new SupplierForm());
 
         return "suppliers/suppliersListAdmin";
     }

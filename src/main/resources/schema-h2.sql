@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS suppliers (
     name VARCHAR(255) NOT NULL,
     vat VARCHAR(15),
     legal_form VARCHAR(55),
-    registered_office VARCHAR(55),
+    registered_office VARCHAR(255),
     address_id BIGINT(20),
     contact_id BIGINT(20),
 

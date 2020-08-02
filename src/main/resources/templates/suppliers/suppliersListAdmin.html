@@ -18,41 +18,26 @@
             <div class="row">
                 <div class="col-lg-4">
                     <!--   -->
-                    <div th:replace="~{fragments/left_side_customerAdmin :: left_side_customerAdmin}">left side</div>
+                    <div th:replace="~{fragments/left_side_suppliersAdmin :: left_side_suppliersAdmin}">left side</div>
                 </div>
 
                 <div class="col-lg-6">
                     <br/>
-                    <h4 th:text="#{label.customers.listing}">categories listing</h4>
+                    <h4 th:text="#{label.supplier.listing}">suppliers listing</h4>
                     <table width="100%" cellspacing="10px" cellpadding="10px">
                         <thead>
                             <tr>
-                                <th th:text="#{label.customer.firstname}">firstname</th>
-                                <th th:text="#{label.customer.lastname}">lastname</th>
-                                <th th:text="#{label.customer.username}">username</th>
-                                <th>attivo</th>
+                                <th th:text="#{label.supplier.name}">name</th>
+                                <th th:text="#{label.supplier.vat}">vat</th>
+                                <th th:text="#{label.supplier.registeredOffice}">registered office</th>
+                                <th th:text="#{label.active}">attivo</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="customer : ${customers}">
-                                <td th:text="${customer.firstname}">firstname</td>
-                                <td th:text="${customer.lastname}">lastname</td>
-                                <td th:text="${customer.username}">username</td>
-                                <!--
-                                <td>
-                                    <a th:href="@{'/admin/customers/' + ${customer.customerid}} + '?form'">
-                                        <i class="fa fa-edit fa-lg"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <form th:action="@{'/admin/customers/'}" th:method="delete">
-                                        <input type="hidden" name="customerid" th:value="${customer.customerid}"/>
-                                        <button class="btn">
-                                            <i class="fa fa-trash fa-lg"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                -->
+                            <tr th:each="supplier : ${suppliers}">
+                                <td th:text="${supplier.name}">name</td>
+                                <td th:text="${supplier.vat}">vat</td>
+                                <td th:text="${supplier.registeredOffice}">registerd office</td>
                                 <td>checkbox</td>
                             </tr>
                         </tbody>

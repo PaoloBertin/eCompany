@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SuppliersService {
 
-    public List<Supplier> getAll();
+    public List<Supplier> getAllSuppliers();
 
     public Supplier getSupplierById(Long supplierId);
 

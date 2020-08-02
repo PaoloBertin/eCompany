@@ -29,8 +29,8 @@ class WarehouseControllerTest {
         mvc.perform(get("/admin/warehouse/wares").param("page", "0")
                                                  .param("size", "10")
                                                  .param("warehouseId", "1")
-                                                 .with(user("admin.ecompany@dmail.com").password("admin")
-                                                                                       .roles("ADMIN")))
+                                                 .with(user("admin.ecompany").password("admin")
+                                                                             .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
@@ -41,8 +41,8 @@ class WarehouseControllerTest {
         mvc.perform(get("/admin/warehouse/{warehouseId}/wares/searchProduct", 1L).param("page", "0")
                                                                                  .param("size", "10")
                                                                                  .param("textToSearch", "Java")
-                                                                                 .with(user("admin.ecompany@dmail.com").password("admin")
-                                                                                                                       .roles("ADMIN")))
+                                                                                 .with(user("admin.ecompany").password("admin")
+                                                                                                             .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
            .andExpect(status().isOk());
     }
