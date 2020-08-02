@@ -31,6 +31,7 @@
                                 <th th:text="#{label.supplier.vat}">vat</th>
                                 <th th:text="#{label.supplier.registeredOffice}">registered office</th>
                                 <th th:text="#{label.active}">attivo</th>
+                                <th th:text="#{label.edit}">edit</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,6 +40,11 @@
                                 <td th:text="${supplier.vat}">vat</td>
                                 <td th:text="${supplier.registeredOffice}">registerd office</td>
                                 <td>checkbox</td>
+                                <td>
+                                    <a th:href="@{'/admin/suppliers/' + ${supplier.id}} + '?form'">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
