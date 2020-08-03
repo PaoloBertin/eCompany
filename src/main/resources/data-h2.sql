@@ -3,13 +3,13 @@
 -- mario.rossi        password = user
 -- giuseppe.verdi     password = user
 -- giuseppe.garibaldi password = user
-INSERT INTO users (username, password, enabled) VALUES ('admin.ecompany', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 1);
+INSERT INTO users (username, password, enabled) VALUES ('admin', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 1);
 INSERT INTO users (username, password, enabled) VALUES ('user.ecompany',  '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 1);
 INSERT INTO users (username, password, enabled) VALUES ('mario.rossi','$2a$10$AN9KMoBs3GLy9ttjE4jsGODh25qA5xVo1IfX3kyHdFaC5JP2eJ45C',1);
 INSERT INTO users (username, password, enabled) VALUES ('giuseppe.verdi','$2a$10$6ougvztJT0if6CTPXPytQuFESws6sq4VEmxkWkg3shNUU/CSbJZ6y',1);
 INSERT INTO users (username, password, enabled) VALUES ('giuseppe.garibaldi','$2a$10$rYz10KiusKJ0EQ14b6zyVeVb1fxq617nAZOLE0HHpHtb8VZwGHusG',0);
 
-INSERT INTO authorities(username,authority) VALUES ('admin.ecompany','ROLE_ADMIN');
+INSERT INTO authorities(username,authority) VALUES ('admin','ROLE_ADMIN');
 INSERT INTO authorities(username,authority) VALUES ('user.ecompany','ROLE_USER');
 INSERT INTO authorities(username,authority) VALUES ('mario.rossi','ROLE_USER');
 INSERT INTO authorities(username,authority) VALUES ('giuseppe.verdi','ROLE_USER');
@@ -26,7 +26,7 @@ INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_USER' FROM gr
 INSERT INTO group_authorities(group_id, authority) SELECT id,'ROLE_ADMIN' FROM groups WHERE group_name='Administrators';
 
 -- Map the users to Groups
-INSERT INTO group_members(group_id, username) SELECT id,'admin.ecompany' FROM groups WHERE group_name='Administrators';
+INSERT INTO group_members(group_id, username) SELECT id,'admin' FROM groups WHERE group_name='Administrators';
 INSERT INTO group_members(group_id, username) SELECT id,'user.ecompany' FROM groups WHERE group_name='Users';
 INSERT INTO group_members(group_id, username) SELECT id,'mario.rossi' FROM groups WHERE group_name='Users';
 INSERT INTO group_members(group_id, username) SELECT id,'giuseppe.verdi' FROM groups WHERE group_name='Users';
@@ -48,7 +48,7 @@ INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (  5, 'giuseppe
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (101, 'miamland@dmail.com', '3658323288', '0429876336');
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (102, 'kui@dmail.com', '3628326288', '0429796336');
 
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(1, 'Admin', 'Ecompany', 'admin.ecompany', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 1, 1);
+INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(1, 'Admin', 'Ecompany', 'admin', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 1, 1);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(2, 'User', 'Ecompany', 'user.ecompany', '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 'user.ecompany@dmail.com', 2, 2);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(3, 'Mario', 'Rossi', 'mario.rossi', '$2a$10$AN9KMoBs3GLy9ttjE4jsGODh25qA5xVo1IfX3kyHdFaC5JP2eJ45C', 'mario.rossi@dmail.com', 3, 3);
 INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(4, 'Giuseppe', 'Verdi', 'giuseppe.verdi', '$2a$10$6ougvztJT0if6CTPXPytQuFESws6sq4VEmxkWkg3shNUU/CSbJZ6y', 'giuseppe.verdi@dmail.com', 4, 4);

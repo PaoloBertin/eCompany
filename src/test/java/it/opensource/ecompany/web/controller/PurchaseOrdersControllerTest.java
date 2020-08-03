@@ -29,8 +29,8 @@ public class PurchaseOrdersControllerTest {
     @Test
     public void getAllPurchaseOrdersTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/admin/purchaseorders/all").with(user("admin.ecompany").password("admin")
-                                                                                .roles("ADMIN")))
+        mvc.perform(get("/admin/purchaseorders/all").with(user("admin").password("admin")
+                                                                       .roles("ADMIN")))
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(10)))

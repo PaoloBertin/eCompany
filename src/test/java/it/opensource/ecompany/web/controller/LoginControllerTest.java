@@ -11,13 +11,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-public class LginControllerTest {
+public class LoginControllerTest {
 
     @Test
     public void loginSuccessTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(post("/login").param("form", "")
-                                  .param("username", "admin.ecompany")
+                                  .param("username", "admin")
                                   .param("password", "admin"))
            .andExpect(redirectedUrl("/default"));
     }
@@ -26,7 +26,7 @@ public class LginControllerTest {
     public void loginFailureTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(post("/login").param("form", "")
-                                  .param("username", "admin.ecompany")
+                                  .param("username", "admin")
                                   .param("password", "user"))
         .andExpect(redirectedUrl("/login?error=true"));
     }

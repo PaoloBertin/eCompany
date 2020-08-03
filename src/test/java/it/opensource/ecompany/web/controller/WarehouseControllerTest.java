@@ -10,10 +10,10 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasProperty;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @EnableWebMvc
@@ -29,10 +29,11 @@ class WarehouseControllerTest {
         mvc.perform(get("/admin/warehouse/wares").param("page", "0")
                                                  .param("size", "10")
                                                  .param("warehouseId", "1")
-                                                 .with(user("admin.ecompany").password("admin")
-                                                                             .roles("ADMIN")))
+                                                 .with(user("admin").password("admin")
+                                                                    .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
-           .andExpect(status().isOk());
+           .andExpect(status().isOk())
+        ;
     }
 
     @Test
@@ -41,10 +42,12 @@ class WarehouseControllerTest {
         mvc.perform(get("/admin/warehouse/{warehouseId}/wares/searchProduct", 1L).param("page", "0")
                                                                                  .param("size", "10")
                                                                                  .param("textToSearch", "Java")
-                                                                                 .with(user("admin.ecompany").password("admin")
-                                                                                                             .roles("ADMIN")))
+                                                                                 .with(user("admin").password("admin")
+                                                                                                    .roles("ADMIN")))
+           .andExpect(model().attribute("productForm", hasProperty("name")))
            .andExpect(view().name("warehouse/list"))
-           .andExpect(status().isOk());
+           .andExpect(status().isOk())
+        ;
     }
 
     @Test
@@ -60,8 +63,5 @@ class WarehouseControllerTest {
     @Test
     public void getAllReduced() {
 
-        //        List<Object[]> actual = warehouseService.getAllReduced();
-
-        //        assertThat(actual.size(), equalTo(54));
     }
 }

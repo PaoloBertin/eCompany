@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>eCompany</title>
+    </head>
+
+    <body>
+        <div th:fragment="right_side_warehouse" th:align="left">
+            <br/>
+
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <span class="sidebar-titolo" th:text="#{label.rightside.warehouse.title}">Prodotto</span><br/>
+
+                <form name="editProductForm" th:object="${productForm}" th:attr="action=@{/admin/products?form}" method="post">
+                    <input type="hidden" name="productId" th:field="*{productId}"/>
+                    <div class="form-group">
+                        <label id="labelNameId" for="inputNameId" th:text="#{label.product.name}">product name</label>
+                        <input class="form-control" id="inputNameId" type="text" name="name" th:field="*{name}"/>
+                    </div>
+                    <div class="form-group">
+                        <label id="labelIsnbId" for="inputIsbnId" th:text="#{label.product.isbn}">product isbn</label>
+                        <input class="form-control" id="inputIsbnId" type="text" name="isbn" th:field="*{isbn}"/>
+                    </div>
+                    <div class="form-group">
+                        <label id="labelDescriptionId" for="inputDescriptionId" th:text="#{label.product.description}">product
+                            description</label>
+                        <input class="form-control" id="inputDescriptionId" type="text" name="description" th:field="*{description}"/>
+                    </div>
+                    <div class="form-group">
+                        <label id="labelPriceId" for="inputPriceId" th:text="#{label.product.price}">product price</label>
+                        <input class="form-control" id="inputPriceId" type="text" name="price" th:field="*{price}"/>
+                    </div>
+                    <div class="form-group">
+                        <label id="labelImageId" for="inputImageId" th:text="#{label.product.photo}">product image</label>
+                        <input class="form-control" id="inputImageId" type="image" name="image"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="labelCategorySelect">Category</label>
+                        <select class="form-control" id="labelCategorySelect" th:field="*{category}">
+                            <option th:each="category : ${categories}" th:value="${category.name}"  th:text="${category.name}">wirefreme</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary" type="submit" th:text="#{label.save}">save</button>
+                </form>
+            </div>
+            <br/>
+        </div>
+    </body>
+</html>

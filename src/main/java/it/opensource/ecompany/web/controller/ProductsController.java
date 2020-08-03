@@ -9,6 +9,7 @@ import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.controller.util.UrlUtil;
 import it.opensource.ecompany.web.form.CustomerForm;
+import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
@@ -199,14 +200,14 @@ public class ProductsController {
     @GetMapping(path = "/admin/products", params = "form")
     public String createForm(Model uiModel) {
 
-        Product product = new Product();
+        ProductForm productForm = new ProductForm();
 
         Customer customer = userContext.getCurrentCustomer();
 
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("productForm", productForm);
         uiModel.addAttribute("cartBean", cartBean);
-        uiModel.addAttribute("product", product);
 
         return "catalog/edit";
     }
@@ -214,7 +215,7 @@ public class ProductsController {
     /**
      * Rende persistente i campi del form ricevuto
      *
-     * @param product
+     * @param productForm
      * @param bindingResult
      * @param uiModel
      * @param httpServletRequest
@@ -224,20 +225,23 @@ public class ProductsController {
      * @return nome vista
      */
     @PostMapping(path = "/admin/products", params = "form")
-    public String createProduct(@Valid Product product, BindingResult bindingResult, RedirectAttributes attributes,
-                                RedirectAttributes redirectAttributes, Model uiModel, HttpServletRequest httpServletRequest, Locale locale,
+    public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                Model uiModel, HttpServletRequest httpServletRequest, Locale locale,
                                 @RequestParam(value = "file", required = false) Part file) {
 
         log.info("Creating product");
         if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("product_save_fail", new Object[]{}, locale)));
-            uiModel.addAttribute("product", product);
+            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
+            uiModel.addAttribute("product", productForm);
             return "catalog/edit";
         }
+        Product product = new Product();
+        product = productForm.getProduct();
+
         uiModel.asMap()
                .clear();
         redirectAttributes.addFlashAttribute("message", new Message("success",
-                                                                    messageSource.getMessage("product_save_success", new Object[]{},
+                                                                    messageSource.getMessage("product.save.success", new Object[]{},
                                                                                              locale)));
 
         log.info("Product id: " + product.getProductid());

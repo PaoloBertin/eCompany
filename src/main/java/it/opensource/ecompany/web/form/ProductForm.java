@@ -1,25 +1,119 @@
 package it.opensource.ecompany.web.form;
 
 import it.opensource.ecompany.domain.Category;
-import lombok.Getter;
-import lombok.Setter;
+import it.opensource.ecompany.domain.Product;
 
-@Setter
-@Getter
+import javax.validation.constraints.NotNull;
+
 public class ProductForm {
 
-    private String   name;
+    private Long productId;
 
-    private String   description;
+    private String name;
 
-    private String   isbn;
+    private String description;
 
-    private Float    price;
+    @NotNull
+    private String isbn;
 
-    private byte[]   image;
+    private Float price;
+
+    private byte[] image;
 
     private Category category;
 
-    private Long     version;
+    public Long getProductId() {
 
+        return productId;
+    }
+
+    public void setProductId(Long productId) {
+
+        this.productId = productId;
+    }
+
+    public String getName() {
+
+        return name;
+    }
+
+    public void setName(String name) {
+
+        this.name = name;
+    }
+
+    public String getDescription() {
+
+        return description;
+    }
+
+    public void setDescription(String description) {
+
+        this.description = description;
+    }
+
+    public String getIsbn() {
+
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+
+        this.isbn = isbn;
+    }
+
+    public Float getPrice() {
+
+        return price;
+    }
+
+    public void setPrice(Float price) {
+
+        this.price = price;
+    }
+
+    public byte[] getImage() {
+
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+
+        this.image = image;
+    }
+
+    public Category getCategory() {
+
+        return category;
+    }
+
+    public void setCategory(Category category) {
+
+        this.category = category;
+    }
+
+    public Product getProduct() {
+
+        Product product = new Product();
+        product.setProductid(getProductId());
+        product.setName(getName());
+        product.setIsbn(getIsbn());
+        product.setDescription(getDescription());
+        product.setPrice(getPrice());
+        product.setImage(getImage());
+        product.setCategory(getCategory());
+
+        return product;
+    }
+
+    public void setProduct(Product product) {
+
+        this.productId = product.getProductid();
+        this.name = product.getName();
+        this.isbn = product.getIsbn();
+        this.description = product.getDescription();
+        this.price = product.getPrice();
+        this.image = product.getImage();
+        this.category = product.getCategory();
+    }
 }
