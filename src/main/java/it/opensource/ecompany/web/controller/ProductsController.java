@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -58,6 +59,18 @@ public class ProductsController {
         this.cartBean = cartBean;
         this.messageSource = messageSource;
         this.userContext = userContext;
+    }
+
+    private static byte[] toByteArray(InputStream inputStream) throws IOException {
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteArrayOutputStream.write(buffer, 0, len);
+        }
+
+        return byteArrayOutputStream.toByteArray();
     }
 
     @GetMapping("/products/all/all")
@@ -253,16 +266,11 @@ public class ProductsController {
      * @return nome vista
      */
     @PostMapping(path = "/admin/products")
-    public String createProduct(@Valid ProductForm productForm,
-                                BindingResult bindingResult,
-                                RedirectAttributes redirectAttributes,
-                                Model uiModel,
-                                @RequestParam(name = "form") String form,
+    public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                Model uiModel, @RequestParam(name = "form") String form,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size,
-                                @RequestParam(name= "categoryId") Long categoryId,
-                                HttpServletRequest httpServletRequest,
-                                Locale locale,
+                                @RequestParam(name = "categoryId") Long categoryId, HttpServletRequest httpServletRequest, Locale locale,
                                 @RequestParam(value = "image", required = false) Part image) {
 
         log.info("Creating product");
@@ -299,8 +307,7 @@ public class ProductsController {
                 if (inputStream == null)
                     log.info("File inputstream is null");
                 // fileContent = IOUtils.toByteArray(inputStream);
-                fileContent = new byte[image.getInputStream()
-                                            .available()];
+                fileContent = toByteArray(inputStream);
                 product.setImage(fileContent);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
@@ -387,4 +394,6 @@ public class ProductsController {
 
         return "catalog/edit";
     }
+
+
 }
