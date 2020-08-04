@@ -159,6 +159,7 @@ public class ProductsController {
 
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
+        uiModel.addAttribute("customer", userContext.getCurrentCustomer());
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("products", products);
@@ -306,7 +307,6 @@ public class ProductsController {
                 InputStream inputStream = image.getInputStream();
                 if (inputStream == null)
                     log.info("File inputstream is null");
-                // fileContent = IOUtils.toByteArray(inputStream);
                 fileContent = toByteArray(inputStream);
                 product.setImage(fileContent);
             } catch (IOException ex) {
@@ -328,8 +328,8 @@ public class ProductsController {
         uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("products", products);
         uiModel.addAttribute("productForm", new ProductForm());
+        uiModel.addAttribute("customer", userContext.getCurrentCustomer());
 
-        //return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(), httpServletRequest);
         String url = "redirect:/admin/products/" + categoryId + "/all";
 
         return url;
