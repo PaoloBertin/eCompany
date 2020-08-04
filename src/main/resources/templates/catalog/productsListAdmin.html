@@ -14,8 +14,8 @@
             <!-- intestazione -->
             <div th:replace="~{fragments/header :: header}">header</div>
 
-            <div class="row">
-                <div class="col-lg-2">
+            <div class="row ml-0 mr-0">
+                <div class="col-lg-1">
                     <br/>
                     <h4 th:text="#{label.categories}"></h4>
                     <table>
@@ -30,7 +30,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <br/>
                     <h4>Elenco Prodotti</h4>
                     <table class="table">
@@ -38,12 +38,14 @@
                             <tr>
                                 <th th:text="#{label.product.category}"></th>
                                 <th th:text="#{label.product.name}"></th>
+                                <th th:text="#{label.product.price}"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="product : ${products}">
                                 <td th:text="${product.category.name}"></td>
                                 <td th:text="${product.name}"></td>
+                                <td th:text="${product.price}"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -97,8 +99,12 @@
                         <br/>
                         <h4 th:text="#{label.rightside.warehouse.title}">prodotto</h4>
                         <br/>
-
-                        <form name="editProductForm" th:object="${productForm}" th:attr="action=@{/admin/products?form}" method="post">
+<!--
+                        <form name="editProductForm" th:object="${productForm}" th:action="@{/admin/products(form=${}, page=${0}, size=${size}, categoryId=S{categoryId})}" method="post"
+-->
+                        <form name="editProductForm" th:object="${productForm}" th:action="@{/admin/products(form, page=${0}, size=${size}, categoryId=${categoryId})}" method="post"
+                              enctype="multipart/form-data">
+                            <input type="hidden" name="categoryId" th:field="*{categoryId}"/>
                             <input type="hidden" name="productId" th:field="*{productId}"/>
                             <div class="form-group">
                                 <label id="labelNameId" for="inputNameId" th:text="#{label.product.name}">product name</label>
@@ -120,7 +126,7 @@
                             </div>
                             <div class="form-group">
                                 <label id="labelImageId" for="inputImageId" th:text="#{label.product.photo}">product image</label>
-                                <input class="form-control" id="inputImageId" type="image" name="image"/>
+                                <input class="form-control" id="inputImageId" type="file" name="image"/>
                             </div>
                             <div class="form-group">
                                 <label for="labelCategorySelect">Category</label>

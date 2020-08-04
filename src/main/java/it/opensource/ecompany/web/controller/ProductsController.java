@@ -1,13 +1,13 @@
 package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
+import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
-import it.opensource.ecompany.web.controller.util.UrlUtil;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
@@ -107,6 +107,36 @@ public class ProductsController {
      * @return nome vista
      */
     @GetMapping(value = "/admin/products/{categoryId}/all")
+    public String viewAdminProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
+                                                    @RequestParam(name = "page", defaultValue = "0") int page,
+                                                    @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
+        Customer customer = userContext.getCurrentCustomer();
+
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("page", page);
+        uiModel.addAttribute("size", size);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("categoryId", categoryId);
+        uiModel.addAttribute("products", products);
+        uiModel.addAttribute("productForm", new ProductForm());
+
+        log.debug("numero prodotti da visualizzare =" + products.getContent()
+                                                                .size());
+
+        return "catalog/productsListAdmin";
+    }
+
+    /**
+     * Visualizzare i prodotti appartenenti ad una determinata categoria per pagine
+     *
+     * @param categoryId categoria prodotti da visualizzare
+     * @param uiModel    dati da visualizzare
+     * @return nome vista
+     */
+    @GetMapping(value = "/products/{categoryId}")
     public String viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                @RequestParam(name = "page", defaultValue = "0") int page,
                                                @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
@@ -119,12 +149,12 @@ public class ProductsController {
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("products", products);
-        uiModel.addAttribute("productForm", new ProductForm());
+        uiModel.addAttribute("searchForm", new SearchForm());
 
         log.debug("numero prodotti da visualizzare =" + products.getContent()
                                                                 .size());
 
-        return "catalog/productsListAdmin";
+        return "catalog/list";
     }
 
     /**
@@ -219,22 +249,35 @@ public class ProductsController {
      * @param httpServletRequest
      * @param redirectAttributes
      * @param locale
-     * @param file
+     * @param image
      * @return nome vista
      */
-    @PostMapping(path = "/admin/products", params = "form")
-    public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                Model uiModel, HttpServletRequest httpServletRequest, Locale locale,
-                                @RequestParam(value = "file", required = false) Part file) {
+    @PostMapping(path = "/admin/products")
+    public String createProduct(@Valid ProductForm productForm,
+                                BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes,
+                                Model uiModel,
+                                @RequestParam(name = "form") String form,
+                                @RequestParam(name = "page", defaultValue = "0") int page,
+                                @RequestParam(name = "size", defaultValue = "10") int size,
+                                @RequestParam(name= "categoryId") Long categoryId,
+                                HttpServletRequest httpServletRequest,
+                                Locale locale,
+                                @RequestParam(value = "image", required = false) Part image) {
 
         log.info("Creating product");
         if (bindingResult.hasErrors()) {
+            Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+            Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
+            uiModel.addAttribute("page", page);
+            uiModel.addAttribute("size", size);
             uiModel.addAttribute("message", new Message("error", messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
+            uiModel.addAttribute("categories", categoriesService.getAll());
+            uiModel.addAttribute("categoryId", categoryId);
             uiModel.addAttribute("product", productForm);
-            return "catalog/edit";
+            uiModel.addAttribute("products", products);
+            return "/admin/products/" + categoryId + "/all";
         }
-        Product product = new Product();
-        product = productForm.getProduct();
 
         uiModel.asMap()
                .clear();
@@ -242,19 +285,22 @@ public class ProductsController {
                                                                     messageSource.getMessage("product.save.success", new Object[]{},
                                                                                              locale)));
 
+        Product product = new Product();
+        product = productForm.getProduct();
         log.info("Product id: " + product.getProductid());
-
         // Process upload file
-        if (file != null) {
-            log.info("File name: " + file.getName());
-            log.info("File size: " + file.getSize());
-            log.info("File content type: " + file.getContentType());
+        if (image != null) {
+            log.info("File name: " + image.getName());
+            log.info("File size: " + image.getSize());
+            log.info("File content type: " + image.getContentType());
             byte[] fileContent = null;
             try {
-                InputStream inputStream = file.getInputStream();
+                InputStream inputStream = image.getInputStream();
                 if (inputStream == null)
                     log.info("File inputstream is null");
                 // fileContent = IOUtils.toByteArray(inputStream);
+                fileContent = new byte[image.getInputStream()
+                                            .available()];
                 product.setImage(fileContent);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
@@ -262,10 +308,24 @@ public class ProductsController {
             product.setImage(fileContent);
         }
 
+        Category category = categoriesService.getCategoryById(categoryId);
+        product.setCategory(category);
         productsService.saveProduct(product);
 
-        return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid()
-                                                                           .toString(), httpServletRequest);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
+
+        uiModel.addAttribute("page", page);
+        uiModel.addAttribute("size", size);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("categoryId", categoryId);
+        uiModel.addAttribute("products", products);
+        uiModel.addAttribute("productForm", new ProductForm());
+
+        //return "redirect:/products/" + UrlUtil.encodeUrlPathSegment(product.getProductid().toString(), httpServletRequest);
+        String url = "redirect:/admin/products/" + categoryId + "/all";
+
+        return url;
     }
 
     /**
