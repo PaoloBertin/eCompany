@@ -6,8 +6,13 @@ import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.controller.util.Message;
+import it.opensource.ecompany.web.form.ProductForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,17 +44,6 @@ public class CatalogsController {
         this.messageSource = messageSource;
     }
 
-    @GetMapping("/admin/catalog/all")
-    public String getAllCategoriesAdmin(Model uiModel) {
-
-        List<Category> categories = categoriesService.getAll();
-        uiModel.addAttribute("categories", categories);
-
-        log.debug("visualizza tutte le categorie");
-
-        return "catalog/categoriesListAdmin";
-    }
-
     /**
      * Gestisce la richiesta di creare una nuova categoria
      *
@@ -59,6 +53,7 @@ public class CatalogsController {
     public String createCategoryForm(Model uiModel) {
 
         Category category = new Category();
+
         uiModel.addAttribute("category", category);
 
         return "catalog/editCategory";
@@ -67,7 +62,7 @@ public class CatalogsController {
     /**
      * Rende persistente i campi del form ricevuto
      *
-     * @param category
+     * @param category           categoria da creare
      * @param bindingResult
      * @param uiModel
      * @param redirectAttributes
@@ -122,9 +117,9 @@ public class CatalogsController {
      * @return nome vista
      */
     @GetMapping(path = "/admin/catalog/{categoryId}", params = "form")
-    public String updateCategoryForm(@PathVariable("categoryId") Long id, Model uiModel) {
+    public String updateCategoryForm(@PathVariable("categoryId") Long categoryId, Model uiModel) {
 
-        Category category = categoriesService.getCategoryById(id);
+        Category category = categoriesService.getCategoryById(categoryId);
 
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
@@ -132,5 +127,42 @@ public class CatalogsController {
         return "catalog/editCategory";
     }
 
+    @GetMapping("/admin/catalog/all")
+    public String getAllCategoriesAdmin(@RequestParam(name = "page", defaultValue = "0") int page,
+                                        @RequestParam(name = "size", defaultValue = "10") int size,
+                                        Model uiModel) {
 
+        List<Category> categories = categoriesService.getAll();
+
+        Category category = new Category();
+        uiModel.addAttribute("categories", categories);
+        uiModel.addAttribute("category", category);
+
+        log.debug("visualizza tutte le categorie");
+
+        return "catalog/categoriesListAdmin";
+    }
+
+    @GetMapping("/admin/catalog/{categoryId}/all")
+    public String getAllProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
+                                                 @RequestParam(name = "page", defaultValue = "0") int page,
+                                                 @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
+        Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
+
+        List<Category> categories = categoriesService.getAll();
+
+        Category category = new Category();
+
+        ProductForm productForm = new ProductForm();
+        uiModel.addAttribute("categories", categories);
+        uiModel.addAttribute("category", category);
+        uiModel.addAttribute("products", products);
+        uiModel.addAttribute("productForm", productForm);
+
+        log.debug("visualizza tutte le categorie");
+
+        return "catalog/categoriesListAdmin";
+    }
 }

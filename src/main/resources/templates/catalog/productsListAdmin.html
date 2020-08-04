@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div class="container-fluid p-0">
+
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                    <br/>
+                    <h4 th:text="#{label.categories}"></h4>
+                    <table>
+                        <tbody>
+                            <tr th:each="category : ${categories}">
+                                <td>
+                                    <a th:href="@{'/admin/products/' + ${category.categoryid} + '/all'}">
+                                        <span th:text="${category.name}"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-7">
+                    <br/>
+                    <h4>Elenco Prodotti</h4>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th th:text="#{label.product.category}"></th>
+                                <th th:text="#{label.product.name}"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="product : ${products}">
+                                <td th:text="${product.category.name}"></td>
+                                <td th:text="${product.name}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Paginazione -->
+                    <div class="row justify-content-center">
+                        <nav aria-label="navigation" th:if="${products.totalPages gt 1}">
+                            <ul class="pagination" th:with="pages=${products.totalPages}">
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{'/admin/products/' + ${categoryId} + '/all'(page=${0}, size=${size})}">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{'/admin/products/' + ${categoryId} + '/all'(page=${page - 1}, size=${size})}">
+                                        <span aria-hidden="true">&lsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${page + 1}">-1</a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link">
+                                        <span>di</span>
+                                    </a>
+                                </li>
+                                <li class="page-item" th:classappend="disabled">
+                                    <a class="page-link" th:text="${pages}">3</a>
+                                </li>
+                                <li class="page-item"
+                                    th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{'/admin/products/' + ${categoryId} + '/all'(page=${page + 1}, size=${size})}">
+                                        <span aria-hidden="true">&rsaquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"
+                                    th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                                    <a class="page-link"
+                                       th:href="@{'/admin/products/' + ${categoryId} + '/all'(page=${products.totalPages - 1}, size=${size})}">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                        <br/>
+                        <h4 th:text="#{label.rightside.warehouse.title}">prodotto</h4>
+                        <br/>
+
+                        <form name="editProductForm" th:object="${productForm}" th:attr="action=@{/admin/products?form}" method="post">
+                            <input type="hidden" name="productId" th:field="*{productId}"/>
+                            <div class="form-group">
+                                <label id="labelNameId" for="inputNameId" th:text="#{label.product.name}">product name</label>
+                                <input class="form-control" id="inputNameId" type="text" name="name" th:field="*{name}"/>
+                            </div>
+                            <div class="form-group">
+                                <label id="labelIsnbId" for="inputIsbnId" th:text="#{label.product.isbn}">product isbn</label>
+                                <input class="form-control" id="inputIsbnId" type="text" name="isbn" th:field="*{isbn}"/>
+                            </div>
+                            <div class="form-group">
+                                <label id="labelDescriptionId" for="inputDescriptionId" th:text="#{label.product.description}">product
+                                    description</label>
+                                <input class="form-control" id="inputDescriptionId" type="text" name="description"
+                                       th:field="*{description}"/>
+                            </div>
+                            <div class="form-group">
+                                <label id="labelPriceId" for="inputPriceId" th:text="#{label.product.price}">product price</label>
+                                <input class="form-control" id="inputPriceId" type="text" name="price" th:field="*{price}"/>
+                            </div>
+                            <div class="form-group">
+                                <label id="labelImageId" for="inputImageId" th:text="#{label.product.photo}">product image</label>
+                                <input class="form-control" id="inputImageId" type="image" name="image"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="labelCategorySelect">Category</label>
+                                <select class="form-control" id="labelCategorySelect" th:field="*{category}">
+                                    <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}">
+                                        wirefreme
+                                    </option>
+                                </select>
+                            </div>
+                            <button class="btn btn-primary" type="submit" th:text="#{label.save}">save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

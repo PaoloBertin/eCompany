@@ -106,27 +106,25 @@ public class ProductsController {
      * @param uiModel    dati da visualizzare
      * @return nome vista
      */
-    @GetMapping(value = "/products/{categoryId}")
+    @GetMapping(value = "/admin/products/{categoryId}/all")
     public String viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                @RequestParam(name = "page", defaultValue = "0") int page,
                                                @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
-        Customer customer = userContext.getCurrentCustomer();
 
-        uiModel.addAttribute("customer", customer);
-        uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
-        uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("products", products);
+        uiModel.addAttribute("productForm", new ProductForm());
 
         log.debug("numero prodotti da visualizzare =" + products.getContent()
                                                                 .size());
 
-        return "catalog/list";
+        return "catalog/productsListAdmin";
     }
 
     /**

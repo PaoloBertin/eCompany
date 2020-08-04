@@ -1,8 +1,7 @@
 <!DOCTYPE HTML>
 
-<html xmlns:th="http://www.thymeleaf.org"  
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      th:with="lang=${#locale.language}" 
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
       th:lang="${lang}">
 
     <head>
@@ -17,24 +16,39 @@
 
             <!-- corpo centrale -->
             <div class="row">               
-                <div class="col-lg-3">
-                    <!--
+                <div class="col-lg-2">
                     <div th:replace="~{fragments/left_side :: left_side}">left side</div>
-                    -->
                 </div>
                 <div class="col-lg-4"> 
                     <br/>   
-                    <h5>Category Edit</h5>
+                    <h5>Product Edit</h5>
                     <br/>
 
-                    <form name="editCategoryForm" th:method="post" th:object="${category}" th:action="@{/admin/catalog?form}">
+                    <form name="editForm" method="post" th:object="${product}" th:action="@{/products/${product.productid}?form}">
                         <div class="form-group">
                             <label for="product_name" th:text="#{label.product.name}">name</label>
                             <input  class="form-control" id="product_name" type="text" th:field="*{name}"/>
                         </div>
-
-                        <input type="hidden" th:field="*{categoryid}" />
-                        <input type="hidden" th:field="*{version}" />
+                        <div  class="form-group">
+                            <label for="product_isbn"  th:text="#{label.product.isbn}" >isbn</label>
+                            <input  class="form-control" id="product_isbn" type="text" th:field="*{isbn}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="product_price" th:text="#{label.product.price}">price</label>
+                            <input  class="form-control" id="product_price" type="text" th:field="*{price}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="product_description" th:text="#{label.product.description}">description</label>
+                            <!-- 
+                            <input  class="form-control" id="product_description" type="text" th:field="*{description}"/>
+                             -->
+                            <textarea class="form-control" id="product_description" rows="4" th:field="*{description}"></textarea>
+                        </div>
+                                
+                        <input type="hidden" th:field="*{productid}" />
+                        <input type="hidden" th:field="*{category}" />
+                        <input type="hidden" th:field="*{image}" />
+                        <input type="hidden" th:field="*{version}" /> 
                                 
                         <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
                         <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
@@ -42,10 +56,8 @@
                     </form>
                     <br/>                             
                 </div>                       
-                <div class="col-lg-5">
-                    <!--
+                <div class="col-lg-6">
                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
-                    -->
                 </div>
             </div>
             

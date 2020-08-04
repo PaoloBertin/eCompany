@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}"
       th:lang="${lang}"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
@@ -93,8 +93,7 @@
                                 <li class="page-item"
                                     th:classappend="${page eq (wares.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/warehouse/1/wares/{categoryId}(categoryId=${categoryId},page=${wares.totalPages - 1},size=${size})}"
-                                       aria-label="Next">
+                                       th:href="@{/admin/warehouse/1/wares/{categoryId}(categoryId=${categoryId},page=${wares.totalPages - 1},size=${size})}">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

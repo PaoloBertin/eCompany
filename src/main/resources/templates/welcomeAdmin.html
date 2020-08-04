@@ -27,11 +27,13 @@
                         <h3>Administration</h3>
                     </div>
                     <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                        <a th:href="@{/admin/customers}">Customers</a>
+                        <a th:href="@{/admin/customers}">customers</a>
                         <br/>
-                        <a th:href="@{/admin/suppliers}">Suppliers</a>
+                        <a th:href="@{/admin/suppliers}">suppliers</a>
                         <br/>
-                        <a th:href="@{/admin/catalog/all}">categorie</a>
+                        <a th:href="@{/admin/catalog/all}" th:text="#{label.categories}">categories</a>
+                        <br/>
+                        <a th:href="@{/admin/products/1/all}" th:text="#{label.products}">products</a>
                         <br/>
                         <a th:href="@{/admin/warehouse/wares?warehouseId=1}" th:text="#{label.warehouse.all}">warehouse</a>
                         <br/>

@@ -11,10 +11,6 @@
 
     <body>
         <div th:fragment="left_side_warehouse" style="align-content: left; margin-left: 15px;">
-<!--
-            <div th:text="${searchForm.textToSearch}"></div>
-            <div th:text="${productForm.name}"></div>
--->
             <form th:action="@{/admin/warehouse/searchProduct}" th:object="${searchForm}" method="GET">
                 <br/>
                 <div class="form-group">
