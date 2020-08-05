@@ -34,7 +34,7 @@
                     <br/>
                     <h4>Elenco Prodotti</h4>
                     <table class="table">
-                        <thead>
+                        <thead class="thead-light">
                             <tr>
                                 <th th:text="#{label.product.category}"></th>
                                 <th th:text="#{label.product.name}"></th>
@@ -99,9 +99,6 @@
                         <br/>
                         <h4 th:text="#{label.rightside.warehouse.title}">prodotto</h4>
                         <br/>
-<!--
-                        <form name="editProductForm" th:object="${productForm}" th:action="@{/admin/products(form=${}, page=${0}, size=${size}, categoryId=S{categoryId})}" method="post"
--->
                         <form name="editProductForm" th:object="${productForm}" th:action="@{/admin/products(form, page=${0}, size=${size}, categoryId=${categoryId})}" method="post"
                               enctype="multipart/form-data">
                             <input type="hidden" name="categoryId" th:field="*{categoryId}"/>
