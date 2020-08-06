@@ -17,23 +17,7 @@
             <div class="row">
                 <div class="col-lg-2">
                 </div>
-                <div class="col-lg-4">
-                    <br/>
-                    <h4>Category Edit</h4>
-                    <br/>
-                    <form name="editCategoryForm" th:object="${category}" th:action="@{/admin/catalog?form}" th:method="post">
-                        <input type="hidden" th:field="*{categoryid}"/>
-                        <div class="form-group">
-                            <label for="product_name" th:text="#{label.product.name}">name</label>
-                            <input class="form-control" id="product_name" type="text" th:field="*{name}"/>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
-                        <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
-                    </form>
-
-                </div>
-
-                <div class="col-lg-4">
+                <div class="col-lg-5">
                     <br/>
                     <h4 th:text="#{label.categories.listing}">categories listing</h4>
                     <table class="table" width="100%" cellspacing="10px" cellpadding="10px">
@@ -84,6 +68,24 @@
                     </table>
                     <br/>
                 </div>
+
+                <div class="col-lg-3">
+                    <br/>
+                    <h4>Category Edit</h4>
+                    <br/>
+                    <form name="editCategoryForm" th:object="${category}" th:action="@{/admin/catalog?form}" th:method="post">
+                        <input type="hidden" th:field="*{categoryid}"/>
+                        <div class="form-group col-xl-9">
+                            <label for="product_name" th:text="#{label.product.name}">name</label>
+                            <input class="form-control" id="product_name" type="text" th:field="*{name}"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+                        <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
+                    </form>
+
+                </div>
+
                 <div class="col-lg-2">
                 </div>
             </div>
