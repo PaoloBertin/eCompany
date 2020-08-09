@@ -161,6 +161,7 @@ public class ProductsController {
         uiModel.addAttribute("size", size);
         uiModel.addAttribute("customer", userContext.getCurrentCustomer());
         uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("products", products);
         uiModel.addAttribute("searchForm", new SearchForm());
