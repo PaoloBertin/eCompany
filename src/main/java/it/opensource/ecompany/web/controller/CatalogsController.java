@@ -56,7 +56,7 @@ public class CatalogsController {
 
         uiModel.addAttribute("category", category);
 
-        return "catalog/editCategory";
+        return "catalog/categoriesListAdmin";
     }
 
     /**
@@ -79,7 +79,7 @@ public class CatalogsController {
             message = new Message("error", messageSource.getMessage("category.save.fail", new Object[]{}, locale));
             uiModel.addAttribute("message", message);
             uiModel.addAttribute("category", category);
-            return "catalog/editCategory";
+            return "catalog/categoriesListAdmin";
         }
 
         uiModel.asMap()
@@ -90,7 +90,7 @@ public class CatalogsController {
         redirectAttributes.addFlashAttribute("message", message);
         log.info("category id: " + result.getCategoryid());
 
-        String urlRedirect = "redirect:/admin/catalog/all";
+        String urlRedirect = "redirect:catalog/categoriesListAdmin";
 
         return urlRedirect;
     }
@@ -124,7 +124,7 @@ public class CatalogsController {
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
 
-        return "catalog/editCategory";
+        return "catalog/categoriesListAdmin";
     }
 
     @GetMapping("/admin/catalog/all")
