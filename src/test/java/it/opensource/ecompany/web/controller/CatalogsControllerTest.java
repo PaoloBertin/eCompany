@@ -36,12 +36,12 @@ class CatalogsControllerTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    public void createCategoryForm(@Autowired MockMvc mvc) throws Exception {
+    public void createCategoryFormTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/admin/catalog").param("form", "")
                                          .with(user("admin.ecompany").password("admin")
                                                                      .roles("ADMIN")))
-           .andExpect(view().name("catalog/editCategory"))
+           .andExpect(view().name("catalog/categoriesListAdmin"))
            .andExpect(status().isOk());
 
     }
@@ -56,7 +56,7 @@ class CatalogsControllerTest {
                                                                       .roles("ADMIN")))
            .andExpect(MockMvcResultMatchers.flash()
                                            .attribute("message", hasProperty("type", equalTo("success"))))
-           .andExpect(redirectedUrl("/admin/catalog/all"));
+           .andExpect(redirectedUrl("catalog/categoriesListAdmin"));
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -67,7 +67,7 @@ class CatalogsControllerTest {
                                           .with(user("admin.ecompany").password("admin")
                                                                       .roles("ADMIN")))
            .andExpect(model().attribute("message", hasProperty("type", equalTo("error"))))
-           .andExpect(view().name("catalog/editCategory"))
+           .andExpect(view().name("catalog/categoriesListAdmin"))
            .andExpect(status().isOk());
     }
 
