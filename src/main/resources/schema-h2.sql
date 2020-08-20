@@ -202,6 +202,7 @@ CREATE TABLE IF NOT EXISTS purchase_orders_lineitems (
 
 CREATE TABLE IF NOT EXISTS accounts (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255),
     balance DECIMAL(12,4),
 
     PRIMARY KEY(id)

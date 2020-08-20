@@ -11,7 +11,7 @@ public interface AccountsService {
 
     List<Account> getAllAccounts();
 
-    void deposit(BigDecimal amount);
+    boolean deposit(Long accountId, BigDecimal amount);
 
-    void withdrawal(BigDecimal amount);
+    boolean withdrawal(Long accountId, BigDecimal amount);
 }
