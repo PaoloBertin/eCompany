@@ -19,21 +19,22 @@ public class AccountsController {
         this.accountsService = accountsService;
     }
 
-    @GetMapping("/api/accounts")
+    @GetMapping("/admin/accounts")
     public String viewAccounts(Model uiModel) {
 
         List<Account> accounts = accountsService.getAllAccounts();
         uiModel.addAttribute("accounts", accounts);
 
-        return "accountsList";
+        return "accounts/accountsList";
     }
 
-    @GetMapping("/api/accounts/{accountId}")
+    @GetMapping("/admin/accounts/{accountId}")
     public String viewAccount(@PathVariable("accountId") Long accountId, Model uiModel) {
 
         Account account = accountsService.getAccountById(accountId);
         uiModel.addAttribute("account", account);
 
-        return "";
+        return "accounts/accountShow";
     }
+
 }
