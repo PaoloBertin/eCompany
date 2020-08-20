@@ -1,7 +1,6 @@
 package it.opensource.ecompany.domain;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
 @Table(name = "products")
