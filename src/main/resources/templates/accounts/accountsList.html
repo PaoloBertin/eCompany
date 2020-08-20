@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div class="container-fluid p-0">
+
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>
+
+            <div class="row">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-5">
+                    <br/>
+                    <h4 th:text="#{label.categories.listing}">categories listing</h4>
+
+                    <!--
+                    <table class="table" width="100%" cellspacing="10px" cellpadding="10px">
+                        <thead class="thead-light">
+                            <tr>
+                                <th th:text="#{label.categories.name}">name</th>
+                                <th th:text="#{label.edit}">edit</th>
+                                <th th:text="#{label.delete}">delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a th:href="@{/admin/catalog/all}" th:text="#{label.categories.all}"></a>
+                                </td>
+                                <td>
+                                    <a th:href="@{/admin/catalog/all?form}">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form th:action="@{/admin/catalog/all}" th:method="delete">
+                                        <button class="btn">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr th:each="category : ${categories}">
+                                <td>
+                                    <a th:href="@{'/admin/catalog/' + ${category.categoryid} + '/all'}" th:text="${category.name}"></a>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/admin/catalog/' + ${category.categoryid}} + '?form'">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form th:action="@{'/admin/catalog/'}" th:method="delete">
+                                        <input type="hidden" name="categoryid" th:value="${category.categoryid}"/>
+                                        <button class="btn">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    -->
+
+                    <br/>
+                </div>
+
+                <div class="col-lg-3">
+                    <br/>
+                    <h4>Category Edit</h4>
+                    <br/>
+
+                    <!--
+                    <form name="editCategoryForm" th:object="${category}" th:action="@{/admin/catalog?form}" th:method="post">
+                        <input type="hidden" th:field="*{categoryid}"/>
+                        <div class="form-group col-xl-9">
+                            <label for="product_name" th:text="#{label.product.name}">name</label>
+                            <input class="form-control" id="product_name" type="text" th:field="*{name}"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+                        <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
+                    </form>
+                    -->
+
+                </div>
+
+                <div class="col-lg-2">
+                </div>
+            </div>
+
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

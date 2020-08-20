@@ -229,3 +229,5 @@ INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) 
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(9, 18);
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(9, 19);
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(10, 20);
+
+INSERT INTO accounts(id, balance) VALUES(1, 10000);
