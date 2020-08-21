@@ -27,7 +27,7 @@ public class AccountsController {
         uiModel.addAttribute("account", account);
         uiModel.addAttribute("accounts", accounts);
 
-        return "accounts/accountsListAdmin";
+        return "accounts/accountsList";
     }
 
     @GetMapping("/admin/accounts/{accountId}")
