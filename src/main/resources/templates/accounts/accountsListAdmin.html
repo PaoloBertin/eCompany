@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div class="container-fluid p-0">
+
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-6">
+                    <br/>
+                    <h4 th:text="#{label.accounts.listing}">accounts listing</h4>
+
+                    <!--    -->
+                    <table class="table" width="100%" cellspacing="10px" cellpadding="10px">
+                        <thead class="thead-light">
+                            <tr>
+                                <th th:text="#{label.account.name}">name</th>
+                                <th th:text="#{label.edit}">edit</th>
+                                <th th:text="#{label.delete}">delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="account : ${accounts}">
+                                <td>
+                                    <a th:href="@{'/admin/accounts/' + ${account.id}}" th:text="${account.name}"></a>
+                                </td>
+                                <td>
+                                    <!--
+                                    <a th:href="@{'/admin/accounts/' + ${account.id}} + '?form'">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                    -->
+                                    <i class="fa fa-edit fa-lg"></i>
+                                </td>
+                                <td>
+                                    <form th:action="@{'/admin/accounts/'}" th:method="delete">
+                                        <input type="hidden" name="id" th:value="${account.id}"/>
+                                        <!--
+                                        <button class="btn">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                        -->
+                                        <i class="fa fa-trash fa-lg"></i>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br/>
+                </div>
+                <div class="col-lg-3">
+                </div>
+            </div>
+
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

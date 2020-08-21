@@ -23,9 +23,11 @@ public class AccountsController {
     public String viewAccounts(Model uiModel) {
 
         List<Account> accounts = accountsService.getAllAccounts();
+        Account account = new Account();
+        uiModel.addAttribute("account", account);
         uiModel.addAttribute("accounts", accounts);
 
-        return "accounts/accountsList";
+        return "accounts/accountsListAdmin";
     }
 
     @GetMapping("/admin/accounts/{accountId}")
