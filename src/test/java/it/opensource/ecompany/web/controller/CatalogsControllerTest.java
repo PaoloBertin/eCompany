@@ -30,7 +30,7 @@ class CatalogsControllerTest {
         mvc.perform(get("/admin/catalog/all").with(user("admin.ecompany").password("admin")
                                                                          .roles("ADMIN")))
            .andExpect(model().attribute("categories", hasSize(6)))
-           .andExpect(view().name("catalog/categoriesListAdmin"))
+           .andExpect(view().name("catalog/categoriesList"))
            .andExpect(status().isOk());
     }
 
@@ -41,7 +41,7 @@ class CatalogsControllerTest {
         mvc.perform(get("/admin/catalog").param("form", "")
                                          .with(user("admin.ecompany").password("admin")
                                                                      .roles("ADMIN")))
-           .andExpect(view().name("catalog/categoriesListAdmin"))
+           .andExpect(view().name("catalog/categoriesList"))
            .andExpect(status().isOk());
 
     }
@@ -56,7 +56,7 @@ class CatalogsControllerTest {
                                                                       .roles("ADMIN")))
            .andExpect(MockMvcResultMatchers.flash()
                                            .attribute("message", hasProperty("type", equalTo("success"))))
-           .andExpect(redirectedUrl("catalog/categoriesListAdmin"));
+           .andExpect(redirectedUrl("/admin/catalog/all"));
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -67,7 +67,7 @@ class CatalogsControllerTest {
                                           .with(user("admin.ecompany").password("admin")
                                                                       .roles("ADMIN")))
            .andExpect(model().attribute("message", hasProperty("type", equalTo("error"))))
-           .andExpect(view().name("catalog/categoriesListAdmin"))
+           .andExpect(view().name("catalog/categoriesList"))
            .andExpect(status().isOk());
     }
 

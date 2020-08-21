@@ -62,10 +62,7 @@
                         </div>
                        
                     </div>
-    
                     <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{'/products/' + ${product.productid}('form')}" th:text="#{label.product.update}"></a>
-                    
-
                 </div>
                             
                 <div class="col-lg-3">

@@ -74,6 +74,7 @@ public class CatalogsController {
                          Locale locale) {
 
         log.info("Creating category");
+
         Message message = null;
         if (bindingResult.hasErrors()) {
             message = new Message("error", messageSource.getMessage("category.save.fail", new Object[]{}, locale));
@@ -90,7 +91,7 @@ public class CatalogsController {
         redirectAttributes.addFlashAttribute("message", message);
         log.info("category id: " + result.getCategoryid());
 
-        String urlRedirect = "redirect:catalog/categoriesList";
+        String urlRedirect = "redirect:/admin/catalog/all";
 
         return urlRedirect;
     }
@@ -106,7 +107,9 @@ public class CatalogsController {
         categoriesService.deleteCategory(category);
 
         List<Category> categories = categoriesService.getAll();
+        category = new Category();
         uiModel.addAttribute("categories", categories);
+        uiModel.addAttribute("category", category);
 
         return "catalog/categoriesList";
     }
@@ -124,7 +127,7 @@ public class CatalogsController {
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
 
-        return "catalog/categoriesList";
+        return "catalog/categoryEdit";
     }
 
     /**
@@ -136,14 +139,14 @@ public class CatalogsController {
      * @return nome vista
      */
     @GetMapping("/admin/catalog/all")
-    public String getAllCategoriesAdmin(@RequestParam(name = "page", defaultValue = "0") int page,
-                                        @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
+    public String getAllCategories(@RequestParam(name = "page", defaultValue = "0") int page,
+                                   @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         List<Category> categories = categoriesService.getAll();
+        Category category = new Category();
 
-        // Category category = new Category();
-        // uiModel.addAttribute("category", category);
         uiModel.addAttribute("categories", categories);
+        uiModel.addAttribute("category", category);
 
         log.debug("visualizza tutte le categorie");
 
