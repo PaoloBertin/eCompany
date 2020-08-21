@@ -56,7 +56,7 @@ public class CatalogsController {
 
         uiModel.addAttribute("category", category);
 
-        return "catalog/categoriesListAdmin";
+        return "catalog/categoriesList";
     }
 
     /**
@@ -79,7 +79,7 @@ public class CatalogsController {
             message = new Message("error", messageSource.getMessage("category.save.fail", new Object[]{}, locale));
             uiModel.addAttribute("message", message);
             uiModel.addAttribute("category", category);
-            return "catalog/categoriesListAdmin";
+            return "catalog/categoriesList";
         }
 
         uiModel.asMap()
@@ -90,7 +90,7 @@ public class CatalogsController {
         redirectAttributes.addFlashAttribute("message", message);
         log.info("category id: " + result.getCategoryid());
 
-        String urlRedirect = "redirect:catalog/categoriesListAdmin";
+        String urlRedirect = "redirect:catalog/categoriesList";
 
         return urlRedirect;
     }
@@ -108,7 +108,7 @@ public class CatalogsController {
         List<Category> categories = categoriesService.getAll();
         uiModel.addAttribute("categories", categories);
 
-        return "catalog/categoriesListAdmin";
+        return "catalog/categoriesList";
     }
 
     /**
@@ -124,23 +124,30 @@ public class CatalogsController {
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
 
-        return "catalog/categoriesListAdmin";
+        return "catalog/categoriesList";
     }
 
+    /**
+     * Ritorna la vista di tutte le categorie
+     *
+     * @param page    pagina da visualizzare
+     * @param size    elementi per pagina
+     * @param uiModel mdello vista
+     * @return nome vista
+     */
     @GetMapping("/admin/catalog/all")
     public String getAllCategoriesAdmin(@RequestParam(name = "page", defaultValue = "0") int page,
-                                        @RequestParam(name = "size", defaultValue = "10") int size,
-                                        Model uiModel) {
+                                        @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         List<Category> categories = categoriesService.getAll();
 
-        Category category = new Category();
+        // Category category = new Category();
+        // uiModel.addAttribute("category", category);
         uiModel.addAttribute("categories", categories);
-        uiModel.addAttribute("category", category);
 
         log.debug("visualizza tutte le categorie");
 
-        return "catalog/categoriesListAdmin";
+        return "catalog/categoriesList";
     }
 
     @GetMapping("/admin/catalog/{categoryId}/all")
@@ -163,6 +170,6 @@ public class CatalogsController {
 
         log.debug("visualizza tutte le categorie");
 
-        return "catalog/categoriesListAdmin";
+        return "catalog/categoriesList";
     }
 }
