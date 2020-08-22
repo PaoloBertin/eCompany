@@ -17,11 +17,13 @@
             <!-- corpo centrale -->
             <div class="row">               
                 <div class="col-lg-2">
+                    <!--
                     <div th:replace="~{fragments/left_side :: left_side}">left side</div>
+                    -->
                 </div>
                 <div class="col-lg-4"> 
                     <br/>   
-                    <h5>Product Edit</h5>
+                    <h4 th:text="#{label.product.update}">product edit</h4>
                     <br/>
 
                     <form name="editForm" method="post" th:object="${product}" th:action="@{/products/${product.productid}?form}">
@@ -57,7 +59,9 @@
                     <br/>                             
                 </div>                       
                 <div class="col-lg-6">
+                    <!--
                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+                    -->
                 </div>
             </div>
             

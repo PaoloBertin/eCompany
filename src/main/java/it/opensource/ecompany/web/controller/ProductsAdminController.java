@@ -71,8 +71,7 @@ public class ProductsAdminController {
 
     @GetMapping("/all/all")
     public String viewAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                        @RequestParam(name = "size", defaultValue = "10") int size,
-                                        Model uiModel) {
+                                        @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size);
 
@@ -105,8 +104,7 @@ public class ProductsAdminController {
     @GetMapping("/{categoryId}/all")
     public String viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                @RequestParam(name = "page", defaultValue = "0") int page,
-                                               @RequestParam(name = "size", defaultValue = "10") int size,
-                                               Model uiModel) {
+                                               @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
@@ -147,7 +145,7 @@ public class ProductsAdminController {
         Product product = productsService.getProductById(productId);
         uiModel.addAttribute("product", product);
 
-        return "catalog/show";
+        return "catalog/productShow";
     }
 
     /**
@@ -156,7 +154,7 @@ public class ProductsAdminController {
      * @param id identificativo prodotto
      * @return immagine prodotto
      */
-    @GetMapping(value = "/products/photo/{id}")
+    @GetMapping(value = "photo/{id}")
     @ResponseBody
     public byte[] downloadPhoto(@PathVariable("id") Long id) {
 
@@ -166,8 +164,7 @@ public class ProductsAdminController {
     }
 
     @GetMapping("/searchProduct")
-    public String searchProduct(@ModelAttribute SearchForm searchForm,
-                                @RequestParam(name = "page", defaultValue = "0") int page,
+    public String searchProduct(@ModelAttribute SearchForm searchForm, @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         String searchText = searchForm.getTextToSearch();
@@ -192,26 +189,6 @@ public class ProductsAdminController {
     }
 
     /**
-     * Gestisce la richiesta di creare un nuovo prodotto
-     *
-     * @return nome vista
-     */
-    @GetMapping(params = "form")
-    public String createProductForm(Model uiModel) {
-
-        ProductForm productForm = new ProductForm();
-
-        Customer customer = userContext.getCurrentCustomer();
-
-        uiModel.addAttribute("customer", customer);
-        uiModel.addAttribute("searchForm", new SearchForm());
-        uiModel.addAttribute("productForm", productForm);
-        uiModel.addAttribute("cartBean", cartBean);
-
-        return "catalog/edit";
-    }
-
-    /**
      * Rende persistente i campi del form ricevuto
      *
      * @param productForm
@@ -233,7 +210,7 @@ public class ProductsAdminController {
 
         log.info("Creating product");
 
-        String message= null;
+        String message = null;
         if (bindingResult.hasErrors()) {
             Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
             Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
@@ -310,8 +287,7 @@ public class ProductsAdminController {
      * @return vista
      */
     @PostMapping(path = "/{id}", params = "form")
-    public String updateProduct(@Valid Product product, BindingResult bindingResult, Model uiModel,
-                                HttpServletRequest httpServletRequest,
+    public String updateProduct(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest,
                                 RedirectAttributes redirectAttributes, Locale locale,
                                 @RequestParam(value = "file", required = false) Part file) {
 
@@ -332,8 +308,8 @@ public class ProductsAdminController {
         // rende persistenti le modifiche
         productsService.saveProduct(product);
 
-        String url = "redirect:/products/" + product.getCategory()
-                                                    .getCategoryid() + "/" + product.getProductid();
+        String url = "redirect:/admin/products/" + product.getCategory()
+                                                          .getCategoryid() + "/" + product.getProductid();
 
         return url;
     }
@@ -346,7 +322,7 @@ public class ProductsAdminController {
      * @param uiModel
      * @return nome vista
      */
-    @GetMapping(path = "/{productId}", params = "form")
+    @GetMapping(path = "/all/{productId}", params = "form")
     public String updateProductForm(@PathVariable("productId") Long productId, @ModelAttribute CustomerForm customerForm, Model uiModel) {
 
         log.debug("id prodotto da editare=" + productId);
@@ -357,7 +333,7 @@ public class ProductsAdminController {
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("product", product);
 
-        return "catalog/edit";
+        return "catalog/productEdit";
     }
 
 }
