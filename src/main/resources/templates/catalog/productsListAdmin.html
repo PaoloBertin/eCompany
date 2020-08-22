@@ -49,12 +49,12 @@
                                 <td th:text="${product.name}"></td>
                                 <td th:text="${product.price}"></td>
                                 <td>
-                                    <a th:href="@{'/admin/catalog/' + ${product.productid}} + '?form'">
+                                    <a th:href="@{'/admin/products/all/' + ${product.productid}} + '?form'">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
                                 </td>
                                 <td>
-                                    <form th:action="@{'/admin/catalog/'}" th:method="delete">
+                                    <form th:action="@{'/admin/products/'}" th:method="delete">
                                         <input type="hidden" name="productid" th:value="${product.productid}"/>
                                         <button class="btn">
                                             <i class="fa fa-trash fa-lg"></i>
