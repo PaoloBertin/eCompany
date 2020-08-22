@@ -32,13 +32,15 @@
                 </div>
                 <div class="col-lg-7">
                     <br/>
-                    <h4>Elenco Prodotti</h4>
+                    <h4 th:text="#{label.product.listing}">elenco prodotti</h4>
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
                                 <th th:text="#{label.product.category}"></th>
                                 <th th:text="#{label.product.name}"></th>
                                 <th th:text="#{label.product.price}"></th>
+                                <th th:text="#{label.edit}">edit</th>
+                                <th th:text="#{label.delete}">delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +48,19 @@
                                 <td th:text="${product.category.name}"></td>
                                 <td th:text="${product.name}"></td>
                                 <td th:text="${product.price}"></td>
+                                <td>
+                                    <a th:href="@{'/admin/catalog/' + ${product.productid}} + '?form'">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form th:action="@{'/admin/catalog/'}" th:method="delete">
+                                        <input type="hidden" name="productid" th:value="${product.productid}"/>
+                                        <button class="btn">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

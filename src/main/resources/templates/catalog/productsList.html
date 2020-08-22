@@ -23,7 +23,7 @@
 
                 <div class="col-lg-7">
                     <br/>
-                    <h4 th:text="#{label.product.listing}">Products Listing</h4>
+                    <h4 th:text="#{label.product.listing}">products listing</h4>
 
                     <table width="100%" cellspacing="10px" cellpadding="10px" th:with="column=2,elements=${products.content.size()}">
                         <tbody>
@@ -32,14 +32,18 @@
                                     th:width="${100 / column} + '%'" style="vertical-align: text-top">
                                     <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left"
                                          style="margin: 0px 10px" width="65" height="92"/>
-                                    <!--  -->
+                                    <!--
                                     <a th:href="@{'/products/' + ${products.content.get(col).category.categoryid} + '/' + ${products.content.get(col).productid}}">
+                                        <span th:text="${products.getContent().get(col).name}"></span>
+                                    </a>
+                                     -->
+                                    <a th:href="@{'/products/all/' + ${products.content.get(col).productid}}">
                                         <span th:text="${products.getContent().get(col).name}"></span>
                                     </a>
                                     <br/>
                                     <p>
                                         <b>
-                                            <span th:text="#{label.product.price} + ':&nbsp;'">Prezzo: </span>
+                                            <span th:text="#{label.product.price} + ':&nbsp;'">prezzo</span>
                                             <span th:text="${#numbers.formatDecimal(products.content.get(col).price, 0, 'COMMA', 2, 'POINT')}  + ' &euro;'"></span>
                                         </b>
                                     </p>
@@ -53,14 +57,14 @@
                             <ul class="pagination" th:with="pages=${products.totalPages}">
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}"
+                                       th:href="@{/products/{categoryId}/all(categoryId=${categoryId},page=${0},size=${size})}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}"
+                                       th:href="@{/products/{categoryId}/all(categoryId=${categoryId},page=${page - 1},size=${size})}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
@@ -78,14 +82,14 @@
                                 </li>
                                 <li class="page-item" th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}"
+                                       th:href="@{/products/{categoryId}/all(categoryId=${categoryId},page=${page + 1},size=${size})}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}(categoryId=${categoryId},page=${products.totalPages - 1},size=${size})}"
+                                       th:href="@{/products/{categoryId}/all(categoryId=${categoryId},page=${products.totalPages - 1},size=${size})}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>

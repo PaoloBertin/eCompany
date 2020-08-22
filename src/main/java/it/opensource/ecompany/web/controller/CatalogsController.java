@@ -6,13 +6,8 @@ import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.controller.util.Message;
-import it.opensource.ecompany.web.form.ProductForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.MessageSource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +19,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Slf4j
+@RequestMapping("/admin/catalog")
 @Controller
 public class CatalogsController {
 
@@ -49,7 +45,7 @@ public class CatalogsController {
      *
      * @return nome vista
      */
-    @GetMapping(path = "/admin/catalog", params = "form")
+    @GetMapping(params = "form")
     public String createCategoryForm(Model uiModel) {
 
         Category category = new Category();
@@ -69,9 +65,9 @@ public class CatalogsController {
      * @param locale
      * @return nome vista
      */
-    @PostMapping(path = "/admin/catalog", params = "form")
-    public String create(@Valid Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model uiModel,
-                         Locale locale) {
+    @PostMapping(params = "form")
+    public String createCategory(@Valid Category category, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                 Model uiModel, Locale locale) {
 
         log.info("Creating category");
 
@@ -96,7 +92,7 @@ public class CatalogsController {
         return urlRedirect;
     }
 
-    @DeleteMapping(path = "/admin/catalog")
+    @DeleteMapping
     public String deleteCategory(@RequestParam("categoryid") Long id, Model uiModel) {
 
         List<Product> products = productsService.getProductsByCategory(id);
@@ -119,7 +115,7 @@ public class CatalogsController {
      *
      * @return nome vista
      */
-    @GetMapping(path = "/admin/catalog/{categoryId}", params = "form")
+    @GetMapping(path = "/{categoryId}", params = "form")
     public String updateCategoryForm(@PathVariable("categoryId") Long categoryId, Model uiModel) {
 
         Category category = categoriesService.getCategoryById(categoryId);
@@ -138,7 +134,7 @@ public class CatalogsController {
      * @param uiModel mdello vista
      * @return nome vista
      */
-    @GetMapping("/admin/catalog/all")
+    @GetMapping("/all")
     public String getAllCategories(@RequestParam(name = "page", defaultValue = "0") int page,
                                    @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
@@ -153,6 +149,7 @@ public class CatalogsController {
         return "catalog/categoriesList";
     }
 
+    /*
     @GetMapping("/admin/catalog/{categoryId}/all")
     public String getAllProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                  @RequestParam(name = "page", defaultValue = "0") int page,
@@ -175,4 +172,5 @@ public class CatalogsController {
 
         return "catalog/categoriesList";
     }
+     */
 }

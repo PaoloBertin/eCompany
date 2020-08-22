@@ -18,7 +18,9 @@
             <!-- corpo centrale -->
             <div class="row">
                 <div class="col-lg-2">
+                    <!--
                     <div th:replace="~{fragments/left_side_admin :: left_side_admin}">left side</div>
+                    -->
                 </div>
 
                 <div class="col-lg-7">
@@ -35,13 +37,16 @@
                         <br/>
                         <a th:href="@{/admin/catalog/all}" th:text="#{label.categories}">categories</a>
                         <br/>
+                        <!--
+                        <a th:href="@{/admin/products/all/all}" th:text="#{label.products}">products</a>
+                        -->
                         <a th:href="@{/admin/products/1/all}" th:text="#{label.products}">products</a>
                         <br/>
                         <a th:href="@{/admin/warehouse/wares?warehouseId=1}" th:text="#{label.warehouse.all}">warehouse</a>
                         <br/>
-                        <a th:href="@{'/admin/purchaseorders/all'}" th:text="#{label.purchaseorder.listing}">Sales orders</a>
+                        <a th:href="@{/admin/purchaseorders/all}" th:text="#{label.purchaseorder.listing}">Sales orders</a>
                         <br/>
-                        <a th:href="@{'/admin/salesorders/all'}" th:text="#{label.salesorder.listing}">Purchases orders</a>
+                        <a th:href="@{/admin/salesorders/all}" th:text="#{label.salesorder.listing}">Purchases orders</a>
                         <br/>
                     </div>
                 </div>
