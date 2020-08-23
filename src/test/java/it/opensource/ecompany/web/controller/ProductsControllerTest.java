@@ -27,7 +27,7 @@ public class ProductsControllerTest {
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(view().name("catalog/list"))
+           .andExpect(view().name("catalog/productsList"))
            .andExpect(status().isOk());
     }
 
@@ -39,32 +39,31 @@ public class ProductsControllerTest {
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(view().name("catalog/list"))
+           .andExpect(view().name("catalog/productsList"))
            .andExpect(status().isOk());
     }
 
     @Test
     public void viewProducstByCategoryByPage1Test() throws Exception {
 
-        mvc.perform(get("/products/{categoryId}", 1L).param("page", "0")
+        mvc.perform(get("/products/{categoryId}/all", 1L).param("page", "0")
                                                      .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(view().name("catalog/list"))
+           .andExpect(view().name("catalog/productsList"))
            .andExpect(status().isOk());
     }
 
     @Test
     public void viewProducstByCategoryByPage2Test() throws Exception {
 
-        mvc.perform(get("/products/{categoryId}", 1L).param("page", "1")
+        mvc.perform(get("/products/{categoryId}/all", 1L).param("page", "1")
                                                      .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
-           .andExpect(view().name("catalog/list"))
+           .andExpect(view().name("catalog/productsList"))
            .andExpect(status().isOk());
-
     }
 }
