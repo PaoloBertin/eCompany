@@ -47,7 +47,7 @@ public class ProductsControllerTest {
     public void viewProducstByCategoryByPage1Test() throws Exception {
 
         mvc.perform(get("/products/{categoryId}/all", 1L).param("page", "0")
-                                                     .param("size", "10"))
+                                                         .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
@@ -59,7 +59,7 @@ public class ProductsControllerTest {
     public void viewProducstByCategoryByPage2Test() throws Exception {
 
         mvc.perform(get("/products/{categoryId}/all", 1L).param("page", "1")
-                                                     .param("size", "10"))
+                                                         .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
            .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))

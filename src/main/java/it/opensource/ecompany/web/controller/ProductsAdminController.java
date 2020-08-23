@@ -79,10 +79,12 @@ public class ProductsAdminController {
 
         Customer customer = userContext.getCurrentCustomer();
         List<Category> categories = categoriesService.getAll();
+        SearchForm searchForm = new SearchForm();
+        ProductForm productForm = new ProductForm();
 
         uiModel.addAttribute("customer", customer);
-        uiModel.addAttribute("customer", customer);
-        uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("searchForm", searchForm);
+        uiModel.addAttribute("productForm", productForm);
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
         uiModel.addAttribute("categories", categories);
@@ -137,12 +139,12 @@ public class ProductsAdminController {
     public String viewProduct(@PathVariable("productId") Long productId, Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
+        Product product = productsService.getProductById(productId);
+
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categoriesService.getAll());
-
-        Product product = productsService.getProductById(productId);
         uiModel.addAttribute("product", product);
 
         return "catalog/productShow";
