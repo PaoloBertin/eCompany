@@ -9,62 +9,73 @@
     </head>
 
     <body>
-        <div  class="container-fluid p-0">
-         
+        <div class="container-fluid p-0">
+
             <!-- intestazione -->
-            <div th:replace="~{fragments/header :: header}">header</div>       
+            <div th:replace="~{fragments/header :: header}">header</div>
 
             <!-- corpo centrale -->
-            <div class="row">               
+            <div class="row">
                 <div class="col-lg-2">
                     <!--
                     <div th:replace="~{fragments/left_side :: left_side}">left side</div>
                     -->
                 </div>
-                <div class="col-lg-4"> 
-                    <br/>   
+                <div class="col-lg-4">
+                    <br/>
                     <h4 th:text="#{label.product.update}">product edit</h4>
                     <br/>
+                    <form name="editProductForm" th:object="${productForm}"
+                          th:action="@{/admin/products(form='true', page=${0}, size=${size}, categoryId=${categoryId})}"
+                          method="post" enctype="multipart/form-data">
 
-                    <form name="editForm" method="post" th:object="${product}" th:action="@{/products/${product.productid}?form}">
+                        <!--
+                        <input type="hidden" th:field="*{categoryId}"/>
+                        -->
+                        <input type="hidden" th:field="*{productId}"/>
+
                         <div class="form-group">
                             <label for="product_name" th:text="#{label.product.name}">name</label>
-                            <input  class="form-control" id="product_name" type="text" th:field="*{name}"/>
+                            <input class="form-control" id="product_name" type="text" th:field="*{name}"/>
                         </div>
-                        <div  class="form-group">
-                            <label for="product_isbn"  th:text="#{label.product.isbn}" >isbn</label>
-                            <input  class="form-control" id="product_isbn" type="text" th:field="*{isbn}"/>
+                        <div class="form-group">
+                            <label for="product_isbn" th:text="#{label.product.isbn}">isbn</label>
+                            <input class="form-control" id="product_isbn" type="text" th:field="*{isbn}"/>
                         </div>
                         <div class="form-group">
                             <label for="product_price" th:text="#{label.product.price}">price</label>
-                            <input  class="form-control" id="product_price" type="text" th:field="*{price}"/>
+                            <input class="form-control" id="product_price" type="text" th:field="*{price}"/>
                         </div>
                         <div class="form-group">
                             <label for="product_description" th:text="#{label.product.description}">description</label>
-                            <!-- 
-                            <input  class="form-control" id="product_description" type="text" th:field="*{description}"/>
-                             -->
                             <textarea class="form-control" id="product_description" rows="4" th:field="*{description}"></textarea>
                         </div>
-                                
-                        <input type="hidden" th:field="*{productid}" />
-                        <input type="hidden" th:field="*{category}" />
-                        <input type="hidden" th:field="*{image}" />
-                        <input type="hidden" th:field="*{version}" /> 
-                                
+                        <div class="form-group">
+                            <label id="labelImageId" for="inputImageId" th:text="#{label.product.photo}">product image</label>
+                            <input class="form-control" id="inputImageId" type="file" name="image"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="labelCategorySelect">Category</label>
+                            <select class="form-control" id="labelCategorySelect" th:field="*{categoryProduct}">
+                                <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}">
+                                    wirefreme
+                                </option>
+                            </select>
+                        </div>
+
                         <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
                         <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
-                                
+
                     </form>
-                    <br/>                             
-                </div>                       
+                    <br/>
+                </div>
                 <div class="col-lg-6">
                     <!--
                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
                     -->
                 </div>
             </div>
-            
+
             <!-- pie' pagina -->
             <div class="row">
                 <div class="col-lg-12">

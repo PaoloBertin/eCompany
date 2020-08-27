@@ -49,9 +49,14 @@
                                 <td th:text="${product.name}"></td>
                                 <td th:text="${product.price}"></td>
                                 <td>
-                                    <a th:href="@{'/admin/products/all/' + ${product.productid}} + '?form'">
+                                    <a th:href="@{'/admin/products/all/' + ${product.productid}(form='true', categoryId=${categoryId})}">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
+                                    <!--
+                                    <a th:href="@{'/admin/products/all/' + ${product.productid}(form, categoryId={categoryId})}">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                    -->
                                 </td>
                                 <td>
                                     <form th:action="@{'/admin/products/'}" th:method="delete">
@@ -114,9 +119,14 @@
                         <br/>
                         <h4 th:text="#{label.rightside.warehouse.title}">prodotto</h4>
                         <br/>
-                        <form name="editProductForm" th:object="${productForm}" th:action="@{/admin/products(form, page=${0}, size=${size}, categoryId=${categoryId})}" method="post"
+                        <form name="editProductForm" th:object="${productForm}"
+                              th:action="@{/admin/products(form, page=${0}, size=${size}, categoryId=${categoryId})}" method="post"
                               enctype="multipart/form-data">
+
+                            <!--
                             <input type="hidden" name="categoryId" th:field="*{categoryId}"/>
+                            -->
+
                             <input type="hidden" name="productId" th:field="*{productId}"/>
                             <div class="form-group">
                                 <label id="labelNameId" for="inputNameId" th:text="#{label.product.name}">product name</label>
@@ -136,13 +146,15 @@
                                 <label id="labelPriceId" for="inputPriceId" th:text="#{label.product.price}">product price</label>
                                 <input class="form-control" id="inputPriceId" type="text" name="price" th:field="*{price}"/>
                             </div>
+                            <!--  -->
                             <div class="form-group">
                                 <label id="labelImageId" for="inputImageId" th:text="#{label.product.photo}">product image</label>
                                 <input class="form-control" id="inputImageId" type="file" name="image"/>
                             </div>
+
                             <div class="form-group">
                                 <label for="labelCategorySelect">Category</label>
-                                <select class="form-control" id="labelCategorySelect" th:field="*{category}">
+                                <select class="form-control" id="labelCategorySelect" th:field="*{categoryProduct}">
                                     <option th:each="category : ${categories}" th:value="${category.name}" th:text="${category.name}">
                                         wirefreme
                                     </option>

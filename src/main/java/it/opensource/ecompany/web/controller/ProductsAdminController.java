@@ -8,7 +8,6 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
-import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
 import lombok.extern.slf4j.Slf4j;
@@ -111,15 +110,19 @@ public class ProductsAdminController {
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
         Customer customer = userContext.getCurrentCustomer();
+        List<Category> categories = categoriesService.getAll();
+        SearchForm searchForm = new SearchForm();
+
+        ProductForm productForm = new ProductForm();
 
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
-        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("categories", categories);
         uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("products", products);
-        uiModel.addAttribute("productForm", new ProductForm());
-        uiModel.addAttribute("searchForm", new SearchForm());
+        uiModel.addAttribute("productForm", productForm);
+        uiModel.addAttribute("searchForm", searchForm);
         uiModel.addAttribute("cartBean", cartBean);
 
         log.debug("numero prodotti da visualizzare =" + products.getContent()
@@ -176,7 +179,10 @@ public class ProductsAdminController {
         Page<Product> products = productsService.getProductsByNameContainingByPage(searchText, pageable);
 
         Customer customer = userContext.getCurrentCustomer();
-        uiModel.addAttribute("searchForm", new SearchForm());
+        ProductForm productForm = new ProductForm();
+
+        uiModel.addAttribute("searchForm", searchForm);
+        uiModel.addAttribute("productForm", productForm);
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
@@ -204,10 +210,10 @@ public class ProductsAdminController {
      */
     @PostMapping
     public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                Model uiModel, @RequestParam(name = "form") String form,
-                                @RequestParam(name = "page", defaultValue = "0") int page,
+                                @RequestParam(name = "form") String form, @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size,
-                                @RequestParam(name = "categoryId") Long categoryId, HttpServletRequest httpServletRequest, Locale locale,
+                                @RequestParam(name = "categoryId", defaultValue = "1") Long categoryId,
+                                HttpServletRequest httpServletRequest, Locale locale, Model uiModel,
                                 @RequestParam(value = "image", required = false) Part image) {
 
         log.info("Creating product");
@@ -221,24 +227,108 @@ public class ProductsAdminController {
 
             uiModel.addAttribute("page", page);
             uiModel.addAttribute("size", size);
-            uiModel.addAttribute("message", message);
+            uiModel.addAttribute("message", new Message("success", message));
             uiModel.addAttribute("categories", categories);
             uiModel.addAttribute("categoryId", categoryId);
-            uiModel.addAttribute("product", productForm);
+            uiModel.addAttribute("productForm", productForm);
             uiModel.addAttribute("products", products);
 
-            return "/admin/products/" + categoryId + "/all";
+            return "catalog/productsListAdmin";
         }
 
         uiModel.asMap()
                .clear();
 
+        Product product = null;
+        if (productForm.getProductId() == null) {
+            product = new Product();
+        } else {
+            product = productsService.getProductById(productForm.getProductId());
+        }
+        setFieldProduct(product, productForm, image);
+
+        productsService.saveProduct(product);
+
         message = messageSource.getMessage("product.save.success", new Object[]{}, locale);
         redirectAttributes.addFlashAttribute("message", new Message("success", message));
 
-        Product product = new Product();
-        product = productForm.getProduct();
-        log.info("Product id: " + product.getProductid());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
+        Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
+
+        uiModel.addAttribute("page", page);
+        uiModel.addAttribute("size", size);
+        uiModel.addAttribute("categories", categoriesService.getAll());
+        uiModel.addAttribute("categoryId", categoryId);
+        uiModel.addAttribute("products", products);
+        uiModel.addAttribute("productForm", new ProductForm());
+        uiModel.addAttribute("customer", userContext.getCurrentCustomer());
+
+        return "redirect:/admin/products/" + categoryId + "/all";
+    }
+
+    /**
+     * Recupera campi prodotto da editare ed invia al form per l'editing
+     *
+     * @param productId
+     * @param uiModel
+     * @return nome vista
+     */
+    @GetMapping(path = "/all/{productId}")
+    public String updateProductForm(@PathVariable("productId") Long productId,
+                                    @RequestParam(name = "form") String form,
+                                    @RequestParam(value = "categoryId") Long categoryId, Model uiModel) {
+
+        log.debug("id prodotto da editare=" + productId);
+
+        Product product = productsService.getProductById(productId);
+        ProductForm productForm = new ProductForm();
+        setFieldProductForm(product, productForm);
+
+        List<Category> categories = categoriesService.getAll();
+
+        uiModel.addAttribute("productForm", productForm);
+        uiModel.addAttribute("categoryId", categoryId);
+        uiModel.addAttribute("categories", categories);
+
+        return "catalog/productEdit";
+    }
+
+
+    private Product setFieldProduct(Product product, ProductForm productForm, Part image) {
+
+        product.setName(productForm.getName());
+        product.setDescription(productForm.getDescription());
+        product.setIsbn(productForm.getIsbn());
+        product.setPrice(productForm.getPrice());
+
+        String categoryName = productForm.getCategoryProduct();
+        if (categoryName != null) {
+            Category category = categoriesService.getCategoryByName(productForm.getCategoryProduct());
+            product.setCategory(category);
+        }
+        setImage(product, image);
+
+        return product;
+    }
+
+    private ProductForm setFieldProductForm(Product product, ProductForm productForm) {
+
+        productForm.setProductId(product.getProductid());
+        productForm.setName(product.getName());
+        productForm.setDescription(product.getDescription());
+        productForm.setIsbn(product.getIsbn());
+        productForm.setPrice(product.getPrice());
+
+        //        productForm.setImage(product.getImage());
+        productForm.setCategoryProduct(product.getCategory()
+                                              .getName());
+        productForm.setCategory(product.getCategory());
+
+        return productForm;
+    }
+
+    private Product setImage(Product product, Part image) {
+
         // Process upload file
         if (image != null) {
             log.info("File name: " + image.getName());
@@ -257,85 +347,6 @@ public class ProductsAdminController {
             product.setImage(fileContent);
         }
 
-        Category category = categoriesService.getCategoryById(categoryId);
-        product.setCategory(category);
-        productsService.saveProduct(product);
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
-        Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
-
-        uiModel.addAttribute("page", page);
-        uiModel.addAttribute("size", size);
-        uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("categoryId", categoryId);
-        uiModel.addAttribute("products", products);
-        uiModel.addAttribute("productForm", new ProductForm());
-        uiModel.addAttribute("customer", userContext.getCurrentCustomer());
-
-        String url = "redirect:/admin/products/" + categoryId + "/all";
-
-        return url;
+        return product;
     }
-
-    /**
-     * Gestisce l'arrivo di un form con i campi editati
-     *
-     * @param product
-     * @param bindingResult
-     * @param uiModel
-     * @param httpServletRequest
-     * @param redirectAttributes
-     * @param locale
-     * @return vista
-     */
-    @PostMapping(path = "/{id}", params = "form")
-    public String updateProduct(@Valid Product product, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest,
-                                RedirectAttributes redirectAttributes, Locale locale,
-                                @RequestParam(value = "file", required = false) Part file) {
-
-        log.info("Updating product");
-
-        if (bindingResult.hasErrors()) {
-            uiModel.addAttribute("message", new Message("error", messageSource.getMessage("product.save.fail", new Object[]{}, locale)));
-            uiModel.addAttribute("product", product);
-            return "catalog/edit";
-        }
-
-        uiModel.asMap()
-               .clear();
-
-        redirectAttributes.addFlashAttribute("message", new Message("success",
-                                                                    messageSource.getMessage("product.save.success", new Object[]{},
-                                                                                             locale)));
-        // rende persistenti le modifiche
-        productsService.saveProduct(product);
-
-        String url = "redirect:/admin/products/" + product.getCategory()
-                                                          .getCategoryid() + "/" + product.getProductid();
-
-        return url;
-    }
-
-    /**
-     * Recupera campi prodotto da editare ed invia al form per l'editing
-     *
-     * @param productId
-     * @param customerForm
-     * @param uiModel
-     * @return nome vista
-     */
-    @GetMapping(path = "/all/{productId}", params = "form")
-    public String updateProductForm(@PathVariable("productId") Long productId, @ModelAttribute CustomerForm customerForm, Model uiModel) {
-
-        log.debug("id prodotto da editare=" + productId);
-
-        Product product = productsService.getProductById(productId);
-
-        uiModel.addAttribute("searchForm", new SearchForm());
-        uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("product", product);
-
-        return "catalog/productEdit";
-    }
-
 }

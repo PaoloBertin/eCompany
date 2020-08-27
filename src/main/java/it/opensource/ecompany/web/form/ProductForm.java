@@ -1,7 +1,6 @@
 package it.opensource.ecompany.web.form;
 
 import it.opensource.ecompany.domain.Category;
-import it.opensource.ecompany.domain.Product;
 
 import javax.validation.constraints.NotNull;
 
@@ -20,7 +19,9 @@ public class ProductForm {
 
     private Float price;
 
-    // private byte[] image;
+    private String categoryProduct;
+
+    //    private  byte[] image;
 
     private Category category;
 
@@ -84,16 +85,27 @@ public class ProductForm {
         this.price = price;
     }
 
-    // public byte[] getImage() {
+    public String getCategoryProduct() {
 
-    //    return image;
-    // }
+        return categoryProduct;
+    }
 
-    // public void setImage(byte[] image) {
+    public void setCategoryProduct(String categoryProduct) {
 
-    //        this.image = image;
-    // }
+        this.categoryProduct = categoryProduct;
+    }
 
+    /*
+        public byte[] getImage() {
+
+            return image;
+        }
+
+        public void setImage(byte[] image) {
+
+            this.image = image;
+        }
+    */
     public Category getCategory() {
 
         return category;
@@ -104,28 +116,4 @@ public class ProductForm {
         this.category = category;
     }
 
-    public Product getProduct() {
-
-        Product product = new Product();
-        product.setProductid(getProductId());
-        product.setName(getName());
-        product.setIsbn(getIsbn());
-        product.setDescription(getDescription());
-        product.setPrice(getPrice());
-        // product.setImage(getImage());
-        product.setCategory(getCategory());
-
-        return product;
-    }
-
-    public void setProduct(Product product) {
-
-        this.productId = product.getProductid();
-        this.name = product.getName();
-        this.isbn = product.getIsbn();
-        this.description = product.getDescription();
-        this.price = product.getPrice();
-        // this.image = product.getImage();
-        this.category = product.getCategory();
-    }
 }
