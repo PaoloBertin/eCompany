@@ -24,6 +24,17 @@
                 <div class="col-lg-7">
                     <br/>
                     <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
+
+                    <form name="selectWarehouseForm" th:object="${productForm}" th:action="@{/admin/warehouse/wares}" method="get">
+                        <div class="form-group">
+                            <label for="labelWarehouseSelect">warehouse</label>
+                            <select class="form-control" id="labelWarehouseSelect" th:field="*{warehouseId}">
+                                <option th:each="warehouse : ${warehouses}" th:value="${warehouse.warehouseid}" th:text="${warehouse.name}">warehouse</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary" type="submit" th:text="#{label.submit}">submit</button>
+                    </form>
+
                     <!--  -->
                     <table class="table">
                         <thead>

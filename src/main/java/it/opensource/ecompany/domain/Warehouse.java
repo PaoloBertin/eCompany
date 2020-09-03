@@ -2,6 +2,8 @@ package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "warehouses")
 @Entity
@@ -15,8 +17,15 @@ public class Warehouse implements Serializable {
 
     private String name;
 
+    @JoinTable(name = "warehouses_wares",
+        joinColumns = @JoinColumn(name = "warehouse_id"),
+        inverseJoinColumns = @JoinColumn(name = "ware_id")
+    )
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Ware> wares = new ArrayList<>();
+
     @Version
-    private Long version;
+    private Long       version;
 
     public Long getWarehouseid() {
 

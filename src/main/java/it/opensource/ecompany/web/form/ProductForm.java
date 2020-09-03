@@ -10,6 +10,8 @@ public class ProductForm {
 
     private Long categoryId;
 
+    private Long warehouseId;
+
     private String name;
 
     private String description;
@@ -43,6 +45,16 @@ public class ProductForm {
     public void setCategoryId(Long categoryId) {
 
         this.categoryId = categoryId;
+    }
+
+    public Long getWarehouseId() {
+
+        return warehouseId;
+    }
+
+    public void setWarehouseId(Long warehouseId) {
+
+        this.warehouseId = warehouseId;
     }
 
     public String getName() {

@@ -2,6 +2,8 @@ package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "wares")
 @Entity
@@ -13,9 +15,8 @@ public class Ware implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "warehouse_fk_01"))
-    private Warehouse warehouse;
+    @ManyToMany(mappedBy = "wares")
+    private List<Warehouse> warehouse = new ArrayList<>();
 
     @JoinColumn(name = "product_id")
     @OneToOne
@@ -54,12 +55,12 @@ public class Ware implements Serializable {
         this.id = id;
     }
 
-    public Warehouse getWarehouse() {
+    public List<Warehouse> getWarehouse() {
 
         return warehouse;
     }
 
-    public void setWarehouse(Warehouse warehouse) {
+    public void setWarehouse(List<Warehouse> warehouse) {
 
         this.warehouse = warehouse;
     }

@@ -1,8 +1,10 @@
 package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
+import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Ware;
+import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
@@ -17,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RequestMapping("/admin/warehouse")
@@ -52,14 +56,19 @@ public class WarehouseController {
         Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
 
         Customer customer = userContext.getCurrentCustomer();
+        List<Category> categories =categoriesService.getAll();
+        SearchForm searchForm = new SearchForm();
+        ProductForm productForm = new ProductForm();
+        List<Warehouse> warehouses = warehouseService.getAllWarehouse();
 
-        uiModel.addAttribute("customer", customer);
-        uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("cartBean", cartBean);
-        uiModel.addAttribute("searchForm",  new SearchForm());
-        uiModel.addAttribute("productForm", new ProductForm());
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
+        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("categories", categories);
+        uiModel.addAttribute("cartBean", cartBean);
+        uiModel.addAttribute("searchForm",  searchForm);
+        uiModel.addAttribute("productForm", productForm);
+        uiModel.addAttribute("warehouses", warehouses);
         uiModel.addAttribute("wares", wares);
 
         log.debug("visualizza pagina " + page + 1);

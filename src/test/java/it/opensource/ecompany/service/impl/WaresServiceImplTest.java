@@ -77,13 +77,13 @@ class WaresServiceImplTest {
     void getProductsByNameContainingByPage() {
 
         Long warehouseId = 1L;
-        String stringSearch = "Java";
+        String stringSearch = "JavaBeans";
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
 
         Page<Ware> page = waresService.getByWarehouseWarehouseidAndProductNameContaining(warehouseId, stringSearch,
                                                                                          pageable);
 
-        int expected = 6;
+        int expected = 2;
         int actual = page.getContent()
                          .size();
 

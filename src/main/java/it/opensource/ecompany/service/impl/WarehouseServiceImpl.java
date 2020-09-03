@@ -9,12 +9,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Transactional
 @RequiredArgsConstructor
 @Service("warehouseService")
 public class WarehouseServiceImpl implements WarehouseService {
 
     private final WarehouseRepository warehouseRepository;
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Warehouse> getAllWarehouse(){
+
+        return warehouseRepository.findAll();
+    }
 
     @Transactional(readOnly = true)
     @Override
