@@ -29,14 +29,12 @@ public class WaresServiceImpl implements WaresService {
     @Override
     public Page<Ware> getWaresByCategoryCategoryid(Long warehouseId, Long categoryId, Pageable pageable) {
 
-        return waresRepository.findByWarehouseWarehouseidAndProductCategoryCategoryid(warehouseId, categoryId,
-                                                                                      pageable);
+        return waresRepository.findByWarehouseWarehouseidAndProductCategoryCategoryid(warehouseId, categoryId, pageable);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Ware> getByWarehouseWarehouseidAndProductNameContaining(Long warehouseId, String searchText,
-                                                                        Pageable pageable) {
+    public Page<Ware> getByWarehouseWarehouseidAndProductNameContaining(Long warehouseId, String searchText, Pageable pageable) {
 
         return waresRepository.findByWarehouseWarehouseidAndProductNameContaining(warehouseId, searchText, pageable);
     }
@@ -45,5 +43,18 @@ public class WaresServiceImpl implements WaresService {
     public Ware getWareBySku(String sku) {
 
         return waresRepository.findBySku(sku);
+    }
+
+    @Override
+    public Integer productsWithdrawalFromWarehouse(Long warehouseId, Long productId, Integer quantity) {
+
+
+        return null;
+    }
+
+    @Override
+    public Integer productsDeliveryFromWarehouse(Long warehouseId, Long productId, Integer quantity) {
+
+        return null;
     }
 }

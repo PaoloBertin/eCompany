@@ -6,12 +6,16 @@ import org.springframework.data.domain.Pageable;
 
 public interface WaresService {
 
-    public Page<Ware> getAllWaresInWarehouseByPage(Long warehouseId, Pageable pageable);
+    Page<Ware> getAllWaresInWarehouseByPage(Long warehouseId, Pageable pageable);
 
-    public Page<Ware> getWaresByCategoryCategoryid(Long warehouseId, Long categoryId, Pageable pageable);
+    Page<Ware> getWaresByCategoryCategoryid(Long warehouseId, Long categoryId, Pageable pageable);
 
-    public Page<Ware> getByWarehouseWarehouseidAndProductNameContaining(Long warehouseid, String searchText,
+    Page<Ware> getByWarehouseWarehouseidAndProductNameContaining(Long warehouseid, String searchText,
                                                                          Pageable pageable);
 
-    public Ware getWareBySku(String sku);
+    Ware getWareBySku(String sku);
+
+    Integer productsWithdrawalFromWarehouse(Long warehouseId, Long productId, Integer quantity);
+
+    Integer productsDeliveryFromWarehouse(Long warehouseId,  Long productId, Integer quantity);
 }

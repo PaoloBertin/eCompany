@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
 
-    public Warehouse findByName(String name);
+    Warehouse findByName(String name);
 
 }
