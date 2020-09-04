@@ -77,7 +77,7 @@ class WaresServiceImplTest {
     void getProductsByNameContainingByPage() {
 
         Long warehouseId = 1L;
-        String stringSearch = "JavaBeans";
+        String stringSearch = "Apple";
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
 
         Page<Ware> page = waresService.getByWarehouseWarehouseidAndProductNameContaining(warehouseId, stringSearch,
