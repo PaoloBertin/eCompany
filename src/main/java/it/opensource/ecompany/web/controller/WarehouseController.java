@@ -11,6 +11,7 @@ import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.service.WaresService;
 import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
+import it.opensource.ecompany.web.form.WareForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -58,7 +59,7 @@ public class WarehouseController {
         Customer customer = userContext.getCurrentCustomer();
         List<Category> categories =categoriesService.getAll();
         SearchForm searchForm = new SearchForm();
-        ProductForm productForm = new ProductForm();
+        WareForm wareForm = new WareForm();
         List<Warehouse> warehouses = warehouseService.getAllWarehouse();
 
         uiModel.addAttribute("page", page);
@@ -67,7 +68,7 @@ public class WarehouseController {
         uiModel.addAttribute("categories", categories);
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("searchForm",  searchForm);
-        uiModel.addAttribute("productForm", productForm);
+        uiModel.addAttribute("wareForm", wareForm);
         uiModel.addAttribute("warehouses", warehouses);
         uiModel.addAttribute("wares", wares);
 
@@ -86,10 +87,12 @@ public class WarehouseController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
         Page<Ware> wares = waresService.getWaresByCategoryCategoryid(warehouseId, categoryId, pageable);
         Customer customer = userContext.getCurrentCustomer();
+        SearchForm searchForm = new SearchForm();
+        WareForm wareForm = new WareForm();
 
         uiModel.addAttribute("customer", customer);
-        uiModel.addAttribute("searchForm", new SearchForm());
-        uiModel.addAttribute("productForm", new ProductForm());
+        uiModel.addAttribute("searchForm", searchForm);
+        uiModel.addAttribute("wareForm", wareForm);
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);
         uiModel.addAttribute("categoryId", categoryId);
@@ -104,8 +107,10 @@ public class WarehouseController {
     }
 
     @GetMapping("/{warehouseId}/wares/searchProduct")
-    public String searchProduct(@PathVariable("warehouseId") Long warehouseId, @RequestParam(name = "page", defaultValue = "0") int page,
-                                @RequestParam(name = "size", defaultValue = "10") int size, @ModelAttribute SearchForm searchForm,
+    public String searchProduct(@PathVariable("warehouseId") Long warehouseId,
+                                @RequestParam(name = "page", defaultValue = "0") int page,
+                                @RequestParam(name = "size", defaultValue = "10") int size,
+                                @ModelAttribute SearchForm searchForm,
                                 Model uiModel) {
 
         String searchText = searchForm.getTextToSearch();

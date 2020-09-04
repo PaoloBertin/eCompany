@@ -3,7 +3,7 @@
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}"
       th:lang="${lang}"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
@@ -25,11 +25,13 @@
                     <br/>
                     <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
 
-                    <form name="selectWarehouseForm" th:object="${productForm}" th:action="@{/admin/warehouse/wares}" method="get">
+                    <form name="selectWarehouseForm" th:object="${wareForm}" th:action="@{/admin/warehouse/wares}" method="get">
                         <div class="form-group">
                             <label for="labelWarehouseSelect">warehouse</label>
                             <select class="form-control" id="labelWarehouseSelect" th:field="*{warehouseId}">
-                                <option th:each="warehouse : ${warehouses}" th:value="${warehouse.warehouseid}" th:text="${warehouse.name}">warehouse</option>
+                                <option th:each="warehouse : ${warehouses}" th:value="${warehouse.warehouseid}" th:text="${warehouse.name}">
+                                    warehouse
+                                </option>
                             </select>
                         </div>
                         <button class="btn btn-primary" type="submit" th:text="#{label.submit}">submit</button>
@@ -51,7 +53,7 @@
                         </thead>
                         <tbody>
                             <tr th:each="item : ${wares.content}">
-                               <td th:text="${item.product.category.name}"></td>
+                                <td th:text="${item.product.category.name}"></td>
                                 <td th:text="${item.product.name}"></td>
                                 <td th:text="${item.sku}">sku</td>
                                 <td th:text="${item.cost}">cost</td>
@@ -89,7 +91,8 @@
                                 </li>
                                 <li class="page-item" th:classappend="${page eq (wares.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/warehouse/wares(page=${page + 1},size=${size}, warehouseId=1)}" aria-label="Previous">
+                                       th:href="@{/admin/warehouse/wares(page=${page + 1},size=${size}, warehouseId=1)}"
+                                       aria-label="Previous">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
