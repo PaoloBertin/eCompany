@@ -15,8 +15,8 @@ public class Ware implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany(mappedBy = "wares")
-    private List<Warehouse> warehouse = new ArrayList<>();
+    @ManyToMany(mappedBy = "wares", fetch = FetchType.EAGER)
+    private List<Warehouse> warehouses = new ArrayList<>();
 
     @JoinColumn(name = "product_id")
     @OneToOne
@@ -55,14 +55,14 @@ public class Ware implements Serializable {
         this.id = id;
     }
 
-    public List<Warehouse> getWarehouse() {
+    public List<Warehouse> getWarehouses() {
 
-        return warehouse;
+        return warehouses;
     }
 
-    public void setWarehouse(List<Warehouse> warehouse) {
+    public void setWarehouses(List<Warehouse> warehouses) {
 
-        this.warehouse = warehouse;
+        this.warehouses = warehouses;
     }
 
     public Product getProduct() {

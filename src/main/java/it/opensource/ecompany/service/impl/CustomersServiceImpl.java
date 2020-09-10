@@ -3,7 +3,8 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.repository.CustomersRepository;
 import it.opensource.ecompany.service.CustomersService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -15,10 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Slf4j
 @Transactional
 @Service("customersService")
 public class CustomersServiceImpl implements CustomersService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     private final CustomersRepository customerRepository;
 

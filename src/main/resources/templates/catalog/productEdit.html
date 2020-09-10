@@ -29,9 +29,7 @@
                           th:action="@{/admin/products(form='true', page=${0}, size=${size}, categoryId=${categoryId})}"
                           method="post" enctype="multipart/form-data">
 
-                        <!--
-                        <input type="hidden" th:field="*{categoryId}"/>
-                        -->
+                        <!--  <input type="hidden" th:field="*{categoryId}"/> -->
                         <input type="hidden" th:field="*{productId}"/>
 
                         <div class="form-group">
@@ -65,14 +63,11 @@
 
                         <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
                         <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
-
                     </form>
                     <br/>
                 </div>
                 <div class="col-lg-6">
-                    <!--
-                    <div th:replace="~{fragments/right_side :: right_side}">right side</div>
-                    -->
+                    <!-- <div th:replace="~{fragments/right_side :: right_side}">right side</div> -->
                 </div>
             </div>
 

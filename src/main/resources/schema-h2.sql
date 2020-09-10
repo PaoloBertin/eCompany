@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS warehouses;
 DROP TABLE IF EXISTS wares;
-DROP TABLE IF EXISTS warehouse_ware;
+DROP TABLE IF EXISTS warehouses_wares;
 DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS purchase_orders;
 DROP TABLE IF EXISTS lineitem;
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS warehouses (
 CREATE  TABLE IF NOT EXISTS wares (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
     product_id BIGINT(20) NOT NULL,
-    sku VARCHAR(50) NOT NULL,
+    sku VARCHAR(50) NOT NULL UNIQUE,
     cost DECIMAL(12,4),
     unit VARCHAR(5),
     quantity INTEGER,

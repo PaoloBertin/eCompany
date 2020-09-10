@@ -1,25 +1,24 @@
 package it.opensource.ecompany.repository;
 
-import java.util.List;
-
+import it.opensource.ecompany.domain.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import it.opensource.ecompany.domain.Product;
+import java.util.List;
 
 @Repository
 public interface ProductsRepository extends JpaRepository<Product, Long> {
 
-    public List<Product> findByCategoryCategoryid(Long id);
+    List<Product> findByCategoryCategoryid(Long id);
 
-    public Page<Product> findByCategoryCategoryid(Long id, Pageable pageable);
+    Page<Product> findByCategoryCategoryid(Long id, Pageable pageable);
 
-    public List<Product> findByName(String name);
+    List<Product> findByName(String name);
 
-    public List<Product> findByNameContaining(String searchText);
+    List<Product> findByNameContaining(String searchText);
 
-    public Page<Product> findByNameContaining(String searchText, Pageable pageable);
+    Page<Product> findByNameContaining(String searchText, Pageable pageable);
 
 }

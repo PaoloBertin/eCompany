@@ -32,8 +32,7 @@ class WarehouseControllerTest {
                                                  .with(user("admin").password("admin")
                                                                     .roles("ADMIN")))
            .andExpect(view().name("warehouse/list"))
-           .andExpect(status().isOk())
-        ;
+           .andExpect(status().isOk());
     }
 
     @Test
@@ -41,13 +40,12 @@ class WarehouseControllerTest {
 
         mvc.perform(get("/admin/warehouse/{warehouseId}/wares/searchProduct", 1L).param("page", "0")
                                                                                  .param("size", "10")
-                                                                                 .param("textToSearch", "Java")
+                                                                                 .param("textToSearch", "Apple")
                                                                                  .with(user("admin").password("admin")
                                                                                                     .roles("ADMIN")))
-           .andExpect(model().attribute("productForm", hasProperty("name")))
+           .andExpect(model().attribute("wareForm", hasProperty("quantity")))
            .andExpect(view().name("warehouse/list"))
-           .andExpect(status().isOk())
-        ;
+           .andExpect(status().isOk());
     }
 
     @Test

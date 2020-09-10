@@ -21,6 +21,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Slf4j
@@ -54,7 +56,8 @@ public class WarehouseController {
                                                 @RequestParam(name = "warehouseId") Long warehouseId, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
-        Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
+        Collection<Long> warehouseIds = Arrays.asList(warehouseId);
+        Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehouseIds, pageable);
 
         Customer customer = userContext.getCurrentCustomer();
         List<Category> categories =categoriesService.getAll();
@@ -119,9 +122,12 @@ public class WarehouseController {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
         Page<Ware> wares = waresService.getByWarehouseWarehouseidAndProductNameContaining(warehouseId, searchText, pageable);
 
+        WareForm wareForm = new WareForm();
+        searchForm = new SearchForm();
+
         Customer customer = userContext.getCurrentCustomer();
-        uiModel.addAttribute("searchForm", new SearchForm());
-        uiModel.addAttribute("productForm", new ProductForm());
+        uiModel.addAttribute("searchForm", searchForm);
+        uiModel.addAttribute("wareForm", wareForm);
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("page", page);
         uiModel.addAttribute("size", size);

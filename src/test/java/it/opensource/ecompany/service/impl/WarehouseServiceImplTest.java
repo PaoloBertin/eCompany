@@ -11,10 +11,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@SpringBootTest
+@SpringBootTest()
 class WarehouseServiceImplTest {
 
     @Autowired
@@ -50,6 +54,33 @@ class WarehouseServiceImplTest {
         String actual = warehouseService.getWarehouseByName("magazzino01")
                                         .getName();
         String expected = "magazzino01";
+        assertThat(actual, equalTo(expected));
+    }
+
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Test
+    void getByWaresIdIn() {
+
+        List<Long> wareId = Arrays.asList(50L);
+        List<Warehouse> warehouses = warehouseService.getByWaresIdIn(wareId);
+
+        int expected = 1;
+        int actual = warehouses.size();
+
+        assertThat(actual, equalTo(expected));
+    }
+
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Test
+    void getByWaresSkuIn(){
+
+        Collection<String> sku = Arrays.asList("8883780450");
+
+        List<Warehouse> warehouses = warehouseService.getByWaresSkuIn(sku);
+
+        int expected = 2;
+        int actual = warehouses.size();
+
         assertThat(actual, equalTo(expected));
     }
 }
