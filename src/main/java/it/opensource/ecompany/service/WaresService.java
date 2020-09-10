@@ -1,8 +1,6 @@
 package it.opensource.ecompany.service;
 
-import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.Ware;
-import it.opensource.ecompany.domain.Warehouse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,8 +14,6 @@ public interface WaresService {
     Page<Ware> getAllWaresInWarehouseByPage(Collection<Long> warehouseId, Pageable pageable);
 
     List<Ware> getByWarehousesWarehouseidIn(Collection<Long> warehouseId);
-
-//    Page<Ware> getByWarehousesWarehouseidIn(Collection<Long> warehouseId, Pageable pageable);
 
     List<Ware> getBySkuAndWarehousesIn(String sku, Collection<Long> warehouseId);
 

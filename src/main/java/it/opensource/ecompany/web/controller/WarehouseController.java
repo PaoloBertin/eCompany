@@ -9,7 +9,6 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.service.WaresService;
-import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
 import it.opensource.ecompany.web.form.WareForm;
 import lombok.extern.slf4j.Slf4j;
