@@ -1,8 +1,6 @@
 package it.opensource.ecompany.service.impl;
 
-import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.Ware;
-import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.repository.WaresRepository;
 import it.opensource.ecompany.service.WaresService;
 import org.springframework.data.domain.Page;
@@ -26,31 +24,24 @@ public class WaresServiceImpl implements WaresService {
 
     @Transactional(readOnly = true)
     @Override
-    public Ware getWareInWarehouse(Long wareId, Long warehouseId) {
+    public Page<Ware> getAllWaresByPage(Pageable pageable) {
 
-        Ware ware = waresRepository.findByIdAndWarehousesWarehouseid(wareId, warehouseId);
-
-        return ware;
+        return waresRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
-    @Override
-    public long getNumberWares() {
-
-        return waresRepository.count();
-    }
-
     @Override
     public Page<Ware> getAllWaresInWarehouseByPage(Collection<Long> warehouseId, Pageable pageable) {
 
         return waresRepository.findByWarehousesWarehouseidIn(warehouseId, pageable);
     }
 
-    public List<Ware> getByWarehousesWarehouseidIn(Collection<Long> warehouseId){
+    public Page<Ware> getByWarehousesWarehouseidIn(Collection<Long> warehouseId, Pageable pageable) {
 
-        return waresRepository.findByWarehousesWarehouseidIn(warehouseId);
+        return waresRepository.findByWarehousesWarehouseidIn(warehouseId, pageable);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Ware> getBySkuAndWarehousesIn(String sku, Collection<Long> warehouseId) {
 
@@ -59,43 +50,8 @@ public class WaresServiceImpl implements WaresService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Ware> getWaresByCategoryCategoryid(Long warehouseId, Long categoryId, Pageable pageable) {
-
-        return waresRepository.findByWarehousesWarehouseidAndProductCategoryCategoryid(warehouseId, categoryId, pageable);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public Page<Ware> getByWarehousesWarehouseidAndProductName(Long warehouseId, String name, Pageable pageable) {
-
-        return waresRepository.findByWarehousesWarehouseidAndProductName(warehouseId, name, pageable);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public Page<Ware> getByWarehouseWarehouseidAndProductNameContaining(Long warehouseId, String searchText, Pageable pageable) {
-
-        Page<Ware> wares = waresRepository.findByWarehousesWarehouseidAndProductNameContaining(warehouseId, searchText, pageable);
-
-        return wares;
-    }
-
-    @Override
     public Ware getWareBySku(String sku) {
 
         return waresRepository.findBySku(sku);
-    }
-
-    @Override
-    public Integer productsWithdrawalFromWarehouse(Long warehouseId, Long productId, Integer quantity) {
-
-
-        return null;
-    }
-
-    @Override
-    public Integer productsDeliveryFromWarehouse(Long warehouseId, Long productId, Integer quantity) {
-
-        return null;
     }
 }

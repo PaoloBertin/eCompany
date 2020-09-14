@@ -9,25 +9,11 @@ import java.util.List;
 
 public interface WaresService {
 
-    long getNumberWares();
+    Page<Ware> getAllWaresByPage(Pageable pageable); //
 
-    Page<Ware> getAllWaresInWarehouseByPage(Collection<Long> warehouseId, Pageable pageable);
-
-    List<Ware> getByWarehousesWarehouseidIn(Collection<Long> warehouseId);
+    Page<Ware> getAllWaresInWarehouseByPage(Collection<Long> warehouseId, Pageable pageable); //
 
     List<Ware> getBySkuAndWarehousesIn(String sku, Collection<Long> warehouseId);
 
-    Ware getWareInWarehouse(Long Id, Long warehouseId);
-
-    Page<Ware> getWaresByCategoryCategoryid(Long warehouseId, Long categoryId, Pageable pageable);
-
-    Page<Ware> getByWarehousesWarehouseidAndProductName(Long warehouseId, String name, Pageable pageable);
-
-    Page<Ware> getByWarehouseWarehouseidAndProductNameContaining(Long warehouseId, String searchText, Pageable pageable);
-
     Ware getWareBySku(String sku);
-
-    Integer productsWithdrawalFromWarehouse(Long warehouseId, Long productId, Integer quantity);
-
-    Integer productsDeliveryFromWarehouse(Long warehouseId, Long productId, Integer quantity);
 }

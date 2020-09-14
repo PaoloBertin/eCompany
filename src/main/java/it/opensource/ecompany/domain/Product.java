@@ -13,16 +13,13 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productid;
 
+    private String isbn;
+
     private String name;
 
     private String description;
 
-    private String isbn;
-
     private Float price;
-
-    @Version
-    private Integer version;
 
     @Lob
     @Basic(fetch = FetchType.LAZY)
@@ -32,33 +29,8 @@ public class Product implements Serializable {
     @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "category_id_fk"))
     private Category category;
 
-    public Product() {
-
-    }
-
-    public Product(String name, String isbn, Category category) {
-
-        this.name = name;
-        this.isbn = isbn;
-        this.category = category;
-    }
-
-    public Product(Long id, String name, String isbn, Category category) {
-
-        this.productid = id;
-        this.name = name;
-        this.isbn = isbn;
-        this.category = category;
-    }
-
-    public Product(Long id, String name, String isbn, Category category, Float price) {
-
-        this.productid = id;
-        this.name = name;
-        this.isbn = isbn;
-        this.category = category;
-        this.price = price;
-    }
+    @Version
+    private Integer version;
 
     public Long getProductid() {
 
@@ -68,6 +40,16 @@ public class Product implements Serializable {
     public void setProductid(Long productid) {
 
         this.productid = productid;
+    }
+
+    public String getIsbn() {
+
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+
+        this.isbn = isbn;
     }
 
     public String getName() {
@@ -88,16 +70,6 @@ public class Product implements Serializable {
     public void setDescription(String description) {
 
         this.description = description;
-    }
-
-    public String getIsbn() {
-
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-
-        this.isbn = isbn;
     }
 
     public Float getPrice() {
@@ -140,37 +112,30 @@ public class Product implements Serializable {
         this.version = version;
     }
 
-    /* */
-    @Override
-    public boolean equals(Object otherObject) {
-
-        if (this == otherObject)
-            return true;
-
-        if (otherObject == null)
-            return false;
-
-        if (getClass() != otherObject.getClass())
-            return false;
-
-        Product otherProduct = (Product) otherObject;
-        if (productid == null) {
-            if (otherProduct.productid != null)
-                return false;
-        } else if (!productid.equals(otherProduct.productid))
-            return false;
-
-        return true;
-    }
-
     @Override
     public int hashCode() {
 
         final int prime = 31;
         int result = 1;
         result = prime * result + ((productid == null) ? 0 : productid.hashCode());
-
         return result;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Product other = (Product) obj;
+        if (productid == null) {
+            if (other.productid != null)
+                return false;
+        } else if (!productid.equals(other.productid))
+            return false;
+        return true;
+    }
 }

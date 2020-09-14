@@ -82,7 +82,10 @@ class ProductResourceTest {
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
 
         Category category = new Category(1L, "Libri");
-        Product product = new Product("aaaa", "bbbb", category);
+        Product product = new Product();
+        product.setIsbn("aaaa");
+        product.setName("bbbb");
+        product.setCategory(category);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);

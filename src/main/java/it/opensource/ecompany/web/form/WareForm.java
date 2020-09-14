@@ -4,7 +4,7 @@ public class WareForm {
 
     private Long wareId;
 
-    private Long warehouseId;
+    private String warehouseId;
 
     private Long productId;
 
@@ -36,12 +36,12 @@ public class WareForm {
         this.wareId = wareId;
     }
 
-    public Long getWarehouseId() {
+    public String getWarehouseId() {
 
         return warehouseId;
     }
 
-    public void setWarehouseId(Long warehouseId) {
+    public void setWarehouseId(String warehouseId) {
 
         this.warehouseId = warehouseId;
     }

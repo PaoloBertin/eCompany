@@ -18,10 +18,6 @@ public class Ware implements Serializable {
     @ManyToMany(mappedBy = "wares", fetch = FetchType.EAGER)
     private List<Warehouse> warehouses = new ArrayList<>();
 
-    @JoinColumn(name = "product_id")
-    @OneToOne
-    private Product product;
-
     private String sku;
 
     private Float cost;
@@ -63,16 +59,6 @@ public class Ware implements Serializable {
     public void setWarehouses(List<Warehouse> warehouses) {
 
         this.warehouses = warehouses;
-    }
-
-    public Product getProduct() {
-
-        return product;
-    }
-
-    public void setProduct(Product product) {
-
-        this.product = product;
     }
 
     public String getSku() {

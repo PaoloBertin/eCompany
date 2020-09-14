@@ -13,9 +13,35 @@ import static org.hamcrest.number.IsCloseTo.closeTo;
 
 class CartBeanTest {
 
+    private Product  product1;
+
+    private Product  product2;
+
+    private Category category;
+
+    private CartBean cartBean;
+
     @BeforeEach
     void setUp() {
 
+        category = new Category();
+        category.setCategoryid(1L);
+        category.setName("Books");
+
+        product1 = new Product();
+        product1.setProductid(1L);
+        product1.setName("Da Visual Basic a Java");
+        product1.setCategory(category);
+        product1.setPrice(29.90F);
+
+        product2 = new Product();
+        product2.setProductid(3L);
+        product2.setIsbn("1449365116");
+        product2.setName("Java Web Services");
+        product2.setCategory(category);
+        product2.setPrice(39.90F);
+
+        cartBean = new CartBean();
     }
 
     @AfterEach
@@ -26,11 +52,8 @@ class CartBeanTest {
     @Test
     void addedTheSameProducts() {
 
-        Category category = new Category(1L, "Books");
-        Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
-        CartBean cartBean = new CartBean();
-        cartBean.addProductToCart(product);
-        cartBean.addProductToCart(product);
+        cartBean.addProductToCart(product1);
+        cartBean.addProductToCart(product1);
 
         Double expected = 59.8; // subTotal
         Double actual = cartBean.getSubTotal();
@@ -41,12 +64,8 @@ class CartBeanTest {
     @Test
     void addProductToCart() {
 
-        Category category = new Category(1L, "Books");
-        Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
-        CartBean cartBean = new CartBean();
-        cartBean.addProductToCart(product);
-        product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
-        cartBean.addProductToCart(product);
+        cartBean.addProductToCart(product1);
+        cartBean.addProductToCart(product2);
 
         Double expected = 69.8; // subTotal
         Double actual = cartBean.getSubTotal();
@@ -57,11 +76,8 @@ class CartBeanTest {
     @Test
     void deleteProductToCart() {
 
-        Category category = new Category(1L, "Books");
-        Product product1 = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
-        CartBean cartBean = new CartBean();
+
         cartBean.addProductToCart(product1);
-        Product product2 = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
         cartBean.addProductToCart(product2);
 
         cartBean.deleteProductToCart(product1);
@@ -75,11 +91,7 @@ class CartBeanTest {
     @Test
     void getNumberProducts() {
 
-        Category category = new Category(1L, "Books");
-        Product product1 = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
-        CartBean cartBean = new CartBean();
         cartBean.addProductToCart(product1);
-        Product product2 = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
         cartBean.addProductToCart(product2);
 
         int expected = 2;
@@ -92,12 +104,8 @@ class CartBeanTest {
     @Test
     public void getShippingCosts() {
 
-        Category category = new Category(1L, "Books");
-        Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
-        CartBean cartBean = new CartBean();
-        cartBean.addProductToCart(product);
-        product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
-        cartBean.addProductToCart(product);
+        cartBean.addProductToCart(product1);
+        cartBean.addProductToCart(product2);
         cartBean.setExpressDelivery(false);
 
         Double expected = 69.8; // totalCost
@@ -110,12 +118,9 @@ class CartBeanTest {
     @Test
     public void getSubTotal() {
 
-        Category category = new Category(1L, "Books");
-        Product product = new Product(1L, "La matematica degli dèi e gli algoritmi degli uomini", "8883780450", category, 7.99F);
-        CartBean cartBean = new CartBean();
-        cartBean.addProductToCart(product);
+        cartBean.addProductToCart(product1);
 
-        Double expected = 10.99; // totalCost
+        Double expected = 29.90; // totalCost
         Double actual = cartBean.getTotalCost();
 
         assertThat(actual, closeTo(expected, 0.001));
@@ -125,13 +130,10 @@ class CartBeanTest {
     @Test
     public void getSubTotalWithExpressDelivery() {
 
-        Category category = new Category(1L, "Books");
-        Product product = new Product(1L, "La matematica degli dèi e gli algoritmi degli uomini", "8883780450", category, 7.99F);
-        CartBean cartBean = new CartBean();
-        cartBean.addProductToCart(product);
+        cartBean.addProductToCart(product1);
         cartBean.setExpressDelivery(true);
 
-        Double expected = 12.99; // totalCost
+        Double expected = 34.90; // totalCost
         Double actual = cartBean.getTotalCost();
 
         assertThat(actual, closeTo(expected, 0.001));
@@ -141,12 +143,8 @@ class CartBeanTest {
     @Test
     public void getTotalCost() {
 
-        Category category = new Category(1L, "Books");
-        Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
-        CartBean cartBean = new CartBean();
-        cartBean.addProductToCart(product);
-        product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
-        cartBean.addProductToCart(product);
+        cartBean.addProductToCart(product1);
+        cartBean.addProductToCart(product2);
         cartBean.setExpressDelivery(true);
 
         Double expected = 74.8; // totalCost

@@ -126,8 +126,8 @@ CREATE TABLE IF NOT EXISTS categories (
 
 CREATE TABLE IF NOT EXISTS products (
     productid BIGINT(20) NOT NULL AUTO_INCREMENT,
-    name VARCHAR(254),
-    description VARCHAR(254),
+    name VARCHAR(255),
+    description VARCHAR(255),
     isbn VARCHAR(20) NOT NULL UNIQUE,
     price DECIMAL(12,4),
     image BLOB,
@@ -149,7 +149,6 @@ CREATE TABLE IF NOT EXISTS warehouses (
 
 CREATE  TABLE IF NOT EXISTS wares (
     id BIGINT(20) NOT NULL AUTO_INCREMENT,
-    product_id BIGINT(20) NOT NULL,
     sku VARCHAR(50) NOT NULL UNIQUE,
     cost DECIMAL(12,4),
     unit VARCHAR(5),
@@ -162,8 +161,6 @@ CREATE  TABLE IF NOT EXISTS wares (
     version BIGINT(20) DEFAULT 0,
 
     PRIMARY KEY(id),
-
-    CONSTRAINT wares_fk_02 FOREIGN KEY (product_id) REFERENCES products(productid)
 );
 
 CREATE TABLE IF NOT EXISTS warehouses_wares (

@@ -210,7 +210,8 @@ public class ProductsAdminController {
      */
     @PostMapping
     public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam(name = "form") String form, @RequestParam(name = "page", defaultValue = "0") int page,
+                                @RequestParam(name = "form") String form,
+                                @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size,
                                 @RequestParam(name = "categoryId", defaultValue = "1") Long categoryId,
                                 HttpServletRequest httpServletRequest, Locale locale, Model uiModel,

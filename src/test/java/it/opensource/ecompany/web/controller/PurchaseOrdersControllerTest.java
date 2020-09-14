@@ -71,10 +71,21 @@ public class PurchaseOrdersControllerTest {
     public void saveMovementTest(@Autowired MockMvc mvc) throws Exception {
 
         Category category = new Category(1L, "Books");
-        Product product = new Product(1L, "Da Visual Basic a Java", "8883780450", category, 29.90F);
+        Product product = new Product();
+        product.setProductid(1L);
+        product.setName("Da Visual Basic a Java");
+        product.setIsbn("8883780450");
+        product.setCategory(category);
+        product.setPrice(29.90F);
+
         CartBean cartBean = new CartBean();
         cartBean.addProductToCart(product);
-        product = new Product(3L, "Java Web Services", "1449365116", category, 39.90F);
+        product.setProductid(3L);
+        product.setName("Java Web Services");
+        product.setIsbn("1449365116");
+        product.setCategory(category);
+        product.setPrice(39.90F);
+
         cartBean.addProductToCart(product);
 
         mvc.perform(get("/purchaseorders/save").sessionAttr("cartBean", cartBean)

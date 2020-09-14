@@ -91,7 +91,7 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
             Product product = entry.getKey();
             Integer quantity = entry.getValue();
             Long productId = product.getProductid();
-            waresService.productsWithdrawalFromWarehouse(warehouseId, productId, quantity);
+//            waresService.productsWithdrawalFromWarehouse(warehouseId, productId, quantity);
         }
 
         // aggiunge fattura al conto
