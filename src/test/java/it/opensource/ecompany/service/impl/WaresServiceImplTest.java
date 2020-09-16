@@ -3,6 +3,7 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.Ware;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WaresService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,8 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -34,7 +33,7 @@ class WaresServiceImplTest {
     void getNumberWaresInWarehouse() {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-        Collection<Long> warehouseId = Arrays.asList(2L);
+        Long warehouseId = 2L;
         Long expected = 30L;
         Page<Ware> page = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
         Long actual = page.getTotalElements();
@@ -52,19 +51,19 @@ class WaresServiceImplTest {
     @Test
     void getAllWaresInWarehouseByPage() {
 
-        Collection<Long> warehouseId = Arrays.asList(1L);
+        Long warehouseId = 1L;
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
 
         Page<Ware> page = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
 
         int expected = 10;
-        int actual = page.getContent()
-                         .size();
+        int actual = page.getContent().size();
 
         assertThat(actual, is(expected));
 
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getWaresByCategoryCategoryid() {
@@ -73,22 +72,23 @@ class WaresServiceImplTest {
         Long categoryId = 1L;
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
 
-        // Page<Ware> page = waresService.getWaresByCategoryCategoryid(warehouseId, categoryId, pageable);
+        //Page<Ware> page = waresService.getWaresByCategoryCategoryid(warehouseId, categoryId, pageable);
+        Page<Ware> page = null;
 
         int expected = 10;
-        // int actual = page.getContent().size();
+        int actual = page.getContent().size();
 
-        // assertThat(actual, is(expected));
+        assertThat(actual, is(expected));
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getByWarehousesWarehouseidIn(){
+    void getByWarehouseWarehouseid() {
 
-        List<Long> warehousesId = Arrays.asList(2L);
+        Long warehouseId = 2L;
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
 
-        Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehousesId, pageable);
+        Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
 
         int expected = 10;
         int actual = wares.getContent().size();
@@ -98,11 +98,11 @@ class WaresServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getByProductProductidAndWarehousesIn() {
+    void getBySkuAndWarehouse() {
 
-        List<Long> warehousesId = Arrays.asList(1L);
+        Long warehousesId = 1L;
         String sku = "8883780450";
-        List<Ware> wares = waresService.getBySkuAndWarehousesIn(sku, warehousesId);
+        List<Ware> wares = waresService.getBySkuAndWarehouse(sku, warehousesId);
 
         int expected = 1;
         int actual = wares.size();
@@ -119,6 +119,7 @@ class WaresServiceImplTest {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getProductsByNameContainingStringByPage() {
@@ -128,10 +129,26 @@ class WaresServiceImplTest {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
 
         // Page<Ware> page = waresService.getByWarehouseWarehouseidAndProductNameContaining(warehouseId, stringSearch, pageable);
+        Page<Ware> page = null;
 
         int expected = 1;
-        // int actual = page.getContent().size();
+        int actual = page.getContent().size();
 
-        // assertThat(actual, is(expected));
+        assertThat(actual, is(expected));
+    }
+
+    @Disabled
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Test
+    void getAllWithProductTest() {
+
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        // Page<Ware> wares = waresService.getAllWithProduct(pageable);
+        Page<Ware> wares = null;
+
+        long expected = 84;
+        long actual = wares.getTotalElements();
+        assertThat(actual, is(expected));
+
     }
 }

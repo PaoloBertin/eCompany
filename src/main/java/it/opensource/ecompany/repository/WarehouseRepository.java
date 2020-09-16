@@ -15,4 +15,5 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
     List<Warehouse> findByWaresIdIn(Collection<Long> wareId);
 
     List<Warehouse> findByWaresSkuIn(Collection<String> sku);
+
 }

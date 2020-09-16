@@ -51,9 +51,9 @@ class WarehouseServiceImplTest {
     @Test
     public void getWarehouseByName() {
 
-        String actual = warehouseService.getWarehouseByName("magazzino01")
-                                        .getName();
-        String expected = "magazzino01";
+        Long actual = warehouseService.getWarehouseByName("magazzino01").getWarehouseid();
+        Long expected = 1L;
+
         assertThat(actual, equalTo(expected));
     }
 

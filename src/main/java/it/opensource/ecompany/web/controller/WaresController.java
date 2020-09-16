@@ -62,8 +62,7 @@ public class WaresController {
         else {
             warehouseId = wareForm.getWarehouseId();
             Long id = Long.parseLong(wareForm.getWarehouseId());
-            Collection<Long> collectionId = Arrays.asList(id);
-            wares = waresService.getAllWaresInWarehouseByPage(collectionId, pageable);
+            wares = waresService.getAllWaresInWarehouseByPage(id, pageable);
         }
 
         Customer customer = userContext.getCurrentCustomer();

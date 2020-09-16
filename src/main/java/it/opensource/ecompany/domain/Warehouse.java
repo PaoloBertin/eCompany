@@ -17,24 +17,11 @@ public class Warehouse implements Serializable {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "warehouses_wares",
-        joinColumns = {@JoinColumn(name = "warehouse_id", referencedColumnName = "warehouseid", nullable = false, updatable = false)},
-        inverseJoinColumns = {@JoinColumn(name = "ware_id", referencedColumnName = "id", nullable = false, updatable = false)})
+    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ware> wares = new ArrayList<>();
 
     @Version
     private Long       version;
-
-    public void addWare(Ware ware) {
-        wares.add(ware);
-        ware.getWarehouses().add(this);
-    }
-
-    public void removeWare(Ware ware) {
-        wares.remove(ware);
-        ware.getWarehouses().remove(this);
-    }
 
     public Long getWarehouseid() {
 
@@ -74,6 +61,16 @@ public class Warehouse implements Serializable {
     public void setVersion(Long version) {
 
         this.version = version;
+    }
+
+    public void addWare(Ware ware) {
+        wares.add(ware);
+        ware.setWarehouse(this);
+    }
+
+    public void removeWare(Ware ware) {
+        wares.remove(ware);
+        ware.setWarehouse(null);
     }
 
     @Override

@@ -6,19 +6,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.List;
 
 @Repository
 public interface WaresRepository extends JpaRepository<Ware, Long> {
 
-    Long countByWarehousesWarehouseid(Long warehouseId);
+    Page<Ware> findByWarehouseWarehouseid(Long warehouseId, Pageable pageable);
 
-    Page<Ware> findByWarehousesWarehouseidIn(Collection<Long> warehouseId, Pageable pageable);
-
-    List<Ware> findBySkuAndWarehousesWarehouseidIn(String sku, Collection<Long> warehouseId);
-
-    Ware findByIdAndWarehousesWarehouseid(Long wareId, Long warehouseId);
+    List<Ware> findBySkuAndWarehouseWarehouseid(String sku, Long warehouseId);
 
     Ware findBySku(String sku);
 }

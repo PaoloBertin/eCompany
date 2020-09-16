@@ -2,8 +2,6 @@ package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Table(name = "wares")
 @Entity
@@ -14,9 +12,6 @@ public class Ware implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToMany(mappedBy = "wares", fetch = FetchType.EAGER)
-    private List<Warehouse> warehouses = new ArrayList<>();
 
     private String sku;
 
@@ -38,6 +33,10 @@ public class Ware implements Serializable {
 
     private String location;
 
+    @JoinColumn(name = "warehouse_id")
+    @ManyToOne
+    private Warehouse warehouse;
+
     @Version
     private Integer version;
 
@@ -49,16 +48,6 @@ public class Ware implements Serializable {
     public void setId(Long id) {
 
         this.id = id;
-    }
-
-    public List<Warehouse> getWarehouses() {
-
-        return warehouses;
-    }
-
-    public void setWarehouses(List<Warehouse> warehouses) {
-
-        this.warehouses = warehouses;
     }
 
     public String getSku() {
@@ -154,6 +143,16 @@ public class Ware implements Serializable {
     public Integer getVersion() {
 
         return version;
+    }
+
+    public Warehouse getWarehouse() {
+
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+
+        this.warehouse = warehouse;
     }
 
     public void setVersion(Integer version) {

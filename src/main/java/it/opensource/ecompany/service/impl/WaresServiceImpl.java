@@ -8,7 +8,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 
 @Transactional
@@ -31,21 +30,16 @@ public class WaresServiceImpl implements WaresService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Ware> getAllWaresInWarehouseByPage(Collection<Long> warehouseId, Pageable pageable) {
+    public Page<Ware> getAllWaresInWarehouseByPage(Long warehouseId, Pageable pageable) {
 
-        return waresRepository.findByWarehousesWarehouseidIn(warehouseId, pageable);
-    }
-
-    public Page<Ware> getByWarehousesWarehouseidIn(Collection<Long> warehouseId, Pageable pageable) {
-
-        return waresRepository.findByWarehousesWarehouseidIn(warehouseId, pageable);
+        return waresRepository.findByWarehouseWarehouseid(warehouseId, pageable);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Ware> getBySkuAndWarehousesIn(String sku, Collection<Long> warehouseId) {
+    public List<Ware> getBySkuAndWarehouse(String sku, Long warehouseId) {
 
-        return waresRepository.findBySkuAndWarehousesWarehouseidIn(sku, warehouseId);
+        return waresRepository.findBySkuAndWarehouseWarehouseid(sku, warehouseId);
     }
 
     @Transactional(readOnly = true)
@@ -54,4 +48,5 @@ public class WaresServiceImpl implements WaresService {
 
         return waresRepository.findBySku(sku);
     }
+
 }

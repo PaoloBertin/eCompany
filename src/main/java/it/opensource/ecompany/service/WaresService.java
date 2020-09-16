@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface WaresService {
 
-    Page<Ware> getAllWaresByPage(Pageable pageable); //
+    Page<Ware> getAllWaresByPage(Pageable pageable);
 
-    Page<Ware> getAllWaresInWarehouseByPage(Collection<Long> warehouseId, Pageable pageable); //
+    Page<Ware> getAllWaresInWarehouseByPage(Long warehouseId, Pageable pageable);
 
-    List<Ware> getBySkuAndWarehousesIn(String sku, Collection<Long> warehouseId);
+    List<Ware> getBySkuAndWarehouse(String sku, Long warehouseId);
 
     Ware getWareBySku(String sku);
 }
