@@ -114,8 +114,8 @@ INSERT INTO products(productid, name, description, isbn, price, image, categoryi
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(48, 'Cyber Flipper', 'Flipper elettronico con luci e suoni', '8001097539673', 45.99, FILE_READ('classpath:static/images/cover/8001097539673.jpg'), 4);
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(49, 'Monopoly', 'Monopoly, il gioco di contrattazione più famoso del mondo.', '5010993414314', 25.00, FILE_READ('classpath:static/images/cover/5010993414314.jpg'), 4);
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(50, 'Poker Romano', 'I giochi di dadi erano molto popolari nell&rsquoAntica Roma. Dagli schiavi all''Imperatore, tutti vi giocavano.', '8058773201294', 25.00, FILE_READ('classpath:static/images/cover/8058773201294.jpg'), 4);
-INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(51, 'Scacchi Dama Tria', 'Game Set Scacchi e Dama Tria 36 x 36 CmContenitore in legno da 36 x 36 cm con scomparti. Scacchiera intarsiata, bifacciale. Pedine e scacchi in legno (altezza Re 65 mm), con regole di gioco', ' 8001097539093', 29.50, FILE_READ('classpath:static/images/cover/8001097539093.jpg'), 4);
-INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(52, 'Mazzo 52 Carte da Gioco Trevigiane', '52 Carte da Gioco TrevigianeMazzo da 52 carte Triestine. Solide e leggere, dalla stampa professionale e dal design unico e inconfondibile costruite interamente in plastica.', ' 8020320036222', 12.00, FILE_READ('classpath:static/images/cover/8020320036222.jpg'), 4);
+INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(51, 'Scacchi Dama Tria', 'Game Set Scacchi e Dama Tria 36 x 36 CmContenitore in legno da 36 x 36 cm con scomparti. Scacchiera intarsiata, bifacciale. Pedine e scacchi in legno (altezza Re 65 mm), con regole di gioco', '8001097539093', 29.50, FILE_READ('classpath:static/images/cover/8001097539093.jpg'), 4);
+INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(52, 'Mazzo 52 Carte da Gioco Trevigiane', '52 Carte da Gioco TrevigianeMazzo da 52 carte Triestine. Solide e leggere, dalla stampa professionale e dal design unico e inconfondibile costruite interamente in plastica.', '8020320036222', 12.00, FILE_READ('classpath:static/images/cover/8020320036222.jpg'), 4);
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(53, 'Carte Da Gioco Ramino Italia', 'L''astuccio Ramino Italia Dal Negro include due mazzi da poker in cartoncino.', '8001097210435', 12.00, FILE_READ('classpath:static/images/cover/8001097210435.jpg'), 4);
 INSERT INTO products(productid, name, description, isbn, price, image, categoryid) VALUES(54, 'Apple iPhone 11', 'Un nuovo sistema a doppia fotocamera, per inquadrare più cose intorno a te.', '0190199221130', 796, FILE_READ('classpath:static/images/cover/0190199221130.jpg'), 6);
 
@@ -238,6 +238,26 @@ INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(17, 15, 1);
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(18, 20, 1);
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(19, 21, 1);
 INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(20, 22, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(21,  1, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(22,  2, 2);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(23,  3, 2);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(24,  5, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(25, 10, 3);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(26, 17, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(27,  4, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(28,  7, 2);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(29,  8, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(30, 13, 4);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(31,  6, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(32,  9, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(33, 11, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(34, 14, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(35, 12, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(36, 16, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(37, 15, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(38, 20, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(39, 21, 1);
+INSERT INTO lineitem(lineitemid, productid, quantity) VALUES(40, 22, 1);
 
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(1, 1);
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(1, 2);
@@ -260,4 +280,36 @@ INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) 
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(9, 19);
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, lineitems_lineitemid) VALUES(10, 20);
 
-INSERT INTO accounts(id, name, balance) VALUES(1, 'eCompany', 10000);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 2);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 2, '2018-10-10 00:00:00',  49.90, 'processato', 2);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 3, '2018-10-10 00:00:00',  59.70, 'processato', 2);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 4, '2018-10-10 00:00:00',  74.90, 'processato', 1);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 5, '2018-12-08 00:00:00', 246.60, 'processato', 1);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 6, '2018-10-10 00:00:00',  79.60, 'processato', 1);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 7, '2018-10-10 00:00:00',  39.80, 'processato', 1);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 8, '2018-10-10 00:00:00',  71.60, 'processato', 1);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES( 9, '2018-10-10 00:00:00', 109.20, 'processato', 2);
+INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id) VALUES(10, '2018-12-08 00:00:00',  19.00, 'processato', 2);
+
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(1,  21);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(1,  22);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(1,  23);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(2,  24);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(3,  25);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(4,  26);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(4,  27);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(5,  28);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(5,  29);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(5,  30);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(6,  31);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(6,  32);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(7,  33);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(8,  34);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(8,  35);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(9,  36);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(9,  37);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(9,  38);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(9,  39);
+INSERT INTO sales_orders_lineitems(sales_orders_id, lineitems_lineitem_id) VALUES(10, 40);
+
+INSERT INTO accounts(id, name, balance) VALUES(1, 'eCompany', 100000);

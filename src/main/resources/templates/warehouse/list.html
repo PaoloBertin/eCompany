@@ -16,19 +16,21 @@
             <div th:replace="~{fragments/header :: header}">header</div>
 
             <!-- corpo centrale -->
-            <div class="row">
+            <div class="row ml-0 mr-0" >
+                <!--
                 <div class="col-lg-2">
                     <div th:replace="~{fragments/left_side_warehouse :: left_side_warehouse}">left side</div>
                 </div>
+                -->
 
-                <div class="col-lg-7">
+                <div class="col-lg-10">
                     <br/>
                     <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
 
                     <form name="selectWarehouseForm" th:object="${wareForm}" th:action="@{/admin/wares}" method="get">
-                        <div class="form-group">
-                            <label for="labelWarehouseSelect">warehouse</label>
-                            <select class="form-control" id="labelWarehouseSelect" th:field="*{warehouseId}">
+                        <div class="form-group row">
+                            <label class="col-lg-2 col-form-label" for="labelWarehouseSelect">warehouse</label>
+                            <select class="col-lg-10" id="labelWarehouseSelect" th:field="*{warehouseId}">
                                 <option th:value="null" th:text="all">all</option>
                                 <option th:each="warehouse : ${warehouses}" th:value="${warehouse.warehouseid}" th:text="${warehouse.name}">
                                     warehouse
@@ -39,22 +41,27 @@
                     </form>
 
                     <!--  -->
+                    <br/>
                     <table class="table">
-                        <thead>
+                        <thead class="thead-light">
                             <tr>
-                                <th th:text="#{label.ware.sku}">Sku</th>
-                                <th th:text="#{label.ware.cost}">Cost</th>
-                                <th th:text="#{label.ware.unit}">Unit</th>
-                                <th th:text="#{label.ware.quantity}">Quantity</th>
+                                <th th:text="#{label.ware.name}">name</th>
+                                <th th:text="#{label.ware.ean}">ean</th>
+                                <th th:text="#{label.ware.sku}">sku</th>
+                                <th th:text="#{label.ware.cost}">cost</th>
+                                <th th:text="#{label.ware.unit}">unit</th>
+                                <th th:text="#{label.ware.quantity}">quantity</th>
                                 <th th:text="#{label.ware.inventoryValue}">inventoryValue</th>
                                 <th th:text="#{label.ware.reorderQuantity}">reorderQuantity</th>
                                 <th th:text="#{label.ware.reorder}">reorder</th>
-                                <th th:text="#{label.ware.container}">Container</th>
-                                <th th:text="#{label.ware.location}">Location</th>
+                                <th th:text="#{label.ware.container}">container</th>
+                                <th th:text="#{label.ware.location}">location</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="ware : ${wares.content}">
+                                <td th:text="${ware.name}">name</td>
+                                <td th:text="${ware.isbn}">ean</td>
                                 <td th:text="${ware.sku}">sku</td>
                                 <td th:text="${ware.cost}">cost</td>
                                 <td th:text="${ware.unit}">unit</td>
@@ -111,7 +118,7 @@
                     </div>
 
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <div th:replace="~{fragments/right_side_warehouse :: right_side_warehouse}">right side warehouse</div>
                 </div>
             </div>

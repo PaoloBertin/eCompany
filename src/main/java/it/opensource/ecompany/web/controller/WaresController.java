@@ -4,6 +4,7 @@ import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Ware;
 import it.opensource.ecompany.domain.Warehouse;
+import it.opensource.ecompany.service.Dto.WareDto;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.service.WaresService;
@@ -53,16 +54,16 @@ public class WaresController {
                                      Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
-        Page<Ware> wares = null;
+        Page<WareDto> wares = null;
 
         if(wareForm.getWarehouseId() == null || wareForm.getWarehouseId().equals("all")) {
-            wares = waresService.getAllWaresByPage(pageable);
+            wares = waresService.getAllWaresWithProductPageable(pageable);
             warehouseId = "all";
         }
         else {
             warehouseId = wareForm.getWarehouseId();
             Long id = Long.parseLong(wareForm.getWarehouseId());
-            wares = waresService.getAllWaresInWarehouseByPage(id, pageable);
+            wares = waresService.getAllWaresInWarehousePageable(id, pageable);
         }
 
         Customer customer = userContext.getCurrentCustomer();

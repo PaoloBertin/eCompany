@@ -8,7 +8,8 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.PurchaseOrdersService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@Slf4j
 @Controller
 public class PurchaseOrdersController {
+
+    Logger log = LoggerFactory.getLogger(PurchaseOrdersController.class);
 
     private final CartBean cartBean;
 

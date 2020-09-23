@@ -15,6 +15,10 @@ DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS purchase_orders;
 DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS purchase_orders_lineitems;
+
+DROP TABLE IF EXISTS sales_orders;
+DROP TABLE IF EXISTS sales_orders_lineitems;
+
 DROP TABLE IF EXISTS accounts;
 
 CREATE TABLE IF NOT EXISTS users(
@@ -196,6 +200,28 @@ CREATE TABLE IF NOT EXISTS purchase_orders_lineitems (
     CONSTRAINT purchase_orders_lineitem_01 UNIQUE (lineitems_lineitemid),
     CONSTRAINT purchase_orders_lineitem_02 FOREIGN KEY (lineitems_lineitemid) REFERENCES lineitem(lineitemid),
     CONSTRAINT purchase_orders_lineitem_03 FOREIGN KEY (purchase_orders_id) REFERENCES purchase_orders(id)
+);
+
+CREATE TABLE IF NOT EXISTS sales_orders (
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    date_sale TIMESTAMP,
+    total_amount DOUBLE DEFAULT 0.0,
+    state VARCHAR(25),
+    supplier_id BIGINT(20) NOT NULL,
+    version BIGINT(20) DEFAULT 0,
+
+    PRIMARY KEY(id),
+
+    CONSTRAINT sales_orders_fk_01 FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
+);
+
+CREATE TABLE IF NOT EXISTS sales_orders_lineitems (
+    lineitems_lineitem_id BIGINT(20) NOT NULL,
+    sales_orders_id BIGINT(20) NOT NULL,
+
+    CONSTRAINT sales_orders_lineitem_01 UNIQUE (lineitems_lineitem_id),
+    CONSTRAINT sales_orders_lineitem_02 FOREIGN KEY (lineitems_lineitem_id) REFERENCES lineitem(lineitemid),
+    CONSTRAINT sales_orders_lineitem_03 FOREIGN KEY (sales_orders_id) REFERENCES sales_orders(id)
 );
 
 CREATE TABLE IF NOT EXISTS accounts (

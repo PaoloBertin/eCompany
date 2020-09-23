@@ -1,6 +1,9 @@
 package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Table(name = "sales_orders")
 @Entity
@@ -11,6 +14,27 @@ public class SalesOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "date_sale")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateSales;
+
+    @Column(name = "total_amount")
+    private Double totalAmount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 25)
+    private State state;
+
+    @OneToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
+    @JoinTable(name = "sales_orders_lineitems",
+        joinColumns = @JoinColumn(name = "sales_orders_id"),
+        inverseJoinColumns = @JoinColumn(name = "lineitems_lineitem_id"))
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Lineitem> lineitems = new ArrayList<>();
 
     @Version
     private Long version;
@@ -23,6 +47,56 @@ public class SalesOrder {
     public void setId(Long id) {
 
         this.id = id;
+    }
+
+    public Date getDateSales() {
+
+        return dateSales;
+    }
+
+    public void setDateSales(Date dateSales) {
+
+        this.dateSales = dateSales;
+    }
+
+    public Double getTotalAmount() {
+
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+
+        this.totalAmount = totalAmount;
+    }
+
+    public State getState() {
+
+        return state;
+    }
+
+    public void setState(State state) {
+
+        this.state = state;
+    }
+
+    public Supplier getSupplier() {
+
+        return supplier;
+    }
+
+    public void setSupplier (Supplier supplier) {
+
+        this.supplier = supplier;
+    }
+
+    public List<Lineitem> getLineitems() {
+
+        return lineitems;
+    }
+
+    public void setLineitems(List<Lineitem> lineitems) {
+
+        this.lineitems = lineitems;
     }
 
     public Long getVersion() {

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:with="lang=${#locale.language}" 
+      th:lang="${lang}">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div  class="container-fluid p-0">
+         
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>       
+
+            <!-- corpo centrale -->
+            <div class="row">
+                <div class="col-lg-2">
+                    <div th:replace="~{fragments/left_side :: left_side}">left side</div>
+                </div>
+            
+                <div class="col-lg-7">
+                    <br/>
+                    <h4 th:text="#{label.salesorder.order_details}">Order Details</h4>
+                    <br/>
+
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th th:text="#{label.salesorder.name}">User Code</th>
+                                <th th:text="#{label.salesorder.sales_date}">Order Date</th>
+                                <th th:text="#{label.salesorder.total}">Total</th>
+                                <th th:text="#{label.salesorder.state}">State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td th:text="${saleOrder.supplier.name}"></td>
+                                <td th:text="${saleOrder.dateSales}"></td>
+                                <td th:text="${saleOrder.totalAmount} + ' &euro;'"></td>
+                                <td th:text="${saleOrder.state}"></td>
+                            </tr>
+                        </tbody>
+                    </table>    
+                     
+                    <br/>
+                    <h4 th:text="#{label.saleorder.order_items}">Voci Ordine</h4>
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th th:text="#{label.saleorder.order_items.product_category}">categoria</th>
+                                <th th:text="#{label.saleorder.order_items.product_name}">prodotto</th>
+                                <th th:text="#{label.saleorder.order_items.product_code}">codice</th>
+                                <th th:text="#{label.saleorder.order_items.product_price}">prezzo</th>
+                                <th th:text="#{label.saleorder.order_items.product_quantity}">quantità</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="lineItem : ${saleOrder.lineitems}">
+                                <td th:text="${lineItem.product.category.name}"></td>
+                                <td th:text="${lineItem.product.name}"></td>
+                                <td th:text="${lineItem.product.isbn}"></td>
+                                <td th:text="${lineItem.product.price} + ' &euro;'"></td>
+                                <td th:text="${lineItem.quantity}"></td>
+                            </tr>
+                        </tbody>
+                    </table>                        
+                </div>
+                            
+                <div class="col-lg-3">
+                    <!--
+                     <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+                     -->
+                </div>
+            </div>
+        
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

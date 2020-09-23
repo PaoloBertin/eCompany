@@ -1,6 +1,7 @@
 package it.opensource.ecompany.service.impl;
 
 import it.opensource.ecompany.domain.Ware;
+import it.opensource.ecompany.service.Dto.WareDto;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WaresService;
 import org.junit.jupiter.api.Disabled;
@@ -57,7 +58,8 @@ class WaresServiceImplTest {
         Page<Ware> page = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
 
         int expected = 10;
-        int actual = page.getContent().size();
+        int actual = page.getContent()
+                         .size();
 
         assertThat(actual, is(expected));
 
@@ -76,7 +78,8 @@ class WaresServiceImplTest {
         Page<Ware> page = null;
 
         int expected = 10;
-        int actual = page.getContent().size();
+        int actual = page.getContent()
+                         .size();
 
         assertThat(actual, is(expected));
     }
@@ -91,7 +94,8 @@ class WaresServiceImplTest {
         Page<Ware> wares = waresService.getAllWaresInWarehouseByPage(warehouseId, pageable);
 
         int expected = 10;
-        int actual = wares.getContent().size();
+        int actual = wares.getContent()
+                          .size();
 
         assertThat(actual, equalTo(expected));
     }
@@ -132,7 +136,8 @@ class WaresServiceImplTest {
         Page<Ware> page = null;
 
         int expected = 1;
-        int actual = page.getContent().size();
+        int actual = page.getContent()
+                         .size();
 
         assertThat(actual, is(expected));
     }
@@ -150,5 +155,44 @@ class WaresServiceImplTest {
         long actual = wares.getTotalElements();
         assertThat(actual, is(expected));
 
+    }
+
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Test
+    void getWaresWithProductTest() {
+
+        List<Object[]> wares = waresService.getWaresWithProduct();
+
+        long expected = 84L;
+        long actual = wares.size();
+        assertThat(actual, is(expected));
+
+    }
+
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Test
+    void getWaresWithProductPageableTest() {
+
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Page<WareDto> wares = waresService.getAllWaresWithProductPageable(pageable);
+
+        long expected = 84L;
+        long actual = wares.getTotalElements();
+        assertThat(actual, is(expected));
+
+    }
+
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Test
+    void getAllWaresInWarehousePageable() {
+
+        Long warehouseId = 2L;
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+
+        Page<WareDto> wares = waresService.getAllWaresInWarehousePageable(warehouseId, pageable);
+
+        long expected = 30L;
+        long actual = wares.getTotalElements();
+        assertThat(actual, is(expected));
     }
 }
