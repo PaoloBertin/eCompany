@@ -32,14 +32,16 @@
                         <!--    --> 
                         <div class="col-lg-8">
                             <div class="row">                        
-                                <div class="col-lg-8"><p style="font-size: 130%; font-weight: 600;" th:text="${product.name}"></p></div>
-                                <!--  --> 
+                                <div class="col-lg-8">
+                                    <div style="font-size: 130%; font-weight: 600;" th:text="${product.name}"></div>
+                                    <div th:text="${product.subtitle}"></div>
+                                </div>
                                 <div class="col-lg-4">                                                                               
                                     <a th:href="@{'/cart/add/' + ${product.productid}}" th:text="#{label.cart.addProduct}">Aggiungi al carrello</a>
                                 </div>
-                                
                             </div> 
                             <!--  -->
+                            <br/>
                             <div class="row">
                                 <div class="col-lg-3"><span style="font-weight: 600;" th:text="#{label.product.isbn}"></span></div>
                                 <div class="col-lg-9"><span th:text="${product.isbn}"></span> </div>
@@ -58,7 +60,6 @@
                                 <div class="col-lg-3"><span style="font-weight: 600;" th:text="#{label.product.description}"></span ></div>
                                 <div class="col-lg-9"><span th:text="${product.description}"></span> </div>
                             </div>
-                            
                         </div>
                        
                     </div>

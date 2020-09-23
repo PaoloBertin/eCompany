@@ -17,6 +17,8 @@ public class Product implements Serializable {
 
     private String name;
 
+    private String subtitle;
+
     private String description;
 
     private Float price;
@@ -60,6 +62,16 @@ public class Product implements Serializable {
     public void setName(String name) {
 
         this.name = name;
+    }
+
+    public String getSubtitle() {
+
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+
+        this.subtitle = subtitle;
     }
 
     public String getDescription() {

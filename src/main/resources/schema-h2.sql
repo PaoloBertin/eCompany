@@ -15,10 +15,8 @@ DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS purchase_orders;
 DROP TABLE IF EXISTS lineitem;
 DROP TABLE IF EXISTS purchase_orders_lineitems;
-
 DROP TABLE IF EXISTS sales_orders;
 DROP TABLE IF EXISTS sales_orders_lineitems;
-
 DROP TABLE IF EXISTS accounts;
 
 CREATE TABLE IF NOT EXISTS users(
@@ -130,6 +128,7 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS products (
     productid BIGINT(20) NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
+    subtitle VARCHAR(255),
     description VARCHAR(255),
     isbn VARCHAR(20) NOT NULL UNIQUE,
     price DECIMAL(12,4),

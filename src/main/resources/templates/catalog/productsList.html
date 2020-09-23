@@ -40,6 +40,7 @@
                                     <a th:href="@{'/products/all/' + ${products.content.get(col).productid}}">
                                         <span th:text="${products.getContent().get(col).name}"></span>
                                     </a>
+                                    <div th:text="${products.getContent().get(col).subtitle}"></div>
                                     <br/>
                                     <p>
                                         <b>
