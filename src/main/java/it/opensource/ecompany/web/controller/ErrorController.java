@@ -1,16 +1,18 @@
 package it.opensource.ecompany.web.controller;
 
-import org.springframework.ui.Model;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @ControllerAdvice
 public class ErrorController {
+
+    private static final Logger log = LoggerFactory.getLogger(ErrorController.class);
 
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -19,7 +21,8 @@ public class ErrorController {
         log.error("Exception during execution of SpringSecurity application", throwable);
         String errorMessage = (throwable != null ? throwable.getMessage() : "Unknown error");
         model.addAttribute("error", errorMessage);
-        
+
         return "error";
     }
+
 }

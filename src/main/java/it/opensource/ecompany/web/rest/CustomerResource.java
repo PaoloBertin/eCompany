@@ -7,7 +7,8 @@ import it.opensource.ecompany.service.CustomersService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
-@Slf4j
 @RequestMapping("/api/customers")
 @RestController
 public class CustomerResource {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomerResource.class);
 
     private CustomerForm customerForm;
 
@@ -58,8 +60,7 @@ public class CustomerResource {
     }
 
     @PostMapping(value = "/registration")
-    public String signup(@Valid CustomerForm customerForm, BindingResult result,
-                         RedirectAttributes redirectAttributes) {
+    public String signup(@Valid CustomerForm customerForm, BindingResult result, RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
             return "/customers/registration";
@@ -95,4 +96,5 @@ public class CustomerResource {
 
         return userContext.getCurrentCustomer();
     }
+
 }

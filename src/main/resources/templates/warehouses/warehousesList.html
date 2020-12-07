@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div class="container-fluid p-0">
+
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>
+
+            <!-- corpo centrale -->
+            <div class="row">
+                <div class="col-lg-2">
+                </div>
+
+                <div class="col-lg-7">
+                    <br/>
+                    <h4 th:text="#{label.warehouse.list}">warehouse list</h4>
+                    <table class="table" width="100%" cellspacing="10px" cellpadding="10px">
+                        <thead class="thead-light">
+                            <tr>
+                                <th th:text="#{label.warehouse.name}">name</th>
+                                <th th:text="#{label.edit}">edit</th>
+                                <th th:text="#{label.delete}">delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="warehouse : ${warehouses}">
+                                <td>
+                                    <a th:href="@{'/admin/warehouses/' + ${warehouse.id}}">
+                                        <span th:text="${warehouse.name}"></span>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/admin/warehouses/' + ${warehouse.id}} + '?form'">
+                                        <i class="fa fa-edit fa-lg"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <form th:action="@{'/admin/warehouses/'}" th:method="delete">
+                                        <input type="hidden" name="id" th:value="${warehouse.id}"/>
+                                        <button class="btn">
+                                            <i class="fa fa-trash fa-lg"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-3">
+                    <!--
+                    <div th:replace="~{fragments/right_side_warehouse :: right_side_warehouse}">right side warehouse</div>
+                    -->
+                </div>
+            </div>
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

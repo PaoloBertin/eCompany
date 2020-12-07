@@ -3,17 +3,19 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.Account;
 import it.opensource.ecompany.repository.AccountsRepository;
 import it.opensource.ecompany.service.AccountsService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Slf4j
 @Transactional
 @Service("accountsService")
 public class AccountsServiceImpl implements AccountsService {
+
+    private static final Logger log = LoggerFactory.getLogger(AccountsServiceImpl.class);
 
     private final AccountsRepository accountsRepository;
 
@@ -73,4 +75,5 @@ public class AccountsServiceImpl implements AccountsService {
 
         return false;
     }
+
 }

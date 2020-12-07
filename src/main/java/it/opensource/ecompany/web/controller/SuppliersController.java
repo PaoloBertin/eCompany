@@ -4,7 +4,8 @@ import it.opensource.ecompany.domain.Supplier;
 import it.opensource.ecompany.service.SuppliersService;
 import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.form.SupplierForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,10 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 
-@Slf4j
 @Controller
 public class SuppliersController {
+
+    private static final Logger log = LoggerFactory.getLogger(SuppliersController.class);
 
     private final SuppliersService suppliersService;
 
@@ -84,7 +86,8 @@ public class SuppliersController {
         }
 
         Supplier supplier = supplierForm.getSupplier();
-        long id = suppliersService.saveSupplier(supplier).getId();
+        long id = suppliersService.saveSupplier(supplier)
+                                  .getId();
         message = new Message("success", messageSource.getMessage("supplier.save.success", new Object[]{}, locale));
         redirectAttributes.addFlashAttribute("message", message);
         log.debug("salvato customer con id=" + id);
@@ -92,4 +95,5 @@ public class SuppliersController {
 
         return "redirect:/suppliersListAdmin";
     }
+
 }

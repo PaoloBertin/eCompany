@@ -23,7 +23,7 @@ class AccountsServiceImplTest {
     @Test
     void getAccountByIdTest() {
 
-        BigDecimal expected = new BigDecimal(10000);
+        BigDecimal expected = new BigDecimal(100000);
         BigDecimal error = new BigDecimal(0.00001);
         BigDecimal actual = accountsService.getAccountById(1L)
                                            .getBalance();
@@ -47,10 +47,10 @@ class AccountsServiceImplTest {
     void depositTest() {
 
         Long accountId = 1L;
-        BigDecimal deposit = new BigDecimal(100);
+        BigDecimal deposit = new BigDecimal(1000);
         accountsService.deposit(accountId, deposit);
 
-        BigDecimal expected = new BigDecimal(10100);
+        BigDecimal expected = new BigDecimal(101000);
         BigDecimal error = new BigDecimal(0.00001);
         BigDecimal actual = accountsService.getAccountById(accountId)
                                            .getBalance();
@@ -67,7 +67,7 @@ class AccountsServiceImplTest {
         BigDecimal withdrawl = new BigDecimal(1000);
         accountsService.withdrawal(accountId, withdrawl);
 
-        BigDecimal expected = new BigDecimal(9000);
+        BigDecimal expected = new BigDecimal(99000);
         BigDecimal error = new BigDecimal(0.00001);
         BigDecimal actual = accountsService.getAccountById(accountId)
                                            .getBalance();
@@ -83,7 +83,7 @@ class AccountsServiceImplTest {
         BigDecimal withdrawl = new BigDecimal(11000);
         accountsService.withdrawal(accountId, withdrawl);
 
-        BigDecimal expected = new BigDecimal(10000);
+        BigDecimal expected = new BigDecimal(89000);
         BigDecimal error = new BigDecimal(0.00001);
         BigDecimal actual = accountsService.getAccountById(accountId)
                                            .getBalance();

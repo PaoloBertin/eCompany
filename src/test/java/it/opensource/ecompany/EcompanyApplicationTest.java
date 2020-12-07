@@ -5,8 +5,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class EcompanyApplicationTest {
-    
-    @Test
+
+    // @Test
     public void contextLoads() throws Exception {
     }
 }

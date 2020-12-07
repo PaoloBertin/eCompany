@@ -6,7 +6,8 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
  *
  * @author Paolo Bertin
  */
-@Slf4j
 @Controller
 public class WelcomeController {
+
+    private static final Logger log = LoggerFactory.getLogger(WelcomeController.class);
 
     private final UserContext userContext;
 
@@ -71,4 +73,5 @@ public class WelcomeController {
 
         return "welcomeAdmin";
     }
+
 }

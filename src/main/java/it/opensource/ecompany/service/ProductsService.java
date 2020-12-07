@@ -8,23 +8,23 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductsService {
 
-    public List<Product> getAll();
+    List<Product> getAll();
 
-    public Page<Product> getAllByPage(Pageable pageable);
+    Page<Product> getAllByPage(Pageable pageable);
 
-    public List<Product> getProductsByCategory(Long id);
+    List<Product> getProductsByCategory(Long id);
 
-    public Page<Product> getProductsByCategoryByPage(Long categoryId, Pageable pageable);
+    Page<Product> getProductsByCategoryByPage(Long categoryId, Pageable pageable);
 
-    public Product getProductById(Long id);
+    Product getProductById(Long id);
 
-    public List<Product> getProductsByName(String name);
+    List<Product> getProductsByName(String name);
 
-    public List<Product> getProductsByNameContaining(String searchText);
+    List<Product> getProductsByNameContaining(String searchText);
 
-    public Page<Product> getProductsByNameContainingByPage(String searchText, Pageable pageable);
+    Page<Product> getProductsByNameContainingByPage(String searchText, Pageable pageable);
 
-    public Product saveProduct(Product product);
+    Product saveProduct(Product product);
 
-    public void deleteProduct(Product product);
+    void deleteProduct(Product product);
 }

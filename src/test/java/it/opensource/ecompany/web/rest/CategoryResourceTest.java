@@ -17,7 +17,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-// @ActiveProfiles("rest")
 @AutoConfigureMockMvc
 @SpringBootTest
 class CategoryResourceTest {
@@ -26,23 +25,19 @@ class CategoryResourceTest {
     @Test
     public void getAllCategoriesTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/api/categories").contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.length()", equalTo(6)))
-            .andExpect(status().isOk())
-        ;
+        mvc.perform(get("/api/categories").contentType(MediaType.APPLICATION_JSON))
+           .andExpect(jsonPath("$.length()", equalTo(6)))
+           .andExpect(status().isOk());
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     public void getCategoryByIdTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc
-            .perform(get("/api/categories/{categoryId}", 1L).contentType(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.categoryid", equalTo(1)))
-            .andExpect(jsonPath("$.name", equalTo("Libri")))
-            .andExpect(status().isOk())
-        ;
+        mvc.perform(get("/api/categories/{categoryId}", 1L).contentType(MediaType.APPLICATION_JSON))
+           .andExpect(jsonPath("$.categoryid", equalTo(1)))
+           .andExpect(jsonPath("$.name", equalTo("Libri")))
+           .andExpect(status().isOk());
 
     }
 
@@ -72,11 +67,9 @@ class CategoryResourceTest {
         ObjectMapper objectMapper = new ObjectMapper();
         String requestJson = objectMapper.writeValueAsString(category);
 
-        mvc
-            .perform(delete("/categories")
-                         .contentType(MediaType.APPLICATION_JSON)
-                         .content(requestJson))
-            .andExpect(status().isOk())
-        ;
+        mvc.perform(delete("/categories").contentType(MediaType.APPLICATION_JSON)
+                                         .content(requestJson))
+           .andExpect(status().isOk());
     }
+
 }

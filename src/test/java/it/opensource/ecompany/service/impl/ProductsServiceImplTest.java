@@ -123,7 +123,7 @@ public class ProductsServiceImplTest {
 
         String searchText = "Java";
 
-        int expected = 6;
+        int expected = 5;
         int actual = productsService.getProductsByNameContaining(searchText)
                                     .size();
 
@@ -137,7 +137,7 @@ public class ProductsServiceImplTest {
         String searchText = "Java";
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Order.asc("name")));
 
-        int expected = 6;
+        int expected = 5;
         int actual = productsService.getProductsByNameContainingByPage(searchText, pageable)
                                     .getContent()
                                     .size();

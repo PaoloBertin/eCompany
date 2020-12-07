@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+        <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+    </head>
+
+    <body>
+        <div class="container-fluid p-0">
+
+            <!-- intestazione -->
+            <div th:replace="~{fragments/header :: header}">header</div>
+
+            <!-- corpo centrale -->
+            <div class="row">
+                <div class="col-lg-2">
+                    <!--
+                    <div th:replace="~{fragments/left_side :: left_side}">left side</div>
+                    -->
+                </div>
+                <div class="col-lg-4">
+                    <br/>
+                    <h4 th:text="#{label.warehouse.update}">warehouse edit</h4>
+                    <br/>
+                    <form name="editWarehouseForm" th:object="${warehouse}" th:action="@{/admin/warehouses(form='true')}" th:method="put">
+
+                        <!--  <input type="hidden" th:field="*{categoryId}"/> -->
+                        <input type="hidden" th:field="*{id}"/>
+                        <input type="hidden" th:field="*{version}"/>
+
+                        <div class="form-group">
+                            <label for="warehouse_name" th:text="#{label.warehouse.name}">name</label>
+                            <input class="form-control" id="warehouse_name" type="text" th:field="*{name}"/>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+                        <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
+                    </form>
+                    <br/>
+                </div>
+                <div class="col-lg-6">
+                    <!-- <div th:replace="~{fragments/right_side :: right_side}">right side</div> -->
+                </div>
+            </div>
+
+            <!-- pie' pagina -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div th:replace="~{fragments/footer :: footer}"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

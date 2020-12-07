@@ -8,7 +8,8 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,10 +28,11 @@ import java.io.InputStream;
  *
  * @author Paolo Bertin
  */
-@Slf4j
 @RequestMapping("products")
 @Controller
 public class ProductsController {
+
+    private static final Logger log = LoggerFactory.getLogger(ProductsController.class);
 
     private final CategoriesService categoriesService;
 
@@ -66,8 +68,7 @@ public class ProductsController {
 
     @GetMapping
     public String viewAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                        @RequestParam(name = "size", defaultValue = "10") int size,
-                                        Model uiModel) {
+                                        @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size);
 
@@ -97,8 +98,7 @@ public class ProductsController {
     @GetMapping(value = "/{categoryId}/all")
     public String viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                @RequestParam(name = "page", defaultValue = "0") int page,
-                                               @RequestParam(name = "size", defaultValue = "10") int size,
-                                               Model uiModel) {
+                                               @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
@@ -181,4 +181,5 @@ public class ProductsController {
 
         return "catalog/productsList";
     }
+
 }

@@ -1,7 +1,8 @@
 package it.opensource.ecompany.domain;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Table(name = "products")
 @Entity
@@ -13,6 +14,7 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productid;
 
+    @NotNull
     private String isbn;
 
     private String name;
@@ -33,6 +35,16 @@ public class Product implements Serializable {
 
     @Version
     private Integer version;
+
+    public Product() {
+
+    }
+
+    public Product(String isbn, String name) {
+
+        this.isbn = isbn;
+        this.name = name;
+    }
 
     public Long getProductid() {
 
@@ -150,4 +162,5 @@ public class Product implements Serializable {
             return false;
         return true;
     }
+
 }

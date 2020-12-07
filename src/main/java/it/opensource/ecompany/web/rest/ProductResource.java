@@ -3,11 +3,13 @@ package it.opensource.ecompany.web.rest;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +25,11 @@ import java.net.URISyntaxException;
  *
  * @author Paolo Bertin
  */
-@Slf4j
 @RequestMapping("/api/products")
 @RestController
 public class ProductResource {
+
+    private static final Logger log = LoggerFactory.getLogger(ProductResource.class);
 
     private final ProductsService productsService;
 
@@ -36,10 +39,8 @@ public class ProductResource {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Page<Product>> getAllProductsByPage(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                              @RequestParam(name = "size", defaultValue = "10") int size) {
+    public ResponseEntity<Page<Product>> getAllProductsByPage(@PageableDefault Pageable pageable) {
 
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> pageProducts = productsService.getAllByPage(pageable);
 
         return ResponseEntity.ok()
@@ -141,8 +142,7 @@ public class ProductResource {
      * @return vista
      */
     @PutMapping(value = "/{productId}")
-    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product,
-                                                 @PathVariable("productId") Long id) throws Exception {
+    public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product, @PathVariable("productId") Long id) throws Exception {
 
         if (product.getProductid() == null) {
             throw new Exception();
@@ -182,4 +182,5 @@ public class ProductResource {
         return ResponseEntity.ok()
                              .body(pageProducts);
     }
+
 }

@@ -28,11 +28,11 @@ class AccountsControllerTest {
     @Test
     void viewAccountsTest(@Autowired MockMvc mvc) throws Exception {
 
-        BigDecimal balance = new BigDecimal(10000);
+        BigDecimal balance = new BigDecimal(100000);
         BigDecimal error = new BigDecimal(0.00001);
 
         mvc.perform(get("/admin/accounts").with(user("admin").password("admin")
-                                                           .roles("ADMIN")))
+                                                             .roles("ADMIN")))
            .andExpect(model().attribute("accounts", IsCollectionWithSize.hasSize(1)))
            .andExpect(model().attribute("accounts", hasItem(hasProperty("balance", is(closeTo(balance, error))))))
            .andExpect(view().name("accounts/accountsList"))
@@ -43,13 +43,14 @@ class AccountsControllerTest {
     @Test
     void viewAccount(@Autowired MockMvc mvc) throws Exception {
 
-        BigDecimal balance = new BigDecimal(10000);
+        BigDecimal balance = new BigDecimal(100000);
         BigDecimal error = new BigDecimal(0.00001);
 
         mvc.perform(get("/admin/accounts/{accountId}", 1L).with(user("admin").password("admin")
-                                                               .roles("ADMIN")))
+                                                                             .roles("ADMIN")))
            .andExpect(model().attribute("account", hasProperty("balance", is(closeTo(balance, error)))))
            .andExpect(view().name("accounts/accountShow"))
            .andExpect(status().isOk());
     }
+
 }

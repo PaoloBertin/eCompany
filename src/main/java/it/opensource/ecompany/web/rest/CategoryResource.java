@@ -2,17 +2,19 @@ package it.opensource.ecompany.web.rest;
 
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.service.CategoriesService;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Slf4j
 @RequestMapping("/api/categories")
 @RestController
 public class CategoryResource {
+
+    private static final Logger log = LoggerFactory.getLogger(CategoryResource.class);
 
     private final CategoriesService categoriesService;
 
@@ -45,8 +47,7 @@ public class CategoryResource {
     @GetMapping("/{categoryId}")
     public ResponseEntity<Category> getCategoryById(@PathVariable("categoryId") Long id) {
 
-        ResponseEntity<Category> responseEntity = new ResponseEntity<Category>(categoriesService.getCategoryById(id),
-                                                                               HttpStatus.OK);
+        ResponseEntity<Category> responseEntity = new ResponseEntity<Category>(categoriesService.getCategoryById(id), HttpStatus.OK);
 
         log.trace("restituisce Category con id=" + id);
 
@@ -78,4 +79,5 @@ public class CategoryResource {
 
         categoriesService.deleteCategory(category);
     }
+
 }

@@ -2,8 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}"
-      th:lang="${lang}"
->
+      th:lang="${lang}">
 
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
@@ -27,7 +26,7 @@
                     <br/>
                     <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
 
-                    <form name="selectWarehouseForm" th:object="${wareForm}" th:action="@{/admin/wares}" method="get">
+                    <form name="selectWarehouseForm" th:object="${wareForm}" th:action="@{/admin/warehouseCards}" method="get">
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="labelWarehouseSelect">warehouse</label>
                             <select class="col-lg-10" id="labelWarehouseSelect" th:field="*{warehouseId}">
@@ -45,46 +44,46 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th th:text="#{label.ware.name}">name</th>
-                                <th th:text="#{label.ware.ean}">ean</th>
-                                <th th:text="#{label.ware.sku}">sku</th>
-                                <th th:text="#{label.ware.cost}">cost</th>
-                                <th th:text="#{label.ware.unit}">unit</th>
-                                <th th:text="#{label.ware.quantity}">quantity</th>
-                                <th th:text="#{label.ware.inventoryValue}">inventoryValue</th>
-                                <th th:text="#{label.ware.reorderQuantity}">reorderQuantity</th>
-                                <th th:text="#{label.ware.reorder}">reorder</th>
-                                <th th:text="#{label.ware.container}">container</th>
-                                <th th:text="#{label.ware.location}">location</th>
+                                <th th:text="#{label.warehouseCard.name}">name</th>
+                                <th th:text="#{label.warehouseCard.ean}">ean</th>
+                                <th th:text="#{label.warehouseCard.sku}">sku</th>
+                                <th th:text="#{label.warehouseCard.cost}">cost</th>
+                                <th th:text="#{label.warehouseCard.unit}">unit</th>
+                                <th th:text="#{label.warehouseCard.quantity}">quantity</th>
+                                <th th:text="#{label.warehouseCard.inventoryValue}">inventoryValue</th>
+                                <th th:text="#{label.warehouseCard.reorderQuantity}">reorderQuantity</th>
+                                <th th:text="#{label.warehouseCard.reorder}">reorder</th>
+                                <th th:text="#{label.warehouseCard.container}">container</th>
+                                <th th:text="#{label.warehouseCard.location}">location</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="ware : ${wares.content}">
-                                <td th:text="${ware.name}">name</td>
-                                <td th:text="${ware.isbn}">ean</td>
-                                <td th:text="${ware.sku}">sku</td>
-                                <td th:text="${ware.cost}">cost</td>
-                                <td th:text="${ware.unit}">unit</td>
-                                <td th:text="${ware.quantity}">quantity</td>
-                                <td th:text="${ware.inventoryValue}">inventoryValue</td>
-                                <td th:text="${ware.reorderQuantity}">reorderQuantity</td>
-                                <td th:text="${ware.reorder}">reorderr</td>
-                                <td th:text="${ware.container}">container</td>
-                                <td th:text="${ware.location}">location</td>
+                            <tr th:each="warehouseCard : ${warehouseCards.content}">
+                                <td th:text="${warehouseCard.name}">name</td>
+                                <td th:text="${warehouseCard.isbn}">ean</td>
+                                <td th:text="${warehouseCard.sku}">sku</td>
+                                <td th:text="${warehouseCard.cost}">cost</td>
+                                <td th:text="${warehouseCard.unit}">unit</td>
+                                <td th:text="${warehouseCard.quantity}">quantity</td>
+                                <td th:text="${warehouseCard.inventoryValue}">inventoryValue</td>
+                                <td th:text="${warehouseCard.reorderQuantity}">reorderQuantity</td>
+                                <td th:text="${warehouseCard.reorder}">reorderr</td>
+                                <td th:text="${warehouseCard.container}">container</td>
+                                <td th:text="${warehouseCard.location}">location</td>
                             </tr>
                         </tbody>
                     </table>
                     <br/>
                     <div class="row justify-content-center">
-                        <nav aria-label="navigation" th:if="${wares.totalPages gt 1}">
-                            <ul class="pagination" th:with="pages=${wares.totalPages}">
+                        <nav aria-label="navigation" th:if="${warehouseCards.totalPages gt 1}">
+                            <ul class="pagination" th:with="pages=${warehouseCards.totalPages}">
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/admin/wares(page=${0}, size=${size}, warehouseId=${warehouseId})}">
+                                    <a class="page-link" th:href="@{/admin/warehouseCards(page=${0}, size=${size}, warehouseId=${warehouseId})}">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                                    <a class="page-link" th:href="@{/admin/wares(page=${page - 1}, size=${size}, warehouseId=${warehouseId})}">
+                                    <a class="page-link" th:href="@{/admin/warehouseCards(page=${page - 1}, size=${size}, warehouseId=${warehouseId})}">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
                                 </li>
@@ -99,16 +98,16 @@
                                 <li class="page-item" th:classappend="disabled">
                                     <a class="page-link" th:text="${pages}">3</a>
                                 </li>
-                                <li class="page-item" th:classappend="${page eq (wares.totalPages - 1)} ? 'disabled'">
+                                <li class="page-item" th:classappend="${page eq (warehouseCards.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/wares(page=${page + 1},size=${size}, warehouseId=${warehouseId})}"
+                                       th:href="@{/admin/warehouseCards(page=${page + 1},size=${size}, warehouseId=${warehouseId})}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
-                                <li class="page-item" th:classappend="${page eq (wares.totalPages - 1)} ? 'disabled'">
+                                <li class="page-item" th:classappend="${page eq (warehouseCards.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/wares(page=${wares.totalPages - 1}, size=${size}, warehouseId=${warehouseId})}"
+                                       th:href="@{/admin/warehouseCards(page=${warehouseCards.totalPages - 1}, size=${size}, warehouseId=${warehouseId})}"
                                        aria-label="Next">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>

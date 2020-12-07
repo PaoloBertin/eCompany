@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+    <head>
+    </head>
+
+    <body>
+        <div th:fragment="warehouseNew">
+            <br/>
+            <h4 th:text="#{label.warehouse.new}">warehouse new</h4>
+            <br/>
+            <form name="createWarehouseForm" th:object="${warehouse}" th:action="@{/admin/warehouse?form=true}" th:method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-group col-xl-9">
+                    <label for="warehouse_name" th:text="#{label.warehouse.name}">name</label>
+                    <input class="form-control" id="warehouse_name" type="text" th:field="*{name}"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+                <button type="reset" class="btn btn-primary" style="margin-left: 5px" th:text="#{label.reset}"></button>
+            </form>
+        </div>
+    </body>
+</html>

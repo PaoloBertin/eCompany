@@ -2,17 +2,19 @@ package it.opensource.ecompany.web.rest;
 
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.service.UserContext;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RequestMapping("/api/users")
 @RestController
 public class UserResources {
+
+    private static final Logger log = LoggerFactory.getLogger(UserResources.class);
 
     private final UserContext userContext;
 
@@ -24,11 +26,11 @@ public class UserResources {
     @GetMapping
     public ResponseEntity<Customer> getCurrentUser() {
 
-        ResponseEntity<Customer> responseEntity = new ResponseEntity<Customer>(userContext.getCurrentCustomer(),
-                                                                               HttpStatus.OK);
+        ResponseEntity<Customer> responseEntity = new ResponseEntity<Customer>(userContext.getCurrentCustomer(), HttpStatus.OK);
 
         log.trace("restituisce utente corrente");
 
         return responseEntity;
     }
+
 }

@@ -23,17 +23,17 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
 
     private final PurchaseOrdersRepository purchaseOrdersRepository;
 
-    private final WaresService waresService;
+    private final WarehouseCardService warehouseCardService;
 
     private final AccountsService accountsService;
 
     public PurchaseOrdersServiceImpl(CartBean cartBean, UserContext userContext, PurchaseOrdersRepository purchaseOrdersRepository,
-                                     WaresService waresService, AccountsService accountsService) {
+                                     WarehouseCardService warehouseCardService, AccountsService accountsService) {
 
         this.cartBean = cartBean;
         this.userContext = userContext;
         this.purchaseOrdersRepository = purchaseOrdersRepository;
-        this.waresService = waresService;
+        this.warehouseCardService = warehouseCardService;
         this.accountsService = accountsService;
     }
 
@@ -71,10 +71,10 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
         purchaseOrder.setCustomer(customer);
 
         // costruzione lista LineItem associata all'acquisto
-        List<Lineitem> lineitems = new ArrayList<>();
+        List<LineItem> lineitems = new ArrayList<>();
         for (Map.Entry<Product, Integer> entry : cartBean.getProducts()
                                                          .entrySet()) {
-            Lineitem lineitem = new Lineitem();
+            LineItem lineitem = new LineItem();
             lineitem.setProduct(entry.getKey());
             lineitem.setQuantity(Double.valueOf(entry.getValue()));
             lineitems.add(lineitem);
@@ -91,7 +91,7 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
             Product product = entry.getKey();
             Integer quantity = entry.getValue();
             Long productId = product.getProductid();
-//            waresService.productsWithdrawalFromWarehouse(warehouseId, productId, quantity);
+//            warehouseCardService.productsWithdrawalFromWarehouse(warehouseId, productId, quantity);
         }
 
         // aggiunge fattura al conto

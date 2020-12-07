@@ -80,7 +80,7 @@ class ProductsAdminControllerTest {
                                                         .param("textToSearch", "Java")
                                                         .with(user("admin").password("admin")
                                                                            .roles("ADMIN")))
-           .andExpect(model().attribute("products", hasProperty("content", hasSize(6))))
+           .andExpect(model().attribute("products", hasProperty("content", hasSize(5))))
            .andExpect(view().name("catalog/productsListAdmin"))
            .andExpect(status().isOk());
         ;

@@ -1,11 +1,17 @@
 package it.opensource.ecompany.web.form;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class SearchForm {
 
     private String textToSearch;
+
+    public String getTextToSearch() {
+
+        return textToSearch;
+    }
+
+    public void setTextToSearch(String textToSearch) {
+
+        this.textToSearch = textToSearch;
+    }
+
 }

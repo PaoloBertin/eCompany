@@ -18,7 +18,6 @@ public class Account implements Serializable {
 
     private BigDecimal balance;
 
-
     public Long getId() {
 
         return id;

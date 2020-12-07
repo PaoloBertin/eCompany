@@ -14,44 +14,44 @@
             <br/>
 
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                <span class="sidebar-titolo" th:text="#{label.rightside.warehouse.title}">ware</span><br/>
+                <span class="sidebar-titolo" th:text="#{label.rightside.warehouse.title}">warehouseCard</span><br/>
 
-                <form name="editWareForm" th:object="${wareForm}" th:attr="action=@{/admin/wares?form}" method="post">
+                <form name="editWareForm" th:object="${wareForm}" th:attr="action=@{/admin/warehouseCards?form}" method="post">
                     <input type="hidden" name="wareId" th:field="*{wareId}"/>
                     <div class="form-group">
-                        <label id="labelSku" for="inputSku" th:text="#{label.ware.sku}">sku</label>
+                        <label id="labelSku" for="inputSku" th:text="#{label.warehouseCard.sku}">sku</label>
                         <input class="form-control" id="inputSku" type="text" name="sku" th:field="*{sku}"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelCost" for="inputCost" th:text="#{label.ware.cost}">cost</label>
+                        <label id="labelCost" for="inputCost" th:text="#{label.warehouseCard.cost}">cost</label>
                         <input class="form-control" id="inputCost" type="text" name="cost" th:field="*{cost}"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelUnit" for="inputUnit" th:text="#{label.ware.unit}">unit</label>
+                        <label id="labelUnit" for="inputUnit" th:text="#{label.warehouseCard.unit}">unit</label>
                         <input class="form-control" id="inputUnit" type="text" name="unit" th:field="*{unit}"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelPrice" for="inputQuantity" th:text="#{label.ware.quantity}">quantity</label>
+                        <label id="labelPrice" for="inputQuantity" th:text="#{label.warehouseCard.quantity}">quantity</label>
                         <input class="form-control" id="inputQuantity" type="text" name="quantity" th:field="*{quantity}"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelReorderQuantity" for="inputReorderQuantity" th:text="#{label.ware.reorderQuantity}">reorderQuantity</label>
+                        <label id="labelReorderQuantity" for="inputReorderQuantity" th:text="#{label.warehouseCard.reorderQuantity}">reorderQuantity</label>
                         <input class="form-control" id="inputReorderQuantity" type="text" name="reorderQuantity"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelInventoryValue" for="inputInventoryValue" th:text="#{label.ware.inventoryValue}">inventoryValue</label>
+                        <label id="labelInventoryValue" for="inputInventoryValue" th:text="#{label.warehouseCard.inventoryValue}">inventoryValue</label>
                         <input class="form-control" id="inputinventoryValue" type="text" name="inventoryValue"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelReorder" for="inputReorder" th:text="#{label.ware.reorder}">reorder</label>
+                        <label id="labelReorder" for="inputReorder" th:text="#{label.warehouseCard.reorder}">reorder</label>
                         <input class="form-control" id="inputReorder" type="text" name="reorder"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelContainer" for="inputContainer" th:text="#{label.ware.container}">container</label>
+                        <label id="labelContainer" for="inputContainer" th:text="#{label.warehouseCard.container}">container</label>
                         <input class="form-control" id="inputContainer" type="text" name="container"/>
                     </div>
                     <div class="form-group">
-                        <label id="labelLocation" for="inputLocation" th:text="#{label.ware.location}">location</label>
+                        <label id="labelLocation" for="inputLocation" th:text="#{label.warehouseCard.location}">location</label>
                         <input class="form-control" id="inputLocation" type="text" name="location"/>
                     </div>
 

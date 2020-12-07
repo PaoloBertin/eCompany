@@ -4,20 +4,23 @@ import it.opensource.ecompany.domain.Warehouse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 public interface WarehouseService {
+
+    Long getWarehouseNumber();
 
     List<Warehouse> getAllWarehouse();
 
     Page<Warehouse> getAllWarehousesByPage(Pageable pageable);
 
-    Warehouse getWarehouseById(Long warehouseId);
+    Optional<Warehouse> getWarehouseById(Long warehouseId);
 
-    Warehouse getWarehouseByName(String name);
+    Optional<Warehouse> getWarehouseByName(String name);
 
-    List<Warehouse> getByWaresIdIn(Collection<Long> wareId);
+    Warehouse saveWarehouse(Warehouse warehouse);
 
-    List<Warehouse> getByWaresSkuIn(Collection<String> sku);
+    void deleteWarehouse(Long warehouseId);
+
 }

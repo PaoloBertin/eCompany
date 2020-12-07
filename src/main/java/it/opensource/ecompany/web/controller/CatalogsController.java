@@ -6,7 +6,8 @@ import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.controller.util.Message;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,11 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 
-@Slf4j
 @RequestMapping("/admin/catalog")
 @Controller
 public class CatalogsController {
+
+    private static final Logger log = LoggerFactory.getLogger(CatalogsController.class);
 
     private final CategoriesService categoriesService;
 

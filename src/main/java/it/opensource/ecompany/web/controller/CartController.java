@@ -8,15 +8,17 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @Controller
 @RequestMapping("/cart")
 public class CartController {
+
+    private static final Logger log = LoggerFactory.getLogger(CartController.class);
 
     private final CategoriesService categoriesServices;
 
@@ -36,8 +38,7 @@ public class CartController {
     }
 
     @GetMapping("/add/{productid}")
-    public String addProductToCart(@PathVariable("productid") Long productid,
-                                   @RequestHeader("referer") String referer) {
+    public String addProductToCart(@PathVariable("productid") Long productid, @RequestHeader("referer") String referer) {
 
         Product product = productsService.getProductById(productid);
 
@@ -50,8 +51,7 @@ public class CartController {
     }
 
     @GetMapping("/deleteproduct/{productid}")
-    public String deleteProductFromToCart(@PathVariable("productid") Long productid,
-                                          @RequestHeader("referer") String referer) {
+    public String deleteProductFromToCart(@PathVariable("productid") Long productid, @RequestHeader("referer") String referer) {
 
         Product product = productsService.getProductById(productid);
         cartBean.deleteProductToCart(product);

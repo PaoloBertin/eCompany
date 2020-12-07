@@ -8,8 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @Transactional
 @Service("warehouseService")
@@ -20,6 +20,12 @@ public class WarehouseServiceImpl implements WarehouseService {
     public WarehouseServiceImpl(WarehouseRepository warehouseRepository) {
 
         this.warehouseRepository = warehouseRepository;
+    }
+
+    @Override
+    public Long getWarehouseNumber() {
+
+        return warehouseRepository.count();
     }
 
     @Transactional(readOnly = true)
@@ -38,30 +44,28 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Transactional(readOnly = true)
     @Override
-    public Warehouse getWarehouseById(Long warehouseId) {
+    public Optional<Warehouse> getWarehouseById(Long warehouseId) {
 
-        Warehouse warehouse = warehouseRepository.findById(warehouseId)
-                                                 .orElse(null);
-        return warehouse;
+        return warehouseRepository.findById(warehouseId);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Warehouse getWarehouseByName(String name) {
+    public Optional<Warehouse> getWarehouseByName(String name) {
 
         return warehouseRepository.findByName(name);
     }
 
     @Override
-    public List<Warehouse> getByWaresIdIn(Collection<Long> wareId) {
+    public Warehouse saveWarehouse(Warehouse warehouse) {
 
-        return warehouseRepository.findByWaresIdIn(wareId);
+        return warehouseRepository.save(warehouse);
     }
 
     @Override
-    public List<Warehouse> getByWaresSkuIn(Collection<String> sku) {
+    public void deleteWarehouse(Long warehouseId) {
 
-        return warehouseRepository.findByWaresSkuIn(sku);
+        warehouseRepository.deleteById(warehouseId);
     }
 
 }

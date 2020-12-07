@@ -1,19 +1,21 @@
 package it.opensource.ecompany.bean;
 
+import it.opensource.ecompany.domain.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-import it.opensource.ecompany.domain.Product;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Shopping cart
  *
  * @author Paolo Bertin
  */
-@Slf4j
 public class CartBean implements Serializable {
+
+    private static final Logger log = LoggerFactory.getLogger(CartBean.class);
 
     private static final long serialVersionUID = 1L;
 
@@ -99,8 +101,7 @@ public class CartBean implements Serializable {
         } else {
             if (subTotal >= 25) {
                 shippingCosts = 0.0;
-            }
-            else {
+            } else {
                 shippingCosts = 3.0;
             }
         }
@@ -136,4 +137,5 @@ public class CartBean implements Serializable {
             subTotal += unitCost;
         }
     }
+
 }

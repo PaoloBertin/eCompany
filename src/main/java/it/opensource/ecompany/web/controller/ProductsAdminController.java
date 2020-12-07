@@ -10,7 +10,8 @@ import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,10 +32,11 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
-@Slf4j
 @RequestMapping("admin/products")
 @Controller
 public class ProductsAdminController {
+
+    private static final Logger log = LoggerFactory.getLogger(ProductsAdminController.class);
 
     private final CategoriesService categoriesService;
 
@@ -210,8 +212,7 @@ public class ProductsAdminController {
      */
     @PostMapping
     public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam(name = "form") String form,
-                                @RequestParam(name = "page", defaultValue = "0") int page,
+                                @RequestParam(name = "form") String form, @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size,
                                 @RequestParam(name = "categoryId", defaultValue = "1") Long categoryId,
                                 HttpServletRequest httpServletRequest, Locale locale, Model uiModel,
@@ -275,8 +276,7 @@ public class ProductsAdminController {
      * @return nome vista
      */
     @GetMapping(path = "/all/{productId}")
-    public String updateProductForm(@PathVariable("productId") Long productId,
-                                    @RequestParam(name = "form") String form,
+    public String updateProductForm(@PathVariable("productId") Long productId, @RequestParam(name = "form") String form,
                                     @RequestParam(value = "categoryId") Long categoryId, Model uiModel) {
 
         log.debug("id prodotto da editare=" + productId);
@@ -350,4 +350,5 @@ public class ProductsAdminController {
 
         return product;
     }
+
 }

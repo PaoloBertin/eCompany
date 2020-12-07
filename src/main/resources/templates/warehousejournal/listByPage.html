@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="item : ${wares.content}">
+                            <tr th:each="item : ${warehouseCards.content}">
                                 <!--
                                  <td>
                                     <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left" style="margin: 0px 10px" width="65" height="92"/>
@@ -58,17 +58,17 @@
                     <br/>
                     <!-- Paginazione -->
                     <div class="row justify-content-center">
-                        <nav aria-label="navigation" th:if="${wares.totalPages gt 1}">
-                            <ul class="pagination" th:with="pages=${wares.totalPages}">
+                        <nav aria-label="navigation" th:if="${warehouseCards.totalPages gt 1}">
+                            <ul class="pagination" th:with="pages=${warehouseCards.totalPages}">
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/warehouse/1/wares/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
+                                       th:href="@{/admin/warehouse/1/warehouseCards/{categoryId}(categoryId=${categoryId},page=${0},size=${size})}">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/warehouse/1/wares/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
+                                       th:href="@{/admin/warehouse/1/warehouseCards/{categoryId}(categoryId=${categoryId},page=${page - 1},size=${size})}">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>
                                 </li>
@@ -84,16 +84,16 @@
                                     <a class="page-link" th:text="${pages}">3</a>
                                 </li>
                                 <li class="page-item"
-                                    th:classappend="${page eq (wares.totalPages - 1)} ? 'disabled'">
+                                    th:classappend="${page eq (warehouseCards.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/warehouse/1/wares/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
+                                       th:href="@{/admin/warehouse/1/warehouseCards/{categoryId}(categoryId=${categoryId},page=${page + 1},size=${size})}">
                                         <span aria-hidden="true">&rsaquo;</span>
                                     </a>
                                 </li>
                                 <li class="page-item"
-                                    th:classappend="${page eq (wares.totalPages - 1)} ? 'disabled'">
+                                    th:classappend="${page eq (warehouseCards.totalPages - 1)} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/admin/warehouse/1/wares/{categoryId}(categoryId=${categoryId},page=${wares.totalPages - 1},size=${size})}">
+                                       th:href="@{/admin/warehouse/1/warehouseCards/{categoryId}(categoryId=${categoryId},page=${warehouseCards.totalPages - 1},size=${size})}">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>

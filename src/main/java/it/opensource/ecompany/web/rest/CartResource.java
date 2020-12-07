@@ -8,14 +8,16 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @RestController
 @RequestMapping("/api/cart")
 public class CartResource {
+
+    private static final Logger log = LoggerFactory.getLogger(CartResource.class);
 
     private final CategoriesService categoriesServices;
 
@@ -25,8 +27,7 @@ public class CartResource {
 
     private final UserContext userContext;
 
-    public CartResource(CategoriesService categoriesServices, CartBean cartBean, ProductsService productsService,
-                        UserContext userContext) {
+    public CartResource(CategoriesService categoriesServices, CartBean cartBean, ProductsService productsService, UserContext userContext) {
 
         this.categoriesServices = categoriesServices;
         this.cartBean = cartBean;
@@ -35,8 +36,7 @@ public class CartResource {
     }
 
     @GetMapping("/add/{productid}")
-    public String addProductToCart(@PathVariable("productid") Long productid,
-                                   @RequestHeader("referer") String referer) {
+    public String addProductToCart(@PathVariable("productid") Long productid, @RequestHeader("referer") String referer) {
 
         Product product = productsService.getProductById(productid);
 
@@ -49,8 +49,7 @@ public class CartResource {
     }
 
     @GetMapping("/deleteproduct/{productid}")
-    public String deleteProductFromToCart(@PathVariable("productid") Long productid,
-                                          @RequestHeader("referer") String referer) {
+    public String deleteProductFromToCart(@PathVariable("productid") Long productid, @RequestHeader("referer") String referer) {
 
         Product product = productsService.getProductById(productid);
         cartBean.deleteProductToCart(product);
@@ -83,5 +82,6 @@ public class CartResource {
 
         return "welcome";
     }
+
 }
 

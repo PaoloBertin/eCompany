@@ -30,7 +30,7 @@ public class CartControllerTest {
     public void showCartTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/cart/show").with(user("mario.rossi").password("user")
-                                                                        .roles("USER")))
+                                                              .roles("USER")))
            .andExpect(model().attribute("customer", notNullValue()))
            .andExpect(view().name("cart/show"));
     }
@@ -39,4 +39,5 @@ public class CartControllerTest {
     public void deleteCartTest(@Autowired MockMvc mvc) throws Exception {
 
     }
+
 }

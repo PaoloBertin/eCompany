@@ -3,17 +3,19 @@ package it.opensource.ecompany.web.rest;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RequestMapping("/api/login")
 @RestController
 public class LoginResource {
+
+    private static final Logger log = LoggerFactory.getLogger(LoginResource.class);
 
     private CartBean cartBean;
 
@@ -57,4 +59,5 @@ public class LoginResource {
 
         return "welcome";
     }
+
 }

@@ -74,7 +74,9 @@ class ProductResourceTest {
     @Test
     void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/api/products/photo/{productid}", 1L)).andDo(print()).andExpect(status().isOk());
+        mvc.perform(get("/api/products/photo/{productid}", 1L))
+           .andDo(print())
+           .andExpect(status().isOk());
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -91,7 +93,8 @@ class ProductResourceTest {
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         String requestJson = objectMapper.writeValueAsString(product);
 
-        mvc.perform(post("/api/products").contentType(MediaType.APPLICATION_JSON).content(requestJson))
+        mvc.perform(post("/api/products").contentType(MediaType.APPLICATION_JSON)
+                                         .content(requestJson))
            .andExpect(status().isOk());
     }
 
@@ -106,7 +109,8 @@ class ProductResourceTest {
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         String requestJson = objectMapper.writeValueAsString(product);
 
-        mvc.perform(put("/api/products/{id}", 1L).contentType(MediaType.APPLICATION_JSON).content(requestJson))
+        mvc.perform(put("/api/products/{id}", 1L).contentType(MediaType.APPLICATION_JSON)
+                                                 .content(requestJson))
            .andExpect(jsonPath("$.name", equalTo("Da Basic a Java")))
            .andExpect(status().isOk());
     }
@@ -121,12 +125,12 @@ class ProductResourceTest {
         objectMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         String requestJson = objectMapper.writeValueAsString(searchForm);
 
-        mvc
-            .perform(get("/api/products/searchProduct").contentType(MediaType.APPLICATION_JSON)
-                                                       .queryParam("page", "0")
-                                                       .queryParam("size", "10")
-                                                       .content(requestJson))
-            .andExpect(jsonPath("$.content.length()", equalTo(6)))
-            .andExpect(status().isOk());
+        mvc.perform(get("/api/products/searchProduct").contentType(MediaType.APPLICATION_JSON)
+                                                      .queryParam("page", "0")
+                                                      .queryParam("size", "10")
+                                                      .content(requestJson))
+           .andExpect(jsonPath("$.content.length()", equalTo(5)))
+           .andExpect(status().isOk());
     }
+
 }

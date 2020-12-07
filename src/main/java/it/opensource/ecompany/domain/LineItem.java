@@ -1,36 +1,48 @@
 package it.opensource.ecompany.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
-@Table(name = "lineitem")
+@Table(name = "line_items")
 @Entity
-public class Lineitem implements Serializable {
+public class LineItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long lineitemid;
+    private Long id;
 
     @OneToOne
-    @JoinColumn(name = "productid")
+    @JoinColumn(name = "product_id")
     private Product product;
 
     private Double quantity;
 
+    private BigDecimal price;
+
     @Version
     private Long version;
 
-    public Long getLineitemid() {
+    public LineItem() {
 
-        return lineitemid;
     }
 
-    public void setLineitemid(Long lineitemid) {
+    public LineItem(Product product, Double quantity) {
 
-        this.lineitemid = lineitemid;
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    public Long getId() {
+
+        return id;
+    }
+
+    public void setId(Long id) {
+
+        this.id = id;
     }
 
     public Product getProduct() {
@@ -68,7 +80,7 @@ public class Lineitem implements Serializable {
 
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((lineitemid == null) ? 0 : lineitemid.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -81,12 +93,13 @@ public class Lineitem implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Lineitem other = (Lineitem) obj;
-        if (lineitemid == null) {
-            if (other.lineitemid != null)
+        LineItem other = (LineItem) obj;
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!lineitemid.equals(other.lineitemid))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
+
 }

@@ -1,6 +1,8 @@
-package it.opensource.ecompany.service.Dto;
+package it.opensource.ecompany.service.dto;
 
 import it.opensource.ecompany.domain.Warehouse;
+
+import java.math.BigDecimal;
 
 public class WareDto {
 
@@ -8,7 +10,7 @@ public class WareDto {
 
     private String sku;
 
-    private Float cost;
+    private BigDecimal cost;
 
     private String unit;
 
@@ -16,7 +18,7 @@ public class WareDto {
 
     private Integer reorderQuantity;
 
-    private Float inventoryValue;
+    private BigDecimal inventoryValue;
 
     private Boolean reorder;
 
@@ -40,7 +42,7 @@ public class WareDto {
         this.sku = sku;
     }
 
-    public void setCost(Float cost) {
+    public void setCost(BigDecimal cost) {
 
         this.cost = cost;
     }
@@ -60,7 +62,7 @@ public class WareDto {
         this.reorderQuantity = reorderQuantity;
     }
 
-    public void setInventoryValue(Float inventoryValue) {
+    public void setInventoryValue(BigDecimal inventoryValue) {
 
         this.inventoryValue = inventoryValue;
     }
@@ -105,7 +107,7 @@ public class WareDto {
         return sku;
     }
 
-    public Float getCost() {
+    public BigDecimal getCost() {
 
         return cost;
     }
@@ -125,7 +127,7 @@ public class WareDto {
         return reorderQuantity;
     }
 
-    public Float getInventoryValue() {
+    public BigDecimal getInventoryValue() {
 
         return inventoryValue;
     }

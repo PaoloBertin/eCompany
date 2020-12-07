@@ -15,6 +15,9 @@ public class Supplier implements Serializable {
 
     private String name;
 
+    @Column(name = "supplier_code")
+    private String supplierCode;
+
     @Column(name = "vat")
     private String vat;
 

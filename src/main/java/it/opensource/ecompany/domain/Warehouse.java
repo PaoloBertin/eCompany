@@ -2,8 +2,6 @@ package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Table(name = "warehouses")
 @Entity
@@ -13,24 +11,21 @@ public class Warehouse implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long warehouseid;
+    private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ware> wares = new ArrayList<>();
-
     @Version
-    private Long       version;
+    private Long version;
 
-    public Long getWarehouseid() {
+    public Long getId() {
 
-        return warehouseid;
+        return id;
     }
 
-    public void setWarehouseid(Long warehouseid) {
+    public void setId(Long id) {
 
-        this.warehouseid = warehouseid;
+        this.id = id;
     }
 
     public String getName() {
@@ -43,16 +38,6 @@ public class Warehouse implements Serializable {
         this.name = name;
     }
 
-    public List<Ware> getWares() {
-
-        return wares;
-    }
-
-    public void setWares(List<Ware> wares) {
-
-        this.wares = wares;
-    }
-
     public Long getVersion() {
 
         return version;
@@ -63,22 +48,12 @@ public class Warehouse implements Serializable {
         this.version = version;
     }
 
-    public void addWare(Ware ware) {
-        wares.add(ware);
-        ware.setWarehouse(this);
-    }
-
-    public void removeWare(Ware ware) {
-        wares.remove(ware);
-        ware.setWarehouse(null);
-    }
-
     @Override
     public int hashCode() {
 
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((warehouseid == null) ? 0 : warehouseid.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -92,12 +67,18 @@ public class Warehouse implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Warehouse other = (Warehouse) obj;
-        if (warehouseid == null) {
-            if (other.warehouseid != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!warehouseid.equals(other.warehouseid))
+        } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    @Override
+    public String toString() {
+
+        return "Warehouse{" + "id=" + id + ", name='" + name + '\'' + ", version=" + version + '}';
     }
 
 }

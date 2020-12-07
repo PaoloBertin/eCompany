@@ -8,7 +8,8 @@ import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.form.CustomerForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,9 +23,10 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 
-@Slf4j
 @Controller
 public class CustomerController {
+
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
 
     private final CustomerBean customerBean;
 
@@ -65,13 +67,10 @@ public class CustomerController {
     }
 
     @PostMapping("/customers/registration")
-    public String signup(@Valid CustomerForm customerForm,
-                         BindingResult result,
-                         RedirectAttributes redirectAttributes,
-                         Locale locale) {
+    public String signup(@Valid CustomerForm customerForm, BindingResult result, RedirectAttributes redirectAttributes, Locale locale) {
 
         if (result.hasErrors()) {
-            message = new Message("danger", messageSource.getMessage("customer.save.fail", new Object[] {}, locale));
+            message = new Message("danger", messageSource.getMessage("customer.save.fail", new Object[]{}, locale));
             redirectAttributes.addFlashAttribute("message", message);
 
             return "/customers/registration";
@@ -83,8 +82,7 @@ public class CustomerController {
             // result.rejectValue("username", "label.errors.registration.username",
             // "Username is already in use.");
             redirectAttributes.addFlashAttribute("error", "Username is already in use.");
-            message = new Message("danger",
-                                  messageSource.getMessage("customer.form.username.fail", new Object[] {}, locale));
+            message = new Message("danger", messageSource.getMessage("customer.form.username.fail", new Object[]{}, locale));
             redirectAttributes.addFlashAttribute("message", message);
 
             return "redirect:/customers/registration";
@@ -94,8 +92,7 @@ public class CustomerController {
         message = null;
         if (customerForm.getCustomerid() == null && customersService.getCustomerByEmail(email) != null) {
             redirectAttributes.addFlashAttribute("error", "Email is already in use.");
-            message = new Message("danger",
-                                  messageSource.getMessage("customer.form.email.fail", new Object[] {}, locale));
+            message = new Message("danger", messageSource.getMessage("customer.form.email.fail", new Object[]{}, locale));
             redirectAttributes.addFlashAttribute("message", message);
 
             return "redirect:/customers/registration";
@@ -103,7 +100,7 @@ public class CustomerController {
 
         Customer customer = customerForm.getCustomer();
         long id = customersService.saveCustomer(customer);
-        message = new Message("success", messageSource.getMessage("customer.save.success", new Object[] {}, locale));
+        message = new Message("success", messageSource.getMessage("customer.save.success", new Object[]{}, locale));
         redirectAttributes.addFlashAttribute("message", message);
         log.debug("salvato customer con id=" + id);
 
@@ -137,4 +134,5 @@ public class CustomerController {
 
         return "customers/customersListAdmin";
     }
+
 }
