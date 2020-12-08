@@ -28,6 +28,8 @@ public interface WarehouseCardService {
 
     Page<WarehouseCard> getByWarehouseIdAndLineItemProductByPage(Long warehouseId, Long productId, Pageable pageable);
 
+    Page<WarehouseCard> getByDocumentationWarehouseIdAndDocumentationLineItemProductIsbn(Long warehouseId, String isbn, Pageable pageable);
+
     Page<WareDto> getAllWaresWithProductPageable(Pageable pageable);
 
     Page<WareDto> getAllWaresInWarehousePageable(Long warehouseId, Pageable pageable);

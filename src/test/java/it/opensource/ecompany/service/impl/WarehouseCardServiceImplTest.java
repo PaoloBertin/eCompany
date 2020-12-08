@@ -80,14 +80,21 @@ class WarehouseCardServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getByWarehousesWarehouseidAndProductName() {
+    void getByWarehouseCardsByWarehouseIdAndProductCodeTest() {
 
         Long warehouseId = 1L;
-        String name = "";
+        String productCode = "8883780450";
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getByDocumentationWarehouseIdAndDocumentationLineItemProductIsbn(
+            warehouseId, productCode, pageable);
+
+        long expected = 2;
+        long actual = warehouseCards.getTotalElements();
+
+        assertThat(actual, equalTo(expected));
     }
 
 
