@@ -101,25 +101,6 @@ class WarehouseCardServiceImplTest {
     @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getProductsByNameContainingStringByPage() {
-
-        Long warehouseId = 1L;
-        String stringSearch = "Apple";
-        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-
-        //        Page<WarehouseCard> page = warehouseCardService.getByWarehouseWarehouseidAndProductNameContaining(warehouseId, stringSearch, pageable);
-        Page<WarehouseCard> page = null;
-
-        int expected = 1;
-        int actual = page.getContent()
-                         .size();
-
-        assertThat(actual, is(expected));
-    }
-
-    @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
-    @Test
     void getAllWithProductTest() {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
