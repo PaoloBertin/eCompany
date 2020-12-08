@@ -88,8 +88,7 @@ class WarehouseCardServiceImplTest {
         String productCode = "8883780450";
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
 
-        Page<WarehouseCard> warehouseCards = warehouseCardService.getByDocumentationWarehouseIdAndDocumentationLineItemProductIsbn(
-            warehouseId, productCode, pageable);
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIsbn(warehouseId, productCode, pageable);
 
         long expected = 2;
         long actual = warehouseCards.getTotalElements();
