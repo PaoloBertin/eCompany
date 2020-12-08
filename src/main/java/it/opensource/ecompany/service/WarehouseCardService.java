@@ -1,7 +1,6 @@
 package it.opensource.ecompany.service;
 
 import it.opensource.ecompany.domain.WarehouseCard;
-import it.opensource.ecompany.service.dto.WareDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -29,9 +28,5 @@ public interface WarehouseCardService {
     Page<WarehouseCard> getByWarehouseIdAndProductIdByPage(Long warehouseId, Long productId, Pageable pageable);
 
     Page<WarehouseCard> getByWarehouseIdAndProductIsbn(Long warehouseId, String isbn, Pageable pageable);
-
-    Page<WareDto> getAllWaresWithProductPageable(Pageable pageable);
-
-    Page<WareDto> getAllWaresInWarehousePageable(Long warehouseId, Pageable pageable);
 
 }

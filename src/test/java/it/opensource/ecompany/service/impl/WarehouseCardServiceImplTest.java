@@ -127,20 +127,4 @@ class WarehouseCardServiceImplTest {
 
     }
 
-    @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
-    @Test
-    void getAllWaresInWarehousePageable() {
-
-        Long warehouseId = 2L;
-        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-
-        Page<WareDto> wares = warehouseCardService.getAllWaresInWarehousePageable(warehouseId, pageable);
-
-        long expected = 30L;
-        long actual = wares.getTotalElements();
-        //        long actual = 30L;
-        assertThat(actual, is(expected));
-    }
-
 }
