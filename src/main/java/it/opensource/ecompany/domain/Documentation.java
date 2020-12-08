@@ -17,7 +17,7 @@ public class Documentation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "documentation_joural_fk_01"))
+    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "documentations_fk_01"))
     @ManyToOne
     private Warehouse warehouse;
 

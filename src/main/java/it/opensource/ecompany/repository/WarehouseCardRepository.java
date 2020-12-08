@@ -11,14 +11,14 @@ import java.util.List;
 @Repository
 public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Long> {
 
-    long countByWarehouseId(Long warehouseId);
+    long countByDocumentationWarehouseId(Long warehouseId);
 
-    long countByWarehouseIdAndLineItemProductProductid(Long warehouseId, Long productId);
+    long countByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(Long warehouseId, Long productId);
 
-    Page<WarehouseCard> findByWarehouseId(Long id, Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseId(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> findByWarehouseIdAndLineItemProductProductid(Long warehouseId, Long productId);
+    List<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(Long warehouseId, Long productId);
 
-    Page<WarehouseCard> findByWarehouseIdAndLineItemProductProductid(Long warehouseId, Long productId, Pageable pageable);
+//    Page<WarehouseCard> findByDocumentationWarehouseIdAndLineItemProductProductid(Long warehouseId, Long productId, Pageable pageable);
 
 }

@@ -78,7 +78,7 @@ public class WarehouseCardResource {
 
         log.debug("REST request to get warehouseCard of the warehouse with id = " + id);
 
-        Page<WarehouseCard> warehouseCards = warehouseCardService.getAllWarehouseCardsInWarehouseByPage(id, pageable);
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseByPage(id, pageable);
 
         return ResponseEntity.ok()
                              .body(warehouseCards);

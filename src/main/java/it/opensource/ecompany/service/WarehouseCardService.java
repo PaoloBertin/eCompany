@@ -16,15 +16,15 @@ public interface WarehouseCardService {
 
     Long getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId);
 
-    List<WarehouseCard> getWarehouseCards();
-
-    Optional<WarehouseCard> getWarehouseCardById(Long warehouseCardId);
+    List<WarehouseCard> getAllWarehouseCards();
 
     Page<WarehouseCard> getAllWarehouseCardsByPage(Pageable pageable);
 
-    Page<WarehouseCard> getAllWarehouseCardsInWarehouseByPage(Long warehouseId, Pageable pageable);
+    Optional<WarehouseCard> getWarehouseCardById(Long warehouseCardId);
 
-    List<WarehouseCard> getByWarehouseIdAndWarehouseCardProductId(Long warehouseId, Long warehouseCardProductId);
+    Page<WarehouseCard> getWarehouseCardsByWarehouseByPage(Long warehouseId, Pageable pageable);
+
+    List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductId(Long warehouseId, Long productId);
 
     Page<WarehouseCard> getByWarehouseIdAndLineItemProductByPage(Long warehouseId, Long productId, Pageable pageable);
 

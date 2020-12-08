@@ -14,15 +14,11 @@ public class WarehouseCard implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_01"))
-    @ManyToOne
-    private Warehouse warehouse;
-
-    @JoinColumn(name = "line_item_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_02"))
+    @JoinColumn(name = "documentation_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_01"))
     @OneToOne
-    private LineItem lineItem;
+    private Documentation documentation;
 
-    @JoinColumn(name = "warehouse_card_product_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_03"))
+    @JoinColumn(name = "warehouse_card_product_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_02"))
     @ManyToOne
     private WarehouseCardProduct warehouseCardProduct;
 
@@ -44,14 +40,14 @@ public class WarehouseCard implements Serializable {
         this.id = id;
     }
 
-    public Warehouse getWarehouse() {
+    public Documentation getDocumentation() {
 
-        return warehouse;
+        return documentation;
     }
 
-    public void setWarehouse(Warehouse warehouse) {
+    public void setDocumentation(Documentation documentation) {
 
-        this.warehouse = warehouse;
+        this.documentation = documentation;
     }
 
     public WarehouseCardProduct getWarehouseCardProduct() {
@@ -62,16 +58,6 @@ public class WarehouseCard implements Serializable {
     public void setWarehouseCardProduct(WarehouseCardProduct warehouseCardProduct) {
 
         this.warehouseCardProduct = warehouseCardProduct;
-    }
-
-    public LineItem getLineItem() {
-
-        return lineItem;
-    }
-
-    public void setLineitem(LineItem lineitem) {
-
-        this.lineItem = lineitem;
     }
 
     public Integer getStock() {

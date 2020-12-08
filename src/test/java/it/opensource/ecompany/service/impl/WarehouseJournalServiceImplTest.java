@@ -21,7 +21,7 @@ class WarehouseJournalServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getAllWarehouseJurnal() {
+    void getAllWarehouseJurnalTest() {
 
         List<WarehouseJournal> warehousesJournals = warehouseJournalService.getAllWarehouseJurnal();
         int expected = 84;
@@ -31,19 +31,19 @@ class WarehouseJournalServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getAllWarehouseJournalByPage() {
+    void getAllWarehouseJournalByPageTest() {
 
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getAllWarehouseJournalByDocumentDateBetween() {
+    void getAllWarehouseJournalByDocumentDateBetweenTest() {
 
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void testGetAllWarehouseJournalByDocumentDateBetween() {
+    void testGetAllWarehouseJournalByDocumentDateBetweenTest() {
 
     }
 

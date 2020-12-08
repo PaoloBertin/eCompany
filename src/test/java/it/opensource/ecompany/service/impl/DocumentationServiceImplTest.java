@@ -17,7 +17,7 @@ class DocumentationServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getNumberDocumentations() {
+    void getNumberDocumentationsTest() {
 
         Long expected = 84L;
         Long actual = documentationService.getNumberDocumentations();
@@ -25,7 +25,6 @@ class DocumentationServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    // @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getNumberDocumentationsBydWarehouseId() {
@@ -36,7 +35,6 @@ class DocumentationServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    // @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getNumberDocumentationsByWarehouseIdAndLineItemProductId() {

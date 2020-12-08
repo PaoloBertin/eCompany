@@ -53,6 +53,7 @@ class WarehouseCardResourceTest {
 
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getNumberWarehouseCardTest(@Autowired MockMvc mvc) throws Exception {
@@ -65,6 +66,7 @@ class WarehouseCardResourceTest {
 
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsBydWarehouseIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -77,6 +79,7 @@ class WarehouseCardResourceTest {
 
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsByWarehouseIdAndLineItemProductIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -89,6 +92,7 @@ class WarehouseCardResourceTest {
 
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getWarehouseCardByIdSuccessTest(@Autowired MockMvc mvc) throws Exception {
@@ -100,6 +104,7 @@ class WarehouseCardResourceTest {
            .andExpect(jsonPath("$.inventoryValue", equalTo(400.0)));
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getWarehouseCardByIdFailureTest(@Autowired MockMvc mvc) throws Exception {
@@ -110,6 +115,7 @@ class WarehouseCardResourceTest {
            .andExpect(status().isNotFound());
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseTest(@Autowired MockMvc mvc) throws Exception {
@@ -123,6 +129,7 @@ class WarehouseCardResourceTest {
            .andExpect(status().isOk());
     }
 
+    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseAndProductIdTest(@Autowired MockMvc mvc) throws Exception {
