@@ -82,7 +82,7 @@ class WarehouseCardServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getByWarehouseCardsByWarehouseIdAndProductCodeTest() {
+    void getWarehouseCardsByWarehouseIdAndProductCodeTest() {
 
         Long warehouseId = 1L;
         String productCode = "8883780450";
@@ -98,34 +98,16 @@ class WarehouseCardServiceImplTest {
     }
 
 
-    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getAllWithProductTest() {
-
-        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-        //Page<WarehouseCard> wares = warehouseCardService.getAllWithProduct(pageable);
-        Page<WarehouseCard> wares = null;
-
-        long expected = 84L;
-        long actual = wares.getTotalElements();
-        //        long actual = 84L;
-        assertEquals(expected, actual);
-
-    }
-
-    @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
-    @Test
-    void getByWarehouseIdAndWarehouseCardProductIdTest() {
+    void getWarehouseCardsByWarehouseIdAndCardProductIdTest() {
 
         Long warehouseId = 1L;
         Long productId = 1L;
-        List<WarehouseCard> wares = warehouseCardService.getWarehouseCardsByWarehouseIdAndProductId(warehouseId, productId);
+        List<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseIdAndProductId(warehouseId, productId);
 
-        long expected = 84L;
-        long actual = wares.size();
-        //        long actual = 84L;
+        long expected = 2;
+        long actual = warehouseCards.size();
         assertThat(actual, is(expected));
 
     }
