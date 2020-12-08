@@ -26,7 +26,7 @@ public interface WarehouseCardService {
 
     List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductId(Long warehouseId, Long productId);
 
-    Page<WarehouseCard> getByWarehouseIdAndLineItemProductByPage(Long warehouseId, Long productId, Pageable pageable);
+    Page<WarehouseCard> getByWarehouseIdAndProductIdByPage(Long warehouseId, Long productId, Pageable pageable);
 
     Page<WarehouseCard> getByDocumentationWarehouseIdAndDocumentationLineItemProductIsbn(Long warehouseId, String isbn, Pageable pageable);
 

@@ -100,7 +100,7 @@ class WarehouseCardServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getWarehouseCardsByWarehouseIdAndCardProductIdTest() {
+    void getWarehouseCardsByWarehouseIdAndProductIdTest() {
 
         Long warehouseId = 1L;
         Long productId = 1L;
@@ -112,17 +112,18 @@ class WarehouseCardServiceImplTest {
 
     }
 
-    @Disabled
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    void getWaresWithProductPageableTest() {
+    void getWarehouseCardsByWarehouseIdAndProductIdByPage() {
 
+        Long warehouseId = 1L;
+        Long productId = 1L;
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-        Page<WareDto> wares = warehouseCardService.getAllWaresWithProductPageable(pageable);
 
-        long expected = 84L;
-        long actual = wares.getTotalElements();
-        //        long actual =84L;
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIdByPage(warehouseId, productId, pageable);
+
+        long expected = 2;
+        long actual = warehouseCards.getTotalElements();
         assertThat(actual, is(expected));
 
     }

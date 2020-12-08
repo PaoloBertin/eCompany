@@ -90,8 +90,8 @@ public class WarehouseCardResource {
                                                                                      @PageableDefault Pageable pageable) {
 
         log.debug("REST request to get warehouseCard of the warehouse with id=" + warehouseId + " and productId=" + productId);
-        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndLineItemProductByPage(warehouseId, productId,
-                                                                                                           pageable);
+
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIdByPage(warehouseId, productId, pageable);
 
         return ResponseEntity.ok()
                              .body(warehouseCards);
