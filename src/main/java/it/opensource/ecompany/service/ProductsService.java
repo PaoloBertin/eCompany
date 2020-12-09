@@ -8,15 +8,17 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductsService {
 
-    List<Product> getAll();
+    List<Product> getAllProducts();
 
-    Page<Product> getAllByPage(Pageable pageable);
+    Page<Product> getAllProductsByPage(Pageable pageable);
 
     List<Product> getProductsByCategory(Long id);
 
     Page<Product> getProductsByCategoryByPage(Long categoryId, Pageable pageable);
 
     Product getProductById(Long id);
+
+    Product getProductByProductCode(String productCode);
 
     List<Product> getProductsByName(String name);
 

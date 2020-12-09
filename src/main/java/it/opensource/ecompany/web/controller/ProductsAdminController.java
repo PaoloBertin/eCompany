@@ -76,7 +76,7 @@ public class ProductsAdminController {
 
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<Product> products = productsService.getAllByPage(pageable);
+        Page<Product> products = productsService.getAllProductsByPage(pageable);
 
         Customer customer = userContext.getCurrentCustomer();
         List<Category> categories = categoriesService.getAll();

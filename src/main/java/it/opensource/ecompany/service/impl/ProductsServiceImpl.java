@@ -1,16 +1,15 @@
 package it.opensource.ecompany.service.impl;
 
-import java.util.List;
-
+import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.repository.ProductsRepository;
+import it.opensource.ecompany.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import it.opensource.ecompany.domain.Product;
-import it.opensource.ecompany.repository.ProductsRepository;
-import it.opensource.ecompany.service.ProductsService;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional
 @Service("productsService")
@@ -21,14 +20,14 @@ public class ProductsServiceImpl implements ProductsService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Product> getAll() {
+    public List<Product> getAllProducts() {
 
         return productsRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Page<Product> getAllByPage(Pageable pageable) {
+    public Page<Product> getAllProductsByPage(Pageable pageable) {
 
         return productsRepository.findAll(pageable);
     }
@@ -51,7 +50,15 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public Product getProductById(Long id) {
 
-        return productsRepository.findById(id).get();
+        return productsRepository.findById(id)
+                                 .get();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Product getProductByProductCode(String productCode) {
+
+        return productsRepository.findByProductCode(productCode);
     }
 
     @Transactional(readOnly = true)
@@ -86,4 +93,5 @@ public class ProductsServiceImpl implements ProductsService {
 
         productsRepository.delete(product);
     }
+
 }

@@ -72,7 +72,7 @@ public class ProductsController {
 
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<Product> products = productsService.getAllByPage(pageable);
+        Page<Product> products = productsService.getAllProductsByPage(pageable);
 
         Customer customer = userContext.getCurrentCustomer();
         uiModel.addAttribute("customer", customer);

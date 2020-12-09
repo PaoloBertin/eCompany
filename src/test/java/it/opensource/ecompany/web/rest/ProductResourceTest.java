@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 @SpringBootTest
 class ProductResourceTest {
+
+    @Autowired
+    private CategoriesService categoriesService;
 
     @Autowired
     private ProductsService productsService;
@@ -83,7 +87,8 @@ class ProductResourceTest {
     @Test
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
 
-        Category category = new Category(1L, "Libri");
+        // Category category = new Category(1L, "Libri");
+        Category category = categoriesService.getCategoryByName("Libri");
         Product product = new Product();
         product.setProductCode("aaaa");
         product.setName("bbbb");

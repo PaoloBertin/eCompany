@@ -2,6 +2,7 @@ package it.opensource.ecompany.service.impl;
 
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WarehouseService;
 import org.junit.jupiter.api.Disabled;
@@ -14,21 +15,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class ProductsServiceImplTest {
 
     @Autowired
-    private WarehouseService warehouseService;
+    private CategoriesService categoriesService;
 
     @Autowired
-    private ProductsService productsService;
+    private ProductsService   productsService;
+
+    @Autowired
+    private WarehouseService warehouseService;
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
@@ -45,7 +51,7 @@ public class ProductsServiceImplTest {
     public void getAllProductsTest() {
 
         int expected = 54;
-        int actual = productsService.getAll()
+        int actual = productsService.getAllProducts()
                                     .size();
 
         assertThat(actual, is(expected));
@@ -57,7 +63,7 @@ public class ProductsServiceImplTest {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Order.asc("name")));
 
-        Page<Product> page = productsService.getAllByPage(pageable);
+        Page<Product> page = productsService.getAllProductsByPage(pageable);
 
         int expected = 10;
         int actual = page.getContent()
@@ -106,6 +112,16 @@ public class ProductsServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
+    void getProductByProductCodeTest() {
+
+        String expected = "Da Visual Basic a Java";
+        String actual = productsService.getProductByProductCode("8883780450")
+                                       .getName();
+        assertEquals(expected, actual);
+    }
+
+    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Test
     public void getProductsByNameTest() {
 
         String expected = "Da Visual Basic a Java";
@@ -149,9 +165,7 @@ public class ProductsServiceImplTest {
     @Test
     public void saveProductTest() {
 
-        Category category = new Category();
-        category.setId(1L);
-        category.setName("Libri");
+        Category category = categoriesService.getCategoryByName("Libri");
         Product product = new Product();
         product.setName("Alice");
         product.setProductCode("00000");
@@ -160,10 +174,10 @@ public class ProductsServiceImplTest {
         productsService.saveProduct(product);
 
         int expected = 55;
-        int actual = productsService.getAll()
+        int actual = productsService.getAllProducts()
                                     .size();
 
-        assertThat(actual, equalTo(expected));
+        assertEquals(expected, actual);
     }
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
@@ -176,12 +190,12 @@ public class ProductsServiceImplTest {
         productsService.saveProduct(product);
 
         int expected = 54;
-        int actual = productsService.getAll()
+        int actual = productsService.getAllProducts()
                                     .size();
-
         // verifica non sia stato aggiunto prodotto
         assertThat(actual, equalTo(expected));
-        // verifica che il nuovo titolo sia stato salvato correttamente
+
+        // verifica che il titolo sia stato aggiornato
         assertThat(productsService.getProductById(1L)
                                   .getName(), equalTo("Alice"));
     }
@@ -201,4 +215,5 @@ public class ProductsServiceImplTest {
 
         //        productsService.deleteProduct(product);
     }
+
 }

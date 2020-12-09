@@ -41,7 +41,7 @@ public class ProductResource {
     @GetMapping("/all")
     public ResponseEntity<Page<Product>> getAllProductsByPage(@PageableDefault Pageable pageable) {
 
-        Page<Product> pageProducts = productsService.getAllByPage(pageable);
+        Page<Product> pageProducts = productsService.getAllProductsByPage(pageable);
 
         return ResponseEntity.ok()
                              .body(pageProducts);

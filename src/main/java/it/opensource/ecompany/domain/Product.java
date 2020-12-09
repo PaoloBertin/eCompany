@@ -31,8 +31,9 @@ public class Product implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     private byte[] image;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
+    // @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "products_fk_01"))
     private Category category;
 
     @Version
