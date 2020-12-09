@@ -108,7 +108,7 @@ public class ProductResource {
 
         log.debug("REST request to save Product : {}", product);
 
-        if (product.getProductid() != null) {
+        if (product.getId() != null) {
             throw new Exception();
         }
 
@@ -144,7 +144,7 @@ public class ProductResource {
     @PutMapping(value = "/{productId}")
     public ResponseEntity<Product> updateProduct(@Valid @RequestBody Product product, @PathVariable("productId") Long id) throws Exception {
 
-        if (product.getProductid() == null) {
+        if (product.getId() == null) {
             throw new Exception();
         }
 

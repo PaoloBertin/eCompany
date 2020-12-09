@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 public class ProductForm {
 
-    private Long productId;
+    private Long id;
 
     private Long categoryId;
 
@@ -27,14 +27,14 @@ public class ProductForm {
 
     private Category category;
 
-    public Long getProductId() {
+    public Long getId() {
 
-        return productId;
+        return id;
     }
 
-    public void setProductId(Long productId) {
+    public void setId(Long id) {
 
-        this.productId = productId;
+        this.id = id;
     }
 
     public Long getCategoryId() {

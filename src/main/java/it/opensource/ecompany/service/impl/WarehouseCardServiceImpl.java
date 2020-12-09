@@ -1,10 +1,8 @@
 package it.opensource.ecompany.service.impl;
 
-import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.WarehouseCard;
 import it.opensource.ecompany.repository.WarehouseCardRepository;
 import it.opensource.ecompany.service.WarehouseCardService;
-import it.opensource.ecompany.service.dto.WareDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -43,7 +41,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Long getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId) {
 
-        return warehouseCardRepository.countByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(warehouseId, productId);
+        return warehouseCardRepository.countByDocumentationWarehouseIdAndDocumentationLineItemProductId(warehouseId, productId);
     }
 
     @Transactional(readOnly = true)
@@ -70,14 +68,13 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductId(Long warehouseId, Long productId) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(warehouseId, productId);
+        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductId(warehouseId, productId);
     }
 
     @Override
     public Page<WarehouseCard> getByWarehouseIdAndProductIdByPage(Long warehouseId, Long productId, Pageable pageable) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(warehouseId, productId,
-                                                                                                              pageable);
+        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductId(warehouseId, productId, pageable);
     }
 
     @Override

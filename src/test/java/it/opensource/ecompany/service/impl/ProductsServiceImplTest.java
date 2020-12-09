@@ -32,7 +32,7 @@ public class ProductsServiceImplTest {
 
     @Sql({"/schema-h2.sql", "/data-h2.sql"})
     @Test
-    public void equality_products() {
+    public void equality_productsTest() {
 
         Product product1 = productsService.getProductById(1L);
         Product product2 = productsService.getProductById(1L);

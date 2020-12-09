@@ -49,18 +49,18 @@
                                 <td th:text="${product.name}"></td>
                                 <td th:text="${product.price}"></td>
                                 <td>
-                                    <a th:href="@{'/admin/products/all/' + ${product.productid}(form='true', categoryId=${categoryId})}">
+                                    <a th:href="@{'/admin/products/all/' + ${product.id}(form='true', categoryId=${categoryId})}">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
                                     <!--
-                                    <a th:href="@{'/admin/products/all/' + ${product.productid}(form, categoryId={categoryId})}">
+                                    <a th:href="@{'/admin/products/all/' + ${product.id}(form, categoryId={categoryId})}">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
                                     -->
                                 </td>
                                 <td>
                                     <form th:action="@{'/admin/products/'}" th:method="delete">
-                                        <input type="hidden" name="productid" th:value="${product.productid}"/>
+                                        <input type="hidden" name="id" th:value="${product.id}"/>
                                         <button class="btn">
                                             <i class="fa fa-trash fa-lg"></i>
                                         </button>
@@ -127,7 +127,7 @@
                             <input type="hidden" name="categoryId" th:field="*{categoryId}"/>
                             -->
 
-                            <input type="hidden" name="productId" th:field="*{productId}"/>
+                            <input type="hidden" name="id" th:field="*{id}"/>
                             <div class="form-group">
                                 <label id="labelNameId" for="inputNameId" th:text="#{label.product.name}">product name</label>
                                 <input class="form-control" id="inputNameId" type="text" name="name" th:field="*{name}"/>

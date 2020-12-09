@@ -27,7 +27,7 @@
                     
                     <div class="row">    
                         <div class="col-lg-4">
-                            <img th:src="@{'/products/photo/' + ${product.productid} }" width="100" height="150"/>
+                            <img th:src="@{'/products/photo/' + ${product.id} }" width="100" height="150"/>
                         </div>
                         <!--    --> 
                         <div class="col-lg-8">
@@ -37,7 +37,7 @@
                                     <div th:text="${product.subtitle}"></div>
                                 </div>
                                 <div class="col-lg-4">                                                                               
-                                    <a th:href="@{'/cart/add/' + ${product.productid}}" th:text="#{label.cart.addProduct}">Aggiungi al carrello</a>
+                                    <a th:href="@{'/cart/add/' + ${product.id}}" th:text="#{label.cart.addProduct}">Aggiungi al carrello</a>
                                 </div>
                             </div> 
                             <!--  -->
@@ -63,7 +63,7 @@
                         </div>
                        
                     </div>
-                    <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{'/products/' + ${product.productid}('form')}" th:text="#{label.product.update}"></a>
+                    <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" th:href="@{'/products/' + ${product.id}('form')}" th:text="#{label.product.update}"></a>
                 </div>
                             
                 <div class="col-lg-3">

@@ -30,14 +30,14 @@
                             <tr th:each="row : ${#numbers.sequence( 0, elements / column)}">
                                 <td th:each="col : ${#numbers.sequence(row * column, row * column + 1)}" th:if="${elements gt col}"
                                     th:width="${100 / column} + '%'" style="vertical-align: text-top">
-                                    <img th:src="@{'/products/photo/' + ${products.content.get(col).productid}}" border="0" align="left"
+                                    <img th:src="@{'/products/photo/' + ${products.content.get(col).id}}" border="0" align="left"
                                          style="margin: 0px 10px" width="65" height="92"/>
                                     <!--
-                                    <a th:href="@{'/products/' + ${products.content.get(col).category.categoryid} + '/' + ${products.content.get(col).productid}}">
+                                    <a th:href="@{'/products/' + ${products.content.get(col).category.categoryid} + '/' + ${products.content.get(col).id}}">
                                         <span th:text="${products.getContent().get(col).name}"></span>
                                     </a>
                                      -->
-                                    <a th:href="@{'/products/all/' + ${products.content.get(col).productid}}">
+                                    <a th:href="@{'/products/all/' + ${products.content.get(col).id}}">
                                         <span th:text="${products.getContent().get(col).name}"></span>
                                     </a>
                                     <div th:text="${products.getContent().get(col).subtitle}"></div>

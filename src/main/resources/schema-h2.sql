@@ -132,7 +132,7 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 
 CREATE TABLE IF NOT EXISTS products (
-    productid BIGINT NOT NULL AUTO_INCREMENT,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
     subtitle VARCHAR(255),
     description VARCHAR(255),
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS products (
     categoryid BIGINT,
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY (productid),
+    PRIMARY KEY (id),
 
     CONSTRAINT products_fk_01 FOREIGN KEY (categoryid) REFERENCES categories(categoryid)
 );
@@ -263,7 +263,7 @@ CREATE TABLE IF NOT EXISTS line_items (
 
     PRIMARY KEY(id),
 
-    CONSTRAINT line_item_fk FOREIGN KEY (product_id) REFERENCES products(productid)
+    CONSTRAINT line_item_fk FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 CREATE TABLE IF NOT EXISTS purchase_orders_lineitems (

@@ -12,7 +12,7 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productid;
+    private Long id;
 
     @NotNull
     private String isbn;
@@ -46,14 +46,14 @@ public class Product implements Serializable {
         this.name = name;
     }
 
-    public Long getProductid() {
+    public Long getId() {
 
-        return productid;
+        return id;
     }
 
-    public void setProductid(Long productid) {
+    public void setId(Long id) {
 
-        this.productid = productid;
+        this.id = id;
     }
 
     public String getIsbn() {
@@ -141,7 +141,7 @@ public class Product implements Serializable {
 
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((productid == null) ? 0 : productid.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -155,10 +155,10 @@ public class Product implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Product other = (Product) obj;
-        if (productid == null) {
-            if (other.productid != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!productid.equals(other.productid))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }

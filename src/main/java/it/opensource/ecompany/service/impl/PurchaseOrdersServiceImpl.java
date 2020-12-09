@@ -90,7 +90,7 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
                                                          .entrySet()) {
             Product product = entry.getKey();
             Integer quantity = entry.getValue();
-            Long productId = product.getProductid();
+            Long productId = product.getId();
 //            warehouseCardService.productsWithdrawalFromWarehouse(warehouseId, productId, quantity);
         }
 

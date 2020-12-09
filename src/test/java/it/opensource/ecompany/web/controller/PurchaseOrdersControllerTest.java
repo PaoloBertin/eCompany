@@ -72,7 +72,7 @@ public class PurchaseOrdersControllerTest {
 
         Category category = new Category(1L, "Books");
         Product product = new Product();
-        product.setProductid(1L);
+        product.setId(1L);
         product.setName("Da Visual Basic a Java");
         product.setIsbn("8883780450");
         product.setCategory(category);
@@ -80,7 +80,7 @@ public class PurchaseOrdersControllerTest {
 
         CartBean cartBean = new CartBean();
         cartBean.addProductToCart(product);
-        product.setProductid(3L);
+        product.setId(3L);
         product.setName("Java Web Services");
         product.setIsbn("1449365116");
         product.setCategory(category);

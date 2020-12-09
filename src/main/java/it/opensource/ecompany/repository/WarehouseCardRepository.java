@@ -13,15 +13,15 @@ public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Lo
 
     long countByDocumentationWarehouseId(Long warehouseId);
 
-    long countByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(Long warehouseId, Long productId);
+    long countByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId);
 
     Page<WarehouseCard> findByDocumentationWarehouseId(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(Long warehouseId, Long productId);
+    List<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId);
 
     Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductIsbn(Long warehouseId, String isbn, Pageable pageable);
 
-    Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductProductid(Long warehouseId, Long productId,
-                                                                                               Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId,
+                                                                                        Pageable pageable);
 
 }

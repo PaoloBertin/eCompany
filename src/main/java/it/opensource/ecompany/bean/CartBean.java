@@ -38,7 +38,7 @@ public class CartBean implements Serializable {
 
     public void addProductToCart(Product product) {
 
-        log.debug("aggiunge prodotto al carrello con id=" + product.getProductid());
+        log.debug("aggiunge prodotto al carrello con id=" + product.getId());
 
         if (this.products.containsKey(product)) {
             int quantity = this.products.get(product);
@@ -57,7 +57,7 @@ public class CartBean implements Serializable {
 
     public void deleteProductToCart(Product product) {
 
-        log.debug("elimina prodotto dal carrello con id=" + product.getProductid());
+        log.debug("elimina prodotto dal carrello con id=" + product.getId());
 
         if (this.products.containsKey(product)) {
             products.remove(product);

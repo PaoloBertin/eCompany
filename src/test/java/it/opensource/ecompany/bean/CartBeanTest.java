@@ -29,13 +29,13 @@ class CartBeanTest {
         category.setName("Books");
 
         product1 = new Product();
-        product1.setProductid(1L);
+        product1.setId(1L);
         product1.setName("Da Visual Basic a Java");
         product1.setCategory(category);
         product1.setPrice(29.90F);
 
         product2 = new Product();
-        product2.setProductid(3L);
+        product2.setId(3L);
         product2.setIsbn("1449365116");
         product2.setName("Java Web Services");
         product2.setCategory(category);

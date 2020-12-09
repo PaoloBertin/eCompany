@@ -11,8 +11,8 @@ public interface DocumentationRepository extends JpaRepository<Documentation, Lo
 
     Long countByWarehouseId(Long warehouseId);
 
-    Long countByWarehouseIdAndLineItemProductProductid(Long warehouseId, Long productId);
+    Long countByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId);
 
-    Page<Documentation> findByWarehouseIdAndLineItemProductProductid(Long warehouseId, Long productId, Pageable pageable);
+    Page<Documentation> findByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId, Pageable pageable);
 
 }

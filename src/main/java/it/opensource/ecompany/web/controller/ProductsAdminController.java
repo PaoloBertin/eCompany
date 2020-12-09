@@ -242,10 +242,10 @@ public class ProductsAdminController {
                .clear();
 
         Product product = null;
-        if (productForm.getProductId() == null) {
+        if (productForm.getId() == null) {
             product = new Product();
         } else {
-            product = productsService.getProductById(productForm.getProductId());
+            product = productsService.getProductById(productForm.getId());
         }
         setFieldProduct(product, productForm, image);
 
@@ -314,7 +314,7 @@ public class ProductsAdminController {
 
     private ProductForm setFieldProductForm(Product product, ProductForm productForm) {
 
-        productForm.setProductId(product.getProductid());
+        productForm.setId(product.getId());
         productForm.setName(product.getName());
         productForm.setDescription(product.getDescription());
         productForm.setIsbn(product.getIsbn());
