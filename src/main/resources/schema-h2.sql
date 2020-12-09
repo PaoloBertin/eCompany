@@ -154,7 +154,9 @@ CREATE TABLE IF NOT EXISTS price_lists(
     price DECIMAL(12,4),
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+
+    CONSTRAINT price_lists_uq_01 UNIQUE (name,product_code)
 );
 
 CREATE TABLE IF NOT EXISTS warehouses (
