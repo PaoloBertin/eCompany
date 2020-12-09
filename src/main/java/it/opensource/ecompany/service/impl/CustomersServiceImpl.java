@@ -106,7 +106,7 @@ public class CustomersServiceImpl implements CustomersService {
         // rende persistenti le credenziali del cliente
         userDetailsManager.createUser(userDetails);
 
-        return result.getCustomerid();
+        return result.getId();
 
     }
 }

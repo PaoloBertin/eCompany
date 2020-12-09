@@ -257,7 +257,7 @@ public class CustomerForm {
     public Customer getCustomer() {
 
         Customer customer = new Customer();
-        customer.setCustomerid(getCustomerid());
+        customer.setId(getCustomerid());
         customer.setFirstname(getFirstname());
         customer.setLastname(getLastname());
         customer.setEmail(getEmail());
@@ -271,7 +271,7 @@ public class CustomerForm {
 
     public void setCustomer(Customer customer) {
 
-        this.customerid = customer.getCustomerid();
+        this.customerid = customer.getId();
         this.firstname = customer.getFirstname();
         this.lastname = customer.getLastname();
         this.email = customer.getEmail();

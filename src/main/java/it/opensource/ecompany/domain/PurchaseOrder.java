@@ -27,8 +27,8 @@ public class PurchaseOrder implements Serializable {
     @Column(length = 25)
     private State state;
 
+    @JoinColumn(name = "customer_id")
     @OneToOne
-    @JoinColumn(name = "customerid")
     private Customer customer;
 
     @JoinTable(name = "purchase_orders_lineitems",

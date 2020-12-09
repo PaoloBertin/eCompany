@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS contacts (
 );
 
 CREATE TABLE IF NOT EXISTS customers (
-    customerid BIGINT NOT NULL AUTO_INCREMENT,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     customer_code VARCHAR(15),
     firstname VARCHAR(15),
     lastname VARCHAR(25),
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS customers (
     contact_id BIGINT,
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY(customerid),
+    PRIMARY KEY(id),
     CONSTRAINT customers_fk_01 FOREIGN KEY (address_id) REFERENCES address(id),
     CONSTRAINT customers_fk_02 FOREIGN KEY (contact_id) REFERENCES contacts(id)
 );
@@ -246,12 +246,12 @@ CREATE TABLE IF NOT EXISTS purchase_orders (
     date_purchase TIMESTAMP,
     total_amount DOUBLE DEFAULT 0.0,
     state VARCHAR(25),
-    customerid BIGINT NOT NULL,
+    customer_id BIGINT NOT NULL,
     version BIGINT,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT purchase_orders_fk_01 FOREIGN KEY (customerid) REFERENCES customers(customerid)
+    CONSTRAINT purchase_orders_fk_01 FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
 CREATE TABLE IF NOT EXISTS line_items (

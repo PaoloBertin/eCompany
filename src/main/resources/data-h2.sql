@@ -48,14 +48,16 @@ INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (  5, 'giuseppe
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (101, 'miamland@dmail.com', '3658323288', '0429876336');
 INSERT INTO contacts(id, email, cellular, landline_phone) VALUES (102, 'kui@dmail.com', '3628326288', '0429796336');
 
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(1, 'Admin', 'Ecompany', 'admin', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 1, 1);
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(2, 'User', 'Ecompany', 'user.ecompany', '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 'user.ecompany@dmail.com', 2, 2);
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(3, 'Mario', 'Rossi', 'mario.rossi', '$2a$10$AN9KMoBs3GLy9ttjE4jsGODh25qA5xVo1IfX3kyHdFaC5JP2eJ45C', 'mario.rossi@dmail.com', 3, 3);
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(4, 'Giuseppe', 'Verdi', 'giuseppe.verdi', '$2a$10$6ougvztJT0if6CTPXPytQuFESws6sq4VEmxkWkg3shNUU/CSbJZ6y', 'giuseppe.verdi@dmail.com', 4, 4);
-INSERT INTO customers(customerid, firstname, lastname, username, password, email, address_id, contact_id) VALUES(5, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', '$2a$10$rYz10KiusKJ0EQ14b6zyVeVb1fxq617nAZOLE0HHpHtb8VZwGHusG', 'giuseppe.garibaldi@dmail.com', 5, 5);
+INSERT INTO customers(id, firstname, lastname, username, password, email, address_id, contact_id)
+    VALUES (1, 'Admin', 'Ecompany', 'admin', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 1, 1),
+           (2, 'User', 'Ecompany', 'user.ecompany', '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 'user.ecompany@dmail.com', 2, 2),
+           (3, 'Mario', 'Rossi', 'mario.rossi', '$2a$10$AN9KMoBs3GLy9ttjE4jsGODh25qA5xVo1IfX3kyHdFaC5JP2eJ45C', 'mario.rossi@dmail.com', 3, 3),
+           (4, 'Giuseppe', 'Verdi', 'giuseppe.verdi', '$2a$10$6ougvztJT0if6CTPXPytQuFESws6sq4VEmxkWkg3shNUU/CSbJZ6y', 'giuseppe.verdi@dmail.com', 4, 4),
+           (5, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', '$2a$10$rYz10KiusKJ0EQ14b6zyVeVb1fxq617nAZOLE0HHpHtb8VZwGHusG', 'giuseppe.garibaldi@dmail.com', 5, 5);
 
-INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (1,  'MIAMLAND',   'FR818007445', 'S.P.A', 'Route de Paris 26 77340 Pontault-Combault', 101, 101, 0);
-INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (2, 'KUI S.R.L', 'IT09376250016', 'S.R.L', 'Piazza Vittorio Alfieri 45', 102, 102, 0);
+INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version)
+    VALUES (1,  'MIAMLAND',   'FR818007445', 'S.P.A', 'Route de Paris 26 77340 Pontault-Combault', 101, 101, 0),
+           (2, 'KUI S.R.L', 'IT09376250016', 'S.R.L', 'Piazza Vittorio Alfieri 45', 102, 102, 0);
 
 INSERT INTO categories(id, name, version)
     VALUES ( 1, 'Libri', 0),
@@ -517,7 +519,7 @@ INSERT INTO invoices(id, document_date, document_number, transferor_code, transf
           (  8, '2018-10-09',  1, 's-00001', 'c-00001', 0),
           (  9, '2018-10-09',  1, 's-00001', 'c-00001', 0);
 
-INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customerid)
+INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customer_id)
     VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 3),
           ( 2, '2018-10-10 00:00:00',  49.90, 'processato', 3),
           ( 3, '2018-10-10 00:00:00',  59.70, 'processato', 3),

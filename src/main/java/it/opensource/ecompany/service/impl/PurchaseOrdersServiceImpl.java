@@ -56,7 +56,7 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
     @Override
     public List<PurchaseOrder> getPurchaseOrderByCustomer(Long customerId) {
 
-        return purchaseOrdersRepository.findByCustomerCustomerid(customerId);
+        return purchaseOrdersRepository.findByCustomerId(customerId);
     }
 
     @Override

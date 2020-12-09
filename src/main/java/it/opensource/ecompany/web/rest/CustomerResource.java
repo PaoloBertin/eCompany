@@ -81,7 +81,7 @@ public class CustomerResource {
         customer.setEmail(username);
 
         long id = customersService.saveCustomer(customer);
-        customer.setCustomerid(id);
+        customer.setId(id);
 
         // aggiunge nuovo utente alla lista delle credenziali in memoria
         userContext.setCurrentCustomer(customer);

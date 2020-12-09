@@ -14,7 +14,7 @@ public class Customer implements Principal, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long customerid;
+    private Long id;
 
     @Column(name = "customer_code")
     private String customerCode;
@@ -45,14 +45,14 @@ public class Customer implements Principal, Serializable {
     @Version
     private Long version;
 
-    public Long getCustomerid() {
+    public Long getId() {
 
-        return customerid;
+        return id;
     }
 
-    public void setCustomerid(Long customerid) {
+    public void setId(Long id) {
 
-        this.customerid = customerid;
+        this.id = id;
     }
 
     public String getFirstname() {
@@ -164,7 +164,7 @@ public class Customer implements Principal, Serializable {
 
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((customerid == null) ? 0 : customerid.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -178,10 +178,10 @@ public class Customer implements Principal, Serializable {
         if (getClass() != obj.getClass())
             return false;
         Customer other = (Customer) obj;
-        if (customerid == null) {
-            if (other.customerid != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!customerid.equals(other.customerid))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
