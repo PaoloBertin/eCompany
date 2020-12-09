@@ -74,4 +74,10 @@ public class PriceList implements Serializable {
         this.version = version;
     }
 
+    @Override
+    public String toString() {
+
+        return "PriceList{" + "id=" + id + ", name='" + name + '\'' + ", productCode='" + productCode + '\'' + ", price=" + price + ", version=" + version + '}';
+    }
+
 }
