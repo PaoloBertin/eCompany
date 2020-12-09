@@ -16,6 +16,7 @@ public class PriceList implements Serializable {
 
     private String name;
 
+    @Column(name = "product_code")
     private String productCode;
 
     private BigDecimal price;
