@@ -38,7 +38,7 @@
                         <div th:each="product : ${cartBean.products}">
                             <div class="row">
                                 <div class="col-lg-2">
-                                    <img th:src="@{'/products/photo/' + ${product.key.productid} }" width="100px"/>
+                                    <img th:src="@{'/products/photo/' + ${product.key.id} }" width="100px"/>
                                 </div>
                                 <div class="col-lg-4">
                                     <span th:text="${product.key.name}"></span>
@@ -53,7 +53,7 @@
                                     <span th:text="${#numbers.formatDecimal((product.key.price * product.value),  0, 'COMMA', 2, 'POINT')} + ' &euro;'"></span>
                                 </div>
                                 <div class="col-lg-1">
-                                    <a th:href="@{'/cart/deleteproduct/' + ${product.key.productid}}">
+                                    <a th:href="@{'/cart/deleteproduct/' + ${product.key.id}}">
                                         <span class="fa fa-trash fa-lg"></span>
                                     </a>
                                 </div>
