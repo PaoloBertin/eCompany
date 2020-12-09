@@ -36,7 +36,7 @@ class CartBeanTest {
 
         product2 = new Product();
         product2.setId(3L);
-        product2.setIsbn("1449365116");
+        product2.setProductCode("1449365116");
         product2.setName("Java Web Services");
         product2.setCategory(category);
         product2.setPrice(39.90F);

@@ -15,7 +15,8 @@ public class Product implements Serializable {
     private Long id;
 
     @NotNull
-    private String isbn;
+    @Column(name = "product_code")
+    private String productCode;
 
     private String name;
 
@@ -40,9 +41,9 @@ public class Product implements Serializable {
 
     }
 
-    public Product(String isbn, String name) {
+    public Product(String productCode, String name) {
 
-        this.isbn = isbn;
+        this.productCode = productCode;
         this.name = name;
     }
 
@@ -56,14 +57,14 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public String getIsbn() {
+    public String getProductCode() {
 
-        return isbn;
+        return productCode;
     }
 
-    public void setIsbn(String isbn) {
+    public void setProductCode(String productCode) {
 
-        this.isbn = isbn;
+        this.productCode = productCode;
     }
 
     public String getName() {

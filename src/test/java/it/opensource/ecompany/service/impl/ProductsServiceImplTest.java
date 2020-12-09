@@ -154,7 +154,7 @@ public class ProductsServiceImplTest {
         category.setName("Libri");
         Product product = new Product();
         product.setName("Alice");
-        product.setIsbn("00000");
+        product.setProductCode("00000");
         product.setCategory(category);
 
         productsService.saveProduct(product);

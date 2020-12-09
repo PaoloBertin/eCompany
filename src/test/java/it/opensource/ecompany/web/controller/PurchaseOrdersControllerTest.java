@@ -74,7 +74,7 @@ public class PurchaseOrdersControllerTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Da Visual Basic a Java");
-        product.setIsbn("8883780450");
+        product.setProductCode("8883780450");
         product.setCategory(category);
         product.setPrice(29.90F);
 
@@ -82,7 +82,7 @@ public class PurchaseOrdersControllerTest {
         cartBean.addProductToCart(product);
         product.setId(3L);
         product.setName("Java Web Services");
-        product.setIsbn("1449365116");
+        product.setProductCode("1449365116");
         product.setCategory(category);
         product.setPrice(39.90F);
 

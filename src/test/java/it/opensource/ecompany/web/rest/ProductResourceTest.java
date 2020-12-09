@@ -85,7 +85,7 @@ class ProductResourceTest {
 
         Category category = new Category(1L, "Libri");
         Product product = new Product();
-        product.setIsbn("aaaa");
+        product.setProductCode("aaaa");
         product.setName("bbbb");
         product.setCategory(category);
 

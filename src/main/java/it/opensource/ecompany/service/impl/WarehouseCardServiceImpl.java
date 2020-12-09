@@ -78,9 +78,10 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     }
 
     @Override
-    public Page<WarehouseCard> getByWarehouseIdAndProductIsbn(Long warehouseId, String isbn, Pageable pageable) {
+    public Page<WarehouseCard> getByWarehouseIdAndProductIsbn(Long warehouseId, String productCode, Pageable pageable) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductIsbn(warehouseId, isbn, pageable);
+        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductProductCode(warehouseId, productCode,
+                                                                                                                pageable);
     }
 
     @Override

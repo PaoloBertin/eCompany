@@ -299,7 +299,7 @@ public class ProductsAdminController {
 
         product.setName(productForm.getName());
         product.setDescription(productForm.getDescription());
-        product.setIsbn(productForm.getIsbn());
+        product.setProductCode(productForm.getIsbn());
         product.setPrice(productForm.getPrice());
 
         String categoryName = productForm.getCategoryProduct();
@@ -317,7 +317,7 @@ public class ProductsAdminController {
         productForm.setId(product.getId());
         productForm.setName(product.getName());
         productForm.setDescription(product.getDescription());
-        productForm.setIsbn(product.getIsbn());
+        productForm.setIsbn(product.getProductCode());
         productForm.setPrice(product.getPrice());
 
         //        productForm.setImage(product.getImage());

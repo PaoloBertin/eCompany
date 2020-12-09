@@ -136,7 +136,7 @@ CREATE TABLE IF NOT EXISTS products (
     name VARCHAR(255),
     subtitle VARCHAR(255),
     description VARCHAR(255),
-    isbn VARCHAR(20) NOT NULL UNIQUE,
+    product_code VARCHAR(20) NOT NULL UNIQUE,
     price DECIMAL(12,4),
     image BLOB,
     category_id BIGINT,

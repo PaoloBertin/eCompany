@@ -19,7 +19,8 @@ public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Lo
 
     List<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId);
 
-    Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductIsbn(Long warehouseId, String isbn, Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductProductCode(Long warehouseId, String productCode,
+                                                                                                 Pageable pageable);
 
     Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId,
                                                                                         Pageable pageable);
