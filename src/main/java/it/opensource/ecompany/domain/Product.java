@@ -3,6 +3,7 @@ package it.opensource.ecompany.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Table(name = "products")
 @Entity
@@ -137,6 +138,7 @@ public class Product implements Serializable {
         this.version = version;
     }
 
+/*
     @Override
     public int hashCode() {
 
@@ -162,6 +164,24 @@ public class Product implements Serializable {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+*/
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o)
+            return true;
+        if (!(o instanceof Product))
+            return false;
+        Product product = (Product) o;
+        return getProductCode().equals(product.getProductCode());
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getProductCode());
     }
 
 }
