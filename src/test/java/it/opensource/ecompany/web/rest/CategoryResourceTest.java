@@ -35,7 +35,7 @@ class CategoryResourceTest {
     public void getCategoryByIdTest(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/api/categories/{categoryId}", 1L).contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.categoryid", equalTo(1)))
+           .andExpect(jsonPath("$.id", equalTo(1)))
            .andExpect(jsonPath("$.name", equalTo("Libri")))
            .andExpect(status().isOk());
 
@@ -53,7 +53,7 @@ class CategoryResourceTest {
 
         mvc.perform(post("/api/categories").contentType(MediaType.APPLICATION_JSON)
                                            .content(requestJson))
-           .andExpect(jsonPath("$.categoryid", equalTo(7)))
+           .andExpect(jsonPath("$.id", equalTo(7)))
            .andExpect(status().isOk());
     }
 

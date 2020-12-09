@@ -35,16 +35,16 @@ public class ProductsServiceImpl implements ProductsService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Product> getProductsByCategory(Long categoryid) {
+    public List<Product> getProductsByCategory(Long categoryId) {
 
-        return productsRepository.findByCategoryCategoryid(categoryid);
+        return productsRepository.findByCategoryId(categoryId);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<Product> getProductsByCategoryByPage(Long categoryId, Pageable pageable) {
 
-        return productsRepository.findByCategoryCategoryid(categoryId, pageable);
+        return productsRepository.findByCategoryId(categoryId, pageable);
     }
 
     @Transactional(readOnly = true)

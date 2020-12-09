@@ -24,7 +24,7 @@
                 <tbody>
                     <tr th:each="category : ${categories}">
                         <td>
-                            <a href="#" th:href="@{/products/{categoryId}/all(categoryId=${category.categoryid})}">
+                            <a href="#" th:href="@{/products/{categoryId}/all(categoryId=${category.id})}">
                                 <span th:text="${category.name}"></span>
                             </a>
                         </td>

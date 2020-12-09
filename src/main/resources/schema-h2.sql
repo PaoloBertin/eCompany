@@ -124,11 +124,11 @@ CREATE TABLE IF NOT EXISTS suppliers (
 );
 
 CREATE TABLE IF NOT EXISTS categories (
-    categoryid BIGINT NOT NULL AUTO_INCREMENT,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(254),
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY(categoryid)
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS products (
@@ -139,12 +139,12 @@ CREATE TABLE IF NOT EXISTS products (
     isbn VARCHAR(20) NOT NULL UNIQUE,
     price DECIMAL(12,4),
     image BLOB,
-    categoryid BIGINT,
+    category_id BIGINT,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY (id),
 
-    CONSTRAINT products_fk_01 FOREIGN KEY (categoryid) REFERENCES categories(categoryid)
+    CONSTRAINT products_fk_01 FOREIGN KEY (category_id) REFERENCES categories(id)
 );
 
 CREATE TABLE IF NOT EXISTS price_lists(

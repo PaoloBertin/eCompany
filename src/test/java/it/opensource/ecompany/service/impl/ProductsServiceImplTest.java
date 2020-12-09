@@ -150,7 +150,7 @@ public class ProductsServiceImplTest {
     public void saveProductTest() {
 
         Category category = new Category();
-        category.setCategoryid(1L);
+        category.setId(1L);
         category.setName("Libri");
         Product product = new Product();
         product.setName("Alice");

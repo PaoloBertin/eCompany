@@ -57,7 +57,7 @@ INSERT INTO customers(customerid, firstname, lastname, username, password, email
 INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (1,  'MIAMLAND',   'FR818007445', 'S.P.A', 'Route de Paris 26 77340 Pontault-Combault', 101, 101, 0);
 INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version) VALUES (2, 'KUI S.R.L', 'IT09376250016', 'S.R.L', 'Piazza Vittorio Alfieri 45', 102, 102, 0);
 
-INSERT INTO categories(categoryid, name, version)
+INSERT INTO categories(id, name, version)
     VALUES ( 1, 'Libri', 0),
            ( 2, 'CD', 0),
            ( 3, 'DVD', 0),
@@ -65,7 +65,7 @@ INSERT INTO categories(categoryid, name, version)
            ( 5, 'Cartoleria', 0),
            ( 6, 'Elettronica', 0);
 
-INSERT INTO products(id, name, subtitle, description, isbn, price, image, categoryid)
+INSERT INTO products(id, name, subtitle, description, isbn, price, image, category_id)
     VALUES ( 1, 'Da Visual Basic a Java', '', 'Con Visual Basic oggi si possono produrre applicazioni allo stato dell''arte: event-driven, Internet-ready, con logica ad oggetti, o meglio a componenti. Tuttavia Visual Basic ha una limitazione evidente: funziona solo in ambienti Microsoft', '8883780450', 29.90, FILE_READ('classpath:static/images/cover/vb2java.jpg'),1),
            ( 2, 'Resurrection', '', 'Even though it under performed at the box office last Christmas, I really enjoyed "Star Trek: Insurrection." Maybe it was the title. Maybe it was the time of year.', '8883780451', 39.90, FILE_READ('classpath:static/images/cover/resurrection.jpg'), 2),
            ( 3, 'Java Web Services', '', 'Java web services" consente allo sviluppatore Java di entrare nel mondo del Web Services.', '1449365116', 29.90, FILE_READ('classpath:static/images/cover/jws.jpg'), 1),

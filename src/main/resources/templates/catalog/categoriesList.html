@@ -34,13 +34,13 @@
                                     <span th:text="${category.name}"></span>
                                 </td>
                                 <td>
-                                    <a th:href="@{'/admin/catalog/' + ${category.categoryid}} + '?form'">
+                                    <a th:href="@{'/admin/catalog/' + ${category.id}} + '?form'">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
                                 </td>
                                 <td>
                                     <form th:action="@{'/admin/catalog/'}" th:method="delete">
-                                        <input type="hidden" name="categoryid" th:value="${category.categoryid}"/>
+                                        <input type="hidden" name="categoryid" th:value="${category.id}"/>
                                         <button class="btn">
                                             <i class="fa fa-trash fa-lg"></i>
                                         </button>

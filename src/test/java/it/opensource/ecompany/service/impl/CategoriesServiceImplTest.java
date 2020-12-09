@@ -41,7 +41,7 @@ public class CategoriesServiceImplTest {
     public void getCategoryByNameTest() {
 
         Long expected = 3L;
-        Long actual = categoriesService.getCategoryByName("DVD").getCategoryid();
+        Long actual = categoriesService.getCategoryByName("DVD").getId();
 
         assertThat(expected, equalTo(actual));
     }

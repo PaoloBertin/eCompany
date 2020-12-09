@@ -25,7 +25,7 @@ class CartBeanTest {
     void setUp() {
 
         category = new Category();
-        category.setCategoryid(1L);
+        category.setId(1L);
         category.setName("Books");
 
         product1 = new Product();

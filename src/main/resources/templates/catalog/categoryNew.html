@@ -13,7 +13,7 @@
             <h4 th:text="#{label.categories.new}">categories listing</h4>
             <br/>
             <form name="editCategoryForm" th:object="${category}" th:action="@{/admin/catalog?form}" th:method="post">
-                <input type="hidden" th:field="*{categoryid}"/>
+                <input type="hidden" th:field="*{id}"/>
                 <div class="form-group col-xl-9">
                     <label for="category_name" th:text="#{label.categories.name}">name</label>
                     <input class="form-control" id="category_name" type="text" th:field="*{name}"/>

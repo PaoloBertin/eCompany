@@ -30,7 +30,7 @@ public class Product implements Serializable {
     private byte[] image;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "category_id_fk"))
+    @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "category_id_fk"))
     private Category category;
 
     @Version

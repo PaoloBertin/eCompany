@@ -1,9 +1,8 @@
 package it.opensource.ecompany.domain;
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Table(name = "categories")
 @Entity
@@ -13,7 +12,7 @@ public class Category implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryid;
+    private Long id;
 
     @NotNull
     private String name;
@@ -32,18 +31,18 @@ public class Category implements Serializable {
 
     public Category(Long id, String name) {
 
-        this.categoryid = id;
+        this.id = id;
         this.name = name;
     }
 
-    public Long getCategoryid() {
+    public Long getId() {
 
-        return categoryid;
+        return id;
     }
 
-    public void setCategoryid(Long categoryid) {
+    public void setId(Long id) {
 
-        this.categoryid = categoryid;
+        this.id = id;
     }
 
     public String getName() {
@@ -71,7 +70,7 @@ public class Category implements Serializable {
 
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((categoryid == null) ? 0 : categoryid.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
 
@@ -85,10 +84,10 @@ public class Category implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         Category other = (Category) obj;
-        if (categoryid == null) {
-            if (other.categoryid != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!categoryid.equals(other.categoryid))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }

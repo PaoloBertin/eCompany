@@ -11,9 +11,9 @@ import java.util.List;
 @Repository
 public interface ProductsRepository extends JpaRepository<Product, Long> {
 
-    List<Product> findByCategoryCategoryid(Long id);
+    List<Product> findByCategoryId(Long categoryId);
 
-    Page<Product> findByCategoryCategoryid(Long id, Pageable pageable);
+    Page<Product> findByCategoryId(Long categoryId, Pageable pageable);
 
     List<Product> findByName(String name);
 

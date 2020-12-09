@@ -22,7 +22,7 @@
                         <tbody>
                             <tr th:each="category : ${categories}">
                                 <td>
-                                    <a th:href="@{'/admin/products/' + ${category.categoryid} + '/all'}">
+                                    <a th:href="@{'/admin/products/' + ${category.id} + '/all'}">
                                         <span th:text="${category.name}"></span>
                                     </a>
                                 </td>

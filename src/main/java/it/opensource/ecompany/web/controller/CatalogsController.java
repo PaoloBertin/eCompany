@@ -87,7 +87,7 @@ public class CatalogsController {
         Category result = categoriesService.saveCategory(category);
         message = new Message("success", messageSource.getMessage("category.save.success", new Object[]{}, locale));
         redirectAttributes.addFlashAttribute("message", message);
-        log.info("category id: " + result.getCategoryid());
+        log.info("category id: " + result.getId());
 
         String urlRedirect = "redirect:/admin/catalog/all";
 
