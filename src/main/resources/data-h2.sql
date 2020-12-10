@@ -545,47 +545,130 @@ INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customer_id)
           (10, '2018-12-08 00:00:00',  19.00, 'processato', 2);
 
 INSERT INTO line_items(id, product_id, quantity, price, version)
-    VALUES( 1,  1, 1, 10.0, 0),
-          ( 2,  2, 2, 10.0, 0),
-          ( 3,  3, 2, 10.0, 0),
-          ( 4,  5, 1, 10.0, 0),
-          ( 5, 10, 3, 10.0, 0),
-          ( 6, 17, 1, 10.0, 0),
-          ( 7,  4, 1, 10.0, 0),
-          ( 8,  7, 2, 10.0, 0),
-          ( 9,  8, 1, 10.0, 0),
-          (10, 13, 4, 10.0, 0),
-          (11,  6, 1, 10.0, 0),
-          (12,  9, 1, 10.0, 0),
-          (13, 11, 1, 10.0, 0),
-          (14, 14, 1, 10.0, 0),
-          (15, 12, 1, 10.0, 0),
-          (16, 16, 1, 10.0, 0),
-          (17, 15, 1, 10.0, 0),
-          (18, 20, 1, 10.0, 0),
-          (19, 21, 1, 10.0, 0),
-          (20, 22, 1, 10.0, 0),
-          (21,  1, 1, 10.0, 0),
-          (22,  2, 2, 10.0, 0),
-          (23,  3, 2, 10.0, 0),
-          (24,  5, 1, 10.0, 0),
-          (25, 10, 3, 10.0, 0),
-          (26, 17, 1, 10.0, 0),
-          (27,  4, 1, 10.0, 0),
-          (28,  7, 2, 10.0, 0),
-          (29,  8, 1, 10.0, 0),
-          (30, 13, 4, 10.0, 0),
-          (31,  6, 1, 10.0, 0),
-          (32,  9, 1, 10.0, 0),
-          (33, 11, 1, 10.0, 0),
-          (34, 14, 1, 10.0, 0),
-          (35, 12, 1, 10.0, 0),
-          (36, 16, 1, 10.0, 0),
-          (37, 15, 1, 10.0, 0),
-          (38, 20, 1, 10.0, 0),
-          (39, 21, 1, 10.0, 0),
-          (40, 22, 1, 10.0, 0);
-
+    VALUES(  1,  1, 1, 10.0, 0),     -- purchase_orders 1
+          (  2,  2, 2, 10.0, 0),     -- purchase_orders 1
+          (  3,  3, 2, 10.0, 0),     -- purchase_orders 1
+          (  4,  5, 1, 10.0, 0),     -- purchase_orders 2
+          (  5, 10, 3, 10.0, 0),     -- purchase_orders 3
+          (  6, 17, 1, 10.0, 0),     -- purchase_orders 4
+          (  7,  4, 1, 10.0, 0),     -- purchase_orders 4
+          (  8,  7, 2, 10.0, 0),     -- purchase_orders 5
+          (  9,  8, 1, 10.0, 0),     -- purchase_orders 5
+          ( 10, 13, 4, 10.0, 0),     -- purchase_orders 5
+          ( 11,  6, 1, 10.0, 0),     -- purchase_orders 6
+          ( 12,  9, 1, 10.0, 0),     -- purchase_orders 6
+          ( 13, 11, 1, 10.0, 0),     -- purchase_orders 7
+          ( 14, 14, 1, 10.0, 0),     -- purchase_orders 8
+          ( 15, 12, 1, 10.0, 0),     -- purchase_orders 8
+          ( 16, 16, 1, 10.0, 0),     -- purchase_orders 9
+          ( 17, 15, 1, 10.0, 0),     -- purchase_orders 9
+          ( 18, 20, 1, 10.0, 0),     -- purchase_orders 9
+          ( 19, 21, 1, 10.0, 0),     -- purchase_orders 9
+          ( 20, 22, 1, 10.0, 0),     -- purchase_orders 10
+          ( 21,  1, 1, 10.0, 0),     -- sales_orders 1
+          ( 22,  2, 2, 10.0, 0),     -- sales_orders 1
+          ( 23,  3, 2, 10.0, 0),     -- sales_orders 1
+          ( 24,  5, 1, 10.0, 0),     -- sales_orders 2
+          ( 25, 10, 3, 10.0, 0),     -- sales_orders 3
+          ( 26, 17, 1, 10.0, 0),     -- sales_orders 4
+          ( 27,  4, 1, 10.0, 0),     -- sales_orders 4
+          ( 28,  7, 2, 10.0, 0),     -- sales_orders 5
+          ( 29,  8, 1, 10.0, 0),     -- sales_orders 5
+          ( 30, 13, 4, 10.0, 0),     -- sales_orders 5
+          ( 31,  6, 1, 10.0, 0),     -- sales_orders 6
+          ( 32,  9, 1, 10.0, 0),     -- sales_orders 6
+          ( 33, 11, 1, 10.0, 0),     -- sales_orders 7
+          ( 34, 14, 1, 10.0, 0),     -- sales_orders 8
+          ( 35, 12, 1, 10.0, 0),     -- sales_orders 8
+          ( 36, 16, 1, 10.0, 0),     -- sales_orders 9
+          ( 37, 15, 1, 10.0, 0),     -- sales_orders 9
+          ( 38, 20, 1, 10.0, 0),     -- sales_orders 9
+          ( 39, 21, 1, 10.0, 0),     -- sales_orders 9
+          ( 40, 22, 1, 10.0, 0),     -- sales_orders 10
+          ( 41, 22, 1, 10.0, 0),     -- documentations 1
+          ( 42, 22, 1, 10.0, 0),     -- documentations 2
+          ( 43, 22, 1, 10.0, 0),     -- documentations 3
+          ( 44, 22, 1, 10.0, 0),     -- documentations 4
+          ( 45, 22, 1, 10.0, 0),     -- documentations 5
+          ( 46, 22, 1, 10.0, 0),     -- documentations 6
+          ( 47, 22, 1, 10.0, 0),     -- documentations 7
+          ( 48, 22, 1, 10.0, 0),     -- documentations 8
+          ( 49, 22, 1, 10.0, 0),     -- documentations 9
+          ( 50, 22, 1, 10.0, 0),     -- documentations 10
+          ( 51, 22, 1, 10.0, 0),     -- documentations 11
+          ( 52, 22, 1, 10.0, 0),     -- documentations 12
+          ( 53, 22, 1, 10.0, 0),     -- documentations 13
+          ( 54, 22, 1, 10.0, 0),     -- documentations 14
+          ( 55, 22, 1, 10.0, 0),     -- documentations 15
+          ( 56, 22, 1, 10.0, 0),     -- documentations 16
+          ( 57, 22, 1, 10.0, 0),     -- documentations 17
+          ( 58, 22, 1, 10.0, 0),     -- documentations 18
+          ( 59, 22, 1, 10.0, 0),     -- documentations 19
+          ( 60, 22, 1, 10.0, 0),     -- documentations 20
+          ( 61, 22, 1, 10.0, 0),     -- documentations 21
+          ( 62, 22, 1, 10.0, 0),     -- documentations 22
+          ( 63, 22, 1, 10.0, 0),     -- documentations 23
+          ( 64, 22, 1, 10.0, 0),     -- documentations 24
+          ( 65, 22, 1, 10.0, 0),     -- documentations 25
+          ( 66, 22, 1, 10.0, 0),     -- documentations 26
+          ( 67, 22, 1, 10.0, 0),     -- documentations 27
+          ( 68, 22, 1, 10.0, 0),     -- documentations 28
+          ( 69, 22, 1, 10.0, 0),     -- documentations 29
+          ( 70, 22, 1, 10.0, 0),     -- documentations 30
+          ( 71, 22, 1, 10.0, 0),     -- documentations 31
+          ( 72, 22, 1, 10.0, 0),     -- documentations 32
+          ( 73, 22, 1, 10.0, 0),     -- documentations 33
+          ( 74, 22, 1, 10.0, 0),     -- documentations 34
+          ( 75, 22, 1, 10.0, 0),     -- documentations 35
+          ( 76, 22, 1, 10.0, 0),     -- documentations 36
+          ( 77, 22, 1, 10.0, 0),     -- documentations 37
+          ( 78, 22, 1, 10.0, 0),     -- documentations 38
+          ( 79, 22, 1, 10.0, 0),     -- documentations 39
+          ( 80, 22, 1, 10.0, 0),     -- documentations 40
+          ( 81, 22, 1, 10.0, 0),     -- documentations 41
+          ( 82, 22, 1, 10.0, 0),     -- documentations 42
+          ( 83, 22, 1, 10.0, 0),     -- documentations 43
+          ( 84, 22, 1, 10.0, 0),     -- documentations 44
+          ( 85, 22, 1, 10.0, 0),     -- documentations 45
+          ( 86, 22, 1, 10.0, 0),     -- documentations 46
+          ( 87, 22, 1, 10.0, 0),     -- documentations 47
+          ( 88, 22, 1, 10.0, 0),     -- documentations 48
+          ( 89, 22, 1, 10.0, 0),     -- documentations 49
+          ( 90, 22, 1, 10.0, 0),     -- documentations 50
+          ( 91, 22, 1, 10.0, 0),     -- documentations 51
+          ( 92, 22, 1, 10.0, 0),     -- documentations 52
+          ( 93, 22, 1, 10.0, 0),     -- documentations 53
+          ( 94, 22, 1, 10.0, 0),     -- documentations 54
+          ( 95, 22, 1, 10.0, 0),     -- documentations 55
+          ( 96, 22, 1, 10.0, 0),     -- documentations 56
+          ( 97, 22, 1, 10.0, 0),     -- documentations 57
+          ( 98, 22, 1, 10.0, 0),     -- documentations 58
+          ( 99, 22, 1, 10.0, 0),     -- documentations 59
+          (100, 22, 1, 10.0, 0),     -- documentations 60
+          (101, 22, 1, 10.0, 0),     -- documentations 61
+          (102, 22, 1, 10.0, 0),     -- documentations 62
+          (103, 22, 1, 10.0, 0),     -- documentations 63
+          (104, 22, 1, 10.0, 0),     -- documentations 64
+          (105, 22, 1, 10.0, 0),     -- documentations 65
+          (106, 22, 1, 10.0, 0),     -- documentations 66
+          (107, 22, 1, 10.0, 0),     -- documentations 67
+          (108, 22, 1, 10.0, 0),     -- documentations 68
+          (109, 22, 1, 10.0, 0),     -- documentations 69
+          (110, 22, 1, 10.0, 0),     -- documentations 70
+          (111, 22, 1, 10.0, 0),     -- documentations 71
+          (112, 22, 1, 10.0, 0),     -- documentations 72
+          (113, 22, 1, 10.0, 0),     -- documentations 73
+          (114, 22, 1, 10.0, 0),     -- documentations 74
+          (115, 22, 1, 10.0, 0),     -- documentations 75
+          (116, 22, 1, 10.0, 0),     -- documentations 76
+          (117, 22, 1, 10.0, 0),     -- documentations 77
+          (118, 22, 1, 10.0, 0),     -- documentations 78
+          (119, 22, 1, 10.0, 0),     -- documentations 79
+          (120, 22, 1, 10.0, 0),     -- documentations 80
+          (121, 22, 1, 10.0, 0),     -- documentations 81
+          (122, 22, 1, 10.0, 0),     -- documentations 82
+          (123, 22, 1, 10.0, 0),     -- documentations 83
+          (124, 22, 1, 10.0, 0);     -- documentations 84
 
 INSERT INTO purchase_orders_lineitems(purchase_orders_id, line_items_line_item_id)
     VALUES ( 1,  1),
