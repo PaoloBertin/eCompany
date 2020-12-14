@@ -3,7 +3,10 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.*;
 import it.opensource.ecompany.repository.PurchaseOrdersRepository;
-import it.opensource.ecompany.service.*;
+import it.opensource.ecompany.service.AccountsService;
+import it.opensource.ecompany.service.PurchaseOrdersService;
+import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.service.WarehouseCardService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -71,15 +74,15 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
         purchaseOrder.setCustomer(customer);
 
         // costruzione lista LineItem associata all'acquisto
-        List<LineItem> lineitems = new ArrayList<>();
+        List<LineItemPurchaseOrder> lineItemPurchaseOrders = new ArrayList<>();
         for (Map.Entry<Product, Integer> entry : cartBean.getProducts()
                                                          .entrySet()) {
-            LineItem lineitem = new LineItem();
-            lineitem.setProduct(entry.getKey());
-            lineitem.setQuantity(Double.valueOf(entry.getValue()));
-            lineitems.add(lineitem);
+            LineItemPurchaseOrder lineItemPurchaseOrder = new LineItemPurchaseOrder();
+            lineItemPurchaseOrder.setProduct(entry.getKey());
+            lineItemPurchaseOrder.setQuantity(Double.valueOf(entry.getValue()));
+            lineItemPurchaseOrders.add(lineItemPurchaseOrder);
         }
-        purchaseOrder.setLineitems(lineitems);
+        purchaseOrder.setLineitems(lineItemPurchaseOrders);
 
         // salva ordine
         purchaseOrdersRepository.save(purchaseOrder);
@@ -91,7 +94,7 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
             Product product = entry.getKey();
             Integer quantity = entry.getValue();
             Long productId = product.getId();
-//            warehouseCardService.productsWithdrawalFromWarehouse(warehouseId, productId, quantity);
+            //            warehouseCardService.productsWithdrawalFromWarehouse(warehouseId, productId, quantity);
         }
 
         // aggiunge fattura al conto
@@ -99,4 +102,5 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
         Double totalAmount = purchaseOrder.getTotalAmount();
         accountsService.deposit(accountId, BigDecimal.valueOf(totalAmount));
     }
+
 }

@@ -1,10 +1,10 @@
 package it.opensource.ecompany.service;
 
-import it.opensource.ecompany.domain.Documentation;
+import it.opensource.ecompany.domain.DocumentationWarehouseCard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface DocumentationService {
+public interface DocumentationWarehouseCardService {
 
     Long getNumberDocumentations();
 
@@ -12,7 +12,7 @@ public interface DocumentationService {
 
     Long getNumberDocumentationsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId);
 
-    Page<Documentation> getByWarehouseIdAndLineItemProductIdByPage(Long warehouseId, Long productId, Pageable pageable);
+    Page<DocumentationWarehouseCard> getByWarehouseIdAndLineItemProductIdByPage(Long warehouseId, Long productId, Pageable pageable);
 
 
 }

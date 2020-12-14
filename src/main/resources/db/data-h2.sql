@@ -43,6 +43,9 @@ INSERT INTO group_members(group_id, username)
 INSERT INTO group_members(group_id, username)
     SELECT id,'giuseppe.garibaldi' FROM groups WHERE group_name='Users';
 
+INSERT INTO accounts(id, name, balance)
+    VALUES(1, 'eCompany', 100000);
+
 INSERT INTO address(id, city, street, house_number, zip_code, country, state)
     VALUES (  1, 'Battaglia Terme', 'Via A. Ecompany', '8', '35041', 'Padova', 'Italia'),
            (  2, 'Battaglia Terme', 'Via U. Ecompany', '7', '35041', 'Padova', 'Italia'),
@@ -199,61 +202,61 @@ INSERT INTO warehouses(id, name, version)
           ( 4, 'magazzino04',  0),
           ( 5, 'magazzino05',  0);
 
-INSERT INTO documentations(id, warehouse_id, causal, document, document_date, document_number, line_item_id, version)
+INSERT INTO documentations_warehouse_journal(id, warehouse_id, causal, document, document_date, document_number, line_item_warehouse_journal_id, version)
     VALUES (  1,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  10,   1, 0),
            (  2,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  22,   2, 0),
-           (  3,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-10',  11,   3, 0),
-           (  4,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-10',  12,   4, 0),
+           (  3,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-10',  11,   3, 0),
+           (  4,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-10',  12,   4, 0),
            (  5,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-11',   2,   5, 0),
            (  6,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-11',  42,   6, 0),
-           (  7,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-12',  13,   7, 0),
-           (  8,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-12',  14,   8, 0),
-           (  9,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-12',  15,   9, 0),
-           ( 10,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-12',  16,  10, 0),
+           (  7,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  13,   7, 0),
+           (  8,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  14,   8, 0),
+           (  9,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  15,   9, 0),
+           ( 10,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  16,  10, 0),
            ( 11,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-13',  26,  11, 0),
            ( 12,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-13',  37,  12, 0),
-           ( 13,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-14',  17,  13, 0),
-           ( 14,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  14, 0),
-           ( 15,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  15, 0),
-           ( 16,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  16, 0),
-           ( 17,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  17, 0),
-           ( 18,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  18, 0),
-           ( 19,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  19, 0),
-           ( 20,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  20, 0),
-           ( 21,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  21, 0),
-           ( 22,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  22, 0),
-           ( 23,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  23, 0),
-           ( 24,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  24, 0),
-           ( 25,  1,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  25, 0),
-           ( 26,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  26, 0),
-           ( 27,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  27, 0),
-           ( 28,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  28, 0),
-           ( 29,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  29, 0),
-           ( 30,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  30, 0),
-           ( 31,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  31, 0),
-           ( 32,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  32, 0),
-           ( 33,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  33, 0),
-           ( 34,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  34, 0),
-           ( 35,  2,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  35, 0),
-           ( 36,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  36, 0),
-           ( 37,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  37, 0),
-           ( 38,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  38, 0),
-           ( 39,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  39, 0),
-           ( 40,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 41,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 42,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 43,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 44,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 45,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 46,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 47,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 48,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 49,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 50,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 51,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 52,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 53,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
-           ( 54,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 13,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-14',  17,  13, 0),
+           ( 14,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  14, 0),
+           ( 15,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  15, 0),
+           ( 16,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  16, 0),
+           ( 17,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  17, 0),
+           ( 18,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  18, 0),
+           ( 19,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  19, 0),
+           ( 20,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  20, 0),
+           ( 21,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  21, 0),
+           ( 22,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  22, 0),
+           ( 23,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  23, 0),
+           ( 24,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  24, 0),
+           ( 25,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  25, 0),
+           ( 26,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  26, 0),
+           ( 27,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  27, 0),
+           ( 28,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  28, 0),
+           ( 29,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  29, 0),
+           ( 30,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  30, 0),
+           ( 31,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  31, 0),
+           ( 32,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  32, 0),
+           ( 33,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  33, 0),
+           ( 34,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  34, 0),
+           ( 35,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  35, 0),
+           ( 36,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  36, 0),
+           ( 37,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  37, 0),
+           ( 38,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  38, 0),
+           ( 39,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  39, 0),
+           ( 40,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 41,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  41, 0),
+           ( 42,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  42, 0),
+           ( 43,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  43, 0),
+           ( 44,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  44, 0),
+           ( 45,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  45, 0),
+           ( 46,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  46, 0),
+           ( 47,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  47, 0),
+           ( 48,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  48, 0),
+           ( 49,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  49, 0),
+           ( 50,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  50, 0),
+           ( 51,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  51, 0),
+           ( 52,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  52, 0),
+           ( 53,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  53, 0),
+           ( 54,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  54, 0),
            ( 55,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
            ( 56,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
            ( 57,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
@@ -285,7 +288,93 @@ INSERT INTO documentations(id, warehouse_id, causal, document, document_date, do
            ( 83,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
            ( 84,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  19,  40, 0);
 
-INSERT INTO warehouse_journal(id, documentation_id, version)
+INSERT INTO documentations_warehouse_card(id, warehouse_id, causal, document, document_date, document_number, line_item_id, version)
+    VALUES (  1,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  10,   1, 0),
+           (  2,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  22,   2, 0),
+           (  3,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-10',  11,   3, 0),
+           (  4,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-10',  12,   4, 0),
+           (  5,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-11',   2,   5, 0),
+           (  6,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-11',  42,   6, 0),
+           (  7,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  13,   7, 0),
+           (  8,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  14,   8, 0),
+           (  9,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  15,   9, 0),
+           ( 10,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-12',  16,  10, 0),
+           ( 11,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-13',  26,  11, 0),
+           ( 12,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-13',  37,  12, 0),
+           ( 13,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-14',  17,  13, 0),
+           ( 14,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  14, 0),
+           ( 15,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  15, 0),
+           ( 16,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  16, 0),
+           ( 17,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  17, 0),
+           ( 18,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  18, 0),
+           ( 19,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  19, 0),
+           ( 20,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  20, 0),
+           ( 21,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  21, 0),
+           ( 22,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  22, 0),
+           ( 23,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  23, 0),
+           ( 24,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  24, 0),
+           ( 25,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  25, 0),
+           ( 26,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  26, 0),
+           ( 27,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  27, 0),
+           ( 28,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  28, 0),
+           ( 29,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  29, 0),
+           ( 30,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  30, 0),
+           ( 31,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  31, 0),
+           ( 32,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  32, 0),
+           ( 33,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  33, 0),
+           ( 34,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  34, 0),
+           ( 35,  2, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  35, 0),
+           ( 36,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  36, 0),
+           ( 37,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  37, 0),
+           ( 38,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  38, 0),
+           ( 39,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  39, 0),
+           ( 40,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 41,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  41, 0),
+           ( 42,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  42, 0),
+           ( 43,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  43, 0),
+           ( 44,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  44, 0),
+           ( 45,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  45, 0),
+           ( 46,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  46, 0),
+           ( 47,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  47, 0),
+           ( 48,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  48, 0),
+           ( 49,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  49, 0),
+           ( 50,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  50, 0),
+           ( 51,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  51, 0),
+           ( 52,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  52, 0),
+           ( 53,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  53, 0),
+           ( 54,  3, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  54, 0),
+           ( 55,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 56,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 57,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 58,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 59,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 60,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 61,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 62,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 63,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 64,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 65,  3,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 66,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 67,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 68,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 69,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 70,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 71,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 72,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 73,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 74,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 75,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 76,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 77,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 78,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 79,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 80,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 81,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 82,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 83,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  18,  40, 0),
+           ( 84,  4,     'SALE', 'TRANSPORT_DOCUMENT', '2018-10-15',  19,  40, 0);
+
+INSERT INTO warehouse_journal(id, documentation_warehouse_journal_id, version)
     VALUES (  1,  1, 0),
            (  2,  2, 0),
            (  3,  3, 0),
@@ -427,7 +516,7 @@ INSERT INTO warehouse_card_products(id, product_code, sku, reorder_quantity, uni
           (53,  53, '8001097210435',  5, 'pz', 'T004', 'D0007', 0),
           (54,  54, '8001097210435',  5, 'pz', 'T004', 'D0008', 0);
 
-INSERT INTO warehouse_cards(id, documentation_id, warehouse_card_product_id, stock, inventory_value, version)
+INSERT INTO warehouse_cards(id, documentation_warehouse_card_id, warehouse_card_product_id, stock, inventory_value, version)
     VALUES ( 1,  1,  1, 20,  400, 0),
            ( 2,  2,  2, 10,    0, 0),
            ( 3,  3,  3, 20,    0, 0),
@@ -532,145 +621,332 @@ INSERT INTO invoices(id, document_date, document_number, transferor_code, transf
           (  8, '2018-10-09',  1, 's-00001', 'c-00001', 0),
           (  9, '2018-10-09',  1, 's-00001', 'c-00001', 0);
 
+INSERT INTO line_items_warehouse_journal(id, product_id, quantity, price, version)
+    VALUES(  1,  1, 10, 20.00, 0),     -- carico
+          (  2,  2, 20, 30.00, 0),     -- carico
+          (  3,  3, 20, 20.00, 0),     -- carico
+          (  4,  5, 10, 35.00, 0),     -- carico
+          (  5, 10, 30, 10.00, 0),     -- carico
+          (  6, 17, 10, 15.00, 0),     -- carico
+          (  7,  4, 10, 35.00, 0),     -- carico
+          (  8,  7, 20, 10.00, 0),     -- carico
+          (  9,  8, 10, 10.00, 0),     -- carico
+          ( 10, 13, 40,  9.00, 0),     -- carico
+          ( 11,  6, 10, 11.00, 0),     -- carico
+          ( 12,  9, 10, 12.00, 0),     -- carico
+          ( 13, 11, 10, 10.00, 0),     -- carico
+          ( 14, 14, 10,  8.00, 0),     -- carico
+          ( 15, 12, 10, 10.00, 0),     -- carico
+          ( 16, 16, 10, 10.00, 0),     -- carico
+          ( 17, 15, 10,  9.00, 0),     -- carico
+          ( 18, 20, 10, 22.00, 0),     -- carico
+          ( 19, 21, 10,  9.00, 0),     -- carico
+          ( 20, 22, 10, 10.00, 0),     -- carico
+          ( 21,  9, 10, 11.00, 0),     -- carico
+          ( 22, 18, 20, 28.00, 0),     -- carico
+          ( 23, 19, 20, 24.50, 0),     -- carico
+          ( 24, 23, 10, 16.00, 0),     -- carico
+          ( 25, 24, 30, 28.00, 0),     -- carico
+          ( 26, 25, 10, 38.00, 0),     -- carico
+          ( 27, 26, 10, 36.50, 0),     -- carico
+          ( 28, 27, 20, 20.50, 0),     -- carico
+          ( 29, 28, 10,  3.50, 0),     -- carico
+          ( 30, 29, 40,  7.00, 0),     -- carico
+          ( 31, 30, 10, 13.50, 0),     -- carico
+          ( 32, 31, 10,  0.50, 0),     -- carico
+          ( 33, 32, 10,  0.50, 0),     -- carico
+          ( 34, 33, 10,  7.50, 0),     -- carico
+          ( 35, 34, 10,  8.50, 0),     -- carico
+          ( 36, 35, 10, 15.15, 0),     -- carico
+          ( 37, 36, 10, 16.50, 0),     -- carico
+          ( 38, 37, 10,  9.15, 0),     -- carico
+          ( 39, 38, 10, 17.00, 0),     -- carico
+          ( 40, 39, 10,  4.50, 0),     -- carico
+          ( 41, 41, 10,  4.50, 0),     -- carico
+          ( 42, 42, 10,  4.50, 0),     -- carico
+          ( 43, 40, 10,  4.50, 0),     -- carico
+          ( 44, 45, 30,  4.00, 0),     -- carico
+          ( 45, 43, 10,  4.50, 0),     -- carico
+          ( 46, 44, 10,  4.50, 0),     -- carico
+          ( 47, 46, 10,  4.20, 0),     -- carico
+          ( 48, 49, 10, 14.50, 0),     -- carico
+          ( 49, 47, 10,  4.10, 0),     -- carico
+          ( 50, 50, 10, 17.50, 0),     -- carico
+          ( 51, 51, 10, 19.50, 0),     -- carico
+          ( 52, 52, 10,  8.50, 0),     -- carico
+          ( 53, 53, 10,  6.50, 0),     -- carico
+          ( 54, 22, 10, 450.0, 0),     -- carico     in magazzino tutti i prodotti messi in vendita
+          ( 55, 22,  1,  10.0, 0),     -- scarico
+          ( 56, 22,  1,  10.0, 0),     -- scarico
+          ( 57, 22,  1,  10.0, 0),     -- scarico
+          ( 58, 22,  1,  10.0, 0),     -- carico
+          ( 59, 22,  1,  10.0, 0),     -- scarico
+          ( 60, 22,  1,  10.0, 0),     -- scarico
+          ( 61, 22,  1,  10.0, 0),     -- scarico
+          ( 62, 22,  1,  10.0, 0),     -- carico
+          ( 63, 22,  1,  10.0, 0),     -- carico
+          ( 64, 22,  1,  10.0, 0),     -- scarico
+          ( 65, 22,  1,  10.0, 0),     -- scarico
+          ( 66, 22,  1,  10.0, 0),     -- scarico
+          ( 67, 22,  1,  10.0, 0),     -- carico
+          ( 68, 22,  1,  10.0, 0),     -- scarico
+          ( 69, 22,  1,  10.0, 0),     -- scarico
+          ( 70, 22,  1,  10.0, 0),     -- scarico
+          ( 71, 22,  1,  10.0, 0),     -- scarico
+          ( 72, 22,  1,  10.0, 0),     -- scarico
+          ( 73, 22,  1,  10.0, 0),     -- scarico
+          ( 74, 22,  1,  10.0, 0),     -- scarico
+          ( 75, 22,  1,  10.0, 0),     -- scarico
+          ( 76, 22,  1,  10.0, 0),     -- scarico
+          ( 77, 22,  1,  10.0, 0),     -- scarico
+          ( 78, 22,  1,  10.0, 0),     -- carico
+          ( 79, 22,  1,  10.0, 0),     -- scarico
+          ( 80, 22,  1,  10.0, 0),     -- scarico
+          ( 81, 22,  1,  10.0, 0),     -- scarico
+          ( 82, 22,  1,  10.0, 0),     -- scarico
+          ( 83, 22,  1,  10.0, 0),     -- scarico
+          ( 84, 22,  1,  10.0, 0),     -- scarico
+          ( 85, 22,  1,  10.0, 0),     -- scarico
+          ( 86, 22,  1,  10.0, 0),     -- carico
+          ( 87, 22,  1,  10.0, 0),     -- scarico
+          ( 88, 22,  1,  10.0, 0),     -- scarico
+          ( 89, 22,  1,  10.0, 0),     -- scarico
+          ( 90, 22,  1,  10.0, 0),     -- scarico
+          ( 91, 22,  1,  10.0, 0),     -- scarico
+          ( 92, 22,  1,  10.0, 0),     -- scarico
+          ( 93, 22,  1,  10.0, 0),     -- scarico
+          ( 94, 22,  1,  10.0, 0),     -- scarico
+          ( 95, 22,  1,  10.0, 0),     -- scarico
+          ( 96, 22,  1,  10.0, 0),     -- scarico
+          ( 97, 22,  1,  10.0, 0),     -- scarico
+          ( 98, 22,  1,  10.0, 0),     -- scarico
+          ( 99, 22,  1,  10.0, 0),     -- carico
+          (100, 22,  1,  10.0, 0),     -- scarico
+          (101, 22,  1,  10.0, 0),     -- scarico
+          (102, 22,  1,  10.0, 0),     -- scarico
+          (103, 22,  1,  10.0, 0),     -- scarico
+          (104, 22,  1,  10.0, 0),     -- scarico
+          (105, 22,  1,  10.0, 0),     -- scarico
+          (106, 22,  1,  10.0, 0),     -- scarico
+          (107, 22,  1,  10.0, 0),     -- scarico
+          (108, 22,  1,  10.0, 0),     -- scarico
+          (109, 22,  1,  10.0, 0),     -- scarico
+          (110, 22,  1,  10.0, 0),     -- scarico
+          (111, 22,  1,  10.0, 0),     -- scarico
+          (112, 22,  1,  10.0, 0),     -- scarico
+          (113, 22,  1,  10.0, 0),     -- scarico
+          (114, 22,  1,  10.0, 0),     -- scarico
+          (115, 22,  1,  10.0, 0),     -- carico
+          (116, 22,  1,  10.0, 0),     -- scarico
+          (117, 22,  1,  10.0, 0),     -- scarico
+          (118, 22,  1,  10.0, 0),     -- scarico
+          (119, 22,  1,  10.0, 0),     -- scarico
+          (120, 22,  1,  10.0, 0),     -- scarico
+          (121, 22,  1,  10.0, 0),     -- scarico
+          (122, 22,  1,  10.0, 0),     -- scarico
+          (123, 22,  1,  10.0, 0),     -- scarico
+          (124, 22,  1,  10.0, 0);     -- scarico
+
+INSERT INTO line_items_warehouse_card(id, product_id, quantity, price, version)
+    VALUES(  1,  1, 10, 20.00, 0),     -- carico
+          (  2,  2, 20, 30.00, 0),     -- carico
+          (  3,  3, 20, 20.00, 0),     -- carico
+          (  4,  5, 10, 35.00, 0),     -- carico
+          (  5, 10, 30, 10.00, 0),     -- carico
+          (  6, 17, 10, 15.00, 0),     -- carico
+          (  7,  4, 10, 35.00, 0),     -- carico
+          (  8,  7, 20, 10.00, 0),     -- carico
+          (  9,  8, 10, 10.00, 0),     -- carico
+          ( 10, 13, 40,  9.00, 0),     -- carico
+          ( 11,  6, 10, 11.00, 0),     -- carico
+          ( 12,  9, 10, 12.00, 0),     -- carico
+          ( 13, 11, 10, 10.00, 0),     -- carico
+          ( 14, 14, 10,  8.00, 0),     -- carico
+          ( 15, 12, 10, 10.00, 0),     -- carico
+          ( 16, 16, 10, 10.00, 0),     -- carico
+          ( 17, 15, 10,  9.00, 0),     -- carico
+          ( 18, 20, 10, 22.00, 0),     -- carico
+          ( 19, 21, 10,  9.00, 0),     -- carico
+          ( 20, 22, 10, 10.00, 0),     -- carico
+          ( 21,  9, 10, 11.00, 0),     -- carico
+          ( 22, 18, 20, 28.00, 0),     -- carico
+          ( 23, 19, 20, 24.50, 0),     -- carico
+          ( 24, 23, 10, 16.00, 0),     -- carico
+          ( 25, 24, 30, 28.00, 0),     -- carico
+          ( 26, 25, 10, 38.00, 0),     -- carico
+          ( 27, 26, 10, 36.50, 0),     -- carico
+          ( 28, 27, 20, 20.50, 0),     -- carico
+          ( 29, 28, 10,  3.50, 0),     -- carico
+          ( 30, 29, 40,  7.00, 0),     -- carico
+          ( 31, 30, 10, 13.50, 0),     -- carico
+          ( 32, 31, 10,  0.50, 0),     -- carico
+          ( 33, 32, 10,  0.50, 0),     -- carico
+          ( 34, 33, 10,  7.50, 0),     -- carico
+          ( 35, 34, 10,  8.50, 0),     -- carico
+          ( 36, 35, 10, 15.15, 0),     -- carico
+          ( 37, 36, 10, 16.50, 0),     -- carico
+          ( 38, 37, 10,  9.15, 0),     -- carico
+          ( 39, 38, 10, 17.00, 0),     -- carico
+          ( 40, 39, 10,  4.50, 0),     -- carico
+          ( 41, 41, 10,  4.50, 0),     -- carico
+          ( 42, 42, 10,  4.50, 0),     -- carico
+          ( 43, 40, 10,  4.50, 0),     -- carico
+          ( 44, 45, 30,  4.00, 0),     -- carico
+          ( 45, 43, 10,  4.50, 0),     -- carico
+          ( 46, 44, 10,  4.50, 0),     -- carico
+          ( 47, 46, 10,  4.20, 0),     -- carico
+          ( 48, 49, 10, 14.50, 0),     -- carico
+          ( 49, 47, 10,  4.10, 0),     -- carico
+          ( 50, 50, 10, 17.50, 0),     -- carico
+          ( 51, 51, 10, 19.50, 0),     -- carico
+          ( 52, 52, 10,  8.50, 0),     -- carico
+          ( 53, 53, 10,  6.50, 0),     -- carico
+          ( 54, 22, 10, 450.0, 0),     -- carico     in magazzino tutti i prodotti messi in vendita
+          ( 55, 22,  1,  10.0, 0),     -- scarico
+          ( 56, 22,  1,  10.0, 0),     -- scarico
+          ( 57, 22,  1,  10.0, 0),     -- scarico
+          ( 58, 22,  1,  10.0, 0),     -- carico
+          ( 59, 22,  1,  10.0, 0),     -- scarico
+          ( 60, 22,  1,  10.0, 0),     -- scarico
+          ( 61, 22,  1,  10.0, 0),     -- scarico
+          ( 62, 22,  1,  10.0, 0),     -- carico
+          ( 63, 22,  1,  10.0, 0),     -- carico
+          ( 64, 22,  1,  10.0, 0),     -- scarico
+          ( 65, 22,  1,  10.0, 0),     -- scarico
+          ( 66, 22,  1,  10.0, 0),     -- scarico
+          ( 67, 22,  1,  10.0, 0),     -- carico
+          ( 68, 22,  1,  10.0, 0),     -- scarico
+          ( 69, 22,  1,  10.0, 0),     -- scarico
+          ( 70, 22,  1,  10.0, 0),     -- scarico
+          ( 71, 22,  1,  10.0, 0),     -- scarico
+          ( 72, 22,  1,  10.0, 0),     -- scarico
+          ( 73, 22,  1,  10.0, 0),     -- scarico
+          ( 74, 22,  1,  10.0, 0),     -- scarico
+          ( 75, 22,  1,  10.0, 0),     -- scarico
+          ( 76, 22,  1,  10.0, 0),     -- scarico
+          ( 77, 22,  1,  10.0, 0),     -- scarico
+          ( 78, 22,  1,  10.0, 0),     -- carico
+          ( 79, 22,  1,  10.0, 0),     -- scarico
+          ( 80, 22,  1,  10.0, 0),     -- scarico
+          ( 81, 22,  1,  10.0, 0),     -- scarico
+          ( 82, 22,  1,  10.0, 0),     -- scarico
+          ( 83, 22,  1,  10.0, 0),     -- scarico
+          ( 84, 22,  1,  10.0, 0),     -- scarico
+          ( 85, 22,  1,  10.0, 0),     -- scarico
+          ( 86, 22,  1,  10.0, 0),     -- carico
+          ( 87, 22,  1,  10.0, 0),     -- scarico
+          ( 88, 22,  1,  10.0, 0),     -- scarico
+          ( 89, 22,  1,  10.0, 0),     -- scarico
+          ( 90, 22,  1,  10.0, 0),     -- scarico
+          ( 91, 22,  1,  10.0, 0),     -- scarico
+          ( 92, 22,  1,  10.0, 0),     -- scarico
+          ( 93, 22,  1,  10.0, 0),     -- scarico
+          ( 94, 22,  1,  10.0, 0),     -- scarico
+          ( 95, 22,  1,  10.0, 0),     -- scarico
+          ( 96, 22,  1,  10.0, 0),     -- scarico
+          ( 97, 22,  1,  10.0, 0),     -- scarico
+          ( 98, 22,  1,  10.0, 0),     -- scarico
+          ( 99, 22,  1,  10.0, 0),     -- carico
+          (100, 22,  1,  10.0, 0),     -- scarico
+          (101, 22,  1,  10.0, 0),     -- scarico
+          (102, 22,  1,  10.0, 0),     -- scarico
+          (103, 22,  1,  10.0, 0),     -- scarico
+          (104, 22,  1,  10.0, 0),     -- scarico
+          (105, 22,  1,  10.0, 0),     -- scarico
+          (106, 22,  1,  10.0, 0),     -- scarico
+          (107, 22,  1,  10.0, 0),     -- scarico
+          (108, 22,  1,  10.0, 0),     -- scarico
+          (109, 22,  1,  10.0, 0),     -- scarico
+          (110, 22,  1,  10.0, 0),     -- scarico
+          (111, 22,  1,  10.0, 0),     -- scarico
+          (112, 22,  1,  10.0, 0),     -- scarico
+          (113, 22,  1,  10.0, 0),     -- scarico
+          (114, 22,  1,  10.0, 0),     -- scarico
+          (115, 22,  1,  10.0, 0),     -- carico
+          (116, 22,  1,  10.0, 0),     -- scarico
+          (117, 22,  1,  10.0, 0),     -- scarico
+          (118, 22,  1,  10.0, 0),     -- scarico
+          (119, 22,  1,  10.0, 0),     -- scarico
+          (120, 22,  1,  10.0, 0),     -- scarico
+          (121, 22,  1,  10.0, 0),     -- scarico
+          (122, 22,  1,  10.0, 0),     -- scarico
+          (123, 22,  1,  10.0, 0),     -- scarico
+          (124, 22,  1,  10.0, 0);     -- scarico
+
+INSERT INTO line_items_purchase_orders(id, product_id, quantity, price, version)
+    VALUES(  1,  1, 10, 20.00, 0),     -- carico
+          (  2,  2, 20, 30.00, 0),     -- carico
+          (  3,  3, 20, 20.00, 0),     -- carico
+          (  4,  5, 10, 35.00, 0),     -- carico
+          (  5, 10, 30, 10.00, 0),     -- carico
+          (  6, 17, 10, 15.00, 0),     -- carico
+          (  7,  4, 10, 35.00, 0),     -- carico
+          (  8,  7, 20, 10.00, 0),     -- carico
+          (  9,  8, 10, 10.00, 0),     -- carico
+          ( 10, 13, 40,  9.00, 0),     -- carico
+          ( 11,  6, 10, 11.00, 0),     -- carico
+          ( 12,  9, 10, 12.00, 0),     -- carico
+          ( 13, 11, 10, 10.00, 0),     -- carico
+          ( 14, 14, 10,  8.00, 0),     -- carico
+          ( 15, 12, 10, 10.00, 0),     -- carico
+          ( 16, 16, 10, 10.00, 0),     -- carico
+          ( 17, 15, 10,  9.00, 0),     -- carico
+          ( 18, 20, 10, 22.00, 0),     -- carico
+          ( 19, 21, 10,  9.00, 0),     -- carico
+          ( 20, 22, 10, 10.00, 0),     -- carico
+          ( 21,  9, 10, 11.00, 0),     -- carico
+          ( 22, 18, 20, 28.00, 0),     -- carico
+          ( 23, 19, 20, 24.50, 0),     -- carico
+          ( 24, 23, 10, 16.00, 0),     -- carico
+          ( 25, 24, 30, 28.00, 0),     -- carico
+          ( 26, 25, 10, 38.00, 0),     -- carico
+          ( 27, 26, 10, 36.50, 0),     -- carico
+          ( 28, 27, 20, 20.50, 0),     -- carico
+          ( 29, 28, 10,  3.50, 0),     -- carico
+          ( 30, 29, 40,  7.00, 0),     -- carico
+          ( 31, 30, 10, 13.50, 0),     -- carico
+          ( 32, 31, 10,  0.50, 0),     -- carico
+          ( 33, 32, 10,  0.50, 0),     -- carico
+          ( 34, 33, 10,  7.50, 0),     -- carico
+          ( 35, 34, 10,  8.50, 0),     -- carico
+          ( 36, 35, 10, 15.15, 0),     -- carico
+          ( 37, 36, 10, 16.50, 0),     -- carico
+          ( 38, 37, 10,  9.15, 0),     -- carico
+          ( 39, 38, 10, 17.00, 0),     -- carico
+          ( 40, 39, 10,  4.50, 0),     -- carico
+          ( 41, 41, 10,  4.50, 0),     -- carico
+          ( 42, 42, 10,  4.50, 0),     -- carico
+          ( 43, 40, 10,  4.50, 0),     -- carico
+          ( 44, 45, 30,  4.00, 0),     -- carico
+          ( 45, 43, 10,  4.50, 0),     -- carico
+          ( 46, 44, 10,  4.50, 0),     -- carico
+          ( 47, 46, 10,  4.20, 0),     -- carico
+          ( 48, 49, 10, 14.50, 0),     -- carico
+          ( 49, 47, 10,  4.10, 0),     -- carico
+          ( 50, 50, 10, 17.50, 0),     -- carico
+          ( 51, 51, 10, 19.50, 0),     -- carico
+          ( 52, 52, 10,  8.50, 0),     -- carico
+          ( 53, 53, 10,  6.50, 0),     -- carico
+          ( 54, 22, 10, 450.0, 0);     -- carico     in magazzino tutti i prodotti messi in vendita
+
 INSERT INTO purchase_orders(id, date_purchase, total_amount, state, customer_id)
     VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 3),
           ( 2, '2018-10-10 00:00:00',  49.90, 'processato', 3),
           ( 3, '2018-10-10 00:00:00',  59.70, 'processato', 3),
           ( 4, '2018-10-10 00:00:00',  74.90, 'processato', 3),
-          ( 5, '2018-12-08 00:00:00', 246.60, 'processato', 1),
-          ( 6, '2018-10-10 00:00:00',  79.60, 'processato', 1),
-          ( 7, '2018-10-10 00:00:00',  39.80, 'processato', 1),
-          ( 8, '2018-10-10 00:00:00',  71.60, 'processato', 1),
-          ( 9, '2018-10-10 00:00:00', 109.20, 'processato', 2),
-          (10, '2018-12-08 00:00:00',  19.00, 'processato', 2);
+          ( 5, '2018-10-12 00:00:00', 246.60, 'processato', 1),
+          ( 6, '2018-10-13 00:00:00',  79.60, 'processato', 1),
+          ( 7, '2018-10-13 00:00:00',  39.80, 'processato', 1),
+          ( 8, '2018-10-13 00:00:00',  71.60, 'processato', 1),
+          ( 9, '2018-10-13 00:00:00', 109.20, 'processato', 2),
+          (10, '2018-10-14 00:00:00',  19.00, 'processato', 2),
+          (11, '2018-10-14 00:00:00',  79.60, 'processato', 1),
+          (12, '2018-10-14 00:00:00',  39.80, 'processato', 1),
+          (13, '2018-10-14 00:00:00',  71.60, 'processato', 1),
+          (14, '2018-10-14 00:00:00', 109.20, 'processato', 2),
+          (15, '2018-10-16 00:00:00',  19.00, 'processato', 2);
 
-INSERT INTO line_items(id, product_id, quantity, price, version)
-    VALUES(  1,  1, 1, 10.0, 0),     -- purchase_orders 1
-          (  2,  2, 2, 10.0, 0),     -- purchase_orders 1
-          (  3,  3, 2, 10.0, 0),     -- purchase_orders 1
-          (  4,  5, 1, 10.0, 0),     -- purchase_orders 2
-          (  5, 10, 3, 10.0, 0),     -- purchase_orders 3
-          (  6, 17, 1, 10.0, 0),     -- purchase_orders 4
-          (  7,  4, 1, 10.0, 0),     -- purchase_orders 4
-          (  8,  7, 2, 10.0, 0),     -- purchase_orders 5
-          (  9,  8, 1, 10.0, 0),     -- purchase_orders 5
-          ( 10, 13, 4, 10.0, 0),     -- purchase_orders 5
-          ( 11,  6, 1, 10.0, 0),     -- purchase_orders 6
-          ( 12,  9, 1, 10.0, 0),     -- purchase_orders 6
-          ( 13, 11, 1, 10.0, 0),     -- purchase_orders 7
-          ( 14, 14, 1, 10.0, 0),     -- purchase_orders 8
-          ( 15, 12, 1, 10.0, 0),     -- purchase_orders 8
-          ( 16, 16, 1, 10.0, 0),     -- purchase_orders 9
-          ( 17, 15, 1, 10.0, 0),     -- purchase_orders 9
-          ( 18, 20, 1, 10.0, 0),     -- purchase_orders 9
-          ( 19, 21, 1, 10.0, 0),     -- purchase_orders 9
-          ( 20, 22, 1, 10.0, 0),     -- purchase_orders 10
-          ( 21,  1, 1, 10.0, 0),     -- sales_orders 1
-          ( 22,  2, 2, 10.0, 0),     -- sales_orders 1
-          ( 23,  3, 2, 10.0, 0),     -- sales_orders 1
-          ( 24,  5, 1, 10.0, 0),     -- sales_orders 2
-          ( 25, 10, 3, 10.0, 0),     -- sales_orders 3
-          ( 26, 17, 1, 10.0, 0),     -- sales_orders 4
-          ( 27,  4, 1, 10.0, 0),     -- sales_orders 4
-          ( 28,  7, 2, 10.0, 0),     -- sales_orders 5
-          ( 29,  8, 1, 10.0, 0),     -- sales_orders 5
-          ( 30, 13, 4, 10.0, 0),     -- sales_orders 5
-          ( 31,  6, 1, 10.0, 0),     -- sales_orders 6
-          ( 32,  9, 1, 10.0, 0),     -- sales_orders 6
-          ( 33, 11, 1, 10.0, 0),     -- sales_orders 7
-          ( 34, 14, 1, 10.0, 0),     -- sales_orders 8
-          ( 35, 12, 1, 10.0, 0),     -- sales_orders 8
-          ( 36, 16, 1, 10.0, 0),     -- sales_orders 9
-          ( 37, 15, 1, 10.0, 0),     -- sales_orders 9
-          ( 38, 20, 1, 10.0, 0),     -- sales_orders 9
-          ( 39, 21, 1, 10.0, 0),     -- sales_orders 9
-          ( 40, 22, 1, 10.0, 0),     -- sales_orders 10
-          ( 41, 22, 1, 10.0, 0),     -- documentations 1
-          ( 42, 22, 1, 10.0, 0),     -- documentations 2
-          ( 43, 22, 1, 10.0, 0),     -- documentations 3
-          ( 44, 22, 1, 10.0, 0),     -- documentations 4
-          ( 45, 22, 1, 10.0, 0),     -- documentations 5
-          ( 46, 22, 1, 10.0, 0),     -- documentations 6
-          ( 47, 22, 1, 10.0, 0),     -- documentations 7
-          ( 48, 22, 1, 10.0, 0),     -- documentations 8
-          ( 49, 22, 1, 10.0, 0),     -- documentations 9
-          ( 50, 22, 1, 10.0, 0),     -- documentations 10
-          ( 51, 22, 1, 10.0, 0),     -- documentations 11
-          ( 52, 22, 1, 10.0, 0),     -- documentations 12
-          ( 53, 22, 1, 10.0, 0),     -- documentations 13
-          ( 54, 22, 1, 10.0, 0),     -- documentations 14
-          ( 55, 22, 1, 10.0, 0),     -- documentations 15
-          ( 56, 22, 1, 10.0, 0),     -- documentations 16
-          ( 57, 22, 1, 10.0, 0),     -- documentations 17
-          ( 58, 22, 1, 10.0, 0),     -- documentations 18
-          ( 59, 22, 1, 10.0, 0),     -- documentations 19
-          ( 60, 22, 1, 10.0, 0),     -- documentations 20
-          ( 61, 22, 1, 10.0, 0),     -- documentations 21
-          ( 62, 22, 1, 10.0, 0),     -- documentations 22
-          ( 63, 22, 1, 10.0, 0),     -- documentations 23
-          ( 64, 22, 1, 10.0, 0),     -- documentations 24
-          ( 65, 22, 1, 10.0, 0),     -- documentations 25
-          ( 66, 22, 1, 10.0, 0),     -- documentations 26
-          ( 67, 22, 1, 10.0, 0),     -- documentations 27
-          ( 68, 22, 1, 10.0, 0),     -- documentations 28
-          ( 69, 22, 1, 10.0, 0),     -- documentations 29
-          ( 70, 22, 1, 10.0, 0),     -- documentations 30
-          ( 71, 22, 1, 10.0, 0),     -- documentations 31
-          ( 72, 22, 1, 10.0, 0),     -- documentations 32
-          ( 73, 22, 1, 10.0, 0),     -- documentations 33
-          ( 74, 22, 1, 10.0, 0),     -- documentations 34
-          ( 75, 22, 1, 10.0, 0),     -- documentations 35
-          ( 76, 22, 1, 10.0, 0),     -- documentations 36
-          ( 77, 22, 1, 10.0, 0),     -- documentations 37
-          ( 78, 22, 1, 10.0, 0),     -- documentations 38
-          ( 79, 22, 1, 10.0, 0),     -- documentations 39
-          ( 80, 22, 1, 10.0, 0),     -- documentations 40
-          ( 81, 22, 1, 10.0, 0),     -- documentations 41
-          ( 82, 22, 1, 10.0, 0),     -- documentations 42
-          ( 83, 22, 1, 10.0, 0),     -- documentations 43
-          ( 84, 22, 1, 10.0, 0),     -- documentations 44
-          ( 85, 22, 1, 10.0, 0),     -- documentations 45
-          ( 86, 22, 1, 10.0, 0),     -- documentations 46
-          ( 87, 22, 1, 10.0, 0),     -- documentations 47
-          ( 88, 22, 1, 10.0, 0),     -- documentations 48
-          ( 89, 22, 1, 10.0, 0),     -- documentations 49
-          ( 90, 22, 1, 10.0, 0),     -- documentations 50
-          ( 91, 22, 1, 10.0, 0),     -- documentations 51
-          ( 92, 22, 1, 10.0, 0),     -- documentations 52
-          ( 93, 22, 1, 10.0, 0),     -- documentations 53
-          ( 94, 22, 1, 10.0, 0),     -- documentations 54
-          ( 95, 22, 1, 10.0, 0),     -- documentations 55
-          ( 96, 22, 1, 10.0, 0),     -- documentations 56
-          ( 97, 22, 1, 10.0, 0),     -- documentations 57
-          ( 98, 22, 1, 10.0, 0),     -- documentations 58
-          ( 99, 22, 1, 10.0, 0),     -- documentations 59
-          (100, 22, 1, 10.0, 0),     -- documentations 60
-          (101, 22, 1, 10.0, 0),     -- documentations 61
-          (102, 22, 1, 10.0, 0),     -- documentations 62
-          (103, 22, 1, 10.0, 0),     -- documentations 63
-          (104, 22, 1, 10.0, 0),     -- documentations 64
-          (105, 22, 1, 10.0, 0),     -- documentations 65
-          (106, 22, 1, 10.0, 0),     -- documentations 66
-          (107, 22, 1, 10.0, 0),     -- documentations 67
-          (108, 22, 1, 10.0, 0),     -- documentations 68
-          (109, 22, 1, 10.0, 0),     -- documentations 69
-          (110, 22, 1, 10.0, 0),     -- documentations 70
-          (111, 22, 1, 10.0, 0),     -- documentations 71
-          (112, 22, 1, 10.0, 0),     -- documentations 72
-          (113, 22, 1, 10.0, 0),     -- documentations 73
-          (114, 22, 1, 10.0, 0),     -- documentations 74
-          (115, 22, 1, 10.0, 0),     -- documentations 75
-          (116, 22, 1, 10.0, 0),     -- documentations 76
-          (117, 22, 1, 10.0, 0),     -- documentations 77
-          (118, 22, 1, 10.0, 0),     -- documentations 78
-          (119, 22, 1, 10.0, 0),     -- documentations 79
-          (120, 22, 1, 10.0, 0),     -- documentations 80
-          (121, 22, 1, 10.0, 0),     -- documentations 81
-          (122, 22, 1, 10.0, 0),     -- documentations 82
-          (123, 22, 1, 10.0, 0),     -- documentations 83
-          (124, 22, 1, 10.0, 0);     -- documentations 84
-
-INSERT INTO purchase_orders_lineitems(purchase_orders_id, line_items_line_item_id)
+INSERT INTO purchase_orders_line_items(purchase_orders_id, line_items_purchase_orders_id)
     VALUES ( 1,  1),
            ( 1,  2),
            ( 1,  3),
@@ -690,7 +966,83 @@ INSERT INTO purchase_orders_lineitems(purchase_orders_id, line_items_line_item_i
            ( 9, 17),
            ( 9, 18),
            ( 9, 19),
-           (10, 20);
+           (10, 20),
+           (10, 21),
+           (10, 22),
+           (10, 23),
+           (10, 24),
+           (11, 25),
+           (11, 26),
+           (11, 27),
+           (12, 28),
+           (12, 29),
+           (12, 30),
+           (12, 31),
+           (13, 32),
+           (13, 33),
+           (13, 34),
+           (14, 35),
+           (14, 36),
+           (14, 37),
+           (14, 38),
+           (15, 39),
+           (15, 40),
+           (15, 41),
+           (15, 42),
+           (15, 43),
+           (15, 44),
+           (15, 45),
+           (15, 46),
+           (15, 47),
+           (15, 48),
+           (15, 49),
+           (15, 50),
+           (15, 51),
+           (15, 52),
+           (15, 53),
+           (15, 54);
+
+INSERT INTO line_items_sales_orders(id, product_id, quantity, price, version)
+    VALUES(  1,  1, 10, 20.00, 0),     -- scarico
+          (  2,  2, 20, 30.00, 0),     -- scarico
+          (  3,  3, 20, 20.00, 0),     -- scarico
+          (  4,  5, 10, 35.00, 0),     -- scarico
+          (  5, 10, 30, 10.00, 0),     -- scarico
+          (  6, 17, 10, 15.00, 0),     -- scarico
+          (  7,  4, 10, 35.00, 0),     -- scarico
+          (  8,  7, 20, 10.00, 0),     -- scarico
+          (  9,  8, 10, 10.00, 0),     -- scarico
+          ( 10, 13, 40,  9.00, 0),     -- scarico
+          ( 11,  6, 10, 11.00, 0),     -- scarico
+          ( 12,  9, 10, 12.00, 0),     -- scarico
+          ( 13, 11, 10, 10.00, 0),     -- scarico
+          ( 14, 14, 10,  8.00, 0),     -- scarico
+          ( 15, 12, 10, 10.00, 0),     -- scarico
+          ( 16, 16, 10, 10.00, 0),     -- scarico
+          ( 17, 15, 10,  9.00, 0),     -- scarico
+          ( 18, 20, 10, 22.00, 0),     -- scarico
+          ( 19, 21, 10,  9.00, 0),     -- scarico
+          ( 20, 22, 10, 10.00, 0),     -- scarico
+          ( 21,  9, 10, 11.00, 0),     -- scarico
+          ( 22, 18, 20, 28.00, 0),     -- scarico
+          ( 23, 19, 20, 24.50, 0),     -- scarico
+          ( 24, 23, 10, 16.00, 0),     -- scarico
+          ( 25, 24, 30, 28.00, 0),     -- scarico
+          ( 26, 25, 10, 38.00, 0),     -- scarico
+          ( 27, 26, 10, 36.50, 0),     -- scarico
+          ( 28, 27, 20, 20.50, 0),     -- scarico
+          ( 29, 28, 10,  3.50, 0),     -- scarico
+          ( 30, 29, 40,  7.00, 0),     -- scarico
+          ( 31, 30, 10, 13.50, 0),     -- scarico
+          ( 32, 31, 10,  0.50, 0),     -- scarico
+          ( 33, 32, 10,  0.50, 0),     -- scarico
+          ( 34, 33, 10,  7.50, 0),     -- scarico
+          ( 35, 34, 10,  8.50, 0),     -- scarico
+          ( 36, 35, 10, 15.15, 0),     -- scarico
+          ( 37, 36, 10, 16.50, 0),     -- scarico
+          ( 38, 37, 10,  9.15, 0),     -- scarico
+          ( 39, 38, 10, 17.00, 0),     -- scarico
+          ( 40, 39, 10,  4.50, 0);     -- scarico
 
 INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id)
     VALUES( 1, '2018-10-10 00:00:00', 169.50, 'processato', 2),
@@ -704,7 +1056,7 @@ INSERT INTO sales_orders(id, date_sale, total_amount, state, supplier_id)
           ( 9, '2018-10-10 00:00:00', 109.20, 'processato', 2),
           (10, '2018-12-08 00:00:00',  19.00, 'processato', 2);
 
-INSERT INTO sales_orders_lineitems(sales_orders_id, line_items_line_item_id)
+INSERT INTO sales_orders_line_items(sales_orders_id, line_items_sales_order_id)
     VALUES(1,  21),
           (1,  22),
           (1,  23),
@@ -725,6 +1077,3 @@ INSERT INTO sales_orders_lineitems(sales_orders_id, line_items_line_item_id)
           (9,  38),
           (9,  39),
           (10, 40);
-
-INSERT INTO accounts(id, name, balance)
-    VALUES(1, 'eCompany', 100000);

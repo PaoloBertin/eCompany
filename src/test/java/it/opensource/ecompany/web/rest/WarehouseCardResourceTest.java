@@ -1,7 +1,7 @@
 package it.opensource.ecompany.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.opensource.ecompany.service.LineItemService;
+import it.opensource.ecompany.service.LineItemWarehouseCardService;
 import it.opensource.ecompany.service.WarehouseCardService;
 import it.opensource.ecompany.service.WarehouseService;
 import org.junit.jupiter.api.AfterEach;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @SpringBootTest
 class WarehouseCardResourceTest {
@@ -32,7 +34,7 @@ class WarehouseCardResourceTest {
     private WarehouseCardService warehouseCardService;
 
     @Autowired
-    private LineItemService lineItemService;
+    private LineItemWarehouseCardService lineItemWarehouseCardService;
 
     private static String asJsonString(final Object obj) {
 
@@ -54,7 +56,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -67,7 +69,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsBydWarehouseIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -80,7 +82,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsByWarehouseIdAndLineItemProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -93,7 +95,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByIdSuccessTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -105,7 +107,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByIdFailureTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -116,7 +118,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -130,7 +132,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseAndProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -145,7 +147,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardBetweenDateTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -162,7 +164,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardDateTest(@Autowired MockMvc mvc) throws Exception {
 

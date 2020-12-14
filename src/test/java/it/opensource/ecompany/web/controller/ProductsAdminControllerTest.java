@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -14,12 +15,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@ActiveProfiles("dbh2")
 @EnableWebMvc
 @AutoConfigureMockMvc
 @SpringBootTest
 class ProductsAdminControllerTest {
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -33,7 +35,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewProducstByCategoryByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -47,7 +49,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -60,7 +62,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void downloadPhotoTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -71,7 +73,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void searchProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -86,7 +88,7 @@ class ProductsAdminControllerTest {
         ;
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createProductSuccessTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -105,13 +107,13 @@ class ProductsAdminControllerTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createProductFailureTest(@Autowired MockMvc mvc) throws Exception {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void updateProductTest(@Autowired MockMvc mvc) throws Exception {
 

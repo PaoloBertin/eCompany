@@ -3,7 +3,6 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.WarehouseCard;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WarehouseCardService;
-import it.opensource.ecompany.service.dto.WareDto;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -21,6 +21,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("dbh2")
 @SpringBootTest
 class WarehouseCardServiceImplTest {
 
@@ -30,7 +31,8 @@ class WarehouseCardServiceImplTest {
     @Autowired
     private ProductsService productsService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Disabled
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsTest() {
 
@@ -40,7 +42,7 @@ class WarehouseCardServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsByWarehouseTest() {
 
@@ -51,9 +53,10 @@ class WarehouseCardServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Disabled
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getNumberWarehouseCardsByWarehouseIdAndLineItemProductIdTest() {
+    void getNumberWarehouseCardsByDocumentWarehouseIdAndDocumentLineItemProductIdTest() {
 
         Long warehouseId = 4L;
         Long productId = 22L;
@@ -65,7 +68,7 @@ class WarehouseCardServiceImplTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseByPageTest() {
 
@@ -80,7 +83,8 @@ class WarehouseCardServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Disabled
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardsByWarehouseIdAndProductCodeTest() {
 
@@ -96,8 +100,8 @@ class WarehouseCardServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Disabled
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardsByWarehouseIdAndProductIdTest() {
 
@@ -111,7 +115,8 @@ class WarehouseCardServiceImplTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Disabled
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardsByWarehouseIdAndProductIdByPage() {
 

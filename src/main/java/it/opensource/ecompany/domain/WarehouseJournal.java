@@ -15,7 +15,7 @@ public class WarehouseJournal implements Serializable {
 
     @JoinColumn(name = "documentation_id", foreignKey = @ForeignKey(name = "warehouse_journal_fk_01"))
     @OneToOne
-    private Documentation documentation;
+    private DocumentationWarehouseJournal documentationWarehouseJournal;
 
     @Version
     private Long version;
@@ -24,9 +24,9 @@ public class WarehouseJournal implements Serializable {
 
     }
 
-    public WarehouseJournal(Documentation documentation) {
+    public WarehouseJournal(DocumentationWarehouseJournal documentationWarehouseJournal) {
 
-        this.documentation = documentation;
+        this.documentationWarehouseJournal = documentationWarehouseJournal;
     }
 
     public Long getId() {
@@ -39,14 +39,14 @@ public class WarehouseJournal implements Serializable {
         this.id = id;
     }
 
-    public Documentation getDocumentation() {
+    public DocumentationWarehouseJournal getDocumentationWarehouseJournal() {
 
-        return documentation;
+        return documentationWarehouseJournal;
     }
 
-    public void setDocumentation(Documentation documentation) {
+    public void setDocumentationWarehouseJournal(DocumentationWarehouseJournal documentationWarehouseJournal) {
 
-        this.documentation = documentation;
+        this.documentationWarehouseJournal = documentationWarehouseJournal;
     }
 
     public Long getVersion() {

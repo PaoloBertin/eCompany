@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -17,11 +18,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @SpringBootTest
 class CategoryResourceTest {
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllCategoriesTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -30,7 +32,7 @@ class CategoryResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCategoryByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -41,7 +43,7 @@ class CategoryResourceTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void createCategoryTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -58,7 +60,7 @@ class CategoryResourceTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void deleteCategoryTest(@Autowired MockMvc mvc) throws Exception {
 

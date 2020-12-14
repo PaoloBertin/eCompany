@@ -14,8 +14,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
@@ -24,6 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("dbh2")
 @SpringBootTest
 public class ProductsServiceImplTest {
 
@@ -36,7 +37,7 @@ public class ProductsServiceImplTest {
     @Autowired
     private WarehouseService warehouseService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void equality_productsTest() {
 
@@ -46,7 +47,7 @@ public class ProductsServiceImplTest {
         assertThat(product2, equalTo(product1));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllProductsTest() {
 
@@ -57,7 +58,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllProductsByPageTest() {
 
@@ -72,7 +73,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByCategoryIdTest() {
 
@@ -83,7 +84,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByCategoryByPage() {
 
@@ -98,7 +99,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductById() {
 
@@ -110,7 +111,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getProductByProductCodeTest() {
 
@@ -120,7 +121,7 @@ public class ProductsServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByNameTest() {
 
@@ -133,7 +134,7 @@ public class ProductsServiceImplTest {
                            .getName(), equalTo("Da Visual Basic a Java"));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByNameContainingTest() {
 
@@ -146,7 +147,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByNameContainingByPageTest() {
 
@@ -161,7 +162,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void saveProductTest() {
 
@@ -180,7 +181,7 @@ public class ProductsServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void updateProductTest() {
 
@@ -200,7 +201,7 @@ public class ProductsServiceImplTest {
                                   .getName(), equalTo("Alice"));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Disabled
     @Test
     public void deleteProductTest() {

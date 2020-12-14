@@ -14,7 +14,7 @@ public class WarehouseJournalDto {
 
     //    private String nominativeCode;
 
-    //    private Documentation document;
+    //    private Documentation_ document;
 
     //    private Integer documentNumber;
 

@@ -30,11 +30,11 @@ public class SalesOrder {
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    @JoinTable(name = "sales_orders_lineitems",
+    @JoinTable(name = "sales_orders_line_items",
         joinColumns = @JoinColumn(name = "sales_orders_id"),
-        inverseJoinColumns = @JoinColumn(name = "line_items_line_item_id"))
+        inverseJoinColumns = @JoinColumn(name = "line_items_sales_order_id"))
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<LineItem> lineitems = new ArrayList<>();
+    private List<LineItemSalesOrder> lineItemSalesOrders = new ArrayList<>();
 
     @Version
     private Long version;
@@ -89,14 +89,14 @@ public class SalesOrder {
         this.supplier = supplier;
     }
 
-    public List<LineItem> getLineitems() {
+    public List<LineItemSalesOrder> getLineItemSalesOrders() {
 
-        return lineitems;
+        return lineItemSalesOrders;
     }
 
-    public void setLineitems(List<LineItem> lineitems) {
+    public void setLineItemSalesOrders(List<LineItemSalesOrder> lineItemSalesOrders) {
 
-        this.lineitems = lineitems;
+        this.lineItemSalesOrders = lineItemSalesOrders;
     }
 
     public Long getVersion() {

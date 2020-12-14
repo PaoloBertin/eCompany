@@ -5,21 +5,21 @@ import it.opensource.ecompany.service.WarehouseJournalService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("dbh2")
 @SpringBootTest
 class WarehouseJournalServiceImplTest {
 
     @Autowired
     private WarehouseJournalService warehouseJournalService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getAllWarehouseJurnalTest() {
 
@@ -29,19 +29,19 @@ class WarehouseJournalServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getAllWarehouseJournalByPageTest() {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getAllWarehouseJournalByDocumentDateBetweenTest() {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void testGetAllWarehouseJournalByDocumentDateBetweenTest() {
 

@@ -7,10 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@ActiveProfiles("dbh2")
 @SpringBootTest
 public class CustomersServiceImplTest {
 
@@ -20,7 +22,7 @@ public class CustomersServiceImplTest {
     @Autowired
     private CustomersService customersService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllCustomersTest() {
 
@@ -31,7 +33,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyAddress() {
 
@@ -43,7 +45,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyContact() {
 
@@ -55,7 +57,7 @@ public class CustomersServiceImplTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerTest() {
 
@@ -70,7 +72,7 @@ public class CustomersServiceImplTest {
     }
 
     @Disabled
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void verifyCustomerTest() {
 
@@ -81,7 +83,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isTrue();
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void notVerifyCustomerTest() {
 

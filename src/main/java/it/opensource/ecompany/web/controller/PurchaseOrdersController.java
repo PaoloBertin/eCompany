@@ -67,8 +67,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
 
         log.debug("visualizza ordine con id=" + purchaseOrder.getId());
-        log.debug("numero lineItem=" + purchaseOrder.getLineitems()
-                                                    .size());
+        log.debug("numero lineItem=" + purchaseOrder.getLineItemPurchaseOrders().size());
 
         return "purchaseorders/show";
     }

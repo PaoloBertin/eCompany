@@ -5,12 +5,14 @@ import it.opensource.ecompany.domain.Product;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.number.IsCloseTo.closeTo;
 
+@SpringBootTest
 class CartBeanTest {
 
     private Product  product1;

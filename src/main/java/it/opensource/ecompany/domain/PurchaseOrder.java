@@ -31,11 +31,11 @@ public class PurchaseOrder implements Serializable {
     @OneToOne
     private Customer customer;
 
-    @JoinTable(name = "purchase_orders_lineitems",
+    @JoinTable(name = "purchase_orders_line_items",
         joinColumns = @JoinColumn(name = "purchase_orders_id"),
-        inverseJoinColumns = @JoinColumn(name = "line_items_line_item_id"))
+        inverseJoinColumns = @JoinColumn(name = "line_items_purchase_orders_id"))
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<LineItem> lineitems = new ArrayList<>();
+    private List<LineItemPurchaseOrder> lineItemPurchaseOrders = new ArrayList<>();
 
     @Version
     private Long version;
@@ -90,14 +90,14 @@ public class PurchaseOrder implements Serializable {
         this.customer = customer;
     }
 
-    public List<LineItem> getLineitems() {
+    public List<LineItemPurchaseOrder> getLineItemPurchaseOrders() {
 
-        return lineitems;
+        return lineItemPurchaseOrders;
     }
 
-    public void setLineitems(List<LineItem> lineitems) {
+    public void setLineitems(List<LineItemPurchaseOrder> lineItemPurchaseOrders) {
 
-        this.lineitems = lineitems;
+        this.lineItemPurchaseOrders = lineItemPurchaseOrders;
     }
 
     public Long getVersion() {

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -17,6 +18,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @EnableWebMvc
 @SpringBootTest
@@ -25,7 +27,7 @@ public class PurchaseOrdersControllerTest {
     @Autowired
     private CartBean cartBean;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllPurchaseOrdersTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -33,7 +35,7 @@ public class PurchaseOrdersControllerTest {
                                                                        .roles("ADMIN")))
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-           .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(10)))
+           .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(15)))
            .andExpect(model().attribute("purchaseOrders", hasItem(hasProperty("totalAmount", equalTo(169.5)))))
            .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
            .andExpect(request().sessionAttribute("scopedTarget.cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
@@ -41,7 +43,7 @@ public class PurchaseOrdersControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getPurchaseOrderByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -54,19 +56,19 @@ public class PurchaseOrdersControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getPurchasePrdersByCustomerTest() {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewMovementsTest() {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void saveMovementTest(@Autowired MockMvc mvc) throws Exception {
 

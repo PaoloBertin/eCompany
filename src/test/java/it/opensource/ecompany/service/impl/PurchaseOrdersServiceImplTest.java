@@ -1,33 +1,35 @@
 package it.opensource.ecompany.service.impl;
 
 import it.opensource.ecompany.service.PurchaseOrdersService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-
+@ActiveProfiles("dbh2")
 @SpringBootTest
 class PurchaseOrdersServiceImplTest {
 
     @Autowired
     private PurchaseOrdersService purchaseOrdersService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllPurchaseOrdersTest() {
 
-        int expected = 10;
+        int expected = 15;
         int actual = purchaseOrdersService.getAllPurchaseOrders()
                                           .size();
 
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getPurchaseOrderByIdTest() {
 
@@ -38,18 +40,26 @@ class PurchaseOrdersServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getPurchaseOrderByCustomerIdTest() {
 
-        int expected = 2;
+        int expected = 4;
         int actual = purchaseOrdersService.getPurchaseOrderByCustomer(2L)
                                           .size();
 
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Disabled
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
+    @Test
+    public void updatePurchaseOrder() {
+
+    }
+
+    @Disabled
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void savePurchaseOrder() {
 

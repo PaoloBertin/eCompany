@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Table(name = "documentations")
+@Table(name = "documentations_warehouse_journal")
 @Entity
-public class Documentation implements Serializable {
+public class DocumentationWarehouseJournal implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,7 @@ public class Documentation implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "documentations_fk_01"))
+    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_journal_fk_01"))
     @ManyToOne
     private Warehouse warehouse;
 
@@ -35,9 +35,9 @@ public class Documentation implements Serializable {
     @Column(name = "document_number")
     private Long documentNumber;
 
-    @JoinColumn(name = "line_item_id")
+    @JoinColumn(name = "line_item_warehouse_journal_id")
     @OneToOne
-    private LineItem lineItem;
+    private LineItemWarehouseJournal lineItemWarehouseJournal;
 
     @Version
     private Long version;
@@ -102,14 +102,14 @@ public class Documentation implements Serializable {
         this.documentNumber = documentNumber;
     }
 
-    public LineItem getLineItem() {
+    public LineItemWarehouseJournal getLineItemWarehouseJournal() {
 
-        return lineItem;
+        return lineItemWarehouseJournal;
     }
 
-    public void setLineItem(LineItem lineItem) {
+    public void setLineItemWarehouseJournal(LineItemWarehouseJournal lineItemWarehouseJournal) {
 
-        this.lineItem = lineItem;
+        this.lineItemWarehouseJournal = lineItemWarehouseJournal;
     }
 
     public Long getVersion() {

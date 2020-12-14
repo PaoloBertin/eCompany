@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Table(name = "line_items")
+@Table(name = "line_items_sales_order")
 @Entity
-public class LineItem implements Serializable {
+public class LineItemSalesOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,11 +25,11 @@ public class LineItem implements Serializable {
     @Version
     private Long version;
 
-    public LineItem() {
+    public LineItemSalesOrder() {
 
     }
 
-    public LineItem(Product product, Double quantity) {
+    public LineItemSalesOrder(Product product, Double quantity) {
 
         this.product = product;
         this.quantity = quantity;
@@ -93,7 +93,7 @@ public class LineItem implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        LineItem other = (LineItem) obj;
+        LineItemSalesOrder other = (LineItemSalesOrder) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

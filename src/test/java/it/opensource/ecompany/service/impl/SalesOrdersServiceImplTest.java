@@ -5,6 +5,7 @@ import it.opensource.ecompany.service.SalesOrdersService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -12,13 +13,14 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@ActiveProfiles("dbh2")
 @SpringBootTest
 class SalesOrdersServiceImplTest {
 
     @Autowired
     private SalesOrdersService salesOrdersService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getAllSalesOrders() {
 

@@ -47,14 +47,14 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     @Override
     public Page<WarehouseJournal> getByWarehouseId(Long id, Pageable pageable) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseId(id, pageable);
+        return warehouseJournalRepository.findByDocumentationWarehouseJournalWarehouseId(id, pageable);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<WarehouseJournal> getByWarehouseName(String name, Pageable pageable) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseName(name, pageable);
+        return warehouseJournalRepository.findByDocumentationWarehouseJournalWarehouseName(name, pageable);
     }
 
     @Transactional(readOnly = true)
@@ -62,7 +62,8 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     public List<WarehouseJournal> getAllWarehouseJournalByDocumentDateBetween(Long warehouseId, LocalDate documentDateStart,
                                                                               LocalDate documentDateEnd) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseIdAndDocumentationDocumentDateBetween(warehouseId, documentDateStart, documentDateEnd);
+        return warehouseJournalRepository.findByDocumentationWarehouseJournalWarehouseIdAndDocumentationWarehouseJournalDocumentDateBetween(
+            warehouseId, documentDateStart, documentDateEnd);
     }
 
     @Transactional(readOnly = true)
@@ -70,8 +71,8 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     public Page<WarehouseJournal> getAllWarehouseJournalByDocumentDateBetween(Long warehouseId, LocalDate documentDateStart,
                                                                               LocalDate documentDateEnd, Pageable pageable) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseIdAndDocumentationDocumentDateBetween(warehouseId, documentDateStart, documentDateEnd,
-                                                                                  pageable);
+        return warehouseJournalRepository.findByDocumentationWarehouseJournalWarehouseIdAndDocumentationWarehouseJournalDocumentDateBetween(
+            warehouseId, documentDateStart, documentDateEnd, pageable);
     }
 
     @Override

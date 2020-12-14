@@ -33,7 +33,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Long getNumberWarehouseCardsBydWarehouseId(Long wareouseId) {
 
-        return warehouseCardRepository.countByDocumentationWarehouseId(wareouseId);
+        return warehouseCardRepository.countByDocumentationWarehouseCardWarehouseId(wareouseId);
 
     }
 
@@ -41,7 +41,14 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Long getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId) {
 
-        return warehouseCardRepository.countByDocumentationWarehouseIdAndDocumentationLineItemProductId(warehouseId, productId);
+        return warehouseCardRepository.countByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+            warehouseId, productId);
+    }
+
+    @Override
+    public Optional<WarehouseCard> getWarehouseCardById(Long warehouseCardId) {
+
+        return warehouseCardRepository.findById(warehouseCardId);
     }
 
     @Transactional(readOnly = true)
@@ -62,32 +69,29 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Page<WarehouseCard> getWarehouseCardsByWarehouseByPage(Long warehouseId, Pageable pageable) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseId(warehouseId, pageable);
+        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseId(warehouseId, pageable);
     }
 
     @Override
     public List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductId(Long warehouseId, Long productId) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductId(warehouseId, productId);
+        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+            warehouseId, productId);
     }
 
     @Override
     public Page<WarehouseCard> getByWarehouseIdAndProductIdByPage(Long warehouseId, Long productId, Pageable pageable) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductId(warehouseId, productId, pageable);
+        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+            warehouseId, productId, pageable);
     }
 
     @Override
     public Page<WarehouseCard> getByWarehouseIdAndProductIsbn(Long warehouseId, String productCode, Pageable pageable) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseIdAndDocumentationLineItemProductProductCode(warehouseId, productCode,
-                                                                                                                pageable);
+        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductProductCode(
+            warehouseId, productCode, pageable);
     }
 
-    @Override
-    public Optional<WarehouseCard> getWarehouseCardById(Long warehouseCardId) {
-
-        return warehouseCardRepository.findById(warehouseCardId);
-    }
 
 }

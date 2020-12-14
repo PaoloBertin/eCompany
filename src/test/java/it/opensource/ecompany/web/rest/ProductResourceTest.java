@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @SpringBootTest
 class ProductResourceTest {
@@ -31,7 +33,7 @@ class ProductResourceTest {
     @Autowired
     private ProductsService productsService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -42,7 +44,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getProductsByCategory1ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -53,7 +55,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getProductsByCategory6ByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -65,7 +67,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -74,7 +76,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -83,7 +85,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -103,7 +105,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void updateProductTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -120,7 +122,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void searchProducTest(@Autowired MockMvc mvc) throws Exception {
 

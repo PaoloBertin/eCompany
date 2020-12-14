@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -20,6 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @SpringBootTest
 class WarehouseResourceTest {
@@ -27,7 +29,7 @@ class WarehouseResourceTest {
     @Autowired
     private WarehouseService warehouseService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewAllWarehouseByPageTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -38,7 +40,7 @@ class WarehouseResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseByIdTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -50,7 +52,7 @@ class WarehouseResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseByNameTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -62,7 +64,7 @@ class WarehouseResourceTest {
            .andExpect(status().isOk());
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createWarehouseTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -84,7 +86,7 @@ class WarehouseResourceTest {
         assertEquals(expected, actual);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void updateWarehouseTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -113,7 +115,7 @@ class WarehouseResourceTest {
 
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void deleteWarehouseTest(@Autowired MockMvc mvc) throws Exception {
 

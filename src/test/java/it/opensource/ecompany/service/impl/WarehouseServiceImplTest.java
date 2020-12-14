@@ -9,19 +9,21 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("dbh2")
 @SpringBootTest()
 class WarehouseServiceImplTest {
 
     @Autowired
     private WarehouseService warehouseService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseNumber() {
 
@@ -30,7 +32,7 @@ class WarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllWarehousesByPage() {
 
@@ -43,7 +45,7 @@ class WarehouseServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getWarehouseById() {
 
@@ -54,7 +56,7 @@ class WarehouseServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getWarehouseByName() {
 

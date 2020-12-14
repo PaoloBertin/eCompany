@@ -11,18 +11,19 @@ import java.util.List;
 @Repository
 public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Long> {
 
-    long countByDocumentationWarehouseId(Long warehouseId);
+    long countByDocumentationWarehouseCardWarehouseId(Long warehouseId);
 
-    long countByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId);
+    long countByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(Long warehouseId, Long productId);
 
-    Page<WarehouseCard> findByDocumentationWarehouseId(Long warehouseId, Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseId(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId);
+    List<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+        Long warehouseId, Long productId);
 
-    Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductProductCode(Long warehouseId, String productCode,
-                                                                                                 Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductProductCode(
+        Long warehouseId, String productCode, Pageable pageable);
 
-    Page<WarehouseCard> findByDocumentationWarehouseIdAndDocumentationLineItemProductId(Long warehouseId, Long productId,
-                                                                                        Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+        Long warehouseId, Long productId, Pageable pageable);
 
 }

@@ -4,19 +4,21 @@ import it.opensource.ecompany.service.PriceListsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@ActiveProfiles("dbh2")
 @SpringBootTest
 class PriceListsServiceImplTest {
 
     @Autowired
     private PriceListsService priceListsService;
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getPriceListByIdTest() {
 
@@ -29,7 +31,7 @@ class PriceListsServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Sql({"/schema-h2.sql", "/data-h2.sql"})
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getPriceByProductCode() {
 
