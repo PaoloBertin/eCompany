@@ -14,7 +14,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -31,10 +30,20 @@ public class ProductsServiceImplTest {
     private CategoriesService categoriesService;
 
     @Autowired
-    private ProductsService   productsService;
+    private ProductsService productsService;
 
     @Autowired
     private WarehouseService warehouseService;
+
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
+    @Test
+    void getNumberProducts() {
+
+        long expected = 54;
+        long actual = productsService.getNumberProducts();
+
+        assertEquals(expected, actual);
+    }
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
