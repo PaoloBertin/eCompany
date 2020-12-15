@@ -7,6 +7,8 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WarehouseService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
@@ -37,10 +39,27 @@ public class ProductsServiceImplTest {
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getNumberProducts() {
+    void getNumberProductsTest() {
 
         long expected = 54;
         long actual = productsService.getNumberProducts();
+
+        assertEquals(expected, actual);
+    }
+
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
+    @ParameterizedTest
+    @CsvSource({
+        "1, 21",
+        "2, 11",
+        "3, 12",
+        "4,  7",
+        "5,  1",
+        "6,  2"
+    })
+    void getNumberProductsByCategory(long categoryId, long expected) {
+
+        long actual = productsService.getNumberProductsByCategory(categoryId);
 
         assertEquals(expected, actual);
     }

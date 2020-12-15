@@ -32,7 +32,7 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public Long getNumberProductsByCategory(Long categoryId) {
 
-        return null;
+        return productsRepository.countByCategoryId(categoryId);
     }
 
     @Transactional(readOnly = true)
