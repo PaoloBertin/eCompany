@@ -15,8 +15,13 @@ import java.util.List;
 @Service("productsService")
 public class ProductsServiceImpl implements ProductsService {
 
-    @Autowired
-    private ProductsRepository productsRepository;
+
+    private final ProductsRepository productsRepository;
+
+    public ProductsServiceImpl(ProductsRepository productsRepository) {
+
+        this.productsRepository = productsRepository;
+    }
 
     @Override
     public Long getNumberProducts() {
