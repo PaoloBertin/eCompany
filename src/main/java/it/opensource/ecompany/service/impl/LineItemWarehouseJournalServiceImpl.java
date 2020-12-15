@@ -18,6 +18,18 @@ public class LineItemWarehouseJournalServiceImpl implements LineItemWarehouseJou
     }
 
     @Override
+    public Long getNumberLineItemWarehouseJournal() {
+
+        return lineItemWarehouseJournalRepository.count();
+    }
+
+    @Override
+    public Long getNumberLineItemWarehouseJournalByProduct(Long productId) {
+
+        return lineItemWarehouseJournalRepository.countByProductId(productId);
+    }
+
+    @Override
     public Optional<LineItemWarehouseJournal> getLineItemWarehouseJournalById(Long lineItemWarehouseJournalId) {
 
         return lineItemWarehouseJournalRepository.findById(lineItemWarehouseJournalId);

@@ -77,7 +77,7 @@ class WarehouseCardServiceImplTest {
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
-    @CsvSource({"1, 8883780450, 1", "2, 8883780450, 1", "3, 8883780450, 1", "4, 8883780450, 1", "5, 8883780450, 1",})
+    @CsvSource({"1, 8883780450, 1", "2, 8883780450, 1", "3, 8883780450, 1", "4, 8883780450, 1", "5, 8883780450, 1"})
     void getWarehouseCardsByWarehouseIdAndProductCodeTest(long warehouseId, String productCode, long expected) {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));

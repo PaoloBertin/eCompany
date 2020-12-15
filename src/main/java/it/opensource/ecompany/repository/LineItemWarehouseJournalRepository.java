@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LineItemWarehouseJournalRepository extends JpaRepository<LineItemWarehouseJournal, Long> {
 
+    long countByProductId(Long productId);
 }
