@@ -6,7 +6,7 @@ import it.opensource.ecompany.domain.Customer;
 
 public interface CustomersService {
 
-    public List<Customer> getAll();
+    public List<Customer> getAllCustomers();
 
     public Customer getCustomerById(Long customerId);
 

@@ -7,8 +7,16 @@ import org.springframework.test.context.junit.jupiter.EnabledIf;
 @SpringBootTest
 public class EcompanyApplicationTest {
 
-    @Test
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
-    public void contextLoads() throws Exception {
+    @Test
+    public void contextLoadsH2() throws Exception {
+
     }
+
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
+    @Test
+    public void contextLoadsMySQL() throws Exception {
+
+    }
+
 }

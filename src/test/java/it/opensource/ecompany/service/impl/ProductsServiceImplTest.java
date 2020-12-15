@@ -24,7 +24,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ActiveProfiles("dbh2")
 @SpringBootTest
 public class ProductsServiceImplTest {
 

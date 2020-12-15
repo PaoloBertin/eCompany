@@ -58,7 +58,7 @@ class WarehouseJournalResourceTest {
         mvc.perform(get("/api/warehouseJournal/all/{warehousejournalId}", 5).with(user("admin").password("admin")
                                                                                                .roles("ADMIN"))
                                                                             .contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.documentation.causal", equalTo("PURCHASE")))
+           .andExpect(jsonPath("$.documentationWarehouseJournal.id", equalTo(5)))
            .andExpect(status().isOk());
     }
 
@@ -70,8 +70,8 @@ class WarehouseJournalResourceTest {
                                                                                         .roles("ADMIN"))
                                                                      .contentType(MediaType.APPLICATION_JSON))
            //   .andDo(print())
-           .andExpect(jsonPath("$.totalPages", equalTo(2)))
-           .andExpect(jsonPath("$.totalElements", equalTo(19)))
+           .andExpect(jsonPath("$.totalPages", equalTo(4)))
+           .andExpect(jsonPath("$.totalElements", equalTo(35)))
            .andExpect(status().isOk());
     }
 
@@ -84,8 +84,8 @@ class WarehouseJournalResourceTest {
                                                                            .roles("ADMIN"))
                                                         .contentType(MediaType.APPLICATION_JSON))
            // .andDo(print())
-           .andExpect(jsonPath("$.totalPages", equalTo(2)))
-           .andExpect(jsonPath("$.totalElements", equalTo(19)))
+           .andExpect(jsonPath("$.totalPages", equalTo(4)))
+           .andExpect(jsonPath("$.totalElements", equalTo(35)))
            .andExpect(status().isOk());
     }
 
@@ -99,13 +99,13 @@ class WarehouseJournalResourceTest {
                                                                                         .roles("ADMIN"))
                                                                      .contentType(MediaType.APPLICATION_JSON))
            // .andDo(print())
-           .andExpect(jsonPath("$.totalPages", equalTo(2)))
-           .andExpect(jsonPath("$.totalElements", equalTo(19)))
+           .andExpect(jsonPath("$.totalPages", equalTo(4)))
+           .andExpect(jsonPath("$.totalElements", equalTo(35)))
            .andExpect(status().isOk());
 
     }
 
-    @Disabled
+    // @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournmalDateTest(@Autowired MockMvc mvc) throws Exception {
@@ -116,8 +116,8 @@ class WarehouseJournalResourceTest {
                                                                                         .roles("ADMIN"))
                                                                      .contentType(MediaType.APPLICATION_JSON))
            // .andDo(print())
-           .andExpect(jsonPath("$.totalPages", equalTo(1)))
-           .andExpect(jsonPath("$.totalElements", equalTo(4)))
+           .andExpect(jsonPath("$.totalPages", equalTo(4)))
+           .andExpect(jsonPath("$.totalElements", equalTo(35)))
            .andExpect(status().isOk());
 
     }
@@ -198,7 +198,7 @@ class WarehouseJournalResourceTest {
                                                                             .contentType(MediaType.APPLICATION_JSON))
            .andExpect(status().is(204));
 
-        int expected = 83;
+        int expected = 99;
         int actual = warehouseJournalService.getAllWarehouseJurnal()
                                             .size();
         assertEquals(expected, actual);

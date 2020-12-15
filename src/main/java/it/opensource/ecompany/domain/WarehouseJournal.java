@@ -13,7 +13,7 @@ public class WarehouseJournal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "documentation_id", foreignKey = @ForeignKey(name = "warehouse_journal_fk_01"))
+    @JoinColumn(name = "documentation_warehouse_journal_id", foreignKey = @ForeignKey(name = "warehouse_journal_fk_01"))
     @OneToOne
     private DocumentationWarehouseJournal documentationWarehouseJournal;
 

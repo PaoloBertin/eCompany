@@ -11,7 +11,6 @@ import org.springframework.test.context.jdbc.Sql;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-@ActiveProfiles("dbh2")
 @SpringBootTest
 class PurchaseOrdersServiceImplTest {
 

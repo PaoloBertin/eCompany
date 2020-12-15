@@ -8,6 +8,10 @@ import org.springframework.data.domain.Pageable;
 
 public interface ProductsService {
 
+    Long getNumberProducts();
+
+    Long getNumberProductsByCategory(Long categoryId);
+
     List<Product> getAllProducts();
 
     Page<Product> getAllProductsByPage(Pageable pageable);

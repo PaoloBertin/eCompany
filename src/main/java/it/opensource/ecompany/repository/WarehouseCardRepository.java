@@ -1,5 +1,6 @@
 package it.opensource.ecompany.repository;
 
+import it.opensource.ecompany.domain.DocumentationWarehouseCard;
 import it.opensource.ecompany.domain.WarehouseCard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

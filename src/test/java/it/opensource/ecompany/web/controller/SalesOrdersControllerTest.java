@@ -1,6 +1,7 @@
 package it.opensource.ecompany.web.controller;
 
 import org.hamcrest.collection.IsCollectionWithSize;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -31,6 +32,7 @@ class SalesOrdersControllerTest {
            .andExpect(model().attribute("salesOrders", IsCollectionWithSize.hasSize(10)));
     }
 
+    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getPurchaseOrderById(@Autowired MockMvc mvc) throws Exception {

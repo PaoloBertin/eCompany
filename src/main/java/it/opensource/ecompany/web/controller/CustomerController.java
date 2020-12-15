@@ -112,7 +112,7 @@ public class CustomerController {
     @GetMapping("/admin/customers")
     public String viewAllCustomers(Model uiModel) {
 
-        List<Customer> customers = customersService.getAll();
+        List<Customer> customers = customersService.getAllCustomers();
         uiModel.addAttribute("customers", customers);
         uiModel.addAttribute("customerForm", new CustomerForm());
 
@@ -127,7 +127,7 @@ public class CustomerController {
         CustomerForm customerForm = new CustomerForm();
         customerForm.setCustomer(customer);
 
-        List<Customer> customers = customersService.getAll();
+        List<Customer> customers = customersService.getAllCustomers();
 
         uiModel.addAttribute("customers", customers);
         uiModel.addAttribute("customerForm", customerForm);

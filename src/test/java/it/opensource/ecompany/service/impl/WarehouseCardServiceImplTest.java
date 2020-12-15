@@ -3,15 +3,15 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.WarehouseCard;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WarehouseCardService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
@@ -21,7 +21,6 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ActiveProfiles("dbh2")
 @SpringBootTest
 class WarehouseCardServiceImplTest {
 
@@ -31,104 +30,86 @@ class WarehouseCardServiceImplTest {
     @Autowired
     private ProductsService productsService;
 
-    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsTest() {
 
-        Long expected = 84L;
+        Long expected = 100L;
         Long actual = warehouseCardService.getNumberWarehouseCards();
 
         assertEquals(expected, actual);
     }
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @Test
-    void getNumberWarehouseCardsByWarehouseTest() {
+    @ParameterizedTest
+    @CsvSource({"1, 25", "2, 10", "3, 30", "4, 35", "5,  0"})
+    void getNumberWarehouseCardsByWarehouseTest(long warehouseId, long expected) {
 
-        Long warehouseId = 4L;
-        Long expected = 19L;
         Long actual = warehouseCardService.getNumberWarehouseCardsBydWarehouseId(warehouseId);
 
-        assertThat(actual, equalTo(expected));
+        assertEquals(expected, actual);
     }
 
-    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @Test
-    void getNumberWarehouseCardsByDocumentWarehouseIdAndDocumentLineItemProductIdTest() {
+    @ParameterizedTest
+    @CsvSource({"1, 25,  0"})
+    void getNumberWarehouseCardsByDocumentWarehouseIdAndDocumentLineItemProductIdTest(Long warehouseId, Long productId, Long expected) {
 
-        Long warehouseId = 4L;
-        Long productId = 22L;
 
-        Long expected = 19L;
         Long actual = warehouseCardService.getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(warehouseId, productId);
 
-        assertThat(actual, is(expected));
+        assertEquals(expected, actual);
 
     }
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @Test
-    void getWarehouseCardByWarehouseByPageTest() {
+    @ParameterizedTest
+    @CsvSource({"1, 25", "2, 25", "3, 25", "4, 25", "5, 25",})
+    void getWarehouseCardByWarehouseByPageTest(Long warehouseId, Long expected) {
 
-        Long warehouseId = 1L;
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-
         Page<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseByPage(warehouseId, pageable);
 
-        long expected = 25;
         long actual = warehouseCards.getTotalElements();
 
         assertThat(actual, equalTo(expected));
     }
 
-    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @Test
-    void getWarehouseCardsByWarehouseIdAndProductCodeTest() {
+    @ParameterizedTest
+    @CsvSource({"1, 8883780450, 1", "2, 8883780450, 1", "3, 8883780450, 1", "4, 8883780450, 1", "5, 8883780450, 1",})
+    void getWarehouseCardsByWarehouseIdAndProductCodeTest(long warehouseId, String productCode, long expected) {
 
-        Long warehouseId = 1L;
-        String productCode = "8883780450";
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-
         Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIsbn(warehouseId, productCode, pageable);
 
-        long expected = 2;
         long actual = warehouseCards.getTotalElements();
 
-        assertThat(actual, equalTo(expected));
+        assertEquals(expected, actual);
     }
 
-    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @Test
-    void getWarehouseCardsByWarehouseIdAndProductIdTest() {
+    @ParameterizedTest
+    @CsvSource({"1, 25,  0"})
+    void getWarehouseCardsByWarehouseIdAndProductIdTest(long warehouseId, long productId, long expected) {
 
-        Long warehouseId = 1L;
-        Long productId = 1L;
         List<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseIdAndProductId(warehouseId, productId);
 
-        long expected = 2;
         long actual = warehouseCards.size();
-        assertThat(actual, is(expected));
+        assertEquals(expected, actual);
 
     }
 
-    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @Test
-    void getWarehouseCardsByWarehouseIdAndProductIdByPage() {
+    @ParameterizedTest
+    @CsvSource({"1, 25,  0"})
+    void getWarehouseCardsByWarehouseIdAndProductIdByPage(long warehouseId, long productId, long expected) {
 
-        Long warehouseId = 1L;
-        Long productId = 1L;
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-
         Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIdByPage(warehouseId, productId, pageable);
 
-        long expected = 2;
         long actual = warehouseCards.getTotalElements();
-        assertThat(actual, is(expected));
+        assertEquals(expected, actual);
 
     }
 

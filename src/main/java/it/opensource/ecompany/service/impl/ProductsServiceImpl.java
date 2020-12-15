@@ -18,6 +18,18 @@ public class ProductsServiceImpl implements ProductsService {
     @Autowired
     private ProductsRepository productsRepository;
 
+    @Override
+    public Long getNumberProducts() {
+
+        return productsRepository.count();
+    }
+
+    @Override
+    public Long getNumberProductsByCategory(Long categoryId) {
+
+        return null;
+    }
+
     @Transactional(readOnly = true)
     @Override
     public List<Product> getAllProducts() {

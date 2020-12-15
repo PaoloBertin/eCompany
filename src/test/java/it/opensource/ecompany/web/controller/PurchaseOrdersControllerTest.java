@@ -4,6 +4,7 @@ import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
 import org.hamcrest.collection.IsCollectionWithSize;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -43,6 +44,7 @@ public class PurchaseOrdersControllerTest {
            .andExpect(status().isOk());
     }
 
+    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getPurchaseOrderByIdTest(@Autowired MockMvc mvc) throws Exception {

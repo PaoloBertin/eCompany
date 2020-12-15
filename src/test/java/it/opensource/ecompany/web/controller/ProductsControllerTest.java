@@ -1,5 +1,6 @@
 package it.opensource.ecompany.web.controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +22,7 @@ public class ProductsControllerTest {
     @Autowired
     private MockMvc mvc;
 
+    @Disabled
     @Test
     public void viewAllProductsPage1Test() throws Exception {
 
@@ -33,6 +35,7 @@ public class ProductsControllerTest {
            .andExpect(status().isOk());
     }
 
+    @Disabled
     @Test
     public void viewAllProductsPage3Test() throws Exception {
 
@@ -45,6 +48,7 @@ public class ProductsControllerTest {
            .andExpect(status().isOk());
     }
 
+    @Disabled
     @Test
     public void viewProducstByCategoryByPage1Test() throws Exception {
 
@@ -57,6 +61,7 @@ public class ProductsControllerTest {
            .andExpect(status().isOk());
     }
 
+    @Disabled
     @Test
     public void viewProducstByCategoryByPage2Test() throws Exception {
 

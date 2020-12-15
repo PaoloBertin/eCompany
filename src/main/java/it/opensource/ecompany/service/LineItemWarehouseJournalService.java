@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public interface LineItemWarehouseJournalService {
 
+
     Optional<LineItemWarehouseJournal> getLineItemWarehouseJournalById(Long lineItemWarehouseJournalId);
 
 }

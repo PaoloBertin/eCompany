@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ActiveProfiles("dbh2")
 @SpringBootTest
@@ -27,9 +28,8 @@ public class CustomersServiceImplTest {
     public void getAllCustomersTest() {
 
         int expected = 5;
-        int actual = customersService.getAll()
+        int actual = customersService.getAllCustomers()
                                      .size();
-
         assertThat(actual).isEqualTo(expected);
     }
 
@@ -59,13 +59,14 @@ public class CustomersServiceImplTest {
     @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getCustomerTest() {
+    public void getCustomerByUsernameAndPasswordTest() {
 
         String username = "mario.rossi";
-        String password = "user";
+        // String password = "user";
+        String encodedPassword = passwordEncoder.encode("user");
 
         String expected = "mario.rossi";
-        Customer actual = customersService.getCustomerByUsernameAndPassword(username, password);
+        Customer actual = customersService.getCustomerByUsernameAndPassword(username, encodedPassword);
 
         assertThat(actual).isEqualTo(expected);
 

@@ -35,7 +35,7 @@ public class DocumentationWarehouseCard implements Serializable {
     @Column(name = "document_number")
     private Long documentNumber;
 
-    @JoinColumn(name = "line_item_warehouse_card_id")
+    @JoinColumn(name = "line_item_warehouse_card_id", foreignKey = @ForeignKey(name = "documentations_warehouse_card_fk_02"))
     @OneToOne
     private LineItemWarehouseCard lineItemWarehouseCard;
 

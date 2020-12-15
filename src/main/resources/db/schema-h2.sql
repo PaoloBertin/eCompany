@@ -235,12 +235,13 @@ CREATE TABLE IF NOT EXISTS documentations_warehouse_card(
     document VARCHAR(25) NOT NULL,
     document_date DATE NOT NULL,
     document_number BIGINT NOT NULL,
-    line_item_id BIGINT NOT NULL,
+    line_item_warehouse_card_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT documentations_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id)
+    CONSTRAINT documentations_warehouse_card_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id),
+    CONSTRAINT documentations_warehouse_card_fk_02 FOREIGN KEY(line_item_warehouse_card_id) REFERENCES line_items_warehouse_card(id)
 );
 
 CREATE TABLE IF NOT EXISTS warehouse_card_products (
