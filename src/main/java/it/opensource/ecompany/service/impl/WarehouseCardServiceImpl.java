@@ -41,7 +41,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Long getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId) {
 
-        return warehouseCardRepository.countByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+        return warehouseCardRepository.countByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(
             warehouseId, productId);
     }
 
@@ -75,21 +75,21 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductId(Long warehouseId, Long productId) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(
             warehouseId, productId);
     }
 
     @Override
     public Page<WarehouseCard> getByWarehouseIdAndProductIdByPage(Long warehouseId, Long productId, Pageable pageable) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
+        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(
             warehouseId, productId, pageable);
     }
 
     @Override
     public Page<WarehouseCard> getByWarehouseIdAndProductIsbn(Long warehouseId, String productCode, Pageable pageable) {
 
-        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductProductCode(
+        return warehouseCardRepository.findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductProductCode(
             warehouseId, productCode, pageable);
     }
 

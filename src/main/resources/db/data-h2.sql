@@ -202,7 +202,7 @@ INSERT INTO warehouses(id, name, version)
           ( 4, 'magazzino04',  0),
           ( 5, 'magazzino05',  0);
 
-INSERT INTO line_items_warehouse_journal(id, product_id, quantity, price, version)
+INSERT INTO line_items_warehouse(id, product_id, quantity, price, version)
     VALUES(  1,  1, 10, 20.00, 0),     -- carico
           (  2,  2, 20, 30.00, 0),     -- carico
           (  3,  3, 20, 20.00, 0),     -- carico
@@ -304,7 +304,7 @@ INSERT INTO line_items_warehouse_journal(id, product_id, quantity, price, versio
           ( 99, 22,  1,  10.0, 0),     -- carico
           (100, 22,  1,  10.0, 0);     -- scarico
 
-INSERT INTO documentations_warehouse_journal(id, warehouse_id, causal, document, document_date, document_number, line_item_warehouse_journal_id, version)
+INSERT INTO documentations_warehouse_journal(id, warehouse_id, causal, document, document_date, document_number, line_item_warehouse_id, version)
     VALUES (  1,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  10,   1, 0),
            (  2,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  22,   2, 0),
            (  3,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-10',  11,   3, 0),
@@ -564,109 +564,7 @@ INSERT INTO warehouse_card_products(id, product_code, sku, reorder_quantity, uni
           (53,  53, '8001097210435',  5, 'pz', 'T004', 'D0007', 0),
           (54,  54, '8001097210435',  5, 'pz', 'T004', 'D0008', 0);
 
-INSERT INTO line_items_warehouse_card(id, product_id, quantity, price, version)
-    VALUES(  1,  1, 10, 20.00, 0),     -- carico
-          (  2,  2, 20, 30.00, 0),     -- carico
-          (  3,  3, 20, 20.00, 0),     -- carico
-          (  4,  5, 10, 35.00, 0),     -- carico
-          (  5, 10, 30, 10.00, 0),     -- carico
-          (  6, 17, 10, 15.00, 0),     -- carico
-          (  7,  4, 10, 35.00, 0),     -- carico
-          (  8,  7, 20, 10.00, 0),     -- carico
-          (  9,  8, 10, 10.00, 0),     -- carico
-          ( 10, 13, 40,  9.00, 0),     -- carico
-          ( 11,  6, 10, 11.00, 0),     -- carico
-          ( 12,  9, 10, 12.00, 0),     -- carico
-          ( 13, 11, 10, 10.00, 0),     -- carico
-          ( 14, 14, 10,  8.00, 0),     -- carico
-          ( 15, 12, 10, 10.00, 0),     -- carico
-          ( 16, 16, 10, 10.00, 0),     -- carico
-          ( 17, 15, 10,  9.00, 0),     -- carico
-          ( 18, 20, 10, 22.00, 0),     -- carico
-          ( 19, 21, 10,  9.00, 0),     -- carico
-          ( 20, 22, 10, 10.00, 0),     -- carico
-          ( 21,  9, 10, 11.00, 0),     -- carico
-          ( 22, 18, 20, 28.00, 0),     -- carico
-          ( 23, 19, 20, 24.50, 0),     -- carico
-          ( 24, 23, 10, 16.00, 0),     -- carico
-          ( 25, 24, 30, 28.00, 0),     -- carico
-          ( 26, 25, 10, 38.00, 0),     -- carico
-          ( 27, 26, 10, 36.50, 0),     -- carico
-          ( 28, 27, 20, 20.50, 0),     -- carico
-          ( 29, 28, 10,  3.50, 0),     -- carico
-          ( 30, 29, 40,  7.00, 0),     -- carico
-          ( 31, 30, 10, 13.50, 0),     -- carico
-          ( 32, 31, 10,  0.50, 0),     -- carico
-          ( 33, 32, 10,  0.50, 0),     -- carico
-          ( 34, 33, 10,  7.50, 0),     -- carico
-          ( 35, 34, 10,  8.50, 0),     -- carico
-          ( 36, 35, 10, 15.15, 0),     -- carico
-          ( 37, 36, 10, 16.50, 0),     -- carico
-          ( 38, 37, 10,  9.15, 0),     -- carico
-          ( 39, 38, 10, 17.00, 0),     -- carico
-          ( 40, 39, 10,  4.50, 0),     -- carico
-          ( 41, 41, 10,  4.50, 0),     -- carico
-          ( 42, 42, 10,  4.50, 0),     -- carico
-          ( 43, 40, 10,  4.50, 0),     -- carico
-          ( 44, 45, 30,  4.00, 0),     -- carico
-          ( 45, 43, 10,  4.50, 0),     -- carico
-          ( 46, 44, 10,  4.50, 0),     -- carico
-          ( 47, 46, 10,  4.20, 0),     -- carico
-          ( 48, 49, 10, 14.50, 0),     -- carico
-          ( 49, 47, 10,  4.10, 0),     -- carico
-          ( 50, 50, 10, 17.50, 0),     -- carico
-          ( 51, 51, 10, 19.50, 0),     -- carico
-          ( 52, 52, 10,  8.50, 0),     -- carico
-          ( 53, 53, 10,  6.50, 0),     -- carico
-          ( 54, 22, 10, 450.0, 0),     -- carico     in magazzino tutti i prodotti messi in vendita
-          ( 55, 22,  1,  10.0, 0),     -- scarico
-          ( 56, 22,  1,  10.0, 0),     -- scarico
-          ( 57, 22,  1,  10.0, 0),     -- scarico
-          ( 58, 22,  1,  10.0, 0),     -- carico
-          ( 59, 22,  1,  10.0, 0),     -- scarico
-          ( 60, 22,  1,  10.0, 0),     -- scarico
-          ( 61, 22,  1,  10.0, 0),     -- scarico
-          ( 62, 22,  1,  10.0, 0),     -- carico
-          ( 63, 22,  1,  10.0, 0),     -- carico
-          ( 64, 22,  1,  10.0, 0),     -- scarico
-          ( 65, 22,  1,  10.0, 0),     -- scarico
-          ( 66,  1,  1,  10.0, 0),     -- scarico
-          ( 67, 22,  1,  10.0, 0),     -- carico
-          ( 68, 22,  1,  10.0, 0),     -- scarico
-          ( 69, 22,  1,  10.0, 0),     -- scarico
-          ( 70, 22,  1,  10.0, 0),     -- scarico
-          ( 71, 22,  1,  10.0, 0),     -- scarico
-          ( 72, 22,  1,  10.0, 0),     -- scarico
-          ( 73, 22,  1,  10.0, 0),     -- scarico
-          ( 74, 22,  1,  10.0, 0),     -- scarico
-          ( 75, 22,  1,  10.0, 0),     -- scarico
-          ( 76, 22,  1,  10.0, 0),     -- scarico
-          ( 77, 22,  1,  10.0, 0),     -- scarico
-          ( 78, 22,  1,  10.0, 0),     -- carico
-          ( 79, 22,  1,  10.0, 0),     -- scarico
-          ( 80, 22,  1,  10.0, 0),     -- scarico
-          ( 81, 22,  1,  10.0, 0),     -- scarico
-          ( 82, 22,  1,  10.0, 0),     -- scarico
-          ( 83, 22,  1,  10.0, 0),     -- scarico
-          ( 84, 22,  1,  10.0, 0),     -- scarico
-          ( 85, 22,  1,  10.0, 0),     -- scarico
-          ( 86, 22,  1,  10.0, 0),     -- carico
-          ( 87, 22,  1,  10.0, 0),     -- scarico
-          ( 88, 22,  1,  10.0, 0),     -- scarico
-          ( 89, 22,  1,  10.0, 0),     -- scarico
-          ( 90, 22,  1,  10.0, 0),     -- scarico
-          ( 91, 22,  1,  10.0, 0),     -- scarico
-          ( 92, 22,  1,  10.0, 0),     -- scarico
-          ( 93, 22,  1,  10.0, 0),     -- scarico
-          ( 94, 22,  1,  10.0, 0),     -- scarico
-          ( 95, 22,  1,  10.0, 0),     -- scarico
-          ( 96, 22,  1,  10.0, 0),     -- scarico
-          ( 97, 22,  1,  10.0, 0),     -- scarico
-          ( 98, 22,  1,  10.0, 0),     -- scarico
-          ( 99, 22,  1,  10.0, 0),     -- carico
-          (100, 22,  1,  10.0, 0);
-
-INSERT INTO documentations_warehouse_card(id, warehouse_id, causal, document, document_date, document_number, line_item_warehouse_card_id, version)
+INSERT INTO documentations_warehouse_card(id, warehouse_id, causal, document, document_date, document_number, line_item_warehouse_id, version)
     VALUES (   1,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  10,   1, 0),
            (   2,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-09',  22,   2, 0),
            (   3,  1, 'PURCHASE', 'TRANSPORT_DOCUMENT', '2018-10-10',  11,   3, 0),

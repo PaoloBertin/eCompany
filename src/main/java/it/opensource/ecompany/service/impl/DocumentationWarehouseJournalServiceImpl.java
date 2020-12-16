@@ -32,13 +32,13 @@ public class DocumentationWarehouseJournalServiceImpl implements DocumentationWa
     @Override
     public Long getNumberDocumentationsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId) {
 
-        return documentationWarehouseJournalRepository.countByWarehouseIdAndLineItemWarehouseJournalProductId(warehouseId, productId);
+        return documentationWarehouseJournalRepository.countByWarehouseIdAndLineItemWarehouseProductId(warehouseId, productId);
     }
 
     @Override
     public Page<DocumentationWarehouseJournal> getByWarehouseIdAndLineItemProductIdByPage(Long warehouseId, Long productId, Pageable pageable) {
 
-        return documentationWarehouseJournalRepository.findByWarehouseIdAndLineItemWarehouseJournalProductId(warehouseId, productId, pageable);
+        return documentationWarehouseJournalRepository.findByWarehouseIdAndLineItemWarehouseProductId(warehouseId, productId, pageable);
     }
 
 }

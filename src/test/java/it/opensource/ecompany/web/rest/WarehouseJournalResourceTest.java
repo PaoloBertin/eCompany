@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,7 +21,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @SpringBootTest
 class WarehouseJournalResourceTest {
@@ -31,7 +29,7 @@ class WarehouseJournalResourceTest {
     private ProductsService productsService;
 
     @Autowired
-    private LineItemWarehouseJournalService lineItemWarehouseJournalService;
+    private LineItemWarehouseService lineItemWarehouseService;
 
     @Autowired
     private WarehouseService warehouseService;
@@ -130,8 +128,8 @@ class WarehouseJournalResourceTest {
         Warehouse warehouse = warehouseService.getWarehouseById(4L)
                                               .get();
         Product product = productsService.getProductById(1L);
-        LineItemWarehouseJournal lineItemWarehouseJournal = lineItemWarehouseJournalService.getLineItemWarehouseJournalById(1L)
-                                           .get(); // TODO sostituire con create
+        LineItemWarehouse lineItemWarehouse = lineItemWarehouseService.getLineItemWarehouseById(1L)
+                                                                      .get(); // TODO sostituire con create
 
         DocumentationWarehouseJournal documentationWarehouseJournal = new DocumentationWarehouseJournal();
         documentationWarehouseJournal.setId(1000L);
@@ -140,7 +138,7 @@ class WarehouseJournalResourceTest {
         documentationWarehouseJournal.setDocument(Document.TRANSPORT_DOCUMENT);
         // documentation.setDocumentDate(LocalDate.of(2018, 10, 15)); // TODO riattivare
         documentationWarehouseJournal.setDocumentNumber(100L);
-        documentationWarehouseJournal.setLineItemWarehouseJournal(lineItemWarehouseJournal);
+        documentationWarehouseJournal.setLineItemWarehouse(lineItemWarehouse);
 
         WarehouseJournal warehouseJournal = new WarehouseJournal();
         warehouseJournal.setDocumentationWarehouseJournal(documentationWarehouseJournal);

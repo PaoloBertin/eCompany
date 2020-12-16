@@ -35,9 +35,9 @@ public class DocumentationWarehouseJournal implements Serializable {
     @Column(name = "document_number")
     private Long documentNumber;
 
-    @JoinColumn(name = "line_item_warehouse_journal_id")
+    @JoinColumn(name = "line_item_warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_journal_fk_02"))
     @OneToOne
-    private LineItemWarehouseJournal lineItemWarehouseJournal;
+    private LineItemWarehouse lineItemWarehouse;
 
     @Version
     private Long version;
@@ -102,14 +102,14 @@ public class DocumentationWarehouseJournal implements Serializable {
         this.documentNumber = documentNumber;
     }
 
-    public LineItemWarehouseJournal getLineItemWarehouseJournal() {
+    public LineItemWarehouse getLineItemWarehouse() {
 
-        return lineItemWarehouseJournal;
+        return lineItemWarehouse;
     }
 
-    public void setLineItemWarehouseJournal(LineItemWarehouseJournal lineItemWarehouseJournal) {
+    public void setLineItemWarehouse(LineItemWarehouse lineItemWarehouse) {
 
-        this.lineItemWarehouseJournal = lineItemWarehouseJournal;
+        this.lineItemWarehouse = lineItemWarehouse;
     }
 
     public Long getVersion() {

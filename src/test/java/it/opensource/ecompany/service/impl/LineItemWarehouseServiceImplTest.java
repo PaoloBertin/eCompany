@@ -3,7 +3,6 @@ package it.opensource.ecompany.service.impl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
@@ -11,16 +10,16 @@ import org.springframework.test.context.jdbc.Sql;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class LineItemWarehouseJournalServiceImplTest {
+class LineItemWarehouseServiceImplTest {
 
     @Autowired
-    private LineItemWarehouseJournalServiceImpl lineItemWarehouseJournalService;
+    private LineItemWarehouseServiceImpl lineItemWarehouseService;
 
     @Test
     void getNumberLineItemWarehouseJournal() {
 
         long expected = 100;
-        long actual = lineItemWarehouseJournalService.getNumberLineItemWarehouseJournal();
+        long actual = lineItemWarehouseService.getNumberLineItemWarehouse();
 
         assertEquals(expected, actual);
     }
@@ -30,7 +29,7 @@ class LineItemWarehouseJournalServiceImplTest {
     @CsvFileSource(resources = "/lineItemWarehouseJournalByProduct.csv", numLinesToSkip = 1)
     void getNumberLineItemWarehouseJournalByProduct(long productId, long expected) {
 
-        long actual = lineItemWarehouseJournalService.getNumberLineItemWarehouseJournalByProduct(productId);
+        long actual = lineItemWarehouseService.getNumberLineItemWarehouseByProduct(productId);
         assertEquals(expected, actual);
     }
 

@@ -1,7 +1,7 @@
 package it.opensource.ecompany.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import it.opensource.ecompany.service.LineItemWarehouseCardService;
+import it.opensource.ecompany.service.LineItemWarehouseService;
 import it.opensource.ecompany.service.WarehouseCardService;
 import it.opensource.ecompany.service.WarehouseService;
 import org.junit.jupiter.api.AfterEach;
@@ -34,7 +34,7 @@ class WarehouseCardResourceTest {
     private WarehouseCardService warehouseCardService;
 
     @Autowired
-    private LineItemWarehouseCardService lineItemWarehouseCardService;
+    private LineItemWarehouseService lineItemWarehouseCardService;
 
     private static String asJsonString(final Object obj) {
 

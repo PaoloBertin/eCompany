@@ -4,9 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Table(name = "line_items_warehouse_card")
+@Table(name = "line_items_warehouse")
 @Entity
-public class LineItemWarehouseCard implements Serializable {
+public class LineItemWarehouse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -15,7 +15,7 @@ public class LineItemWarehouseCard implements Serializable {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "line_items_warehouse_fk_01"))
     private Product product;
 
     private Double quantity;
@@ -25,11 +25,11 @@ public class LineItemWarehouseCard implements Serializable {
     @Version
     private Long version;
 
-    public LineItemWarehouseCard() {
+    public LineItemWarehouse() {
 
     }
 
-    public LineItemWarehouseCard(Product product, Double quantity) {
+    public LineItemWarehouse(Product product, Double quantity) {
 
         this.product = product;
         this.quantity = quantity;
@@ -75,6 +75,16 @@ public class LineItemWarehouseCard implements Serializable {
         this.version = version;
     }
 
+    public BigDecimal getPrice() {
+
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+
+        this.price = price;
+    }
+
     @Override
     public int hashCode() {
 
@@ -93,7 +103,7 @@ public class LineItemWarehouseCard implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        LineItemWarehouseCard other = (LineItemWarehouseCard) obj;
+        LineItemWarehouse other = (LineItemWarehouse) obj;
         if (id == null) {
             if (other.id != null)
                 return false;

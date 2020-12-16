@@ -64,7 +64,7 @@ class WarehouseCardServiceImplTest {
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
-    @CsvSource({"1, 25", "2, 25", "3, 25", "4, 25", "5, 25",})
+    @CsvSource({"1, 25", "2, 10", "3, 30", "4, 35", "5,  0",})
     void getWarehouseCardByWarehouseByPageTest(Long warehouseId, Long expected) {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
@@ -77,7 +77,12 @@ class WarehouseCardServiceImplTest {
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
-    @CsvSource({"1, 8883780450, 1", "2, 8883780450, 1", "3, 8883780450, 1", "4, 8883780450, 1", "5, 8883780450, 1"})
+    @CsvSource({
+        "1, 8883780450, 1",
+        "2, 8883780450, 0",
+        "3, 8883780450, 0",
+        "4, 8883780450, 1",
+        "5, 8883780450, 0"})
     void getWarehouseCardsByWarehouseIdAndProductCodeTest(long warehouseId, String productCode, long expected) {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));

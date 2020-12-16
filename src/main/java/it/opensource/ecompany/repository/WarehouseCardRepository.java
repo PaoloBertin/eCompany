@@ -1,6 +1,5 @@
 package it.opensource.ecompany.repository;
 
-import it.opensource.ecompany.domain.DocumentationWarehouseCard;
 import it.opensource.ecompany.domain.WarehouseCard;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,17 +13,19 @@ public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Lo
 
     long countByDocumentationWarehouseCardWarehouseId(Long warehouseId);
 
-    long countByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(Long warehouseId, Long productId);
+    long countByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(Long warehouseId,
+                                                                                                             Long productId);
 
     Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseId(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
-        Long warehouseId, Long productId);
+    List<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(Long warehouseId,
+                                                                                                                           Long productId);
 
-    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductProductCode(
+    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductProductCode(
         Long warehouseId, String productCode, Pageable pageable);
 
-    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseCardProductId(
-        Long warehouseId, Long productId, Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(Long warehouseId,
+                                                                                                                           Long productId,
+                                                                                                                           Pageable pageable);
 
 }

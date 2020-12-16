@@ -13,13 +13,11 @@ DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS price_lists;
 
+DROP TABLE IF EXISTS line_items_warehouse;
 DROP TABLE IF EXISTS documentations_warehouse_journal;
-DROP TABLE IF EXISTS line_items_warehouse_journal;
 DROP TABLE IF EXISTS warehouse_journal;
-
 DROP TABLE IF EXISTS documentations_warehouse_card;
 DROP TABLE IF EXISTS warehouse_cards;
-DROP TABLE IF EXISTS line_items_warehouse_card;
 DROP TABLE IF EXISTS warehouse_card_products;
 
 DROP TABLE IF EXISTS warehouses;
@@ -179,6 +177,18 @@ CREATE TABLE IF NOT EXISTS warehouses (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS line_items_warehouse (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    price DECIMAL(12,4) DEFAULT 0.0,
+    quantity DOUBLE DEFAULT 0.0,
+    version BIGINT DEFAULT 0,
+
+    PRIMARY KEY(id),
+
+    CONSTRAINT line_items_warehouse_fk_01 FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
 CREATE TABLE IF NOT EXISTS documentations_warehouse_journal(
     id BIGINT NOT NULL AUTO_INCREMENT,
     warehouse_id BIGINT NOT NULL,
@@ -186,12 +196,13 @@ CREATE TABLE IF NOT EXISTS documentations_warehouse_journal(
     document VARCHAR(25) NOT NULL,
     document_date DATE NOT NULL,
     document_number BIGINT NOT NULL,
-    line_item_warehouse_journal_id BIGINT NOT NULL,
+    line_item_warehouse_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT documentations_warehouse_journal_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id)
+    CONSTRAINT documentations_warehouse_journal_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id),
+    CONSTRAINT documentations_warehouse_journal_fk_02 FOREIGN KEY(line_item_warehouse_id) REFERENCES line_items_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS warehouse_journal (
@@ -204,30 +215,6 @@ CREATE TABLE IF NOT EXISTS warehouse_journal (
     CONSTRAINT warehouse_journal_fk_01 FOREIGN KEY(documentation_warehouse_journal_id) REFERENCES documentations_warehouse_journal(id)
 );
 
-CREATE TABLE IF NOT EXISTS line_items_warehouse_journal (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    product_id BIGINT NOT NULL,
-    price DECIMAL(12,4) DEFAULT 0.0,
-    quantity DOUBLE DEFAULT 0.0,
-    version BIGINT DEFAULT 0,
-
-    PRIMARY KEY(id),
-
-    CONSTRAINT line_item_warehouse_journal_fk_01 FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
-CREATE TABLE IF NOT EXISTS line_items_warehouse_card (
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    product_id BIGINT NOT NULL,
-    price DECIMAL(12,4) DEFAULT 0.0,
-    quantity DOUBLE DEFAULT 0.0,
-    version BIGINT DEFAULT 0,
-
-    PRIMARY KEY(id),
-
-    CONSTRAINT line_item_warehouse_card_fk_01 FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
 CREATE TABLE IF NOT EXISTS documentations_warehouse_card(
     id BIGINT NOT NULL AUTO_INCREMENT,
     warehouse_id BIGINT NOT NULL,
@@ -235,13 +222,13 @@ CREATE TABLE IF NOT EXISTS documentations_warehouse_card(
     document VARCHAR(25) NOT NULL,
     document_date DATE NOT NULL,
     document_number BIGINT NOT NULL,
-    line_item_warehouse_card_id BIGINT NOT NULL,
+    line_item_warehouse_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 
     CONSTRAINT documentations_warehouse_card_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id),
-    CONSTRAINT documentations_warehouse_card_fk_02 FOREIGN KEY(line_item_warehouse_card_id) REFERENCES line_items_warehouse_card(id)
+    CONSTRAINT documentations_warehouse_card_fk_02 FOREIGN KEY(line_item_warehouse_id) REFERENCES line_items_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS warehouse_card_products (

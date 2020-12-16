@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DocumentationWarrehouseCardRepository extends JpaRepository<DocumentationWarehouseCard, Long> {
+public interface DocumentationWarehouseCardRepository extends JpaRepository<DocumentationWarehouseCard, Long> {
 
     Long countByWarehouseId(Long warehouseId);
 
-    Long countByWarehouseIdAndLineItemWarehouseCardProductId(Long warehouseId, Long productId);
+    Long countByWarehouseIdAndLineItemWarehouseProductId(Long warehouseId, Long productId);
 
-    Page<DocumentationWarehouseCard> findByWarehouseIdAndLineItemWarehouseCardProductId(Long warehouseId, Long productId, Pageable pageable);
+    Page<DocumentationWarehouseCard> findByWarehouseIdAndLineItemWarehouseProductId(Long warehouseId, Long productId, Pageable pageable);
 
 }
