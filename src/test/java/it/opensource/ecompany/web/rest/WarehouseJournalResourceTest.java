@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -35,7 +36,7 @@ class WarehouseJournalResourceTest {
     private WarehouseService warehouseService;
 
     @Autowired
-    private DocumentationWarehouseJournalService documentationWarehouseJournalService;
+    private DocumentationWarehouseService documentationWarehouseService;
 
     @Autowired
     private WarehouseJournalService warehouseJournalService;
@@ -49,6 +50,7 @@ class WarehouseJournalResourceTest {
         }
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournalByIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -56,10 +58,11 @@ class WarehouseJournalResourceTest {
         mvc.perform(get("/api/warehouseJournal/all/{warehousejournalId}", 5).with(user("admin").password("admin")
                                                                                                .roles("ADMIN"))
                                                                             .contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.documentationWarehouseJournal.id", equalTo(5)))
+           .andExpect(jsonPath("$.documentationWarehouse.id", equalTo(5)))
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournalByWarehouseIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -73,6 +76,7 @@ class WarehouseJournalResourceTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournalByWarehouseNameTest(@Autowired MockMvc mvc) throws Exception {
@@ -87,6 +91,7 @@ class WarehouseJournalResourceTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournmalBetweenDateTest(@Autowired MockMvc mvc) throws Exception {
@@ -103,7 +108,7 @@ class WarehouseJournalResourceTest {
 
     }
 
-    // @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournmalDateTest(@Autowired MockMvc mvc) throws Exception {
@@ -120,6 +125,7 @@ class WarehouseJournalResourceTest {
 
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -131,17 +137,17 @@ class WarehouseJournalResourceTest {
         LineItemWarehouse lineItemWarehouse = lineItemWarehouseService.getLineItemWarehouseById(1L)
                                                                       .get(); // TODO sostituire con create
 
-        DocumentationWarehouseJournal documentationWarehouseJournal = new DocumentationWarehouseJournal();
-        documentationWarehouseJournal.setId(1000L);
-        documentationWarehouseJournal.setWarehouse(warehouse);
-        documentationWarehouseJournal.setCausal(Causal.PURCHASE);
-        documentationWarehouseJournal.setDocument(Document.TRANSPORT_DOCUMENT);
+        DocumentationWarehouse documentationWarehouse = new DocumentationWarehouse();
+        documentationWarehouse.setId(1000L);
+        documentationWarehouse.setWarehouse(warehouse);
+        documentationWarehouse.setCausal(Causal.PURCHASE);
+        documentationWarehouse.setDocument(Document.TRANSPORT_DOCUMENT);
         // documentation.setDocumentDate(LocalDate.of(2018, 10, 15)); // TODO riattivare
-        documentationWarehouseJournal.setDocumentNumber(100L);
-        documentationWarehouseJournal.setLineItemWarehouse(lineItemWarehouse);
+        documentationWarehouse.setDocumentNumber(100L);
+        documentationWarehouse.setLineItemWarehouse(lineItemWarehouse);
 
         WarehouseJournal warehouseJournal = new WarehouseJournal();
-        warehouseJournal.setDocumentationWarehouseJournal(documentationWarehouseJournal);
+        warehouseJournal.setDocumentationWarehouse(documentationWarehouse);
 
         mvc.perform(post("/api/warehouseJournal").with(user("admin").password("admin")
                                                                     .roles("ADMIN"))
@@ -157,6 +163,7 @@ class WarehouseJournalResourceTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -164,9 +171,9 @@ class WarehouseJournalResourceTest {
 
         WarehouseJournal warehouseJournal = warehouseJournalService.getWarehouseJournalById(5L)
                                                                    .get();
-        DocumentationWarehouseJournal documentationWarehouseJournal = warehouseJournal.getDocumentationWarehouseJournal();
-        documentationWarehouseJournal.setDocument(Document.INVOICE);
-        warehouseJournal.setDocumentationWarehouseJournal(documentationWarehouseJournal);
+        DocumentationWarehouse documentationWarehouse = warehouseJournal.getDocumentationWarehouse();
+        documentationWarehouse.setDocument(Document.INVOICE);
+        warehouseJournal.setDocumentationWarehouse(documentationWarehouse);
 
         mvc.perform(put("/api/warehouseJournal").with(user("admin").password("admin")
                                                                    .roles("ADMIN"))
@@ -187,6 +194,7 @@ class WarehouseJournalResourceTest {
 
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void deleteWarehouseJournalTest(@Autowired MockMvc mvc) throws Exception {

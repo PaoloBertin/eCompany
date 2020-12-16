@@ -14,9 +14,9 @@ public class WarehouseCard implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "documentation_warehouse_card_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_01"))
+    @JoinColumn(name = "documentation_warehouse_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_01"))
     @OneToOne
-    private DocumentationWarehouseCard documentationWarehouseCard;
+    private DocumentationWarehouse documentationWarehouse;
 
     @JoinColumn(name = "warehouse_card_product_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_02"))
     @ManyToOne
@@ -40,14 +40,14 @@ public class WarehouseCard implements Serializable {
         this.id = id;
     }
 
-    public DocumentationWarehouseCard getDocumentationWarehouseCard() {
+    public DocumentationWarehouse getDocumentationWarehouseCard() {
 
-        return documentationWarehouseCard;
+        return documentationWarehouse;
     }
 
-    public void setDocumentationWarehouseCard(DocumentationWarehouseCard documentationWarehouseCard) {
+    public void setDocumentationWarehouseCard(DocumentationWarehouse documentationWarehouse) {
 
-        this.documentationWarehouseCard = documentationWarehouseCard;
+        this.documentationWarehouse = documentationWarehouse;
     }
 
     public WarehouseCardProduct getWarehouseCardProduct() {

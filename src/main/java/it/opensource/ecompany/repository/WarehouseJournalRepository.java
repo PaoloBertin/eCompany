@@ -12,14 +12,17 @@ import java.util.List;
 @Repository
 public interface WarehouseJournalRepository extends JpaRepository<WarehouseJournal, Long> {
 
-    Page<WarehouseJournal> findByDocumentationWarehouseJournalWarehouseId(Long id, Pageable pageable);
+    Page<WarehouseJournal> findByDocumentationWarehouseWarehouseId(Long id, Pageable pageable);
 
-    Page<WarehouseJournal> findByDocumentationWarehouseJournalWarehouseName(String name, Pageable pageable);
+    Page<WarehouseJournal> findByDocumentationWarehouseWarehouseName(String name, Pageable pageable);
 
-    List<WarehouseJournal> findByDocumentationWarehouseJournalWarehouseIdAndDocumentationWarehouseJournalDocumentDateBetween(
-        Long warehouseId, LocalDate documentDateStart, LocalDate documentDateEnd);
+    List<WarehouseJournal> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(Long warehouseId,
+                                                                                                               LocalDate documentDateStart,
+                                                                                                               LocalDate documentDateEnd);
 
-    Page<WarehouseJournal> findByDocumentationWarehouseJournalWarehouseIdAndDocumentationWarehouseJournalDocumentDateBetween(
-        Long warehouseId, LocalDate documentDateStart, LocalDate documentDateEnd, Pageable pageable);
+    Page<WarehouseJournal> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(Long warehouseId,
+                                                                                                               LocalDate documentDateStart,
+                                                                                                               LocalDate documentDateEnd,
+                                                                                                               Pageable pageable);
 
 }

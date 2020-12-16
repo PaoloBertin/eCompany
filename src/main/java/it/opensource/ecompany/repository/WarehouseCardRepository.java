@@ -11,20 +11,20 @@ import java.util.List;
 @Repository
 public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Long> {
 
-    long countByDocumentationWarehouseCardWarehouseId(Long warehouseId);
+    long countByDocumentationWarehouseWarehouseId(Long warehouseId);
 
-    long countByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(Long warehouseId,
+    long countByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductId(Long warehouseId,
                                                                                                              Long productId);
 
-    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseId(Long warehouseId, Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseWarehouseId(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(Long warehouseId,
+    List<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductId(Long warehouseId,
                                                                                                                            Long productId);
 
-    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductProductCode(
+    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductProductCode(
         Long warehouseId, String productCode, Pageable pageable);
 
-    Page<WarehouseCard> findByDocumentationWarehouseCardWarehouseIdAndDocumentationWarehouseCardLineItemWarehouseProductId(Long warehouseId,
+    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductId(Long warehouseId,
                                                                                                                            Long productId,
                                                                                                                            Pageable pageable);
 

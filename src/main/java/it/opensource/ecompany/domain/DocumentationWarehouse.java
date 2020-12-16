@@ -7,9 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-@Table(name = "documentations_warehouse_card")
+@Table(name = "documentations_warehouse")
 @Entity
-public class DocumentationWarehouseCard implements Serializable {
+public class DocumentationWarehouse implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,7 +17,7 @@ public class DocumentationWarehouseCard implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_card_fk_01"))
+    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_fk_01"))
     @ManyToOne
     private Warehouse warehouse;
 
@@ -35,7 +35,7 @@ public class DocumentationWarehouseCard implements Serializable {
     @Column(name = "document_number")
     private Long documentNumber;
 
-    @JoinColumn(name = "line_item_warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_card_fk_02"))
+    @JoinColumn(name = "line_item_warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_fk_02"))
     @OneToOne
     private LineItemWarehouse lineItemWarehouse;
 
@@ -107,7 +107,7 @@ public class DocumentationWarehouseCard implements Serializable {
         return lineItemWarehouse;
     }
 
-    public void setLineItemWarehouseCard(LineItemWarehouse lineItemWarehouse) {
+    public void setLineItemWarehouse(LineItemWarehouse lineItemWarehouse) {
 
         this.lineItemWarehouse = lineItemWarehouse;
     }

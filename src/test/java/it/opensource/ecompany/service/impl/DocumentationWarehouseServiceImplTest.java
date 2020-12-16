@@ -1,6 +1,6 @@
 package it.opensource.ecompany.service.impl;
 
-import it.opensource.ecompany.service.DocumentationWarehouseCardService;
+import it.opensource.ecompany.service.DocumentationWarehouseService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,17 +10,17 @@ import org.springframework.test.context.jdbc.Sql;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-class DocumentationWarehouseCardServiceImplTest {
+class DocumentationWarehouseServiceImplTest {
 
     @Autowired
-    private DocumentationWarehouseCardService documentationWarehouseCardService;
+    private DocumentationWarehouseService documentationWarehouseService;
 
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberDocumentationWarehouseCardTest() {
 
         Long expected = 100L;
-        Long actual = documentationWarehouseCardService.getNumberDocumentations();
+        Long actual = documentationWarehouseService.getNumberDocumentations();
 
         assertEquals(expected, actual);
     }
@@ -32,7 +32,7 @@ class DocumentationWarehouseCardServiceImplTest {
         Long warehouseId= 4L;
 
         Long expected = 35L;
-        Long actual = documentationWarehouseCardService.getNumberDocumentationsBydWarehouseId(warehouseId);
+        Long actual = documentationWarehouseService.getNumberDocumentationsBydWarehouseId(warehouseId);
 
         assertEquals(expected, actual);
     }
@@ -45,7 +45,7 @@ class DocumentationWarehouseCardServiceImplTest {
         Long productId = 1L;
 
         Long expected = 1L;
-        Long actual = documentationWarehouseCardService.getNumberDocumentationsByWarehouseIdAndLineItemProductId(warehouseId, productId);
+        Long actual = documentationWarehouseService.getNumberDocumentationsByWarehouseIdAndLineItemProductId(warehouseId, productId);
 
         assertEquals(expected, actual);
     }
