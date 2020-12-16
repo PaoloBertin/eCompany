@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -13,12 +15,13 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @EnableWebMvc
 @SpringBootTest
 public class CartControllerTest {
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void addProductToCartTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -28,6 +31,8 @@ public class CartControllerTest {
            .andExpect(redirectedUrl("/"));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void showCartTest(@Autowired MockMvc mvc) throws Exception {
 
@@ -37,6 +42,8 @@ public class CartControllerTest {
            .andExpect(view().name("cart/show"));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void deleteCartTest(@Autowired MockMvc mvc) throws Exception {
 

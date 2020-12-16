@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ class WarehouseCardServiceImplTest {
     @Autowired
     private ProductsService productsService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsTest() {
@@ -40,6 +42,7 @@ class WarehouseCardServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 25", "2, 10", "3, 30", "4, 35", "5,  0"})
@@ -50,6 +53,7 @@ class WarehouseCardServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 25,  0"})
@@ -62,6 +66,7 @@ class WarehouseCardServiceImplTest {
 
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 25", "2, 10", "3, 30", "4, 35", "5,  0",})
@@ -75,6 +80,7 @@ class WarehouseCardServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({
@@ -93,6 +99,7 @@ class WarehouseCardServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 25,  0"})
@@ -105,6 +112,7 @@ class WarehouseCardServiceImplTest {
 
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 25,  0"})

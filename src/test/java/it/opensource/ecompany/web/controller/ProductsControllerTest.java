@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -13,7 +15,6 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ActiveProfiles("dbh2")
 @EnableWebMvc
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -23,6 +24,8 @@ public class ProductsControllerTest {
     private MockMvc mvc;
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewAllProductsPage1Test() throws Exception {
 
@@ -36,6 +39,8 @@ public class ProductsControllerTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewAllProductsPage3Test() throws Exception {
 
@@ -49,6 +54,8 @@ public class ProductsControllerTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewProducstByCategoryByPage1Test() throws Exception {
 
@@ -62,6 +69,8 @@ public class ProductsControllerTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewProducstByCategoryByPage2Test() throws Exception {
 

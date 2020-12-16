@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,6 +16,7 @@ class DocumentationWarehouseServiceImplTest {
     @Autowired
     private DocumentationWarehouseService documentationWarehouseService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberDocumentationWarehouseCardTest() {
@@ -25,6 +27,7 @@ class DocumentationWarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberDocumentationWarehouseCardBydWarehouseId() {
@@ -37,6 +40,7 @@ class DocumentationWarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberDocumentationWarehouseCardByWarehouseIdAndDocumentationWarehouseCardLineItemProductId() {
@@ -51,6 +55,7 @@ class DocumentationWarehouseServiceImplTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getByWarehouseIdAndLineItemProductIdByPage() {

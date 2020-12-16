@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class ProductsServiceImplTest {
     @Autowired
     private WarehouseService warehouseService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberProductsTest() {
@@ -47,6 +49,7 @@ public class ProductsServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({
@@ -64,6 +67,7 @@ public class ProductsServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void equality_productsTest() {
@@ -74,6 +78,7 @@ public class ProductsServiceImplTest {
         assertThat(product2, equalTo(product1));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllProductsTest() {
@@ -85,6 +90,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllProductsByPageTest() {
@@ -100,6 +106,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByCategoryIdTest() {
@@ -111,6 +118,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByCategoryByPage() {
@@ -126,6 +134,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, is(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductById() {
@@ -138,6 +147,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getProductByProductCodeTest() {
@@ -148,6 +158,7 @@ public class ProductsServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByNameTest() {
@@ -161,6 +172,7 @@ public class ProductsServiceImplTest {
                            .getName(), equalTo("Da Visual Basic a Java"));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByNameContainingTest() {
@@ -174,6 +186,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductsByNameContainingByPageTest() {
@@ -189,6 +202,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void saveProductTest() {
@@ -208,6 +222,7 @@ public class ProductsServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void updateProductTest() {
@@ -228,8 +243,9 @@ public class ProductsServiceImplTest {
                                   .getName(), equalTo("Alice"));
     }
 
-    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void deleteProductTest() {
 

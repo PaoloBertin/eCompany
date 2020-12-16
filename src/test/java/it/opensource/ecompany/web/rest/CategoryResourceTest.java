@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -18,11 +19,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @SpringBootTest
 class CategoryResourceTest {
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllCategoriesTest(@Autowired MockMvc mvc) throws Exception {
@@ -32,6 +33,7 @@ class CategoryResourceTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCategoryByIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -43,6 +45,7 @@ class CategoryResourceTest {
 
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void createCategoryTest(@Autowired MockMvc mvc) throws Exception {
@@ -60,6 +63,7 @@ class CategoryResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void deleteCategoryTest(@Autowired MockMvc mvc) throws Exception {

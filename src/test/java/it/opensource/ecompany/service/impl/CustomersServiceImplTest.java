@@ -7,13 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@ActiveProfiles("dbh2")
 @SpringBootTest
 public class CustomersServiceImplTest {
 
@@ -23,6 +21,7 @@ public class CustomersServiceImplTest {
     @Autowired
     private CustomersService customersService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllCustomersTest() {
@@ -33,6 +32,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyAddress() {
@@ -45,6 +45,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyContact() {
@@ -56,6 +57,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -73,6 +75,7 @@ public class CustomersServiceImplTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void verifyCustomerTest() {
@@ -84,6 +87,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isTrue();
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void notVerifyCustomerTest() {

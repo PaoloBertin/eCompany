@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -21,7 +22,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @EnableWebMvc
 @SpringBootTest
@@ -30,6 +30,7 @@ class WarehouseControllerTest {
     @Autowired
     private WarehouseService warehouseService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllWarehouseTest(@Autowired MockMvc mvc) throws Exception {
@@ -40,6 +41,7 @@ class WarehouseControllerTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getWarehuseById(@Autowired MockMvc mvc) throws Exception {
@@ -51,6 +53,7 @@ class WarehouseControllerTest {
 
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getWarehuseByName(@Autowired MockMvc mvc) throws Exception {
@@ -61,6 +64,7 @@ class WarehouseControllerTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void warehouseUpdateFormTest(@Autowired MockMvc mvc) throws Exception {
@@ -72,6 +76,7 @@ class WarehouseControllerTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void warehouseUpdateTest(@Autowired MockMvc mvc) throws Exception {
@@ -98,6 +103,7 @@ class WarehouseControllerTest {
            .andExpect(redirectedUrl("/admin/warehouses/5"));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void createWarehouseFormTest(@Autowired MockMvc mvc) throws Exception {
@@ -110,6 +116,7 @@ class WarehouseControllerTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void createWarehouseTest(@Autowired MockMvc mvc) throws Exception {
@@ -128,6 +135,7 @@ class WarehouseControllerTest {
            .andExpect(redirectedUrl("/admin/warehouses"));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void deleteWarehouse(@Autowired MockMvc mvc) throws Exception {

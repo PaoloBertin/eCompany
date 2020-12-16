@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,6 +16,8 @@ class LineItemWarehouseServiceImplTest {
     @Autowired
     private LineItemWarehouseServiceImpl lineItemWarehouseService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberLineItemWarehouseJournal() {
 
@@ -24,6 +27,7 @@ class LineItemWarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvFileSource(resources = "/lineItemWarehouseJournalByProduct.csv", numLinesToSkip = 1)
@@ -33,6 +37,8 @@ class LineItemWarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getLineItemWarehouseJournalById() {
 

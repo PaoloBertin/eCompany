@@ -53,8 +53,8 @@ class CartBeanTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void addedTheSameProducts() {
 
@@ -67,8 +67,8 @@ class CartBeanTest {
         assertThat(expected, closeTo(actual, 0.001));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void addProductToCart() {
 
@@ -81,8 +81,8 @@ class CartBeanTest {
         assertThat(expected, closeTo(actual, 0.001));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void deleteProductToCart() {
 
@@ -98,8 +98,8 @@ class CartBeanTest {
         assertThat(expected, closeTo(actual, 0.001));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberProducts() {
 
@@ -113,8 +113,8 @@ class CartBeanTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getShippingCosts() {
 
@@ -129,8 +129,8 @@ class CartBeanTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getSubTotal() {
 
@@ -143,8 +143,8 @@ class CartBeanTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getSubTotalWithExpressDelivery() {
 
@@ -158,8 +158,8 @@ class CartBeanTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
-    @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getTotalCost() {
 

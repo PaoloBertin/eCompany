@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class CategoriesServiceImplTest {
     @Autowired
     CategoriesService categoriesService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllCategoriesTest() {
@@ -28,6 +30,7 @@ public class CategoriesServiceImplTest {
         assertThat(categories.size(), equalTo(6));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCategoryByIdTest() {
@@ -37,6 +40,7 @@ public class CategoriesServiceImplTest {
         assertThat("Libri", equalTo(category.getName()));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCategoryByNameTest() {
@@ -47,6 +51,7 @@ public class CategoriesServiceImplTest {
         assertThat(expected, equalTo(actual));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void saveCategoryTest() {
@@ -61,6 +66,7 @@ public class CategoriesServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void updateCategory() {

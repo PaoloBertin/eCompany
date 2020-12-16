@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -22,7 +23,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ActiveProfiles("dbh2")
 @AutoConfigureMockMvc
 @SpringBootTest
 class WarehouseCardResourceTest {
@@ -56,6 +56,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardTest(@Autowired MockMvc mvc) throws Exception {
@@ -69,6 +70,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsBydWarehouseIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -82,6 +84,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsByWarehouseIdAndLineItemProductIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -95,6 +98,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByIdSuccessTest(@Autowired MockMvc mvc) throws Exception {
@@ -107,6 +111,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByIdFailureTest(@Autowired MockMvc mvc) throws Exception {
@@ -118,6 +123,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseTest(@Autowired MockMvc mvc) throws Exception {
@@ -132,6 +138,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseAndProductIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -147,6 +154,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardBetweenDateTest(@Autowired MockMvc mvc) throws Exception {
@@ -164,6 +172,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardDateTest(@Autowired MockMvc mvc) throws Exception {
