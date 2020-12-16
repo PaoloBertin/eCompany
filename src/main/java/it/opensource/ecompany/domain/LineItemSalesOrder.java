@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Table(name = "line_items_sales_order")
+@Table(name = "line_items_sales_orders")
 @Entity
 public class LineItemSalesOrder implements Serializable {
 
