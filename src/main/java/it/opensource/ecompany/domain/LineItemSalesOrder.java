@@ -15,7 +15,7 @@ public class LineItemSalesOrder implements Serializable {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "line_items_sales_orders_fk_01"))
     private Product product;
 
     private Double quantity;

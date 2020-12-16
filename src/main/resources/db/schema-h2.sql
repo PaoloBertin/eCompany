@@ -14,10 +14,10 @@ DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS price_lists;
 
 DROP TABLE IF EXISTS line_items_warehouse;
-DROP TABLE IF EXISTS warehouse_journal;
 DROP TABLE IF EXISTS documentations_warehouse;
-DROP TABLE IF EXISTS warehouse_cards;
 DROP TABLE IF EXISTS warehouse_card_products;
+DROP TABLE IF EXISTS warehouse_journal;
+DROP TABLE IF EXISTS warehouse_cards;
 
 DROP TABLE IF EXISTS warehouses;
 DROP TABLE IF EXISTS transport_documents;

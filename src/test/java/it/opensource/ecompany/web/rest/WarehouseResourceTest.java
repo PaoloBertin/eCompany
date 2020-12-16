@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -28,6 +29,7 @@ class WarehouseResourceTest {
     @Autowired
     private WarehouseService warehouseService;
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewAllWarehouseByPageTest(@Autowired MockMvc mvc) throws Exception {
@@ -39,6 +41,7 @@ class WarehouseResourceTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseByIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -51,6 +54,7 @@ class WarehouseResourceTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseByNameTest(@Autowired MockMvc mvc) throws Exception {
@@ -63,6 +67,7 @@ class WarehouseResourceTest {
            .andExpect(status().isOk());
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createWarehouseTest(@Autowired MockMvc mvc) throws Exception {
@@ -85,6 +90,7 @@ class WarehouseResourceTest {
         assertEquals(expected, actual);
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void updateWarehouseTest(@Autowired MockMvc mvc) throws Exception {
@@ -114,6 +120,7 @@ class WarehouseResourceTest {
 
     }
 
+    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void deleteWarehouseTest(@Autowired MockMvc mvc) throws Exception {

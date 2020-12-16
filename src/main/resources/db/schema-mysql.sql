@@ -1,28 +1,35 @@
+SET FOREIGN_KEY_CHECKS = 0;
+
 DROP TABLE IF EXISTS aggregate_authorities;
 DROP TABLE IF EXISTS aggregate_members;
 DROP TABLE IF EXISTS authorities;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS aggregates;
-DROP TABLE IF EXISTS purchase_orders_lineitems;
-DROP TABLE IF EXISTS purchase_orders;
-DROP TABLE IF EXISTS customers;
-DROP TABLE IF EXISTS sales_orders_lineitems;
-DROP TABLE IF EXISTS sales_orders;
-DROP TABLE IF EXISTS suppliers;
-DROP TABLE IF EXISTS address;
-DROP TABLE IF EXISTS contacts;
-DROP TABLE IF EXISTS line_items;
+
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS price_lists;
+DROP TABLE IF EXISTS line_items_warehouse;
+DROP TABLE IF EXISTS documentations_warehouse;
+DROP TABLE IF EXISTS warehouse_card_products;
 DROP TABLE IF EXISTS warehouse_journal;
 DROP TABLE IF EXISTS warehouse_cards;
-DROP TABLE IF EXISTS documentations;
 DROP TABLE IF EXISTS warehouses;
-DROP TABLE IF EXISTS warehouse_card_products;
 DROP TABLE IF EXISTS transport_documents;
 DROP TABLE IF EXISTS invoices;
+DROP TABLE IF EXISTS purchase_orders;
+DROP TABLE IF EXISTS purchase_orders_line_items;
+DROP TABLE IF EXISTS line_items_purchase_orders;
+DROP TABLE IF EXISTS sales_orders;
+DROP TABLE IF EXISTS line_items_sales_orders;
+DROP TABLE IF EXISTS sales_orders_line_items;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS suppliers;
+DROP TABLE IF EXISTS address;
+DROP TABLE IF EXISTS contacts;
 DROP TABLE IF EXISTS accounts;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS users(
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -36,7 +43,7 @@ CREATE TABLE authorities (
     username VARCHAR(255) NOT NULL,
     authority VARCHAR(255) NOT NULL,
 
-    CONSTRAINT uq_authoritues_01 UNIQUE (username,authority),
+    CONSTRAINT un_authoritues_01 UNIQUE (username,authority),
     CONSTRAINT fk_authorities_01 FOREIGN KEY(username) REFERENCES users(username)
 );
 
@@ -50,17 +57,17 @@ CREATE TABLE aggregates (
 CREATE TABLE aggregate_authorities (
     aggregate_id BIGINT NOT NULL,
     authority VARCHAR(50) NOT NULL,
-    CONSTRAINT fk_aggregate_authorities_aggregate FOREIGN KEY(aggregate_id) REFERENCES aggregates(id)
+    CONSTRAINT fk_aggregate_authorities FOREIGN KEY(aggregate_id) REFERENCES aggregates(id)
 );
 
 CREATE TABLE aggregate_members (
-    id BIGINT  NOT NULL AUTO_INCREMENT,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
     aggregate_id BIGINT NOT NULL,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT fk_aggregate_members_aggregate FOREIGN KEY(aggregate_id) REFERENCES aggregates(id)
+    CONSTRAINT fk_aggregate_members FOREIGN KEY(aggregate_id) REFERENCES aggregates(id)
 );
 
 CREATE TABLE IF NOT EXISTS address (
@@ -166,29 +173,42 @@ CREATE TABLE IF NOT EXISTS warehouses (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS documentations(
+CREATE TABLE IF NOT EXISTS line_items_warehouse (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    price DECIMAL(12,4) DEFAULT 0.0,
+    quantity DOUBLE DEFAULT 0.0,
+    version BIGINT DEFAULT 0,
+
+    PRIMARY KEY(id),
+
+    CONSTRAINT line_items_warehouse_fk_01 FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE IF NOT EXISTS documentations_warehouse(
     id BIGINT NOT NULL AUTO_INCREMENT,
     warehouse_id BIGINT NOT NULL,
     causal VARCHAR(25) NOT NULL,
     document VARCHAR(25) NOT NULL,
     document_date DATE NOT NULL,
     document_number BIGINT NOT NULL,
-    line_item_id BIGINT NOT NULL,
+    line_item_warehouse_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT documentations_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id)
+    CONSTRAINT documentations_warehouse_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id),
+    CONSTRAINT documentations_warehouse_fk_02 FOREIGN KEY(line_item_warehouse_id) REFERENCES line_items_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS warehouse_journal (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    documentation_id BIGINT NOT NULL,
+    documentation_warehouse_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT warehouse_journal_fk_01 FOREIGN KEY(documentation_id) REFERENCES documentations(id)
+    CONSTRAINT warehouse_journal_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS warehouse_card_products (
@@ -206,7 +226,7 @@ CREATE TABLE IF NOT EXISTS warehouse_card_products (
 
 CREATE  TABLE IF NOT EXISTS warehouse_cards (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    documentation_id BIGINT NOT NULL,
+    documentation_warehouse_id BIGINT NOT NULL,
     warehouse_card_product_id BIGINT NOT NULL,
     stock INTEGER,
     inventory_value DECIMAL(12,4),
@@ -214,7 +234,7 @@ CREATE  TABLE IF NOT EXISTS warehouse_cards (
 
     PRIMARY KEY(id),
 
-    CONSTRAINT warehouse_cards_fk_01 FOREIGN KEY(documentation_id) REFERENCES documentations(id),
+    CONSTRAINT warehouse_cards_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id),
     CONSTRAINT warehouse_cards_fk_02 FOREIGN KEY(warehouse_card_product_id) REFERENCES warehouse_card_products(id)
 );
 
@@ -240,6 +260,18 @@ CREATE TABLE IF NOT EXISTS invoices(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE IF NOT EXISTS line_items_purchase_orders (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    product_id BIGINT NOT NULL,
+    price DECIMAL(12,4) DEFAULT 0.0,
+    quantity DOUBLE DEFAULT 0.0,
+    version BIGINT DEFAULT 0,
+
+    PRIMARY KEY(id),
+
+    CONSTRAINT line_items_purchase_order_fk_01 FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
 CREATE TABLE IF NOT EXISTS purchase_orders (
     id BIGINT NOT NULL AUTO_INCREMENT,
     date_purchase TIMESTAMP,
@@ -253,7 +285,16 @@ CREATE TABLE IF NOT EXISTS purchase_orders (
     CONSTRAINT purchase_orders_fk_01 FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
-CREATE TABLE IF NOT EXISTS line_items (
+CREATE TABLE IF NOT EXISTS purchase_orders_line_items (
+    purchase_orders_id BIGINT NOT NULL,
+    line_items_purchase_orders_id BIGINT NOT NULL,
+
+    CONSTRAINT purchase_orders_lineitem_01 FOREIGN KEY (purchase_orders_id) REFERENCES purchase_orders(id),
+    CONSTRAINT purchase_orders_lineitem_02 UNIQUE (line_items_purchase_orders_id),
+    CONSTRAINT purchase_orders_lineitem_03 FOREIGN KEY (line_items_purchase_orders_id) REFERENCES line_items_purchase_orders(id)
+);
+
+CREATE TABLE IF NOT EXISTS line_items_sales_orders (
     id BIGINT NOT NULL AUTO_INCREMENT,
     product_id BIGINT NOT NULL,
     price DECIMAL(12,4) DEFAULT 0.0,
@@ -262,16 +303,7 @@ CREATE TABLE IF NOT EXISTS line_items (
 
     PRIMARY KEY(id),
 
-    CONSTRAINT line_item_fk FOREIGN KEY (product_id) REFERENCES products(id)
-);
-
-CREATE TABLE IF NOT EXISTS purchase_orders_lineitems (
-    purchase_orders_id BIGINT NOT NULL,
-    line_items_line_item_id BIGINT NOT NULL,
-
-    CONSTRAINT purchase_orders_lineitem_01 UNIQUE (line_items_line_item_id),
-    CONSTRAINT purchase_orders_lineitem_02 FOREIGN KEY (line_items_line_item_id) REFERENCES line_items(id),
-    CONSTRAINT purchase_orders_lineitem_03 FOREIGN KEY (purchase_orders_id) REFERENCES purchase_orders(id)
+    CONSTRAINT line_items_sales_orders_fk_01 FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
 CREATE TABLE IF NOT EXISTS sales_orders (
@@ -287,12 +319,12 @@ CREATE TABLE IF NOT EXISTS sales_orders (
     CONSTRAINT sales_orders_fk_01 FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
 );
 
-CREATE TABLE IF NOT EXISTS sales_orders_lineitems (
+CREATE TABLE IF NOT EXISTS sales_orders_line_items (
     sales_orders_id BIGINT NOT NULL,
-    line_items_line_item_id BIGINT NOT NULL,
+    line_items_sales_order_id BIGINT NOT NULL,
 
-    CONSTRAINT sales_orders_line_item_01 UNIQUE (line_items_line_item_id),
-    CONSTRAINT sales_orders_line_item_02 FOREIGN KEY (line_items_line_item_id) REFERENCES line_items(id),
+    CONSTRAINT sales_orders_line_item_01 UNIQUE (line_items_sales_order_id),
+    CONSTRAINT sales_orders_line_item_02 FOREIGN KEY (line_items_sales_order_id) REFERENCES line_items_sales_orders(id),
     CONSTRAINT sales_orders_line_item_03 FOREIGN KEY (sales_orders_id) REFERENCES sales_orders(id)
 );
 
