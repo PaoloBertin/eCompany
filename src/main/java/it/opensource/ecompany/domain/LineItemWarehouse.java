@@ -14,9 +14,8 @@ public class LineItemWarehouse implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "line_items_warehouse_fk_01"))
-    private Product product;
+    @Column(name = "product_code")
+    private String productCode;
 
     private Double quantity;
 
@@ -29,9 +28,9 @@ public class LineItemWarehouse implements Serializable {
 
     }
 
-    public LineItemWarehouse(Product product, Double quantity) {
+    public LineItemWarehouse(String productCode, Double quantity) {
 
-        this.product = product;
+        this.productCode = productCode;
         this.quantity = quantity;
     }
 
@@ -45,14 +44,14 @@ public class LineItemWarehouse implements Serializable {
         this.id = id;
     }
 
-    public Product getProduct() {
+    public String getProductCode() {
 
-        return product;
+        return productCode;
     }
 
-    public void setProduct(Product product) {
+    public void setProductCode(String productCode) {
 
-        this.product = product;
+        this.productCode = productCode;
     }
 
     public Double getQuantity() {

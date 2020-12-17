@@ -13,19 +13,20 @@ public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Lo
 
     long countByDocumentationWarehouseWarehouseId(Long warehouseId);
 
-    long countByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductId(Long warehouseId,
-                                                                                                             Long productId);
+    long countByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
+                                                                                                       String productCode);
 
     Page<WarehouseCard> findByDocumentationWarehouseWarehouseId(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductId(Long warehouseId,
-                                                                                                                           Long productId);
+    List<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
+                                                                                                                     String productCode);
 
-    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductProductCode(
-        Long warehouseId, String productCode, Pageable pageable);
+    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
+                                                                                                                     String productCode,
+                                                                                                                     Pageable pageable);
 
-    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductId(Long warehouseId,
-                                                                                                                           Long productId,
-                                                                                                                           Pageable pageable);
+    //    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
+    //                                                                                                                     String productCode,
+    //                                                                                                                     Pageable pageable);
 
 }

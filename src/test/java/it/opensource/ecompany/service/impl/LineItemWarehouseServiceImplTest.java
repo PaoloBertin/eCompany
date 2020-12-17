@@ -31,9 +31,9 @@ class LineItemWarehouseServiceImplTest {
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvFileSource(resources = "/lineItemWarehouseJournalByProduct.csv", numLinesToSkip = 1)
-    void getNumberLineItemWarehouseJournalByProduct(long productId, long expected) {
+    void getNumberLineItemWarehouseByProductCode(String productCode, long expected) {
 
-        long actual = lineItemWarehouseService.getNumberLineItemWarehouseByProduct(productId);
+        long actual = lineItemWarehouseService.getNumberLineItemWarehouseByProductCode(productCode);
         assertEquals(expected, actual);
     }
 

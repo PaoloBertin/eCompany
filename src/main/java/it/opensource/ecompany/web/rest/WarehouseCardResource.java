@@ -47,12 +47,13 @@ public class WarehouseCardResource {
                              .body(responseObject);
     }
 
-    @GetMapping(path = "/{warehouseId}/{productId}", params = "numberByWarehouseAndProductId")
-    public ResponseEntity<ResponseObject> getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(
-        @PathVariable("warehouseId") Long warehouseId, @PathVariable("productId") Long productId,
-        @RequestParam("numberByWarehouseAndProductId") String numberByWarehouseAndProductId) {
+    @GetMapping(path = "/{warehouseId}/{productCode}", params = "numberByWarehouseAndProductCode")
+    public ResponseEntity<ResponseObject> getNumberWarehouseCardsByWarehouseIdAndLineItemProductCode(
+        @PathVariable("warehouseId") Long warehouseId, @PathVariable("productCode") String productCode,
+        @RequestParam("numberByWarehouseAndProductCode") String numberByWarehouseAndProductCode) {
 
-        Long numberWarehouseCards = warehouseCardService.getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(warehouseId, productId);
+        Long numberWarehouseCards = warehouseCardService.getNumberWarehouseCardsByWarehouseIdAndLineItemProductCode(warehouseId,
+                                                                                                                    productCode);
         ResponseObject responseObject = new ResponseObject(numberWarehouseCards);
 
         return ResponseEntity.ok()
@@ -84,14 +85,14 @@ public class WarehouseCardResource {
                              .body(warehouseCards);
     }
 
-    @GetMapping(path = "/{warehouseId}/all/{productId}")
+    @GetMapping(path = "/{warehouseId}/all/{productCode}")
     public ResponseEntity<Page<WarehouseCard>> getWarehouseCardByWarehouseAndProduct(@PathVariable("warehouseId") Long warehouseId,
-                                                                                     @PathVariable("productId") Long productId,
+                                                                                     @PathVariable("productCode") String productCode,
                                                                                      @PageableDefault Pageable pageable) {
 
-        log.debug("REST request to get warehouseCard of the warehouse with id=" + warehouseId + " and productId=" + productId);
+        log.debug("REST request to get warehouseCard of the warehouse with code=" + warehouseId + " and productCode=" + productCode);
 
-        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIdByPage(warehouseId, productId, pageable);
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductCodeByPage(warehouseId, productCode, pageable);
 
         return ResponseEntity.ok()
                              .body(warehouseCards);

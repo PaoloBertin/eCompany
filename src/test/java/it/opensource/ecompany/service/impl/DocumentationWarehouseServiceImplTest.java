@@ -43,13 +43,13 @@ class DocumentationWarehouseServiceImplTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getNumberDocumentationWarehouseCardByWarehouseIdAndDocumentationWarehouseCardLineItemProductId() {
+    void getNumberDocumentationWarehouseCardByWarehouseIdAndDocumentationWarehouseCardLineItemProductCode() {
 
         Long warehouseId = 4L;
-        Long productId = 1L;
+        String productCode = "8883780450";
 
         Long expected = 1L;
-        Long actual = documentationWarehouseService.getNumberDocumentationsByWarehouseIdAndLineItemProductId(warehouseId, productId);
+        Long actual = documentationWarehouseService.getNumberDocumentationsByWarehouseIdAndLineItemProductCode(warehouseId, productCode);
 
         assertEquals(expected, actual);
     }

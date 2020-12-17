@@ -57,10 +57,10 @@ class WarehouseCardServiceImplTest {
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 25,  0"})
-    void getNumberWarehouseCardsByDocumentWarehouseIdAndDocumentLineItemProductIdTest(Long warehouseId, Long productId, Long expected) {
+    void getNumberWarehouseCardsByDocumentWarehouseIdAndDocumentLineItemProductCodeTest(Long warehouseId, String productCode, Long expected) {
 
 
-        Long actual = warehouseCardService.getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(warehouseId, productId);
+        Long actual = warehouseCardService.getNumberWarehouseCardsByWarehouseIdAndLineItemProductCode(warehouseId, productCode);
 
         assertEquals(expected, actual);
 
@@ -89,7 +89,7 @@ class WarehouseCardServiceImplTest {
         "3, 8883780450, 0",
         "4, 8883780450, 1",
         "5, 8883780450, 0"})
-    void getWarehouseCardsByWarehouseIdAndProductCodeTest(long warehouseId, String productCode, long expected) {
+    void getWarehouseCardsByWarehouseIdAndProductCodePageTest(long warehouseId, String productCode, long expected) {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
         Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIsbn(warehouseId, productCode, pageable);
@@ -102,10 +102,10 @@ class WarehouseCardServiceImplTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
-    @CsvSource({"1, 25,  0"})
-    void getWarehouseCardsByWarehouseIdAndProductIdTest(long warehouseId, long productId, long expected) {
+    @CsvSource({"1, 8883780450,  1"})
+    void getWarehouseCardsByWarehouseIdAndProductCodeTest(long warehouseId, String productCode, long expected) {
 
-        List<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseIdAndProductId(warehouseId, productId);
+        List<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseIdAndProductCode(warehouseId, productCode);
 
         long actual = warehouseCards.size();
         assertEquals(expected, actual);
@@ -115,11 +115,11 @@ class WarehouseCardServiceImplTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
-    @CsvSource({"1, 25,  0"})
-    void getWarehouseCardsByWarehouseIdAndProductIdByPage(long warehouseId, long productId, long expected) {
+    @CsvSource({"1, 8883780450,  1"})
+    void getWarehouseCardsByWarehouseIdAndProductCodeByPage(long warehouseId, String productCode, long expected) {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductIdByPage(warehouseId, productId, pageable);
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getByWarehouseIdAndProductCodeByPage(warehouseId, productCode, pageable);
 
         long actual = warehouseCards.getTotalElements();
         assertEquals(expected, actual);

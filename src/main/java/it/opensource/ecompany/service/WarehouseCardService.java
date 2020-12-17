@@ -13,7 +13,7 @@ public interface WarehouseCardService {
 
     Long getNumberWarehouseCardsBydWarehouseId(Long wareouseId);
 
-    Long getNumberWarehouseCardsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId);
+    Long getNumberWarehouseCardsByWarehouseIdAndLineItemProductCode(Long warehouseId, String productCode);
 
     List<WarehouseCard> getAllWarehouseCards();
 
@@ -23,9 +23,9 @@ public interface WarehouseCardService {
 
     Page<WarehouseCard> getWarehouseCardsByWarehouseByPage(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductId(Long warehouseId, Long productId);
+    List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductCode(Long warehouseId, String productCode);
 
-    Page<WarehouseCard> getByWarehouseIdAndProductIdByPage(Long warehouseId, Long productId, Pageable pageable);
+    Page<WarehouseCard> getByWarehouseIdAndProductCodeByPage(Long warehouseId, String productCode, Pageable pageable);
 
     Page<WarehouseCard> getByWarehouseIdAndProductIsbn(Long warehouseId, String isbn, Pageable pageable);
 

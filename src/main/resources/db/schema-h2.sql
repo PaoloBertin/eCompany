@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS price_lists(
     id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
-    product_code VARCHAR(15),
+    product_code VARCHAR(25) NOT NULL UNIQUE,
     price DECIMAL(12,4),
     version BIGINT DEFAULT 0,
 
@@ -176,16 +176,14 @@ CREATE TABLE IF NOT EXISTS warehouses (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS line_items_warehouse (
+CREATE TABLE IF NOT EXISTS line_items_warehouse(
     id BIGINT NOT NULL AUTO_INCREMENT,
-    product_id BIGINT NOT NULL,
+    product_code BIGINT NOT NULL,
     price DECIMAL(12,4) DEFAULT 0.0,
     quantity DOUBLE DEFAULT 0.0,
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY(id),
-
-    CONSTRAINT line_items_warehouse_fk_01 FOREIGN KEY (product_id) REFERENCES products(id)
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS documentations_warehouse(
@@ -243,24 +241,26 @@ CREATE  TABLE IF NOT EXISTS warehouse_cards (
 
 CREATE TABLE IF NOT EXISTS transport_documents(
     id BIGINT NOT NULL AUTO_INCREMENT,
-    document_date DATE NOT NULL,
-    document_number BIGINT NOT NULL,
     transferor_code VARCHAR(25),
     transferee_code VARCHAR(25),
+    documentation_warehouse_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+
+    CONSTRAINT transport_documents_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS invoices(
     id BIGINT NOT NULL AUTO_INCREMENT,
-    document_date DATE NOT NULL,
-    document_number BIGINT NOT NULL,
     transferor_code VARCHAR(25),
     transferee_code VARCHAR(25),
-    version BIGINT,
+    documentation_warehouse_id BIGINT NOT NULL,
+    version BIGINT DEFAULT 0,
 
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+
+    CONSTRAINT invoices_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS line_items_purchase_orders (

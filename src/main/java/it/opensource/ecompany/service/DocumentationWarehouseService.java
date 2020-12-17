@@ -10,9 +10,8 @@ public interface DocumentationWarehouseService {
 
     Long getNumberDocumentationsBydWarehouseId(Long wareouseId);
 
-    Long getNumberDocumentationsByWarehouseIdAndLineItemProductId(Long warehouseId, Long productId);
+    Long getNumberDocumentationsByWarehouseIdAndLineItemProductCode(Long warehouseId, String productCode);
 
-    Page<DocumentationWarehouse> getByWarehouseIdAndLineItemProductIdByPage(Long warehouseId, Long productId, Pageable pageable);
-
+    Page<DocumentationWarehouse> getByWarehouseIdAndLineItemProductCodeByPage(Long warehouseId, String productCode, Pageable pageable);
 
 }
