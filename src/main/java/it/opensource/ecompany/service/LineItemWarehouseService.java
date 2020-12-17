@@ -8,7 +8,7 @@ public interface LineItemWarehouseService {
 
     long getNumberLineItemWarehouse();
 
-    long getNumberLineItemWarehouseByProduct(Long productId);
+    long getNumberLineItemWarehouseByProductCode(String productCode);
 
     Optional<LineItemWarehouse> getLineItemWarehouseById(Long lineItemWarehouseId);
 
