@@ -3,6 +3,7 @@ package it.opensource.ecompany.web.controller;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Customer;
+import it.opensource.ecompany.domain.ImageProduct;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.validation.Valid;
+import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +50,8 @@ public class ProductsAdminController {
 
     private final UserContext userContext;
 
-    public ProductsAdminController(CategoriesService categoriesService, ProductsService productsService, CartBean cartBean,
+    public ProductsAdminController(CategoriesService categoriesService, ProductsService productsService,
+                                   CartBean cartBean,
                                    MessageSource messageSource, UserContext userContext) {
 
         this.categoriesService = categoriesService;
@@ -107,7 +110,8 @@ public class ProductsAdminController {
     @GetMapping("/{categoryId}/all")
     public String viewProducstByCategoryByPage(@PathVariable("categoryId") Long categoryId,
                                                @RequestParam(name = "page", defaultValue = "0") int page,
-                                               @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
+                                               @RequestParam(name = "size", defaultValue = "10") int size,
+                                               Model uiModel) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("name"));
         Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
@@ -167,11 +171,13 @@ public class ProductsAdminController {
 
         Product product = productsService.getProductById(id);
 
-        return product.getImage();
+        return product.getImageProduct()
+                      .getImageByte();
     }
 
     @GetMapping("/searchProduct")
-    public String searchProduct(@ModelAttribute SearchForm searchForm, @RequestParam(name = "page", defaultValue = "0") int page,
+    public String searchProduct(@ModelAttribute SearchForm searchForm,
+                                @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
         String searchText = searchForm.getTextToSearch();
@@ -211,8 +217,10 @@ public class ProductsAdminController {
      * @return nome vista
      */
     @PostMapping
-    public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                                @RequestParam(name = "form") String form, @RequestParam(name = "page", defaultValue = "0") int page,
+    public String createProduct(@Valid ProductForm productForm, BindingResult bindingResult,
+                                RedirectAttributes redirectAttributes,
+                                @RequestParam(name = "form") String form,
+                                @RequestParam(name = "page", defaultValue = "0") int page,
                                 @RequestParam(name = "size", defaultValue = "10") int size,
                                 @RequestParam(name = "categoryId", defaultValue = "1") Long categoryId,
                                 HttpServletRequest httpServletRequest, Locale locale, Model uiModel,
@@ -319,8 +327,6 @@ public class ProductsAdminController {
         productForm.setDescription(product.getDescription());
         productForm.setIsbn(product.getProductCode());
         productForm.setPrice(product.getPrice());
-
-        //        productForm.setImage(product.getImage());
         productForm.setCategoryProduct(product.getCategory()
                                               .getName());
         productForm.setCategory(product.getCategory());
@@ -341,11 +347,12 @@ public class ProductsAdminController {
                 if (inputStream == null)
                     log.info("File inputstream is null");
                 fileContent = toByteArray(inputStream);
-                product.setImage(fileContent);
+                ImageProduct imageProduct = new ImageProduct(fileContent);
+                product.setImageProduct(imageProduct);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
             }
-            product.setImage(fileContent);
+            // product.setImage();
         }
 
         return product;

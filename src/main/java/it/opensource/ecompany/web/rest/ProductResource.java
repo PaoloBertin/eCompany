@@ -1,5 +1,6 @@
 package it.opensource.ecompany.web.rest;
 
+import it.opensource.ecompany.domain.ImageProduct;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.SearchForm;
@@ -122,11 +123,12 @@ public class ProductResource {
                 InputStream inputStream = file.getInputStream();
                 if (inputStream == null)
                     log.info("File inputstream is null");
-                product.setImage(fileContent);
+                ImageProduct imageProduct = new ImageProduct(fileContent);
+                product.setImageProduct(imageProduct);
             } catch (IOException ex) {
                 log.error("Error saving uploaded file");
             }
-            product.setImage(fileContent);
+            // product.setImage(fileContent);
         }
 
         productsService.saveProduct(product);

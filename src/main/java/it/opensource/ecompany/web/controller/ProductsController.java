@@ -154,7 +154,7 @@ public class ProductsController {
 
         Product product = productsService.getProductById(id);
 
-        return product.getImage();
+        return product.getImageProduct().getImageByte();
     }
 
     @GetMapping("/searchProduct")

@@ -12,6 +12,7 @@ DROP TABLE IF EXISTS suppliers;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS price_lists;
+DROP TABLE IF EXISTS images_product;
 
 DROP TABLE IF EXISTS line_items_warehouse;
 DROP TABLE IF EXISTS documentations_warehouse;
@@ -140,6 +141,13 @@ CREATE TABLE IF NOT EXISTS categories (
     PRIMARY KEY(id)
 );
 
+CREATE TABLE IF NOT EXISTS images_product (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    image_byte BLOB,
+
+    PRIMARY KEY(id)
+);
+
 CREATE TABLE IF NOT EXISTS products (
     id BIGINT NOT NULL AUTO_INCREMENT,
     name VARCHAR(255),
@@ -147,13 +155,14 @@ CREATE TABLE IF NOT EXISTS products (
     description VARCHAR(255),
     product_code VARCHAR(20) NOT NULL UNIQUE,
     price DECIMAL(12,4),
-    image BLOB,
+    image_id BIGINT,
     category_id BIGINT,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY (id),
 
-    CONSTRAINT products_fk_01 FOREIGN KEY (category_id) REFERENCES categories(id)
+    CONSTRAINT products_fk_01 FOREIGN KEY (category_id) REFERENCES categories(id),
+    CONSTRAINT products_fk_02 FOREIGN KEY (image_id) REFERENCES images_product(id)
 );
 
 CREATE TABLE IF NOT EXISTS price_lists(
