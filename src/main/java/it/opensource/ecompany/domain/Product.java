@@ -3,6 +3,7 @@ package it.opensource.ecompany.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Table(name = "products")
@@ -25,7 +26,8 @@ public class Product implements Serializable {
 
     private String description;
 
-    private Float price;
+    @Transient
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "products_fk_01"))
@@ -98,12 +100,12 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
 
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
 
         this.price = price;
     }

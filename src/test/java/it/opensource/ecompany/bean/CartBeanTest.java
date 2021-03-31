@@ -9,10 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.number.IsCloseTo.closeTo;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 class CartBeanTest {
@@ -25,6 +25,8 @@ class CartBeanTest {
 
     private CartBean cartBean;
 
+    private BigDecimal error = new BigDecimal(0.01);
+
     @BeforeEach
     void setUp() {
 
@@ -36,14 +38,14 @@ class CartBeanTest {
         product1.setId(1L);
         product1.setName("Da Visual Basic a Java");
         product1.setCategory(category);
-        product1.setPrice(29.90F);
+        product1.setPrice(new BigDecimal(29.90));
 
         product2 = new Product();
         product2.setId(3L);
         product2.setProductCode("1449365116");
         product2.setName("Java Web Services");
         product2.setCategory(category);
-        product2.setPrice(39.90F);
+        product2.setPrice(new BigDecimal(39.90));
 
         cartBean = new CartBean();
     }
@@ -61,10 +63,10 @@ class CartBeanTest {
         cartBean.addProductToCart(product1);
         cartBean.addProductToCart(product1);
 
-        Double expected = 59.8; // subTotal
-        Double actual = cartBean.getSubTotal();
+        BigDecimal expected = new BigDecimal(59.8); // subTotal
+        BigDecimal actual = cartBean.getSubTotal();
 
-        assertThat(expected, closeTo(actual, 0.001));
+        assertThat(expected, is(closeTo(actual, error)));
     }
 
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
@@ -75,10 +77,10 @@ class CartBeanTest {
         cartBean.addProductToCart(product1);
         cartBean.addProductToCart(product2);
 
-        Double expected = 69.8; // subTotal
-        Double actual = cartBean.getSubTotal();
+        BigDecimal expected = new BigDecimal(69.8); // subTotal
+        BigDecimal actual = cartBean.getSubTotal();
 
-        assertThat(expected, closeTo(actual, 0.001));
+        assertThat(expected, closeTo(actual, error));
     }
 
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
@@ -92,10 +94,10 @@ class CartBeanTest {
 
         cartBean.deleteProductToCart(product1);
 
-        Double expected = 39.9; // subTotal
-        Double actual = cartBean.getSubTotal();
+        BigDecimal expected = new BigDecimal(39.9); // subTotal
+        BigDecimal actual = cartBean.getSubTotal();
 
-        assertThat(expected, closeTo(actual, 0.001));
+        assertThat(expected, closeTo(actual, error));
     }
 
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
@@ -122,10 +124,10 @@ class CartBeanTest {
         cartBean.addProductToCart(product2);
         cartBean.setExpressDelivery(false);
 
-        Double expected = 69.8; // totalCost
-        Double actual = cartBean.getTotalCost();
+        BigDecimal expected = new BigDecimal(69.8); // totalCost
+        BigDecimal actual = cartBean.getTotalCost();
 
-        assertThat(expected, closeTo(actual, 0.001));
+        assertThat(expected, closeTo(actual, error));
 
     }
 
@@ -136,10 +138,10 @@ class CartBeanTest {
 
         cartBean.addProductToCart(product1);
 
-        Double expected = 29.90; // totalCost
-        Double actual = cartBean.getTotalCost();
+        BigDecimal expected = new BigDecimal(29.90); // totalCost
+        BigDecimal actual = cartBean.getTotalCost();
 
-        assertThat(actual, closeTo(expected, 0.001));
+        assertThat(actual, closeTo(expected, error));
 
     }
 
@@ -151,10 +153,10 @@ class CartBeanTest {
         cartBean.addProductToCart(product1);
         cartBean.setExpressDelivery(true);
 
-        Double expected = 34.90; // totalCost
-        Double actual = cartBean.getTotalCost();
+        BigDecimal expected = new BigDecimal(34.90); // totalCost
+        BigDecimal actual = cartBean.getTotalCost();
 
-        assertThat(actual, closeTo(expected, 0.001));
+        assertThat(actual, closeTo(expected, error));
 
     }
 
@@ -167,9 +169,9 @@ class CartBeanTest {
         cartBean.addProductToCart(product2);
         cartBean.setExpressDelivery(true);
 
-        Double expected = 74.8; // totalCost
-        Double actual = cartBean.getTotalCost();
+        BigDecimal expected = new BigDecimal(74.8); // totalCost
+        BigDecimal actual = cartBean.getTotalCost();
 
-        assertThat(expected, closeTo(actual, 0.001));
+        assertThat(expected, closeTo(actual, error));
     }
 }

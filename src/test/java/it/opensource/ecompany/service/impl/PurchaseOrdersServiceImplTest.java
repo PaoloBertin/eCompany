@@ -9,6 +9,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -35,9 +37,9 @@ class PurchaseOrdersServiceImplTest {
     @Test
     public void getPurchaseOrderByIdTest() {
 
-        double expected = 169.50;
-        double actual = purchaseOrdersService.getPurchaseOrderById(1L)
-                                             .getTotalAmount();
+        BigDecimal expected = new BigDecimal(169.50);
+        BigDecimal actual = purchaseOrdersService.getPurchaseOrderById(1L)
+                                                 .getTotalAmount();
 
         assertThat(actual, equalTo(expected));
     }

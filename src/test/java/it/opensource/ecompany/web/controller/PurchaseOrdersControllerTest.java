@@ -15,6 +15,8 @@ import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.Matchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -85,7 +87,7 @@ public class PurchaseOrdersControllerTest {
         product.setName("Da Visual Basic a Java");
         product.setProductCode("8883780450");
         product.setCategory(category);
-        product.setPrice(29.90F);
+        product.setPrice(new BigDecimal(29.90));
 
         CartBean cartBean = new CartBean();
         cartBean.addProductToCart(product);
@@ -93,7 +95,7 @@ public class PurchaseOrdersControllerTest {
         product.setName("Java Web Services");
         product.setProductCode("1449365116");
         product.setCategory(category);
-        product.setPrice(39.90F);
+        product.setPrice(new BigDecimal(39.90));
 
         cartBean.addProductToCart(product);
 

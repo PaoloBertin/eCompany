@@ -2,6 +2,7 @@ package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +22,7 @@ public class PurchaseOrder implements Serializable {
     private Date datePurchase;
 
     @Column(name = "total_amount")
-    private Double totalAmount;
+    private BigDecimal totalAmount;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 25)
@@ -60,12 +61,12 @@ public class PurchaseOrder implements Serializable {
         this.datePurchase = datePurchase;
     }
 
-    public Double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
 
         return totalAmount;
     }
 
-    public void setTotalAmount(Double totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
 
         this.totalAmount = totalAmount;
     }

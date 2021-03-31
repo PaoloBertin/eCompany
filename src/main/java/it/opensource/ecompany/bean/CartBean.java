@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,13 +20,13 @@ public class CartBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Double totalCost = 0.0;
+    private BigDecimal totalCost = new BigDecimal(0.0);
 
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
-    private Double subTotal = 0.0;
+    private BigDecimal subTotal = new BigDecimal(0.0);
 
-    private Double shippingCosts;
+    private BigDecimal shippingCosts;
 
     private boolean expressDelivery = false;
 
@@ -48,7 +49,7 @@ public class CartBean implements Serializable {
             this.products.put(product, 1);
         }
 
-        setSubTotal();
+        updateSubTotal();
 
         log.debug("nuovo prodotti in carrello=" + getNumberProducts());
         log.debug("importo subTotale acquisto=" + subTotal);
@@ -61,13 +62,13 @@ public class CartBean implements Serializable {
 
         if (this.products.containsKey(product)) {
             products.remove(product);
-            setSubTotal();
+            updateSubTotal();
         }
     }
 
     public Integer getNumberProducts() {
 
-        setSubTotal();
+        updateSubTotal();
 
         return numberProducts;
     }
@@ -87,54 +88,56 @@ public class CartBean implements Serializable {
         this.expressDelivery = expressDelivery;
     }
 
-    public Double getShippingCosts() {
+    public BigDecimal getShippingCosts() {
 
-        setShippingCosts();
+        updateShippingCosts();
 
         return shippingCosts;
     }
 
-    private void setShippingCosts() {
+    private void updateShippingCosts() {
 
         if (expressDelivery) {
-            shippingCosts = 5.0;
+            shippingCosts = new BigDecimal(5.0);
         } else {
-            if (subTotal >= 25) {
-                shippingCosts = 0.0;
+            int result = subTotal.compareTo(new BigDecimal(25));
+            if (result >= 0) {
+                shippingCosts = new BigDecimal(0.0);
             } else {
-                shippingCosts = 3.0;
+                shippingCosts = new BigDecimal(3.0);
             }
         }
     }
 
-    public Double getTotalCost() {
+    public BigDecimal getTotalCost() {
 
-        setSubTotal();
+        updateSubTotal();
         totalCost = subTotal;
-        totalCost += getShippingCosts();
+
+        totalCost.add(getShippingCosts());
 
         return this.totalCost;
     }
 
-    public Double getSubTotal() {
+    public BigDecimal getSubTotal() {
 
         return subTotal;
     }
 
-    private void setSubTotal() {
+    private void updateSubTotal() {
 
         numberProducts = 0;
-        subTotal = 0.0;
+        subTotal = new BigDecimal(0.0);
 
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             Product key = entry.getKey();
             int quantity = entry.getValue();
-            double price = key.getPrice();
-            double unitCost = price * quantity;
+            BigDecimal price = key.getPrice();
+            BigDecimal unitCost = price.multiply(BigDecimal.valueOf(quantity));
 
             numberProducts += quantity;
 
-            subTotal += unitCost;
+            subTotal.add(unitCost);
         }
     }
 

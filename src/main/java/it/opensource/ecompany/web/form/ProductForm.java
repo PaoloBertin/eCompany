@@ -3,6 +3,7 @@ package it.opensource.ecompany.web.form;
 import it.opensource.ecompany.domain.Category;
 
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 public class ProductForm {
 
@@ -19,11 +20,9 @@ public class ProductForm {
     @NotNull
     private String isbn;
 
-    private Float price;
+    private BigDecimal price;
 
     private String categoryProduct;
-
-    //    private  byte[] image;
 
     private Category category;
 
@@ -87,12 +86,12 @@ public class ProductForm {
         this.isbn = isbn;
     }
 
-    public Float getPrice() {
+    public BigDecimal getPrice() {
 
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(BigDecimal price) {
 
         this.price = price;
     }

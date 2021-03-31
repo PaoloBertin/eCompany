@@ -99,8 +99,8 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
 
         // aggiunge fattura al conto
         Long accountId = 1L;
-        Double totalAmount = purchaseOrder.getTotalAmount();
-        accountsService.deposit(accountId, BigDecimal.valueOf(totalAmount));
+        BigDecimal totalAmount = purchaseOrder.getTotalAmount();
+        accountsService.deposit(accountId, totalAmount);
     }
 
 }

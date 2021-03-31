@@ -154,7 +154,6 @@ CREATE TABLE IF NOT EXISTS products (
     subtitle VARCHAR(255),
     description VARCHAR(255),
     product_code VARCHAR(20) NOT NULL UNIQUE,
-    price DECIMAL(12,4),
     image_id BIGINT,
     category_id BIGINT,
     version BIGINT DEFAULT 0,
