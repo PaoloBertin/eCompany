@@ -141,10 +141,17 @@ public class ProductsServiceImplTest {
 
         Product product = productsService.getProductById(1L);
 
-        String expected = "Da Visual Basic a Java";
+        String expectedName = "Da Visual Basic a Java";
         String actual = product.getName();
+        assertThat(actual, equalTo(expectedName));
 
-        assertThat(actual, equalTo(expected));
+        String expectedCode = "8883780450";
+        actual = product.getProductCode();
+        assertThat(actual, equalTo(expectedCode));
+
+        long expectedImageId = 1;
+        long actualImageId = product.getImageProduct().getId();
+        assertThat(actualImageId, equalTo(actualImageId));
     }
 
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)

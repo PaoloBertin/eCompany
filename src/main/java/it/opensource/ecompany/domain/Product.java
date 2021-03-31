@@ -31,7 +31,7 @@ public class Product implements Serializable {
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "products_fk_01"))
     private Category category;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id", foreignKey = @ForeignKey(name = "products_fk_02"))
     private ImageProduct imageProduct;
 
