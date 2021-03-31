@@ -167,14 +167,14 @@ CREATE TABLE IF NOT EXISTS products (
 
 CREATE TABLE IF NOT EXISTS price_lists(
     id BIGINT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(255),
+    price_list_name VARCHAR(255),
     product_code VARCHAR(25) NOT NULL UNIQUE,
     price DECIMAL(12,4),
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY (id),
 
-    CONSTRAINT price_lists_uq_01 UNIQUE (name,product_code)
+    CONSTRAINT price_lists_uq_01 UNIQUE (price_list_name, product_code)
 );
 
 CREATE TABLE IF NOT EXISTS warehouses (

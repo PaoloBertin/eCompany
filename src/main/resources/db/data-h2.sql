@@ -195,7 +195,7 @@ INSERT INTO products(id, name, subtitle, description, product_code, price, image
            (53, 'Carte Da Gioco Ramino Italia', '', 'L''astuccio Ramino Italia Dal Negro include due mazzi da poker in cartoncino.',                                                                       '8001097210435',  12.00,  53, 4),
            (54, 'Apple iPhone 11', '', 'Un nuovo sistema a doppia fotocamera, per inquadrare più cose intorno a te.',                                                                                      '0190199221130', 796.00,  54, 6);
 
-INSERT INTO price_lists(id, name, product_code, price, version)
+INSERT INTO price_lists(id, price_list_name, product_code, price, version)
     VALUES (  1, 'base',    '8883780450', 29.90, 0),
            (  2, 'base',    '8883780451', 39.90, 0),
            (  3, 'base',    '1449365116', 29.90, 0),

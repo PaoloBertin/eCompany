@@ -14,7 +14,8 @@ public class PriceList implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(name = "price_list_name")
+    private String priceListName;
 
     @Column(name = "product_code")
     private String productCode;
@@ -34,14 +35,14 @@ public class PriceList implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public String getPriceListName() {
 
-        return name;
+        return priceListName;
     }
 
-    public void setName(String name) {
+    public void setPriceListName(String priceListName) {
 
-        this.name = name;
+        this.priceListName = priceListName;
     }
 
     public String getProductCode() {
@@ -77,7 +78,12 @@ public class PriceList implements Serializable {
     @Override
     public String toString() {
 
-        return "PriceList{" + "id=" + id + ", name='" + name + '\'' + ", productCode='" + productCode + '\'' + ", price=" + price + ", version=" + version + '}';
+        return "PriceList{" +
+                "id=" + id +
+                ", priceListName='" + priceListName + '\'' +
+                ", productCode='" + productCode + '\'' +
+                ", price=" + price +
+                ", version=" + version +
+                '}';
     }
-
 }

@@ -28,7 +28,7 @@ class PriceListsServiceImplTest {
         String expected = "base";
         String actual = priceListsService.getPriceListById(priceListId)
                                          .get()
-                                         .getName();
+                                         .getPriceListName();
         assertEquals(expected, actual);
     }
 
