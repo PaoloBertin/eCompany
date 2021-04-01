@@ -26,12 +26,12 @@ public class Product implements Serializable {
 
     private String description;
 
-    @Transient
-    private BigDecimal price;
-
     @ManyToOne
     @JoinColumn(name = "category_id", foreignKey = @ForeignKey(name = "products_fk_01"))
     private Category category;
+
+    @Transient
+    private BigDecimal price;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "image_id", foreignKey = @ForeignKey(name = "products_fk_02"))
@@ -100,16 +100,6 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-
-        this.price = price;
-    }
-
     public ImageProduct getImageProduct() {
 
         return imageProduct;
@@ -128,6 +118,16 @@ public class Product implements Serializable {
     public void setCategory(Category category) {
 
         this.category = category;
+    }
+
+    public BigDecimal getPrice() {
+
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+
+        this.price = price;
     }
 
     public Integer getVersion() {

@@ -28,12 +28,11 @@ public class PriceListsServiceImpl implements PriceListsService {
     }
 
     @Override
-    public PriceList getPriceListdByProductCode(String productCode) {
+    public PriceList getPriceListdByPriceListName(String priceListName) {
 
-        PriceList priceList = priceListsRepository.findByProductCode(productCode);
-        log.debug(priceList.toString());
+        PriceList priceList = priceListsRepository.findByPriceListName(priceListName);
+        log.debug("recuperato priceLists " + priceList.getPriceListName());
 
         return priceList;
     }
-
 }

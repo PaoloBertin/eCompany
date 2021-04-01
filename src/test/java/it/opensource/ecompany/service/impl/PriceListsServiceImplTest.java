@@ -4,11 +4,8 @@ import it.opensource.ecompany.service.PriceListsService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
-
-import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,23 +22,23 @@ class PriceListsServiceImplTest {
 
         Long priceListId = 1L;
 
-        String expected = "base";
-        String actual = priceListsService.getPriceListById(priceListId)
-                                         .get()
-                                         .getPriceListName();
+        var expected = "base";
+        var actual = priceListsService.getPriceListById(priceListId)
+                                      .get()
+                                      .getPriceListName();
         assertEquals(expected, actual);
     }
 
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getPriceByProductCode() {
+    void getPriceListdByPriceListNameTest() {
 
-        String productCode = "8883780451";
+        String priceListName = "base";
 
-        BigDecimal expected = new BigDecimal("39.9000");
-        BigDecimal actual = priceListsService.getPriceListdByProductCode(productCode)
-                                             .getPrice();
+        long expected = 1;
+        long actual = priceListsService.getPriceListdByPriceListName(priceListName).getId();
+
         assertEquals(expected, actual);
     }
 

@@ -1,0 +1,94 @@
+package it.opensource.ecompany.domain;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+@Table(name = "product_prices")
+@Entity
+public class ProductPrice {
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "product_code")
+    private String productCode;
+
+    private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "price_list_id", foreignKey = @ForeignKey(name = "product_prices_fk_01"))
+    private PriceList priceList;
+
+    @Version
+    private Long version;
+
+    public Long getId() {
+
+        return id;
+    }
+
+    public void setId(Long id) {
+
+        this.id = id;
+    }
+
+    public String getProductCode() {
+
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+
+        this.productCode = productCode;
+    }
+
+    public BigDecimal getPrice() {
+
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+
+        this.price = price;
+    }
+
+    public Long getVersion() {
+
+        return version;
+    }
+
+    public void setVersion(Long version) {
+
+        this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductPrice that = (ProductPrice) o;
+        return productCode.equals(that.productCode);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(productCode);
+    }
+
+    @Override
+    public String toString() {
+
+        return "ProductPrice{" +
+                "id=" + id +
+                ", productCode='" + productCode + '\'' +
+                ", price=" + price +
+                ", version=" + version +
+                '}';
+    }
+}

@@ -1,6 +1,8 @@
 package it.opensource.ecompany.service.impl;
 
+import it.opensource.ecompany.domain.PriceList;
 import it.opensource.ecompany.domain.Product;
+import it.opensource.ecompany.domain.ProductPrice;
 import it.opensource.ecompany.repository.ProductsRepository;
 import it.opensource.ecompany.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +77,15 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public Product getProductByProductCode(String productCode) {
 
-        return productsRepository.findByProductCode(productCode);
+        Product product = productsRepository.findByProductCode(productCode);
+
+        String priceListName = "base";
+
+
+        ProductPrice productPrice = new ProductPrice();
+
+        product.setPrice(productPrice.getPrice());
+        return product;
     }
 
     @Transactional(readOnly = true)

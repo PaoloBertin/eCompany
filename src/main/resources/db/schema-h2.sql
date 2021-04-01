@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS suppliers;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS price_lists;
+DROP TABLE IF EXISTS product_prices;
+
 DROP TABLE IF EXISTS images_product;
 
 DROP TABLE IF EXISTS line_items_warehouse;
@@ -167,13 +169,21 @@ CREATE TABLE IF NOT EXISTS products (
 CREATE TABLE IF NOT EXISTS price_lists(
     id BIGINT NOT NULL AUTO_INCREMENT,
     price_list_name VARCHAR(255),
-    product_code VARCHAR(25) NOT NULL UNIQUE,
-    price DECIMAL(12,4),
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY (id),
+    PRIMARY KEY (id)
+);
 
-    CONSTRAINT price_lists_uq_01 UNIQUE (price_list_name, product_code)
+CREATE TABLE IF NOT EXISTS product_prices(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    product_code VARCHAR(25) NOT NULL UNIQUE,
+    price DECIMAL(12,4),
+    price_list_id BIGINT,
+    version BIGINT DEFAULT 0,
+
+    PRIMARY KEY(id),
+
+    CONSTRAINT product_prices_fk_01 FOREIGN KEY (price_list_id) REFERENCES price_lists(id)
 );
 
 CREATE TABLE IF NOT EXISTS warehouses (
@@ -184,7 +194,7 @@ CREATE TABLE IF NOT EXISTS warehouses (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS line_items_warehouse(
+CREATE TABLE IF NOT EXISTS line_items_warehouse (
     id BIGINT NOT NULL AUTO_INCREMENT,
     product_code BIGINT NOT NULL,
     price DECIMAL(12,4) DEFAULT 0.0,
@@ -300,8 +310,8 @@ CREATE TABLE IF NOT EXISTS purchase_orders_line_items (
     purchase_orders_id BIGINT NOT NULL,
     line_items_purchase_orders_id BIGINT NOT NULL,
 
-    CONSTRAINT purchase_orders_lineitem_01 FOREIGN KEY (purchase_orders_id) REFERENCES purchase_orders(id),
     CONSTRAINT purchase_orders_lineitem_02 UNIQUE (line_items_purchase_orders_id),
+    CONSTRAINT purchase_orders_lineitem_01 FOREIGN KEY (purchase_orders_id) REFERENCES purchase_orders(id),
     CONSTRAINT purchase_orders_lineitem_03 FOREIGN KEY (line_items_purchase_orders_id) REFERENCES line_items_purchase_orders(id)
 );
 

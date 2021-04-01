@@ -8,6 +8,5 @@ public interface PriceListsService {
 
     Optional<PriceList> getPriceListById(Long priceListId);
 
-    PriceList getPriceListdByProductCode(String productCode);
-
+    PriceList getPriceListdByPriceListName(String priceListName);
 }

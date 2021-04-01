@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
@@ -95,7 +94,6 @@ class ProductResourceTest {
     @Test
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
 
-        // Category category = new Category(1L, "Libri");
         Category category = categoriesService.getCategoryByName("Libri");
         Product product = new Product();
         product.setProductCode("aaaa");

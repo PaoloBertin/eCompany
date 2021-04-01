@@ -2,7 +2,6 @@ package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Table(name = "price_lists")
 @Entity
@@ -16,11 +15,6 @@ public class PriceList implements Serializable {
 
     @Column(name = "price_list_name")
     private String priceListName;
-
-    @Column(name = "product_code")
-    private String productCode;
-
-    private BigDecimal price;
 
     @Version
     private Long version;
@@ -45,26 +39,6 @@ public class PriceList implements Serializable {
         this.priceListName = priceListName;
     }
 
-    public String getProductCode() {
-
-        return productCode;
-    }
-
-    public void setProductCode(String productCode) {
-
-        this.productCode = productCode;
-    }
-
-    public BigDecimal getPrice() {
-
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-
-        this.price = price;
-    }
-
     public Long getVersion() {
 
         return version;
@@ -81,8 +55,6 @@ public class PriceList implements Serializable {
         return "PriceList{" +
                 "id=" + id +
                 ", priceListName='" + priceListName + '\'' +
-                ", productCode='" + productCode + '\'' +
-                ", price=" + price +
                 ", version=" + version +
                 '}';
     }
