@@ -38,14 +38,14 @@ class CartBeanTest {
         product1.setId(1L);
         product1.setName("Da Visual Basic a Java");
         product1.setCategory(category);
-        product1.setPrice(new BigDecimal(29.90));
+        product1.setPrice(new BigDecimal("29.90"));
 
         product2 = new Product();
         product2.setId(3L);
         product2.setProductCode("1449365116");
         product2.setName("Java Web Services");
         product2.setCategory(category);
-        product2.setPrice(new BigDecimal(39.90));
+        product2.setPrice(new BigDecimal("39.90"));
 
         cartBean = new CartBean();
     }
@@ -58,12 +58,12 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void addedTheSameProducts() {
+    void addedTheSameProductsTest() {
 
         cartBean.addProductToCart(product1);
         cartBean.addProductToCart(product1);
 
-        BigDecimal expected = new BigDecimal(59.8); // subTotal
+        BigDecimal expected = new BigDecimal("59.8"); // subTotal
         BigDecimal actual = cartBean.getSubTotal();
 
         assertThat(expected, is(closeTo(actual, error)));
@@ -72,12 +72,12 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void addProductToCart() {
+    void addProductToCartTest() {
 
         cartBean.addProductToCart(product1);
         cartBean.addProductToCart(product2);
 
-        BigDecimal expected = new BigDecimal(69.8); // subTotal
+        BigDecimal expected = new BigDecimal("69.80"); // subTotal
         BigDecimal actual = cartBean.getSubTotal();
 
         assertThat(expected, closeTo(actual, error));
@@ -86,7 +86,7 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void deleteProductToCart() {
+    void deleteProductToCartTest() {
 
 
         cartBean.addProductToCart(product1);
@@ -103,7 +103,7 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getNumberProducts() {
+    void getNumberProductsTest() {
 
         cartBean.addProductToCart(product1);
         cartBean.addProductToCart(product2);
@@ -118,7 +118,7 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getShippingCosts() {
+    public void getShippingCostsTest() {
 
         cartBean.addProductToCart(product1);
         cartBean.addProductToCart(product2);
@@ -134,7 +134,7 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getSubTotal() {
+    public void getSubTotalTest() {
 
         cartBean.addProductToCart(product1);
 
@@ -148,12 +148,12 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getSubTotalWithExpressDelivery() {
+    public void getSubTotalWithExpressDeliveryTest() {
 
         cartBean.addProductToCart(product1);
         cartBean.setExpressDelivery(true);
 
-        BigDecimal expected = new BigDecimal(34.90); // totalCost
+        BigDecimal expected = new BigDecimal("29.90"); // totalCost
         BigDecimal actual = cartBean.getTotalCost();
 
         assertThat(actual, closeTo(expected, error));
@@ -163,13 +163,13 @@ class CartBeanTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getTotalCost() {
+    public void getTotalCostTest() {
 
         cartBean.addProductToCart(product1);
         cartBean.addProductToCart(product2);
         cartBean.setExpressDelivery(true);
 
-        BigDecimal expected = new BigDecimal(74.8); // totalCost
+        BigDecimal expected = new BigDecimal("69.8"); // totalCost
         BigDecimal actual = cartBean.getTotalCost();
 
         assertThat(expected, closeTo(actual, error));

@@ -39,9 +39,7 @@ public class PurchaseOrdersControllerTest {
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(15)))
-           .andExpect(model().attribute("purchaseOrders", hasItem(hasProperty("totalAmount", equalTo(169.5)))))
            .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
-           .andExpect(request().sessionAttribute("scopedTarget.cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
            .andExpect(view().name("purchaseorders/list"))
            .andExpect(status().isOk());
     }

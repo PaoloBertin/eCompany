@@ -20,11 +20,11 @@ public class CartBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private BigDecimal totalCost = new BigDecimal(0.0);
+    private BigDecimal totalCost = BigDecimal.ZERO;
 
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
-    private BigDecimal subTotal = new BigDecimal(0.0);
+    private BigDecimal subTotal = BigDecimal.ZERO;
 
     private BigDecimal shippingCosts;
 
@@ -127,7 +127,7 @@ public class CartBean implements Serializable {
     private void updateSubTotal() {
 
         numberProducts = 0;
-        subTotal = new BigDecimal(0.0);
+        subTotal = BigDecimal.ZERO;
 
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
             Product key = entry.getKey();
@@ -137,7 +137,7 @@ public class CartBean implements Serializable {
 
             numberProducts += quantity;
 
-            subTotal.add(unitCost);
+            subTotal = subTotal.add(unitCost);
         }
     }
 

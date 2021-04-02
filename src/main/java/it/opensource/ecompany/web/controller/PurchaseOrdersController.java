@@ -42,13 +42,15 @@ public class PurchaseOrdersController {
     @GetMapping("/admin/purchaseorders/all")
     public String getAllPurchaseOrders(Model uiModel) {
 
+        List<PurchaseOrder> purchaseOrders = purchaseOrdersService.getAllPurchaseOrders();
+        List<Category> categories = categoriesService.getAll();
         Customer customer = userContext.getCurrentCustomer();
 
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);
-        uiModel.addAttribute("categories", categoriesService.getAll());
-        uiModel.addAttribute("purchaseOrders", purchaseOrdersService.getAllPurchaseOrders());
+        uiModel.addAttribute("categories", categories);
+        uiModel.addAttribute("purchaseOrders", purchaseOrders);
 
         return "purchaseorders/list";
     }

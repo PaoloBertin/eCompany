@@ -41,11 +41,12 @@ public class CartController {
     public String addProductToCart(@PathVariable("productid") Long productid, @RequestHeader("referer") String referer) {
 
         Product product = productsService.getProductById(productid);
-
         cartBean.addProductToCart(product);
 
         log.debug("aggiunto prodotto al carrello");
         log.debug("sono presenti " + cartBean.getNumberProducts() + " prodotti nel carrello");
+        log.debug("subtotale = " + cartBean.getSubTotal());
+        log.debug("totale    = " + cartBean.getTotalCost());
 
         return "redirect:" + referer;
     }
