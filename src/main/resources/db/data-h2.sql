@@ -3,6 +3,10 @@
 -- mario.rossi        password = user
 -- giuseppe.verdi     password = user
 -- giuseppe.garibaldi password = user
+
+INSERT INTO enterprises(id, company_name, price_list)
+    VALUES (1, 'ecompany', 'base');
+
 INSERT INTO users (username, password, enabled)
     VALUES ('admin', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 1),
            ('user.ecompany',  '$2a$10$/P0J7Qo9eAexCmG6bQdM5uQVXNyZ7yutm8sc6qCP2IJj1ZSppTgu.', 1),

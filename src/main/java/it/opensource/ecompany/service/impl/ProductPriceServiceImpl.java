@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service("productPriceService")
 public class ProductPriceServiceImpl implements ProductPriceService {
 
@@ -21,6 +23,16 @@ public class ProductPriceServiceImpl implements ProductPriceService {
     public Page<ProductPrice> getProductPriceByPriceListName(String priceListName, Pageable pageable) {
 
         return productPricesRepository.findByPriceListPriceListName(priceListName, pageable);
+    }
+
+    @Override
+    public BigDecimal getProductPriceByPriceListNameAndProductCode(String productCode) {
+
+        String priceListName = "base";
+        ProductPrice productPrice = getProductPriceByPriceListNameAndProductCode(priceListName, productCode);
+        BigDecimal price = productPrice.getPrice();
+
+        return price;
     }
 
     @Override

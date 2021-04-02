@@ -3,6 +3,7 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
+import it.opensource.ecompany.service.EnterprisesService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WarehouseService;
 import org.junit.jupiter.api.Disabled;
@@ -83,9 +84,10 @@ public class ProductsServiceImplTest {
     @Test
     public void getAllProductsTest() {
 
+        List<Product> products = productsService.getAllProducts();
+
         int expected = 54;
-        int actual = productsService.getAllProducts()
-                                    .size();
+        int actual = products.size();
 
         assertThat(actual, is(expected));
     }
@@ -209,6 +211,7 @@ public class ProductsServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
+    @Disabled
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test

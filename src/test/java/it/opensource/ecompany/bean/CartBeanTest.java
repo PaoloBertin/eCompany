@@ -25,7 +25,7 @@ class CartBeanTest {
 
     private CartBean cartBean;
 
-    private BigDecimal error = new BigDecimal(0.01);
+    private BigDecimal error = new BigDecimal("0.001");
 
     @BeforeEach
     void setUp() {

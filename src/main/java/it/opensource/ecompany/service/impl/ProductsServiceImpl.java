@@ -1,28 +1,35 @@
 package it.opensource.ecompany.service.impl;
 
-import it.opensource.ecompany.domain.PriceList;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.ProductPrice;
 import it.opensource.ecompany.repository.ProductsRepository;
+import it.opensource.ecompany.service.EnterprisesService;
+import it.opensource.ecompany.service.ProductPriceService;
 import it.opensource.ecompany.service.ProductsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Transactional
 @Service("productsService")
 public class ProductsServiceImpl implements ProductsService {
 
-
     private final ProductsRepository productsRepository;
 
-    public ProductsServiceImpl(ProductsRepository productsRepository) {
+    private final ProductPriceService productPriceService;
+
+    private final EnterprisesService enterprisesService;
+
+    public ProductsServiceImpl(ProductsRepository productsRepository, ProductPriceService productPriceService,
+                               EnterprisesService enterprisesService) {
 
         this.productsRepository = productsRepository;
+        this.productPriceService = productPriceService;
+        this.enterprisesService = enterprisesService;
     }
 
     @Override
@@ -41,36 +48,49 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public List<Product> getAllProducts() {
 
-        return productsRepository.findAll();
+        List<Product> products = productsRepository.findAll();
+
+        return setPrices(products);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<Product> getAllProductsByPage(Pageable pageable) {
 
-        return productsRepository.findAll(pageable);
+        Page<Product> pageProducts = productsRepository.findAll(pageable);
+        setPrices(pageProducts.getContent());
+
+        return pageProducts;
     }
 
+    // TODO cambiare il nome del metodo in getAllProductsByCategory
     @Transactional(readOnly = true)
     @Override
     public List<Product> getProductsByCategory(Long categoryId) {
 
-        return productsRepository.findByCategoryId(categoryId);
+        List<Product> products = productsRepository.findByCategoryId(categoryId);
+
+        return setPrices(products);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<Product> getProductsByCategoryByPage(Long categoryId, Pageable pageable) {
 
-        return productsRepository.findByCategoryId(categoryId, pageable);
+        Page<Product> pageProducts = productsRepository.findByCategoryId(categoryId, pageable);
+        setPrices(pageProducts.getContent());
+
+        return pageProducts;
     }
 
     @Transactional(readOnly = true)
     @Override
     public Product getProductById(Long id) {
 
-        return productsRepository.findById(id)
-                                 .get();
+        Product product = productsRepository.findById(id).get();
+        setPrice(product);
+
+        return product;
     }
 
     @Transactional(readOnly = true)
@@ -78,13 +98,8 @@ public class ProductsServiceImpl implements ProductsService {
     public Product getProductByProductCode(String productCode) {
 
         Product product = productsRepository.findByProductCode(productCode);
+        setPrice(product);
 
-        String priceListName = "base";
-
-
-        ProductPrice productPrice = new ProductPrice();
-
-        product.setPrice(productPrice.getPrice());
         return product;
     }
 
@@ -92,33 +107,70 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public List<Product> getProductsByName(String searchText) {
 
-        return productsRepository.findByName(searchText);
+        List<Product> products = productsRepository.findByName(searchText);
+        setPrices(products);
+
+        return products;
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Product> getProductsByNameContaining(String searchText) {
 
-        return productsRepository.findByNameContaining(searchText);
+        List<Product> products = productsRepository.findByNameContaining(searchText);
+        setPrices(products);
+
+        return products;
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<Product> getProductsByNameContainingByPage(String searchText, Pageable pageable) {
 
-        return productsRepository.findByNameContaining(searchText, pageable);
+        Page<Product> pageProducts = productsRepository.findByNameContaining(searchText, pageable);
+        setPrices(pageProducts.getContent());
+
+        return pageProducts;
     }
 
+    // TODO da modificare
     @Override
     public Product saveProduct(Product product) {
 
         return productsRepository.save(product);
     }
 
+    // TODO da modificare altrimenti incongruenza tabelle!!
     @Override
     public void deleteProduct(Product product) {
 
         productsRepository.delete(product);
     }
 
+    private String priceList() {
+
+        return enterprisesService.getEnterprisePriceList();
+    }
+
+    private Product setPrice(Product product) {
+
+        String priceList = enterprisesService.getEnterprisePriceList();
+        ProductPrice productPrice = productPriceService.getProductPriceByPriceListNameAndProductCode(priceList, product.getProductCode());
+        BigDecimal price = productPrice.getPrice();
+        product.setPrice(price);
+
+        return product;
+    }
+
+    private List<Product> setPrices(List<Product> products) {
+
+        String priceList = enterprisesService.getEnterprisePriceList();
+        for (Product product : products) {
+            ProductPrice productPrice = productPriceService.getProductPriceByPriceListNameAndProductCode(priceList, product.getProductCode());
+            BigDecimal price = productPrice.getPrice();
+            product.setPrice(price);
+        }
+
+        return products;
+    }
 }
