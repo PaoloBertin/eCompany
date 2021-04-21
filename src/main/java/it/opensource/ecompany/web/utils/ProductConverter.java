@@ -33,7 +33,7 @@ public class ProductConverter {
             productDto.setImageProduct(product.getImageProduct());
             productDto.setVersion(product.getVersion());
 
-            ProductPrice productPrice = productPriceService.getProductPriceByPriceListNameAndProductCode("base", product.getProductCode());
+            ProductPrice productPrice = productPriceService.getProductPriceByProductCode(product.getProductCode());
             productDto.setPrice(productPrice.getPrice());
 
             productDtos.add(productDto);

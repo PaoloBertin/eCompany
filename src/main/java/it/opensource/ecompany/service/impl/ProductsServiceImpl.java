@@ -3,7 +3,6 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.domain.ProductPrice;
 import it.opensource.ecompany.repository.ProductsRepository;
-import it.opensource.ecompany.service.EnterprisesService;
 import it.opensource.ecompany.service.ProductPriceService;
 import it.opensource.ecompany.service.ProductsService;
 import org.springframework.data.domain.Page;
@@ -22,14 +21,10 @@ public class ProductsServiceImpl implements ProductsService {
 
     private final ProductPriceService productPriceService;
 
-    private final EnterprisesService enterprisesService;
-
-    public ProductsServiceImpl(ProductsRepository productsRepository, ProductPriceService productPriceService,
-                               EnterprisesService enterprisesService) {
+    public ProductsServiceImpl(ProductsRepository productsRepository, ProductPriceService productPriceService) {
 
         this.productsRepository = productsRepository;
         this.productPriceService = productPriceService;
-        this.enterprisesService = enterprisesService;
     }
 
     @Override
@@ -147,15 +142,9 @@ public class ProductsServiceImpl implements ProductsService {
         productsRepository.delete(product);
     }
 
-    private String priceList() {
-
-        return enterprisesService.getEnterprisePriceList();
-    }
-
     private Product setPrice(Product product) {
 
-        String priceList = enterprisesService.getEnterprisePriceList();
-        ProductPrice productPrice = productPriceService.getProductPriceByPriceListNameAndProductCode(priceList, product.getProductCode());
+        ProductPrice productPrice = productPriceService.getProductPriceByProductCode(product.getProductCode());
         BigDecimal price = productPrice.getPrice();
         product.setPrice(price);
 
@@ -164,9 +153,8 @@ public class ProductsServiceImpl implements ProductsService {
 
     private List<Product> setPrices(List<Product> products) {
 
-        String priceList = enterprisesService.getEnterprisePriceList();
         for (Product product : products) {
-            ProductPrice productPrice = productPriceService.getProductPriceByPriceListNameAndProductCode(priceList, product.getProductCode());
+            ProductPrice productPrice = productPriceService.getProductPriceByProductCode(product.getProductCode());
             BigDecimal price = productPrice.getPrice();
             product.setPrice(price);
         }

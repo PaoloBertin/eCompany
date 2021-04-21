@@ -19,10 +19,6 @@ public class ProductPrice {
 
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name = "price_list_id", foreignKey = @ForeignKey(name = "product_prices_fk_01"))
-    private PriceList priceList;
-
     @Version
     private Long version;
 

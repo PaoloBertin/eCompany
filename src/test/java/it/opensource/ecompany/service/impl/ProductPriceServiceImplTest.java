@@ -5,10 +5,6 @@ import it.opensource.ecompany.service.ProductPriceService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
@@ -23,25 +19,10 @@ class ProductPriceServiceImplTest {
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getProductPriceByPriceListName() {
+    void getProductPriceByProductCode() {
 
-        String priceList = "base";
-        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("productCode")));
-
-        long expected = 54;
-        long actual = productPriceService.getProductPriceByPriceListName(priceList, pageable).getTotalElements();
-
-        assertEquals(expected, actual);
-    }
-
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
-    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @Test
-    void getProductPriceByPriceListNameAndProductCode() {
-
-        String priceListName = "base";
         String productCode = "8883780451";
-        ProductPrice productPrice = productPriceService.getProductPriceByPriceListNameAndProductCode(priceListName, productCode);
+        ProductPrice productPrice = productPriceService.getProductPriceByProductCode(productCode);
 
         assertNotNull(productPrice);
     }
