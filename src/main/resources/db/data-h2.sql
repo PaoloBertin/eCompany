@@ -51,22 +51,30 @@ INSERT INTO accounts(id, name, balance)
     VALUES(1, 'eCompany', 100000);
 
 INSERT INTO address(id, city, street, house_number, zip_code, country, state)
-    VALUES (  1, 'Battaglia Terme', 'Via A. Ecompany', '8', '35041', 'Padova', 'Italia'),
-           (  2, 'Battaglia Terme', 'Via U. Ecompany', '7', '35041', 'Padova', 'Italia'),
-           (  3, 'Battaglia Terme', 'Vicolo Pio X', '11', '35041', 'Padova', 'Italia'),
-           (  4, 'Battaglia Terme', 'Via A. Volta', '7', '35041', 'Padova', 'Italia'),
-           (  5, 'Battaglia Terme', 'Via G. Garibaldi', '21', '35041', 'Padova', 'Italia'),
-           (101, 'Pontault-Combault', 'Route de Paris', '21', '77340', 'Pontault', 'France'),
-           (102, 'Asti', 'Piazza Vittorio Veneto', '45', '35041', 'Asti', 'Italia');
+    VALUES (  1, 'Battaglia Terme',   'Via A. Ecompany',         '8', '35041', 'Padova',     'Italy'),
+           (  2, 'Battaglia Terme',   'Via U. Ecompany',         '7', '35041', 'Padova',     'Italy'),
+           (  3, 'Battaglia Terme',   'Vicolo Pio X',           '11', '35041', 'Padova',     'Italy'),
+           (  4, 'Battaglia Terme',   'Via A. Volta',            '7', '35041', 'Padova',     'Italy'),
+           (  5, 'Battaglia Terme',   'Via G. Garibaldi',       '21', '35041', 'Padova',     'Italy'),
+           (101, 'Pontault-Combault', 'Route de Paris',         '21', '77340', 'Pontault',  'France'),
+           (102, 'Asti',              'Piazza Vittorio Veneto', '45', '35041', 'Asti',       'Italy'),
+           (103, 'Assago',            'Via G. Verdi',            '8', '20057', 'Milano',     'Italy'),
+           (104, 'Bologna',           'Via A. Volta',            '4', '20090', 'Bologna',    'Italy'),
+           (105, 'A Corugna',         'Polígono de Pocomaco ',  '15', '21000', 'A Corugna', ' Spain'),
+           (106, 'Roma',              'Viale Giorgio Morandi', '199', '00159', 'Roma',       'Italy');
 
 INSERT INTO contacts(id, email, cellular, landline_phone)
-    VALUES (  1, 'admin.ecompany@dmail.com', '3628323289', '0429776337'),
-           (  2, 'user.ecompany@dmail.com', '3628323299', '0429776339'),
-           (  3, 'mario.rossi@dmail.com', '3458323286', '0497793348'),
-           (  4, 'giuseppe.verdi@dmail.com', '3628323287', '0429776335'),
+    VALUES (  1, 'admin.ecompany@dmail.com',     '3628323289', '0429776337'),
+           (  2, 'user.ecompany@dmail.com',      '3628323299', '0429776339'),
+           (  3, 'mario.rossi@dmail.com',        '3458323286', '0497793348'),
+           (  4, 'giuseppe.verdi@dmail.com',     '3628323287', '0429776335'),
            (  5, 'giuseppe.garibaldi@dmail.com', '3628323288', '0429776336'),
-           (101, 'miamland@dmail.com', '3658323288', '0429876336'),
-           (102, 'kui@dmail.com', '3628326288', '0429796336');
+           (101, 'miamland@dmail.com',           '3658323288', '0429876336'),
+           (102, 'kui@dmail.com',                '3628326288', '0429796336'),
+           (103, 'info@meli.it',                 '3828326288', '0245774876'),
+           (104, 'assistenza@fastbook.it',       '3838326288', '0245774568'),
+           (105, 'assistenza@alco.it',           '3838326289', '0245774569'),
+           (106, 'assistenza.eds@eds.it',        '3838326299', '0645774569');
 
 INSERT INTO customers(id, firstname, lastname, username, password, email, address_id, contact_id)
     VALUES (1, 'Admin', 'Ecompany', 'admin', '$2a$10$xQm0oqzToTzplW8Xn9vEouNcV7uIFUzVLuFIZm3txt4WTaD.iTCW2', 'admin.ecompany@dmail.com', 1, 1),
@@ -76,8 +84,12 @@ INSERT INTO customers(id, firstname, lastname, username, password, email, addres
            (5, 'Giuseppe', 'Garibaldi', 'giuseppe.garibaldi', '$2a$10$rYz10KiusKJ0EQ14b6zyVeVb1fxq617nAZOLE0HHpHtb8VZwGHusG', 'giuseppe.garibaldi@dmail.com', 5, 5);
 
 INSERT INTO suppliers(id, name, vat, legal_form, registered_office, address_id, contact_id, version)
-    VALUES (1,  'MIAMLAND',   'FR818007445', 'S.P.A', 'Route de Paris 26 77340 Pontault-Combault', 101, 101, 0),
-           (2, 'KUI S.R.L', 'IT09376250016', 'S.R.L', 'Piazza Vittorio Alfieri 45', 102, 102, 0);
+    VALUES (1,  'MIAMLAND',        'FR818007445',   'S.P.A.', 'Route de Paris 26 77340 Pontault-Combault', 101, 101, 0),
+           (2, 'KUI S.R.L',        'IT093762506',   'S.R.L.', 'Piazza Vittorio Alfieri 45',                102, 102, 0),
+           (3, 'Messagerie Libri', '04640860153',   'S.P.A.', 'Via G. Verdi 8',                            103, 103, 0),
+           (4, 'FastBook',         '02690950403',   'S.P.A.', 'Via G. Verdi 8',                            104, 104, 0),
+           (5, 'Alco',             '03690950403',   'S.P.A.', 'Polígono de Pocomaco 14',                   105, 105, 0),
+           (6, 'EdS Group',        '11890641001',   'S.P.A.', 'Viale Giorgio Morandi 199 ',                106, 106, 0);
 
 INSERT INTO categories(id, name, version)
     VALUES ( 1, 'Libri', 0),
