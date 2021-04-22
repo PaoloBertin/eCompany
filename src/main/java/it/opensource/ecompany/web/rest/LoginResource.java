@@ -5,12 +5,14 @@ import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Profile("rest")
 @RequestMapping("/api/login")
 @RestController
 public class LoginResource {

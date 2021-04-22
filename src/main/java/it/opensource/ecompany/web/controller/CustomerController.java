@@ -11,6 +11,7 @@ import it.opensource.ecompany.web.form.SearchForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Locale;
 
+@Profile("html")
 @Controller
 public class CustomerController {
 

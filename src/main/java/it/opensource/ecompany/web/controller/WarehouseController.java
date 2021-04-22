@@ -9,6 +9,7 @@ import it.opensource.ecompany.web.controller.util.UrlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 import java.util.Locale;
 import java.util.Optional;
 
+@Profile("html")
 @RequestMapping("/admin/warehouses")
 @Controller
 public class WarehouseController {

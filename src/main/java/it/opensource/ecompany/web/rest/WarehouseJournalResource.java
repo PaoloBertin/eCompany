@@ -4,6 +4,7 @@ import it.opensource.ecompany.domain.WarehouseJournal;
 import it.opensource.ecompany.service.WarehouseJournalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -15,6 +16,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
 
+@Profile("rest")
 @RequestMapping("/api/warehouseJournal")
 @RestController
 public class WarehouseJournalResource {

@@ -3,18 +3,16 @@ package it.opensource.ecompany.web.controller;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Product;
-import it.opensource.ecompany.domain.ProductPrice;
 import it.opensource.ecompany.service.CategoriesService;
-import it.opensource.ecompany.service.ProductPriceService;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.dto.ProductDto;
 import it.opensource.ecompany.web.form.ProductForm;
 import it.opensource.ecompany.web.form.SearchForm;
-import it.opensource.ecompany.web.utils.ProductConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +29,7 @@ import java.util.List;
  *
  * @author Paolo Bertin
  */
+@Profile("html")
 @RequestMapping("products")
 @Controller
 public class ProductsController {

@@ -6,6 +6,7 @@ import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.web.form.SearchForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +27,7 @@ import java.net.URISyntaxException;
  *
  * @author Paolo Bertin
  */
+@Profile("rest")
 @RequestMapping("/api/products")
 @RestController
 public class ProductResource {

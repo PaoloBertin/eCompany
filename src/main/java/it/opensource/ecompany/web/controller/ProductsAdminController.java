@@ -14,6 +14,7 @@ import it.opensource.ecompany.web.form.SearchForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +34,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 
+@Profile("html")
 @RequestMapping("admin/products")
 @Controller
 public class ProductsAdminController {

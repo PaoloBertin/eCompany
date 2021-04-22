@@ -2,6 +2,7 @@ package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.domain.Account;
 import it.opensource.ecompany.service.AccountsService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@Profile("html")
 @RequestMapping("/admin/accounts")
 @Controller
 public class AccountsController {

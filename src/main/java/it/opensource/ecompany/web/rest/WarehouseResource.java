@@ -5,6 +5,7 @@ import it.opensource.ecompany.service.WarehouseService;
 import it.opensource.ecompany.web.controller.WarehouseController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -18,6 +19,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+@Profile("rest")
 @RequestMapping("/api/warehouses")
 @RestController
 public class WarehouseResource {
