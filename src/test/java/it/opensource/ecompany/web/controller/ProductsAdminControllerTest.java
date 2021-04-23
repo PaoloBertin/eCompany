@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class ProductsAdminControllerTest {
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
@@ -35,7 +35,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewProducstByCategoryByPageTest(@Autowired MockMvc mvc) throws Exception {
@@ -50,7 +50,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewProductTest(@Autowired MockMvc mvc) throws Exception {
@@ -64,7 +64,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void downloadPhotoTest(@Autowired MockMvc mvc) throws Exception {
@@ -76,7 +76,7 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void searchProductTest(@Autowired MockMvc mvc) throws Exception {
@@ -92,7 +92,7 @@ class ProductsAdminControllerTest {
         ;
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createProductSuccessTest(@Autowired MockMvc mvc) throws Exception {
@@ -112,14 +112,14 @@ class ProductsAdminControllerTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createProductFailureTest(@Autowired MockMvc mvc) throws Exception {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void updateProductTest(@Autowired MockMvc mvc) throws Exception {

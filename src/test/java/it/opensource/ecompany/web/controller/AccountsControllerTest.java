@@ -26,7 +26,7 @@ class AccountsControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewAccountsTest(@Autowired MockMvc mvc) throws Exception {
@@ -42,7 +42,7 @@ class AccountsControllerTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void viewAccount(@Autowired MockMvc mvc) throws Exception {

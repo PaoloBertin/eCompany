@@ -22,7 +22,7 @@ class WarehouseServiceImplTest {
     @Autowired
     private WarehouseService warehouseService;
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseNumber() {
@@ -32,7 +32,7 @@ class WarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllWarehousesByPage() {
@@ -46,7 +46,7 @@ class WarehouseServiceImplTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getWarehouseById() {

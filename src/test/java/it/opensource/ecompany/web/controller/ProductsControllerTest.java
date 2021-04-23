@@ -24,7 +24,7 @@ public class ProductsControllerTest {
     private MockMvc mvc;
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewAllProductsPage1Test() throws Exception {
@@ -54,7 +54,7 @@ public class ProductsControllerTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewProducstByCategoryByPage1Test() throws Exception {
@@ -68,8 +68,7 @@ public class ProductsControllerTest {
            .andExpect(status().isOk());
     }
 
-    @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewProducstByCategoryByPage2Test() throws Exception {

@@ -32,7 +32,7 @@ class ProductResourceTest {
     @Autowired
     private ProductsService productsService;
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
@@ -44,7 +44,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getProductsByCategory1ByPageTest(@Autowired MockMvc mvc) throws Exception {
@@ -56,7 +56,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getProductsByCategory6ByPageTest(@Autowired MockMvc mvc) throws Exception {
@@ -69,7 +69,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getProductByIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -79,7 +79,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getPhotoByProductIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -89,7 +89,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void createProductTest(@Autowired MockMvc mvc) throws Exception {
@@ -109,7 +109,7 @@ class ProductResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void updateProductTest(@Autowired MockMvc mvc) throws Exception {

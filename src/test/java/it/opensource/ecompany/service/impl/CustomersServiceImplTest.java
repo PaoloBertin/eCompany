@@ -21,7 +21,7 @@ public class CustomersServiceImplTest {
     @Autowired
     private CustomersService customersService;
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllCustomersTest() {
@@ -32,7 +32,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyAddress() {
@@ -45,7 +45,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isEqualTo(expected);
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerByIdVerifyContact() {
@@ -58,7 +58,6 @@ public class CustomersServiceImplTest {
     }
 
     @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
-    @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getCustomerByUsernameAndPasswordTest() {
@@ -74,8 +73,7 @@ public class CustomersServiceImplTest {
 
     }
 
-    @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void verifyCustomerTest() {
@@ -87,7 +85,7 @@ public class CustomersServiceImplTest {
         assertThat(actual).isTrue();
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void notVerifyCustomerTest() {

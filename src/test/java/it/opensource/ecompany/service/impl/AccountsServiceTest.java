@@ -20,7 +20,7 @@ class AccountsServiceTest {
     @Autowired
     private AccountsService accountsService;
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAccountByIdH2Test() {
@@ -33,7 +33,7 @@ class AccountsServiceTest {
         assertThat(actual, is(closeTo(expected, error)));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void getAllAccountsH2Test() {
@@ -45,7 +45,7 @@ class AccountsServiceTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void depositH2Test() {
@@ -63,7 +63,7 @@ class AccountsServiceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void withdrawalSuccessH2Test() {
@@ -80,7 +80,7 @@ class AccountsServiceTest {
         assertThat(actual, is(closeTo(expected, error)));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void withdrawalFailureH2Test() {
@@ -98,7 +98,7 @@ class AccountsServiceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     public void getAccountByIdMySQLTest() {
@@ -111,7 +111,7 @@ class AccountsServiceTest {
         assertThat(actual, is(closeTo(expected, error)));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     public void getAllAccountsMySQLTest() {
@@ -123,7 +123,7 @@ class AccountsServiceTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     public void depositMySQLTest() {
@@ -141,7 +141,7 @@ class AccountsServiceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     void withdrawalSuccessMySQLTest() {
@@ -158,7 +158,7 @@ class AccountsServiceTest {
         assertThat(actual, is(closeTo(expected, error)));
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'mysql'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     void withdrawalFailureMySQLTest() {

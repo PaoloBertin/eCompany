@@ -16,7 +16,7 @@ class DocumentationWarehouseServiceImplTest {
     @Autowired
     private DocumentationWarehouseService documentationWarehouseService;
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberDocumentationWarehouseCardTest() {
@@ -27,7 +27,7 @@ class DocumentationWarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberDocumentationWarehouseCardBydWarehouseId() {
@@ -40,7 +40,7 @@ class DocumentationWarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberDocumentationWarehouseCardByWarehouseIdAndDocumentationWarehouseCardLineItemProductCode() {
@@ -54,8 +54,7 @@ class DocumentationWarehouseServiceImplTest {
         assertEquals(expected, actual);
     }
 
-    @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getByWarehouseIdAndLineItemProductIdByPage() {

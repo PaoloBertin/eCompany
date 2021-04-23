@@ -23,8 +23,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 class SalesOrdersControllerTest {
 
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
     @Test
     void getAllSalesOrders(@Autowired MockMvc mvc) throws Exception {
 
@@ -34,10 +34,10 @@ class SalesOrdersControllerTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getPurchaseOrderById(@Autowired MockMvc mvc) throws Exception {
+    void getSalesOrderById(@Autowired MockMvc mvc) throws Exception {
 
         mvc.perform(get("/admin/salesorders/{saleorderId}", 1L).with(user("admin").password("admin")
                                                                                   .roles("ADMIN")))

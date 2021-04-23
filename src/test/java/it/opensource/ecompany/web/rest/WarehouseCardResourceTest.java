@@ -56,7 +56,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardTest(@Autowired MockMvc mvc) throws Exception {
@@ -70,7 +70,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsBydWarehouseIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -84,7 +84,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getNumberWarehouseCardsByWarehouseIdAndLineItemProductIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -98,7 +98,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByIdSuccessTest(@Autowired MockMvc mvc) throws Exception {
@@ -111,7 +111,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByIdFailureTest(@Autowired MockMvc mvc) throws Exception {
@@ -123,7 +123,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseTest(@Autowired MockMvc mvc) throws Exception {
@@ -138,7 +138,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardByWarehouseAndProductIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -154,7 +154,7 @@ class WarehouseCardResourceTest {
     }
 
     @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseCardBetweenDateTest(@Autowired MockMvc mvc) throws Exception {

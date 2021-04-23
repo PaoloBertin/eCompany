@@ -19,7 +19,7 @@ class SalesOrdersServiceImplTest {
     @Autowired
     private SalesOrdersService salesOrdersService;
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getAllSalesOrders() {

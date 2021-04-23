@@ -50,7 +50,7 @@ class WarehouseJournalResourceTest {
         }
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournalByIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -62,7 +62,7 @@ class WarehouseJournalResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournalByWarehouseIdTest(@Autowired MockMvc mvc) throws Exception {
@@ -76,7 +76,7 @@ class WarehouseJournalResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournalByWarehouseNameTest(@Autowired MockMvc mvc) throws Exception {
@@ -91,7 +91,7 @@ class WarehouseJournalResourceTest {
            .andExpect(status().isOk());
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournmalBetweenDateTest(@Autowired MockMvc mvc) throws Exception {
@@ -108,7 +108,7 @@ class WarehouseJournalResourceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void getWarehouseJournmalDateTest(@Autowired MockMvc mvc) throws Exception {
@@ -125,7 +125,7 @@ class WarehouseJournalResourceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -163,7 +163,7 @@ class WarehouseJournalResourceTest {
         assertEquals(expected, actual);
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Disabled
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -194,7 +194,7 @@ class WarehouseJournalResourceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void deleteWarehouseJournalTest(@Autowired MockMvc mvc) throws Exception {

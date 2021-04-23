@@ -58,7 +58,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="lineItem : ${purchaseOrder.lineitems}">
+                            <tr th:each="lineItem : ${purchaseOrder.lineItems}">
                                 <td th:text="${lineItem.product.category.name}"></td>
                                 <td th:text="${lineItem.product.name}"></td>
                                 <td th:text="${lineItem.product.productCode}"></td>
