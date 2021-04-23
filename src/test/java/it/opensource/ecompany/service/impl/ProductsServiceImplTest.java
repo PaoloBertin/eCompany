@@ -20,6 +20,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -220,13 +221,14 @@ public class ProductsServiceImplTest {
         Product product = new Product();
         product.setName("Alice");
         product.setProductCode("00000");
+        product.setPrice(BigDecimal.valueOf(24.50));
         product.setCategory(category);
 
         productsService.saveProduct(product);
 
+        List<Product> products = productsService.getAllProducts();
+        int actual = products.size();
         int expected = 55;
-        int actual = productsService.getAllProducts()
-                                    .size();
 
         assertEquals(expected, actual);
     }

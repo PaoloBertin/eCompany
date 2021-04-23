@@ -1,6 +1,7 @@
 package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class ProductPrice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     @Column(name = "product_code")
     private String productCode;
 
@@ -21,6 +23,16 @@ public class ProductPrice {
 
     @Version
     private Long version;
+
+    public ProductPrice() {
+
+    }
+
+    public ProductPrice(String productCode, BigDecimal price) {
+
+        this.productCode = productCode;
+        this.price = price;
+    }
 
     public Long getId() {
 

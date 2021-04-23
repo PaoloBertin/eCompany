@@ -20,4 +20,10 @@ public class ProductPriceServiceImpl implements ProductPriceService {
 
         return productPricesRepository.findByProductCode(productCode);
     }
+
+    @Override
+    public ProductPrice saveProductPrice(ProductPrice productPrice) {
+
+        return productPricesRepository.save(productPrice);
+    }
 }

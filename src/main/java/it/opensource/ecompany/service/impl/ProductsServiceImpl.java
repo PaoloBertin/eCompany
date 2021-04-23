@@ -82,7 +82,8 @@ public class ProductsServiceImpl implements ProductsService {
     @Override
     public Product getProductById(Long id) {
 
-        Product product = productsRepository.findById(id).get();
+        Product product = productsRepository.findById(id)
+                                            .get();
         setPrice(product);
 
         return product;
@@ -128,10 +129,17 @@ public class ProductsServiceImpl implements ProductsService {
         return pageProducts;
     }
 
-    // TODO da modificare
     @Override
     public Product saveProduct(Product product) {
 
+        ProductPrice productPrice;
+        if (product.getId() == null) { // save new product
+            productPrice = new ProductPrice(product.getProductCode(), product.getPrice());
+        } else { // save price change
+            productPrice = productPriceService.getProductPriceByProductCode(product.getProductCode());
+            productPrice.setPrice(product.getPrice());
+        }
+        productPriceService.saveProductPrice(productPrice);
         return productsRepository.save(product);
     }
 

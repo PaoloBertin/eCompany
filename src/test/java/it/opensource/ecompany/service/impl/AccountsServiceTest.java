@@ -98,7 +98,7 @@ class AccountsServiceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('mysql')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     public void getAccountByIdMySQLTest() {
@@ -111,7 +111,7 @@ class AccountsServiceTest {
         assertThat(actual, is(closeTo(expected, error)));
     }
 
-    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('mysql')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     public void getAllAccountsMySQLTest() {
@@ -123,7 +123,7 @@ class AccountsServiceTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('mysql')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     public void depositMySQLTest() {
@@ -141,7 +141,7 @@ class AccountsServiceTest {
 
     }
 
-    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('mysql')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     void withdrawalSuccessMySQLTest() {
@@ -158,7 +158,7 @@ class AccountsServiceTest {
         assertThat(actual, is(closeTo(expected, error)));
     }
 
-    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+    @EnabledIf(expression = "#{environment.acceptsProfiles('mysql')}", loadContext = true)
     @Sql({"/db/schema-mysql.sql", "/db/data-mysql.sql"})
     @Test
     void withdrawalFailureMySQLTest() {
