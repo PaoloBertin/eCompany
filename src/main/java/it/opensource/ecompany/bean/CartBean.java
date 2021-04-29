@@ -16,13 +16,13 @@ import java.util.Map;
  */
 public class CartBean implements Serializable {
 
-    private static final Logger log = LoggerFactory.getLogger(CartBean.class);
-
     private static final long serialVersionUID = 1L;
+
+    private static final Logger log = LoggerFactory.getLogger(CartBean.class);
 
     private BigDecimal totalCost = BigDecimal.ZERO;
 
-    private Map<Product, Integer> products = new HashMap<Product, Integer>();
+    private Map<Product, Integer> products = new HashMap<>();
 
     private BigDecimal subTotal = BigDecimal.ZERO;
 
