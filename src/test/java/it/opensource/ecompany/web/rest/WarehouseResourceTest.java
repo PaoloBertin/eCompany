@@ -58,9 +58,9 @@ class WarehouseResourceTest {
     @Test
     void getWarehouseByNameTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/api/warehouses?name=magazzino01").with(user("admin").password("admin")
-                                                                              .roles("ADMIN"))
-                                                           .contentType(MediaType.APPLICATION_JSON))
+        mvc.perform(get("/api/warehouses?name=Antica%20Libreria%20di%20Bergamo").with(user("admin").password("admin")
+                                                                                                   .roles("ADMIN"))
+                                                                                .contentType(MediaType.APPLICATION_JSON))
            .andDo(print())
            .andExpect(jsonPath("$.id", equalTo(1)))
            .andExpect(status().isOk());
@@ -106,7 +106,7 @@ class WarehouseResourceTest {
                                           .content(requestJson))
            .andExpect(status().is2xxSuccessful());
 
-        Long expected1 = 8L;
+        Long expected1 = 5L;
         Long actual1 = warehouseService.getWarehouseByName("magazzino20")
                                        .get()
                                        .getId();
