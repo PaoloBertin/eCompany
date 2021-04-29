@@ -5,14 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import java.math.BigDecimal;
+
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @EnableWebMvc
@@ -23,7 +25,7 @@ public class ProductsControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Disabled
+    // @Disabled
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -33,13 +35,13 @@ public class ProductsControllerTest {
                                     .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+           .andExpect(model().attribute("cartBean", hasProperty("totalCost",  is(closeTo(BigDecimal.ZERO, BigDecimal.ZERO)))))
            .andExpect(view().name("catalog/productsList"))
            .andExpect(status().isOk());
     }
 
-    @Disabled
-    @EnabledIf(expression = "#{environment['spring.profiles.active'] == 'h2'}", loadContext = true)
+    // @Disabled
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     public void viewAllProductsPage3Test() throws Exception {
@@ -48,12 +50,12 @@ public class ProductsControllerTest {
                                     .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+           .andExpect(model().attribute("cartBean", hasProperty("totalCost", is(closeTo(BigDecimal.ZERO, BigDecimal.ZERO)))))
            .andExpect(view().name("catalog/productsList"))
            .andExpect(status().isOk());
     }
 
-    @Disabled
+    // @Disabled
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -63,11 +65,12 @@ public class ProductsControllerTest {
                                                          .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+           .andExpect(model().attribute("cartBean", hasProperty("totalCost", is(closeTo(BigDecimal.ZERO, BigDecimal.ZERO)))))
            .andExpect(view().name("catalog/productsList"))
            .andExpect(status().isOk());
     }
 
+    // @Disabled
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
@@ -77,8 +80,9 @@ public class ProductsControllerTest {
                                                          .param("size", "10"))
            .andExpect(model().attribute("products", hasProperty("content", hasSize(10))))
            .andExpect(model().attributeExists("cartBean"))
-           .andExpect(model().attribute("cartBean", hasProperty("totalCost", closeTo(3.0, 0.001))))
+           .andExpect(model().attribute("cartBean", hasProperty("totalCost",  is(closeTo(BigDecimal.ZERO, BigDecimal.ZERO)))))
            .andExpect(view().name("catalog/productsList"))
+           .andDo(print())
            .andExpect(status().isOk());
     }
 }
