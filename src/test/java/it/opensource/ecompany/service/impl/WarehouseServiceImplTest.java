@@ -27,7 +27,7 @@ class WarehouseServiceImplTest {
     @Test
     void getWarehouseNumber() {
 
-        Long expected = 5L;
+        Long expected = 8L;
         Long actual = warehouseService.getWarehouseNumber();
         assertEquals(expected, actual);
     }
@@ -40,7 +40,7 @@ class WarehouseServiceImplTest {
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("name")));
         Page<Warehouse> page = warehouseService.getAllWarehousesByPage(pageable);
 
-        int expected = 5;
+        int expected = 8;
         int actual = page.getContent()
                          .size();
         assertThat(actual, equalTo(expected));
@@ -54,7 +54,7 @@ class WarehouseServiceImplTest {
         String actual = warehouseService.getWarehouseById(2L)
                                         .get()
                                         .getName();
-        String expected = "magazzino02";
+        String expected = "Antica Libreria di Bologna";
         assertThat(actual, equalTo(expected));
     }
 

@@ -22,7 +22,7 @@ public class CartBean implements Serializable {
 
     private BigDecimal totalCost = BigDecimal.ZERO;
 
-    private Map<Product, Integer> products = new HashMap<>();
+    private final Map<Product, Integer> products = new HashMap<>();
 
     private BigDecimal subTotal = BigDecimal.ZERO;
 

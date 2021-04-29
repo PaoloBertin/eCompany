@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,7 +36,7 @@ class WarehouseResourceTest {
         mvc.perform(get("/api/warehouses/all").with(user("admin").password("admin")
                                                                  .roles("ADMIN"))
                                               .contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$", hasSize(5)))
+           .andExpect(jsonPath("$", hasSize(8)))
            .andExpect(status().isOk());
     }
 
@@ -50,7 +49,7 @@ class WarehouseResourceTest {
                                                                                .roles("ADMIN"))
                                                             .contentType(MediaType.APPLICATION_JSON))
            //.andDo(print())
-           .andExpect(jsonPath("$.name", equalTo("magazzino01")))
+           .andExpect(jsonPath("$.name", equalTo("Antica Libreria di Bergamo")))
            .andExpect(status().isOk());
     }
 
@@ -84,7 +83,7 @@ class WarehouseResourceTest {
                                            .content(requestJson))
            .andExpect(status().is(201));
 
-        int expected = 6;
+        int expected = 9;
         int actual = warehouseService.getAllWarehouse()
                                      .size();
         assertEquals(expected, actual);
@@ -107,15 +106,15 @@ class WarehouseResourceTest {
                                           .content(requestJson))
            .andExpect(status().is2xxSuccessful());
 
-        Long expected1 = 5L;
+        Long expected1 = 8L;
         Long actual1 = warehouseService.getWarehouseByName("magazzino20")
-                                      .get()
-                                      .getId();
+                                       .get()
+                                       .getId();
         assertEquals(expected1, actual1);
 
-        int expected2 = 5;
+        int expected2 = 8;
         int actual2 = warehouseService.getAllWarehouse()
-                                     .size();
+                                      .size();
         assertEquals(expected2, actual2);
 
     }
