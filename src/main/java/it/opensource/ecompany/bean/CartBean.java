@@ -98,13 +98,13 @@ public class CartBean implements Serializable {
     private void updateShippingCosts() {
 
         if (expressDelivery) {
-            shippingCosts = new BigDecimal(5.0);
+            shippingCosts = BigDecimal.valueOf(5.0);
         } else {
-            int result = subTotal.compareTo(new BigDecimal(25));
+            int result = subTotal.compareTo(BigDecimal.valueOf(25));
             if (result >= 0) {
-                shippingCosts = new BigDecimal(0.0);
+                shippingCosts = BigDecimal.valueOf(0.0);
             } else {
-                shippingCosts = new BigDecimal(3.0);
+                shippingCosts = BigDecimal.valueOf(3.0);
             }
         }
     }
