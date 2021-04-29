@@ -57,7 +57,7 @@ public class WarehouseController {
         log.debug("view warehouse with id=" + warehouseId);
 
         Optional<Warehouse> warehouse = warehouseService.getWarehouseById(warehouseId);
-        uiModel.addAttribute("warehouse", warehouse.get());  // TODO invio messaggio se warehouse = null
+        uiModel.addAttribute("warehouse", warehouse.isPresent() ? warehouse.get() : new Warehouse());
 
         return "warehouses/warehouseShow";
     }
@@ -66,8 +66,7 @@ public class WarehouseController {
     public String getWarehouseByName(@RequestParam String name, Model uiModel) {
 
         Optional<Warehouse> warehouse = warehouseService.getWarehouseByName(name);
-        uiModel.addAttribute("warehouse", warehouse.get()); // TODO invio messaggio se warehouse = null
-
+        uiModel.addAttribute("warehouse", warehouse.isPresent() ? warehouse.get() : new Warehouse());
         return "warehouses/warehouseShow";
     }
 

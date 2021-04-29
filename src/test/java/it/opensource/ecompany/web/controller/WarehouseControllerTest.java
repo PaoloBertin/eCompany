@@ -37,7 +37,7 @@ class WarehouseControllerTest {
 
         mvc.perform(get("/admin/warehouses/all").with(user("admin").password("admin")
                                                                    .roles("ADMIN")))
-           .andExpect(model().attribute("warehouses", hasProperty("content", hasSize(5))))
+           .andExpect(model().attribute("warehouses", hasProperty("content", hasSize(8))))
            .andExpect(status().isOk());
     }
 
@@ -48,7 +48,7 @@ class WarehouseControllerTest {
 
         mvc.perform(get("/admin/warehouses/{warehouseId}", 1L).with(user("admin").password("admin")
                                                                                  .roles("ADMIN")))
-           .andExpect(model().attribute("warehouse", hasProperty("name", equalTo("magazzino01"))))
+           .andExpect(model().attribute("warehouse", hasProperty("name", equalTo("Antica Libreria di Bergamo"))))
            .andExpect(status().isOk());
 
     }
@@ -58,7 +58,7 @@ class WarehouseControllerTest {
     @Test
     public void getWarehuseByName(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/admin/warehouses?name=magazzino01").with(user("admin").password("admin")
+        mvc.perform(get("/admin/warehouses?name=Antica Libreria di Bergamo").with(user("admin").password("admin")
                                                                                 .roles("ADMIN")))
            .andExpect(model().attribute("warehouse", hasProperty("id", equalTo(1L))))
            .andExpect(status().isOk());
@@ -72,7 +72,7 @@ class WarehouseControllerTest {
         mvc.perform(get("/admin/warehouses/{warehouseId}", 5L).param("form", "true")
                                                               .with(user("admin").password("admin")
                                                                                  .roles("ADMIN")))
-           .andExpect(model().attribute("warehouse", hasProperty("name", equalTo("magazzino05"))))
+           .andExpect(model().attribute("warehouse", hasProperty("name", equalTo("Antica Libreria di Lecco"))))
            .andExpect(status().isOk());
     }
 
@@ -142,10 +142,9 @@ class WarehouseControllerTest {
 
         mvc.perform(delete("/admin/warehouses/{warehouseId}", 5L).with(user("admin").password("admin")
                                                                                     .roles("ADMIN")))
-           .andDo(print())
            .andExpect(status().isOk());
 
-        int expected= 4;
+        int expected= 7;
         int actual = warehouseService.getAllWarehouse().size();
         assertEquals(expected, actual);
     }
