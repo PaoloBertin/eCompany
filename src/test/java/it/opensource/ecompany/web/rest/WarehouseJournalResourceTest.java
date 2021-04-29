@@ -70,7 +70,6 @@ class WarehouseJournalResourceTest {
         mvc.perform(get("/api/warehouseJournal/{warehouseId}/all", 4).with(user("admin").password("admin")
                                                                                         .roles("ADMIN"))
                                                                      .contentType(MediaType.APPLICATION_JSON))
-           //   .andDo(print())
            .andExpect(jsonPath("$.totalPages", equalTo(4)))
            .andExpect(jsonPath("$.totalElements", equalTo(35)))
            .andExpect(status().isOk());
@@ -81,7 +80,7 @@ class WarehouseJournalResourceTest {
     @Test
     void getWarehouseJournalByWarehouseNameTest(@Autowired MockMvc mvc) throws Exception {
 
-        mvc.perform(get("/api/warehouseJournal/all/all").param("warehouseName", "magazzino04")
+        mvc.perform(get("/api/warehouseJournal/all/all").param("warehouseName", "Antica Libreria di Firenze")
                                                         .with(user("admin").password("admin")
                                                                            .roles("ADMIN"))
                                                         .contentType(MediaType.APPLICATION_JSON))
