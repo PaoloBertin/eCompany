@@ -268,11 +268,14 @@ INSERT INTO product_prices(id, product_code, price, version)
            ( 54, '0190199221130',796.00, 0);
 
 INSERT INTO warehouses(id, name, version)
-    VALUES( 1, 'magazzino01',  0),
-          ( 2, 'magazzino02',  0),
-          ( 3, 'magazzino03',  0),
-          ( 4, 'magazzino04',  0),
-          ( 5, 'magazzino05',  0);
+    VALUES( 1, 'Antica Libreria di Bergamo',  0),
+          ( 2, 'Antica Libreria di Bologna',  0),
+          ( 3, 'Antica Libreria di Ferrara',  0),
+          ( 4, 'Antica Libreria di Firenze',  0),
+          ( 5, 'Antica Libreria di Lecco',    0),
+          ( 6, 'Antica Libreria di Mantova',  0),
+          ( 7, 'Antica Libreria di Roma',     0),
+          ( 8, 'Antica Libreria di Padova',   0);
 
 INSERT INTO line_items_warehouse(id, product_code, quantity, price, version)
     VALUES(  1,    '8883780450', 10, 20.00, 0),     -- carico
