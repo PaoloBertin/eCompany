@@ -762,9 +762,9 @@ INSERT INTO invoices(id, transferor_code, transferee_code, documentation_warehou
           (  9, 's-00001', 'c-00001', 15,  0);
 
 INSERT INTO line_items_purchase_orders(id, product_id, quantity, price, version)
-    VALUES(  1,  1, 10, 20.00, 0),     -- carico
-          (  2,  2, 20, 30.00, 0),     -- carico
-          (  3,  3, 20, 20.00, 0),     -- carico
+    VALUES(  1,  1,  3, 20.00, 0),     -- carico
+          (  2,  2,  2, 30.00, 0),     -- carico
+          (  3,  3,  2, 20.00, 0),     -- carico
           (  4,  5, 10, 35.00, 0),     -- carico
           (  5, 10, 30, 10.00, 0),     -- carico
           (  6, 17, 10, 15.00, 0),     -- carico

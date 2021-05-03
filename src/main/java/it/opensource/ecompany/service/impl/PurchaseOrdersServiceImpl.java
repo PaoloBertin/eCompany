@@ -3,10 +3,7 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.*;
 import it.opensource.ecompany.repository.PurchaseOrdersRepository;
-import it.opensource.ecompany.service.AccountsService;
-import it.opensource.ecompany.service.PurchaseOrdersService;
-import it.opensource.ecompany.service.UserContext;
-import it.opensource.ecompany.service.WarehouseCardService;
+import it.opensource.ecompany.service.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,11 +27,15 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
 
     private final AccountsService accountsService;
 
+    private final ProductPriceService productPriceService;
+
     public PurchaseOrdersServiceImpl(CartBean cartBean, UserContext userContext, PurchaseOrdersRepository purchaseOrdersRepository,
+                                     ProductPriceService productPriceService,
                                      WarehouseCardService warehouseCardService, AccountsService accountsService) {
 
         this.cartBean = cartBean;
         this.userContext = userContext;
+        this.productPriceService = productPriceService;
         this.purchaseOrdersRepository = purchaseOrdersRepository;
         this.warehouseCardService = warehouseCardService;
         this.accountsService = accountsService;
@@ -51,8 +52,18 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
     @Override
     public PurchaseOrder getPurchaseOrderById(Long purchaseOrderId) {
 
-        return purchaseOrdersRepository.findById(purchaseOrderId)
-                                       .get();
+        PurchaseOrder purchaseOrder = purchaseOrdersRepository.findById(purchaseOrderId)
+                                                              .get();
+/*
+        List<LineItemPurchaseOrder> lineItemPurchaseOrders = purchaseOrder.getLineItemPurchaseOrders();
+        for (LineItemPurchaseOrder lineItemPurchaseOrder : lineItemPurchaseOrders) {
+            Product product = lineItemPurchaseOrder.getProduct();
+            setPrice(product);
+            lineItemPurchaseOrder.setProduct(product);
+        }
+*/
+
+        return purchaseOrder;
     }
 
     @Transactional(readOnly = true)
@@ -102,5 +113,4 @@ public class PurchaseOrdersServiceImpl implements PurchaseOrdersService {
         BigDecimal totalAmount = purchaseOrder.getTotalAmount();
         accountsService.deposit(accountId, totalAmount);
     }
-
 }

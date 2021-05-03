@@ -60,15 +60,8 @@ public class PurchaseOrdersControllerTest {
     @Test
     public void getAllPurchaseOrdersTest() throws Exception {
 
-//        MockHttpSession session = new MockHttpSession();
-
-//        cartBean.setExpressDelivery(true);
-//        session.setAttribute("cartBean", cartBean);
-
         mvc.perform(get("/admin/purchaseorders/all").with(user("admin").password("admin")
-                                                                       .roles("ADMIN"))
-//                            .session(session)
-        )
+                                                                       .roles("ADMIN")))
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(15)))
@@ -82,11 +75,16 @@ public class PurchaseOrdersControllerTest {
     @Test
     public void getPurchaseOrderByIdTest() throws Exception {
 
-        mvc.perform(get("/admin/purchaseorders/{purchaseordersId}", 2L).with(user("mario.rossi").password("user")
+        mvc.perform(get("/admin/purchaseorders/{purchaseordersId}", 1L).with(user("mario.rossi").password("user")
                                                                                                 .roles("USER")))
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(model().attribute("cartBean", notNullValue()))
+           .andExpect(model().attribute("purchaseOrder", hasProperty("id", is(1L))))
+           .andExpect(model().attribute("purchaseOrder", hasProperty("lineItemPurchaseOrders")))
+           .andExpect(model().attribute("purchaseOrder", hasProperty("lineItemPurchaseOrders", IsCollectionWithSize.hasSize(3))))
+           .andExpect(model().attribute("purchaseOrder", hasProperty("lineItemPurchaseOrders", hasItem(hasProperty("price", is(new BigDecimal("20.0000")))))))
+//           .andExpect(model().attribute("purchaseOrder", hasProperty("datePurchase", is("2018-10-10 00:00:00.0"))))
            .andExpect(view().name("purchaseorders/show"))
            .andExpect(status().isOk());
     }

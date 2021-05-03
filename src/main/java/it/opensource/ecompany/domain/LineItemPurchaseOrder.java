@@ -65,6 +65,16 @@ public class LineItemPurchaseOrder implements Serializable {
         this.quantity = quantity;
     }
 
+    public BigDecimal getPrice() {
+
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+
+        this.price = price;
+    }
+
     public Long getVersion() {
 
         return version;
