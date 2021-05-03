@@ -16,7 +16,7 @@
             <span class="sidebar-titolo" th:text="#{label.rightside.title}">Eventi</span><br/>
             <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
                 <!--  -->
-                <a th:href="@{'/purchaseorders/all/customers/' + ${customer.id}}" th:text="#{label.purchaseorder.listing}"></a>
+                <a th:href="@{'/admin/purchaseorders/all/customers/' + ${customer.id}}" th:text="#{label.purchaseorder.listing}"></a>
             </div>
             <!--
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
