@@ -15,10 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Profile("html")
+@RequestMapping("/admin/purchaseorders")
 @Controller
 public class PurchaseOrdersController {
 
@@ -41,12 +43,14 @@ public class PurchaseOrdersController {
         this.userContext = userContext;
     }
 
-    @GetMapping("/admin/purchaseorders/all")
+    @GetMapping("/all")
     public String getAllPurchaseOrders(Model uiModel) {
 
         List<PurchaseOrder> purchaseOrders = purchaseOrdersService.getAllPurchaseOrders();
         List<Category> categories = categoriesService.getAll();
         Customer customer = userContext.getCurrentCustomer();
+
+        cartBean.setExpressDelivery(true);
 
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
@@ -57,7 +61,7 @@ public class PurchaseOrdersController {
         return "purchaseorders/list";
     }
 
-    @GetMapping("/purchaseorders/{purchaseorderId}")
+    @GetMapping("/{purchaseorderId}")
     public String getPurchaseOrderById(@PathVariable("purchaseorderId") Long id, Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
@@ -76,24 +80,24 @@ public class PurchaseOrdersController {
         return "purchaseorders/show";
     }
 
-    @GetMapping("/purchaseorders/all/customers/{customerId}")
-    public String getPurchaseOrdersByCustomer(@PathVariable("customerId") Long customerId, Model uiModel) {
+    @GetMapping("/all/customers/{customerId}")
+    public String getPurchaseOrdersByCustomerId(@PathVariable("customerId") Long customerId, Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
+        List<Category> categories = categoriesService.getAll();
+        List<PurchaseOrder> purchaseOrders = purchaseOrdersService.getPurchaseOrderByCustomer(customerId);
 
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
         uiModel.addAttribute("cartBean", cartBean);
-        uiModel.addAttribute("categories", categoriesService.getAll());
-
-        List<PurchaseOrder> purchaseOrders = purchaseOrdersService.getPurchaseOrderByCustomer(customerId);
+        uiModel.addAttribute("categories", categories);
         uiModel.addAttribute("purchaseOrders", purchaseOrders);
 
         return "purchaseorders/list";
     }
 
-    @GetMapping("/purchaseorders/all/customers/checkout")
-    public String viewPurchaseOrders(Model uiModel) {
+    @GetMapping("/all/customers/checkout")
+    public String viewPurchaseOrdersCheckout(Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
         List<Category> categories = categoriesService.getAll();
@@ -106,7 +110,7 @@ public class PurchaseOrdersController {
         return "purchaseorders/checkout";
     }
 
-    @GetMapping("/purchaseorders/save")
+    @GetMapping("/save")
     public String savePurchaseOrdewr(Model uiModel) {
 
         purchaseOrdersService.savePurchaseOrder();

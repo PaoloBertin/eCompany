@@ -92,10 +92,6 @@ public class MvcConfiguration implements WebMvcConfigurer {
     }
 
 
-
-
-
-
 //    @Bean
 //    ThemeChangeInterceptor themeChangeInterceptor() {
 //        return new ThemeChangeInterceptor();

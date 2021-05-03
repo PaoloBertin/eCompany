@@ -4,41 +4,75 @@ import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Category;
 import it.opensource.ecompany.domain.Product;
 import org.hamcrest.collection.IsCollectionWithSize;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import java.math.BigDecimal;
 
 import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
-@EnableWebMvc
 @SpringBootTest
 public class PurchaseOrdersControllerTest {
 
     @Autowired
     private CartBean cartBean;
 
+    @Autowired
+    MockMvc mvc;
+
+    @Autowired
+    private FilterChainProxy springSecurityFilterChain;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
+
+    protected MockHttpServletRequest request;
+
+
+    @BeforeEach
+    public void setup() {
+
+        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                                  .addFilters(springSecurityFilterChain)
+                                  .build();
+    }
+
+    // TODO
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+//    @WithMockUser(username = "admin", password = "admin", authorities = {"USER", "ADMIN"})
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getAllPurchaseOrdersTest(@Autowired MockMvc mvc) throws Exception {
+    public void getAllPurchaseOrdersTest() throws Exception {
+
+//        MockHttpSession session = new MockHttpSession();
+
+//        cartBean.setExpressDelivery(true);
+//        session.setAttribute("cartBean", cartBean);
 
         mvc.perform(get("/admin/purchaseorders/all").with(user("admin").password("admin")
-                                                                       .roles("ADMIN")))
+                                                                       .roles("ADMIN"))
+//                            .session(session)
+        )
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(15)))
-           .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
+           .andExpect(model().attribute("cartBean", notNullValue()))
            .andExpect(view().name("purchaseorders/list"))
            .andExpect(status().isOk());
     }
@@ -46,13 +80,13 @@ public class PurchaseOrdersControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getPurchaseOrderByIdTest(@Autowired MockMvc mvc) throws Exception {
+    public void getPurchaseOrderByIdTest() throws Exception {
 
-        mvc.perform(get("/purchaseorders/{purchaseordersId}", 2L).with(user("mario.rossi").password("user")
-                                                                                          .roles("USER")))
+        mvc.perform(get("/admin/purchaseorders/{purchaseordersId}", 2L).with(user("mario.rossi").password("user")
+                                                                                                .roles("USER")))
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
-           .andExpect(request().sessionAttribute("scopedTarget.cartBean", notNullValue()))
+           .andExpect(model().attribute("cartBean", notNullValue()))
            .andExpect(view().name("purchaseorders/show"))
            .andExpect(status().isOk());
     }
@@ -60,21 +94,29 @@ public class PurchaseOrdersControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getPurchasePrdersByCustomerTest() {
+    public void getPurchasePrdersByCustomerIdTest() throws Exception {
 
+        mvc.perform(get("/admin/purchaseorders/all/customers/{customerId}", 2L).with(user("mario.rossi").password("user")
+                                                                                                        .roles("USER")))
+           .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
+           .andExpect(model().attribute("cartBean", notNullValue()))
+           .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(4)))
+           .andExpect(view().name("purchaseorders/list"))
+           .andExpect(status().isOk());
     }
 
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void viewMovementsTest() {
+    public void viewPurchaseOrdersCheckout() {
 
+        fail(); // TODO
     }
 
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void saveMovementTest(@Autowired MockMvc mvc) throws Exception {
+    public void savePurchaseOrderTest(@Autowired MockMvc mvc) throws Exception {
 
         Category category = new Category(1L, "Books");
         Product product = new Product();
