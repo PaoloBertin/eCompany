@@ -25,7 +25,7 @@
                     <br/>    
                     <h5>Registrazione</h5>
                     <br/>
-                    <form name="registrationForm" th:object="customerForm" th:attr="action=@{/customers/registration}" method="post">
+                    <form name="registrationForm" th:object="${customerForm}" th:attr="action=@{/customers/registration}" method="post">
                         <div class="form-group">
                             <label id="labelFirstnameId" for="inpuFirstnameId" th:text="#{label.customer.firstname}"></label>
                             <input class="form-control" id="inpuFirstnameId" type="text" name="firstname" th:field="*{firstname}"/>
