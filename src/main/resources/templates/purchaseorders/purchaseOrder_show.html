@@ -18,51 +18,51 @@
             <!-- corpo centrale -->
             <div class="row">
                 <div class="col-lg-2">
-                    <div th:replace="~{fragments/left_side :: left_side}">left side</div>
+                    <div th:replace="~{fragments/left_side_admin :: left_side}">left side</div>
                 </div>
             
                 <div class="col-lg-7">
                     <br/>
-                    <h4 th:text="#{label.salesorder.order_details}">Order Details</h4>
+                    <h4 th:text="#{label.purchaseorder.order_details}">Order Details</h4>
                     <br/>
 
                     <table class="table">
-                        <thead class="thead-light">
+                        <thead>
                             <tr>
-                                <th th:text="#{label.salesorder.name}">User Code</th>
-                                <th th:text="#{label.salesorder.sales_date}">Order Date</th>
-                                <th th:text="#{label.salesorder.total}">Total</th>
-                                <th th:text="#{label.salesorder.state}">State</th>
+                                <th th:text="#{label.purchaseorder.username}">User Code</th>
+                                <th th:text="#{label.purchaseorder.order_date}">Order Date</th>
+                                <th th:text="#{label.purchaseorder.total}">Total</th>
+                                <th th:text="#{label.purchaseorder.state}">State</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td th:text="${saleOrder.supplier.name}"></td>
-                                <td th:text="${saleOrder.dateSales}"></td>
-                                <td th:text="${saleOrder.totalAmount} + ' &euro;'"></td>
-                                <td th:text="${saleOrder.state}"></td>
+                                <td th:text="${purchaseOrder.customer.username}"></td>
+                                <td th:text="${purchaseOrder.datePurchase}"></td>
+                                <td th:text="${purchaseOrder.totalAmount} + ' &euro;'"></td>
+                                <td th:text="${purchaseOrder.state}"></td>
                             </tr>
                         </tbody>
                     </table>    
                      
                     <br/>
-                    <h4 th:text="#{label.saleorder.order_items}">Voci Ordine</h4>
+                    <p th:text="#{label.purchaseorder.order_items}">Voci Ordine</p>
                     <table class="table">
-                        <thead class="thead-light">
+                        <thead>
                             <tr>
-                                <th th:text="#{label.saleorder.order_items.product_category}">categoria</th>
-                                <th th:text="#{label.saleorder.order_items.product_name}">prodotto</th>
-                                <th th:text="#{label.saleorder.order_items.product_code}">codice</th>
-                                <th th:text="#{label.saleorder.order_items.product_price}">prezzo</th>
-                                <th th:text="#{label.saleorder.order_items.product_quantity}">quantità</th>
+                                <th th:text="#{label.purchaseorder.order_items.product_category}">Categoria</th>
+                                <th th:text="#{label.purchaseorder.order_items.product_name}">Prodotto</th>
+                                <th th:text="#{label.purchaseorder.order_items.product_code}">Codice</th>
+                                <th th:text="#{label.purchaseorder.order_items.product_price}">Prezzo</th>
+                                <th th:text="#{label.purchaseorder.order_items.product_quantity}">Quantita'</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="lineItem : ${saleOrder.lineitems}">
+                            <tr th:each="lineItem : ${purchaseOrder.lineItemPurchaseOrders}">
                                 <td th:text="${lineItem.product.category.name}"></td>
                                 <td th:text="${lineItem.product.name}"></td>
                                 <td th:text="${lineItem.product.productCode}"></td>
-                                <td th:text="${lineItem.product.price} + ' &euro;'"></td>
+                                <td th:text="${#numbers.formatDecimal(lineItem.price, 0, 'COMMA', 2, 'POINT')}  + ' &euro;'"></td>
                                 <td th:text="${lineItem.quantity}"></td>
                             </tr>
                         </tbody>
@@ -70,9 +70,7 @@
                 </div>
                             
                 <div class="col-lg-3">
-                    <!--
                      <div th:replace="~{fragments/right_side :: right_side}">right side</div>
-                     -->
                 </div>
             </div>
         

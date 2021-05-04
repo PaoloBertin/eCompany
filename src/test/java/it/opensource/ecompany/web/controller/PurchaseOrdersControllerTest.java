@@ -64,7 +64,7 @@ public class PurchaseOrdersControllerTest {
            .andExpect(model().attribute("categories", hasItem(hasProperty("name", is("Libri")))))
            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(15)))
            .andExpect(model().attribute("cartBean", notNullValue()))
-           .andExpect(view().name("purchaseorders/list"))
+           .andExpect(view().name("purchaseorders/purchaseOrders_list"))
            .andExpect(status().isOk());
     }
 
@@ -83,7 +83,7 @@ public class PurchaseOrdersControllerTest {
            .andExpect(model().attribute("purchaseOrder", hasProperty("lineItemPurchaseOrders", IsCollectionWithSize.hasSize(3))))
            .andExpect(model().attribute("purchaseOrder", hasProperty("lineItemPurchaseOrders", hasItem(hasProperty("price", is(new BigDecimal("20.0000")))))))
 //           .andExpect(model().attribute("purchaseOrder", hasProperty("datePurchase", is("2018-10-10 00:00:00.0"))))
-           .andExpect(view().name("purchaseorders/show"))
+           .andExpect(view().name("purchaseorders/purchaseOrder_show"))
            .andExpect(status().isOk());
     }
 
@@ -97,7 +97,7 @@ public class PurchaseOrdersControllerTest {
            .andExpect(model().attribute("categories", IsCollectionWithSize.hasSize(6)))
            .andExpect(model().attribute("cartBean", notNullValue()))
            .andExpect(model().attribute("purchaseOrders", IsCollectionWithSize.hasSize(4)))
-           .andExpect(view().name("purchaseorders/list"))
+           .andExpect(view().name("purchaseorders/purchaseOrders_list"))
            .andExpect(status().isOk());
     }
 

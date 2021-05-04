@@ -34,13 +34,11 @@ public class SalesOrdersController {
     @GetMapping("/admin/salesorders/all")
     public String getAllSalesOrders(Model uiModel) {
 
-        // Customer customer = userContext.getCurrentCustomer();
+        Customer customer = userContext.getCurrentCustomer();
         List<SalesOrder> salesOrders = salesOrdersService.getAllSalesOrders();
 
-        //        uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", new SearchForm());
-        //        uiModel.addAttribute("cartBean", cartBean);
-        //        uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("salesOrders", salesOrders);
 
         return "salesorders/salesOrdersList";
@@ -54,15 +52,13 @@ public class SalesOrdersController {
         SalesOrder saleOrder = salesOrdersService.getSalesOrderById(id);
         SearchForm searchForm = new SearchForm();
 
-        // uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("searchForm", searchForm);
-        // uiModel.addAttribute("cartBean", cartBean);
-        // uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("saleOrder", saleOrder);
 
         log.debug("visualizza ordine con id=" + saleOrder.getId());
 
-        return "salesorders/showSaleOrder";
+        return "salesorders/salesOrder_show";
     }
 
 }

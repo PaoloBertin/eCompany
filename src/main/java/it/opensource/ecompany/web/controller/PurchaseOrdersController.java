@@ -58,7 +58,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("categories", categories);
         uiModel.addAttribute("purchaseOrders", purchaseOrders);
 
-        return "purchaseorders/list";
+        return "purchaseorders/purchaseOrders_list";
     }
 
     @GetMapping("/{purchaseorderId}")
@@ -77,7 +77,7 @@ public class PurchaseOrdersController {
         log.debug("visualizza ordine con id=" + purchaseOrder.getId());
         log.debug("numero lineItem=" + purchaseOrder.getLineItemPurchaseOrders().size());
 
-        return "purchaseorders/show";
+        return "purchaseorders/purchaseOrder_show";
     }
 
     @GetMapping("/all/customers/{customerId}")
@@ -93,7 +93,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("categories", categories);
         uiModel.addAttribute("purchaseOrders", purchaseOrders);
 
-        return "purchaseorders/list";
+        return "purchaseorders/purchaseOrders_list";
     }
 
     @GetMapping("/all/customers/checkout")
@@ -107,7 +107,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("categories", categories);
 
-        return "purchaseorders/checkout";
+        return "purchaseorders/purchaseOrder_checkout";
     }
 
     @GetMapping("/save")
@@ -121,6 +121,7 @@ public class PurchaseOrdersController {
         uiModel.addAttribute("categories", categoriesService.getAll());
         uiModel.addAttribute("searchForm", new SearchForm());
 
+        // TODO inviare a welcome o a welcomeAdmin se l'utente e' admin
         return "welcome";
     }
 }

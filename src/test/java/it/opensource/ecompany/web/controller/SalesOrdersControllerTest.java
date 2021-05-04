@@ -9,23 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.web.FilterChainProxy;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
 class SalesOrdersControllerTest {
+
     @Autowired
     private CartBean cartBean;
 
@@ -53,7 +52,9 @@ class SalesOrdersControllerTest {
 
         mvc.perform(get("/admin/salesorders/all").with(user("admin").password("admin")
                                                                     .roles("ADMIN")))
-           .andExpect(model().attribute("salesOrders", IsCollectionWithSize.hasSize(10)));
+           .andExpect(model().attribute("salesOrders", IsCollectionWithSize.hasSize(10)))
+           .andExpect(view().name("salesOrdersList"))
+           .andExpect(status().isOk());
     }
 
     @Disabled
@@ -64,6 +65,8 @@ class SalesOrdersControllerTest {
 
         mvc.perform(get("/admin/salesorders/{saleorderId}", 1L).with(user("admin").password("admin")
                                                                                   .roles("ADMIN")))
-           .andExpect(model().attribute("saleOrder", hasProperty("totalAmount", equalTo(169.5))));
+           .andExpect(model().attribute("saleOrder", hasProperty("totalAmount", equalTo(169.5))))
+           .andExpect(view().name("salesOrder_show"))
+           .andExpect(status().isOk());
     }
 }

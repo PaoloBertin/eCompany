@@ -18,10 +18,10 @@
             <!-- corpo centrale -->
             <div class="row">
                 <div class="col-lg-2">
-                    <div th:replace="~{fragments/left_side :: left_side}">left side</div>
+                    <div th:replace="~{fragments/left_side_admin :: left_side}">left side</div>
                 </div>
             
-                <div class="col-lg-7">
+                <div class="col-lg-8">
                     <br/>
                     <h4 th:text="#{label.purchaseorder.listing}">Purchase Orders Listing</h4>
                     <br/>
@@ -47,7 +47,7 @@
                     </table>
                 </div>
                             
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                      <div th:replace="~{fragments/right_side :: right_side}">right side</div>
                 </div>
             </div>
