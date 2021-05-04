@@ -2,9 +2,11 @@ package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.domain.Category;
+import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Product;
 import it.opensource.ecompany.service.CategoriesService;
 import it.opensource.ecompany.service.ProductsService;
+import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,13 +37,16 @@ public class CatalogsController {
 
     private final MessageSource messageSource;
 
+    private final UserContext userContext;
+
     public CatalogsController(CategoriesService categoriesService, ProductsService productsService, CartBean cartBean,
-                              MessageSource messageSource) {
+                              MessageSource messageSource, UserContext userContext) {
 
         this.categoriesService = categoriesService;
         this.productsService = productsService;
         this.cartBean = cartBean;
         this.messageSource = messageSource;
+        this.userContext = userContext;
     }
 
     /**
@@ -122,8 +127,10 @@ public class CatalogsController {
     @GetMapping(path = "/{categoryId}", params = "form")
     public String updateCategoryForm(@PathVariable("categoryId") Long categoryId, Model uiModel) {
 
+        Customer customer = userContext.getCurrentCustomer();
         Category category = categoriesService.getCategoryById(categoryId);
 
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("cartBean", cartBean);
         uiModel.addAttribute("category", category);
 
@@ -142,9 +149,12 @@ public class CatalogsController {
     public String getAllCategories(@RequestParam(name = "page", defaultValue = "0") int page,
                                    @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
 
+        Customer customer = userContext.getCurrentCustomer();
+
         List<Category> categories = categoriesService.getAll();
         Category category = new Category();
 
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("categories", categories);
         uiModel.addAttribute("category", category);
 
@@ -152,29 +162,4 @@ public class CatalogsController {
 
         return "catalog/categoriesList";
     }
-
-    /*
-    @GetMapping("/admin/catalog/{categoryId}/all")
-    public String getAllProductsByCategoryByPage(@PathVariable("categoryId") Long categoryId,
-                                                 @RequestParam(name = "page", defaultValue = "0") int page,
-                                                 @RequestParam(name = "size", defaultValue = "10") int size, Model uiModel) {
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("id")));
-        Page<Product> products = productsService.getProductsByCategoryByPage(categoryId, pageable);
-
-        List<Category> categories = categoriesService.getAll();
-
-        Category category = new Category();
-
-        ProductForm productForm = new ProductForm();
-        uiModel.addAttribute("categories", categories);
-        uiModel.addAttribute("category", category);
-        uiModel.addAttribute("products", products);
-        uiModel.addAttribute("productForm", productForm);
-
-        log.debug("visualizza tutte le categorie");
-
-        return "catalog/categoriesList";
-    }
-     */
 }
