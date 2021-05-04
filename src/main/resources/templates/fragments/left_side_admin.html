@@ -11,28 +11,31 @@
 
     <body>
         <div th:fragment="left_side_admin" style="align-content: left; margin-left: 15px;">
-            <!--   -->
-            <form th:action="@{/products/searchProduct?admin=tre}" th:object="${searchForm}" method="GET">
+            <div>
+                <h3>Administration</h3>
+            </div>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <a th:href="@{/admin/accounts}" th:text="#{label.accounts}">accounts</a>
                 <br/>
-                <div class="form-group">
-                    <input id="searchLabel" class="form-control" type="search" placeholder="Search" th:field="*{textToSearch}" aria-label="Search">
-                </div>
-                <button class="btn btn-primary" type="submit">Search</button>
-            </form>
-            <br/>
-            <p class="sidebar-titolo" th:text="#{label.categories}"></p>
-            <table>
-                <tbody>
-                    <tr th:each="category : ${categories}">
-                        <td>
-                            <a href="#" th:href="@{/products/{categoryId}(categoryId=${category.categoryid}, admin=true)}">
-                                <span th:text="${category.name}"></span>
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
+                <a th:href="@{/admin/customers}" th:text="#{label.customers}">customers</a>
+                <br/>
+                <a th:href="@{/admin/suppliers}" th:text="#{label.suppliers}">suppliers</a>
+                <br/>
+                <a th:href="@{/admin/catalog/all}" th:text="#{label.categories}">categories</a>
+                <br/>
+                <a th:href="@{/admin/products/1/all}" th:text="#{label.products}">products</a>
+                <br/>
+                <a th:href="@{/admin/purchaseorders/all}" th:text="#{label.purchaseorder.listing}">Sales orders</a>
+                <br/>
+                <a th:href="@{/admin/salesorders/all}" th:text="#{label.salesorder.listing}">Purchases orders</a>
+                <br/>
+                <a th:href="@{/admin/warehouses/all}" th:text="#{label.warehouse.all}">warehouse</a>
+                <br/>
+                <a th:href="@{/admin/warehousejournal/all}" th:text="#{label.warehousejournal.view}">Warehouse Journal</a>
+                <br/>
+                <a th:href="@{/admin/warehousecards/all}" th:text="#{label.warehousecards.listing}">Warehouse Cards</a>
+                <br/>
+            </div>
         </div>
     </body>
 
