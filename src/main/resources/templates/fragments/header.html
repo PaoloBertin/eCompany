@@ -5,107 +5,119 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-    <head>
-    </head>
+<head>
+</head>
 
-    <body>
-        <div th:fragment="header">
-            <!--
-            <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #FFCC33;">
-            -->
-            <nav class="navbar navbar-expand-xl navbar-light" style="background-color: #e3f2fd;">
+<body>
+<div th:fragment="header">
+    <!--
+    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #FFCC33;">
+    -->
+    <nav class="navbar navbar-expand-xl navbar-light" style="background-color: #e3f2fd;">
 
-                <a class="navbar-brand" th:href="@{/}">
-                    <img src="/images/eCompany_logo.png" alt="Home">
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-                    <span class="navbar-toggler-icon">Admin</span>
-                </button>
+        <a class="navbar-brand" th:href="@{/}">
+            <img src="/images/eCompany_logo.png" alt="Home">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon">Admin</span>
+        </button>
 
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                        <li class="nav-item" >
-                            <a class="nav-link" th:href="@{'/admin'}">
-                                <span class="navbar-text" style="font-size:1.5em; font-weight: bold;" >Administration</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto" th:if="${! #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                        <li class="nav-item" >
-                            <a class="nav-link" th:href="@{'/cart/show'}">
-                                <!--   -->
-                                <span style="font-size: 3em;">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/admin'}">
+                        <span class="navbar-text" style="font-size:1.5em; font-weight: bold;">Administration</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto" th:if="${! #authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{'/cart/show'}">
+                        <!--   -->
+                        <span style="font-size: 3em;">
                                     <i class="fas fa-shopping-cart"></i>
                                 </span>
-                                <span class="badge badge-primary" style="font-size: 1em;" th:if="${cartBean != null}"
-                                      th:text="${cartBean.numberProducts}">
+                        <span class="badge badge-primary" style="font-size: 1em;" th:if="${cartBean != null}"
+                              th:text="${cartBean.numberProducts}">
                                 </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <!--  -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/(lang=it)}">
-                                <img src="/images/Flag_of_Italy.png" width="35" height="23" alt="italiano">
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/(lang=en)}">
-                                <img src="/images/Flag_of_the_United_Kingdom.png" width="35" height="23" alt="inglese">
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto" sec:authorize="! isAuthenticated()">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/login/form}">
-                                <span th:text="#{label.header.login}"></span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/customers/registration}">
-                                <span th:text="#{label.header.registration}"></span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="navbar-text">I miei dati</span>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">Dati Personali</a>
-                                <a class="dropdown-item" href="#">Metodi di pagamento</a>
-                                <a class="dropdown-item" href="#">I miei indirizzi</a>
-                                <a class="dropdown-item" href="#">I miei ordini</a>
-                                <a class="dropdown-item" href="#">Lista dei desideri</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" th:href="@{/logout}">
-                                    <span class="navbar-text" th:text="#{label.header.logout}">logout</span>
-                                </a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">
-                                <span class="navbar-text" th:text="#{label.customer.user}">user</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">
-                                <span class="navbar-text" th:text="${#authentication.getPrincipal().getUsername()}">username</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-            <!-- Standard messages
-            <div th:if="${#vars['message'] != null}" class="alert alert-success">
-                <span th:text="${#vars['message']}"></span>
-            </div>
-            -->
-            <div th:if="${message != null}" th:class="'alert alert-' + ${message.type}" th:text="${message.message}" role="alert">
-            </div>
+                    </a>
+                </li>
+            </ul>
+            <!--  -->
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/(lang=it)}">
+                        <img src="/images/Flag_of_Italy.png" width="35" height="23" alt="italiano">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/(lang=en)}">
+                        <img src="/images/Flag_of_the_United_Kingdom.png" width="35" height="23" alt="inglese">
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto" sec:authorize="! isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/login/form}">
+                        <span th:text="#{label.header.login}"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/customers/registration}">
+                        <span th:text="#{label.header.registration}"></span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false">
+                        <span class="navbar-text">I miei dati</span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Dati Personali</a>
+                        <a class="dropdown-item" href="#">Metodi di pagamento</a>
+                        <a class="dropdown-item" href="#">I miei indirizzi</a>
+
+                        <!--
+                        <a class="dropdown-item" href="#">I miei ordini</a>
+                        -->
+
+                        <div th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+                            <!--  -->
+                            <a class="dropdown-item"
+                               th:href="@{'/admin/purchaseorders/all/customers/' + ${customer.id}}"
+                               th:text="#{label.purchaseorder.listing}">i miei ordini</a>
+                        </div>
+
+                        <a class="dropdown-item" href="#">Lista dei desideri</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/logout}">
+                            <span class="navbar-text" th:text="#{label.header.logout}">logout</span>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <span class="navbar-text" th:text="#{label.customer.user}">user</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <span class="navbar-text" th:text="${#authentication.getPrincipal().getUsername()}">username</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </body>
+    </nav>
+    <!-- Standard messages
+    <div th:if="${#vars['message'] != null}" class="alert alert-success">
+        <span th:text="${#vars['message']}"></span>
+    </div>
+    -->
+    <div th:if="${message != null}" th:class="'alert alert-' + ${message.type}" th:text="${message.message}" role="alert">
+    </div>
+</div>
+</body>
 </html>
 
