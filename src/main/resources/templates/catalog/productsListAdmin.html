@@ -16,19 +16,7 @@
 
             <div class="row ml-0 mr-0">
                 <div class="col-lg-2">
-                    <br/>
-                    <h4 th:text="#{label.categories}"></h4>
-                    <table>
-                        <tbody>
-                            <tr th:each="category : ${categories}">
-                                <td>
-                                    <a th:href="@{'/admin/products/' + ${category.id} + '/all'}">
-                                        <span th:text="${category.name}"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div th:replace="~{fragments/left_side_admin :: left_side_admin}">left side</div>
                 </div>
                 <div class="col-lg-7">
                     <br/>
