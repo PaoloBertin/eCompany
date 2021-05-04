@@ -50,15 +50,16 @@ class AccountsControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void viewAccountsTest(@Autowired MockMvc mvc) throws Exception {
+    void viewAccountsTest() throws Exception {
 
-        BigDecimal balance = new BigDecimal(100000);
-        BigDecimal error = new BigDecimal(0.00001);
+        BigDecimal balance = new BigDecimal("100000");
+        BigDecimal error = new BigDecimal("0.00001");
 
         mvc.perform(get("/admin/accounts").with(user("admin").password("admin")
                                                              .roles("ADMIN")))
            .andExpect(model().attribute("accounts", IsCollectionWithSize.hasSize(1)))
            .andExpect(model().attribute("accounts", hasItem(hasProperty("balance", is(closeTo(balance, error))))))
+           .andExpect(model().attribute("customer", notNullValue()))
            .andExpect(view().name("accounts/accountsList"))
            .andExpect(status().isOk());
     }
@@ -66,16 +67,16 @@ class AccountsControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void viewAccount(@Autowired MockMvc mvc) throws Exception {
+    void viewAccount() throws Exception {
 
-        BigDecimal balance = new BigDecimal(100000);
-        BigDecimal error = new BigDecimal(0.00001);
+        BigDecimal balance = new BigDecimal("100000");
+        BigDecimal error = new BigDecimal("0.00001");
 
         mvc.perform(get("/admin/accounts/{accountId}", 1L).with(user("admin").password("admin")
                                                                              .roles("ADMIN")))
            .andExpect(model().attribute("account", hasProperty("balance", is(closeTo(balance, error)))))
            .andExpect(view().name("accounts/accountShow"))
+           .andExpect(model().attribute("customer", notNullValue()))
            .andExpect(status().isOk());
     }
-
 }
