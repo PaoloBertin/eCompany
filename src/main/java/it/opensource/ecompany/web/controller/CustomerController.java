@@ -114,7 +114,10 @@ public class CustomerController {
     @GetMapping("/admin/customers")
     public String viewAllCustomers(Model uiModel) {
 
+        Customer customer = userContext.getCurrentCustomer();
         List<Customer> customers = customersService.getAllCustomers();
+
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("customers", customers);
         uiModel.addAttribute("customerForm", new CustomerForm());
 
