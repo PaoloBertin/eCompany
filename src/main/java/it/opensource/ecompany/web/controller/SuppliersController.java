@@ -1,7 +1,9 @@
 package it.opensource.ecompany.web.controller;
 
+import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Supplier;
 import it.opensource.ecompany.service.SuppliersService;
+import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.web.controller.util.Message;
 import it.opensource.ecompany.web.form.SupplierForm;
 import org.slf4j.Logger;
@@ -26,6 +28,8 @@ public class SuppliersController {
 
     private static final Logger log = LoggerFactory.getLogger(SuppliersController.class);
 
+    private final UserContext userContext;
+
     private final SuppliersService suppliersService;
 
     private final MessageSource messageSource;
@@ -34,17 +38,20 @@ public class SuppliersController {
 
     private Message message = null;
 
-    public SuppliersController(SuppliersService suppliersService, MessageSource messageSource) {
+    public SuppliersController(SuppliersService suppliersService, MessageSource messageSource, UserContext userContext) {
 
         this.suppliersService = suppliersService;
         this.messageSource = messageSource;
+        this.userContext = userContext;
     }
 
     @GetMapping("/admin/suppliers")
     public String viewAllSupplier(Model uiModel) {
 
+        Customer customer = userContext.getCurrentCustomer();
         List<Supplier> suppliers = suppliersService.getAllSuppliers();
 
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("suppliers", suppliers);
         uiModel.addAttribute("supplierForm", new SupplierForm());
 
@@ -54,12 +61,15 @@ public class SuppliersController {
     @GetMapping(path = "/admin/suppliers/{supplierId}", params = "form")
     public String viewSupplierForm(@PathVariable("supplierId") Long supplierId, Model uiModel) {
 
+        Customer customer = userContext.getCurrentCustomer();
+
         Supplier supplier = suppliersService.getSupplierById(supplierId);
         supplierForm.clear();
         supplierForm.setSupplier(supplier);
 
         List<Supplier> suppliers = suppliersService.getAllSuppliers();
 
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("supplierForm", supplierForm);
         uiModel.addAttribute("suppliers", suppliers);
 
@@ -97,5 +107,4 @@ public class SuppliersController {
 
         return "redirect:/suppliersListAdmin";
     }
-
 }
