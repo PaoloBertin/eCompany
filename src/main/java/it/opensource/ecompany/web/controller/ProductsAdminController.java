@@ -290,12 +290,14 @@ public class ProductsAdminController {
 
         log.debug("id prodotto da editare=" + productId);
 
+        Customer customer = userContext.getCurrentCustomer();
         Product product = productsService.getProductById(productId);
         ProductForm productForm = new ProductForm();
         setFieldProductForm(product, productForm);
 
         List<Category> categories = categoriesService.getAll();
 
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("productForm", productForm);
         uiModel.addAttribute("categoryId", categoryId);
         uiModel.addAttribute("categories", categories);
