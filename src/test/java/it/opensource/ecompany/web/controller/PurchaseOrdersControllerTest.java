@@ -29,6 +29,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class PurchaseOrdersControllerTest {
 
+//    protected MockHttpServletRequest request;
+
     @Autowired
     private CartBean cartBean;
 
@@ -40,8 +42,6 @@ public class PurchaseOrdersControllerTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
-
-//    protected MockHttpServletRequest request;
 
     @BeforeEach
     public void setup() {

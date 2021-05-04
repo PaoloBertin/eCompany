@@ -1,13 +1,18 @@
 package it.opensource.ecompany.web.controller;
 
+import it.opensource.ecompany.bean.CartBean;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
@@ -15,15 +20,34 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@EnableWebMvc
 @AutoConfigureMockMvc
 @SpringBootTest
 class ProductsAdminControllerTest {
 
+    @Autowired
+    private CartBean cartBean;
+
+    @Autowired
+    MockMvc mvc;
+
+    @Autowired
+    private FilterChainProxy springSecurityFilterChain;
+
+    @Autowired
+    private WebApplicationContext webApplicationContext;
+
+    @BeforeEach
+    public void setup() {
+
+        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                                  .addFilters(springSecurityFilterChain)
+                                  .build();
+    }
+
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void viewAllProductsByPageTest(@Autowired MockMvc mvc) throws Exception {
+    void viewAllProductsByPageTest() throws Exception {
 
         mvc.perform(get("/admin/products/all/all").param("page", "0")
                                                   .param("size", "10")
@@ -35,10 +59,11 @@ class ProductsAdminControllerTest {
            .andExpect(status().isOk());
     }
 
+    @Disabled
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void viewProducstByCategoryByPageTest(@Autowired MockMvc mvc) throws Exception {
+    void viewProducstByCategoryByPageTest() throws Exception {
 
         mvc.perform(get("/admin/products/{categoryId}/all", 2L).param("page", "0")
                                                                .param("size", "10")
@@ -53,7 +78,7 @@ class ProductsAdminControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void viewProductTest(@Autowired MockMvc mvc) throws Exception {
+    void viewProductTest() throws Exception {
 
         mvc.perform(get("/admin/products/{productId}", 2L).param("page", "0")
                                                           .param("size", "10")
@@ -67,7 +92,7 @@ class ProductsAdminControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void downloadPhotoTest(@Autowired MockMvc mvc) throws Exception {
+    void downloadPhotoTest() throws Exception {
 
         mvc.perform(get("/admin/products/{productId}", 2L).param("page", "0")
                                                           .param("size", "10")
@@ -79,7 +104,7 @@ class ProductsAdminControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void searchProductTest(@Autowired MockMvc mvc) throws Exception {
+    void searchProductTest() throws Exception {
 
         mvc.perform(get("/admin/products/searchProduct").param("page", "0")
                                                         .param("size", "10")
@@ -95,7 +120,7 @@ class ProductsAdminControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void createProductSuccessTest(@Autowired MockMvc mvc) throws Exception {
+    void createProductSuccessTest() throws Exception {
 
         mvc.perform(post("/admin/products").param("page", "0")
                                            .param("size", "10")
@@ -115,14 +140,14 @@ class ProductsAdminControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void createProductFailureTest(@Autowired MockMvc mvc) throws Exception {
+    void createProductFailureTest() throws Exception {
 
     }
 
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void updateProductTest(@Autowired MockMvc mvc) throws Exception {
+    void updateProductTest() throws Exception {
 
         mvc.perform(post("/admin/products").param("page", "0")
                                            .param("size", "10")
