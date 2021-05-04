@@ -1,6 +1,7 @@
 package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
+import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.Warehouse;
 import it.opensource.ecompany.service.UserContext;
 import it.opensource.ecompany.service.WarehouseService;
@@ -35,9 +36,12 @@ public class WarehouseController {
 
     private final MessageSource messageSource;
 
+    private final UserContext userContext;
+
     public WarehouseController(WarehouseService warehouseService, UserContext userContext, CartBean cartBean, MessageSource messageSource) {
 
         this.warehouseService = warehouseService;
+        this.userContext = userContext;
         this.messageSource = messageSource;
     }
 
@@ -45,7 +49,10 @@ public class WarehouseController {
     public String getAllWarehousesByPage(@PageableDefault Pageable pageable, Model uiModel) {
 
         log.debug("view page " + pageable.getPageNumber() + " warehouse list");
+
+        Customer customer = userContext.getCurrentCustomer();
         Page<Warehouse> warehouses = warehouseService.getAllWarehousesByPage(pageable);
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("warehouses", warehouses);
 
         return "warehouses/warehousesList";
@@ -56,7 +63,10 @@ public class WarehouseController {
 
         log.debug("view warehouse with id=" + warehouseId);
 
+        Customer customer = userContext.getCurrentCustomer();
         Optional<Warehouse> warehouse = warehouseService.getWarehouseById(warehouseId);
+
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("warehouse", warehouse.isPresent() ? warehouse.get() : new Warehouse());
 
         return "warehouses/warehouseShow";
@@ -65,19 +75,28 @@ public class WarehouseController {
     @GetMapping()
     public String getWarehouseByName(@RequestParam String name, Model uiModel) {
 
+        log.debug("view warehouse with name = " + name);
+
+        Customer customer = userContext.getCurrentCustomer();
         Optional<Warehouse> warehouse = warehouseService.getWarehouseByName(name);
+
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("warehouse", warehouse.isPresent() ? warehouse.get() : new Warehouse());
+
         return "warehouses/warehouseShow";
     }
 
     @GetMapping(value = "/{warehouseId}", params = "form")
     public String warehouseUpdateForm(@PathVariable("warehouseId") Long id, @RequestParam String form, Model uiModel) {
 
+        Customer customer = userContext.getCurrentCustomer();
         Optional<Warehouse> warehouse = warehouseService.getWarehouseById(id);
+
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("warehouse", warehouse.get()); // TODO invio messaggio se warehouse = null
 
-        log.debug("update warehouse: " + warehouse.get()
-                                                  .toString()); // TODO inviare oggetto warehouse
+        log.debug("update warehouse: " + (warehouse.isPresent() ? warehouse.get() : "aggiornamento non riuscito"));
+
 
         return "warehouses/warehouseEdit";
     }
