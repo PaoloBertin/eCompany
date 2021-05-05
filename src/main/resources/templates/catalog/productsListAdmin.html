@@ -40,11 +40,6 @@
                                     <a th:href="@{'/admin/products/all/' + ${product.id}(form='true', categoryId=${categoryId})}">
                                         <i class="fa fa-edit fa-lg"></i>
                                     </a>
-                                    <!--
-                                    <a th:href="@{'/admin/products/all/' + ${product.id}(form, categoryId={categoryId})}">
-                                        <i class="fa fa-edit fa-lg"></i>
-                                    </a>
-                                    -->
                                 </td>
                                 <td>
                                     <form th:action="@{'/admin/products/'}" th:method="delete">
@@ -110,11 +105,6 @@
                         <form name="editProductForm" th:object="${productForm}"
                               th:action="@{/admin/products(form, page=${0}, size=${size}, categoryId=${categoryId})}" method="post"
                               enctype="multipart/form-data">
-
-                            <!--
-                            <input type="hidden" name="categoryId" th:field="*{categoryId}"/>
-                            -->
-
                             <input type="hidden" name="id" th:field="*{id}"/>
                             <div class="form-group">
                                 <label id="labelNameId" for="inputNameId" th:text="#{label.product.name}">product name</label>

@@ -32,11 +32,6 @@
                                     th:width="${100 / column} + '%'" style="vertical-align: text-top">
                                     <img th:src="@{'/products/photo/' + ${products.content.get(col).id}}" border="0" align="left"
                                          style="margin: 0px 10px" width="65" height="92"/>
-                                    <!--
-                                    <a th:href="@{'/products/' + ${products.content.get(col).category.categoryid} + '/' + ${products.content.get(col).id}}">
-                                        <span th:text="${products.getContent().get(col).name}"></span>
-                                    </a>
-                                     -->
                                     <a th:href="@{'/products/all/' + ${products.content.get(col).id}}">
                                         <span th:text="${products.getContent().get(col).name}"></span>
                                     </a>
@@ -65,7 +60,7 @@
                                 </li>
                                 <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
                                     <a class="page-link"
-                                       th:href="@{/products/{categoryId}/all(categoryId=${categoryId},page=${page - 1},size=${size})}"
+                                       th:href="@{/products/{categoryId}/all(categoryId=${categoryId},page=${page-1},size=${size})}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&lsaquo;</span>
                                     </a>

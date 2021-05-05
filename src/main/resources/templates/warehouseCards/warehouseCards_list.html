@@ -2,8 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
       th:with="lang=${#locale.language}"
-      th:lang="${lang}"
->
+      th:lang="${lang}">
 
     <head>
         <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
@@ -16,17 +15,17 @@
             <div th:replace="~{fragments/header :: header}">header</div>
 
             <!-- corpo centrale -->
-            <div class="row ml-0 mr-0" >
-                <!--
+            <div class="row" >
+                <!--  -->
                 <div class="col-lg-2">
-                    <div th:replace="~{fragments/left_side_warehouse :: left_side_warehouse}">left side</div>
+                    <div th:replace="~{fragments/left_side_admin :: left_side}">left side</div>
                 </div>
-                -->
 
-                <div class="col-lg-10">
+                <div class="col-lg-8">
                     <br/>
                     <h4 th:text="#{label.warehouse.availability}">warehouse availibility</h4>
 
+                    <!--
                     <form name="selectWarehouseForm" th:object="${wareForm}" th:action="@{/admin/warehouseCards}" method="get">
                         <div class="form-group row">
                             <label class="col-lg-2 col-form-label" for="labelWarehouseSelect">warehouse</label>
@@ -39,6 +38,7 @@
                         </div>
                         <button class="btn btn-primary" type="submit" th:text="#{label.submit}">submit</button>
                     </form>
+                    -->
 
                     <!--  -->
                     <br/>
@@ -75,6 +75,7 @@
                         </tbody>
                     </table>
                     <br/>
+                    <!-- paginazione -->
                     <div class="row justify-content-center">
                         <nav aria-label="navigation" th:if="${warehouseCards.totalPages gt 1}">
                             <ul class="pagination" th:with="pages=${warehouseCards.totalPages}">
@@ -119,7 +120,7 @@
 
                 </div>
                 <div class="col-lg-2">
-                    <div th:replace="~{fragments/right_side_warehouse :: right_side_warehouse}">right side warehouse</div>
+                    <div th:replace="~{fragments/right_side :: right_side}">right side warehouse</div>
                 </div>
             </div>
 

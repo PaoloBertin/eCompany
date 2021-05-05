@@ -2,6 +2,7 @@ package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.service.WarehouseService;
+import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.test.context.junit.jupiter.EnabledIf;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -45,9 +45,9 @@ class WarehouseControllerTest {
     @BeforeEach
     public void setup() {
 
-        this.mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                                  .addFilters(springSecurityFilterChain)
-                                  .build();
+        mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+                             .addFilters(springSecurityFilterChain)
+                             .build();
     }
 
     @Autowired
@@ -56,21 +56,23 @@ class WarehouseControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getAllWarehouseTest(@Autowired MockMvc mvc) throws Exception {
+    public void getAllWarehouseTest() throws Exception {
 
         mvc.perform(get("/admin/warehouses/all").with(user("admin").password("admin")
                                                                    .roles("ADMIN")))
-           .andExpect(model().attribute("warehouses", hasProperty("content", hasSize(8))))
+           .andExpect(model().attribute("customer", notNullValue()))
+           .andExpect(model().attribute("warehouses", IsCollectionWithSize.hasSize(8)))
            .andExpect(status().isOk());
     }
 
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getWarehuseById(@Autowired MockMvc mvc) throws Exception {
+    public void getWarehuseById() throws Exception {
 
         mvc.perform(get("/admin/warehouses/{warehouseId}", 1L).with(user("admin").password("admin")
                                                                                  .roles("ADMIN")))
+           .andExpect(model().attribute("customer", notNullValue()))
            .andExpect(model().attribute("warehouse", hasProperty("name", equalTo("Antica Libreria di Bergamo"))))
            .andExpect(status().isOk());
 
@@ -79,7 +81,7 @@ class WarehouseControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void getWarehuseByName(@Autowired MockMvc mvc) throws Exception {
+    public void getWarehuseByName() throws Exception {
 
         mvc.perform(get("/admin/warehouses?name=Antica Libreria di Bergamo").with(user("admin").password("admin")
                                                                                                .roles("ADMIN")))
@@ -90,7 +92,7 @@ class WarehouseControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void warehouseUpdateFormTest(@Autowired MockMvc mvc) throws Exception {
+    public void warehouseUpdateFormTest() throws Exception {
 
         mvc.perform(get("/admin/warehouses/{warehouseId}", 5L).param("form", "true")
                                                               .with(user("admin").password("admin")
@@ -102,7 +104,7 @@ class WarehouseControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void warehouseUpdateTest(@Autowired MockMvc mvc) throws Exception {
+    public void warehouseUpdateTest() throws Exception {
 
         StringBuilder uri = new StringBuilder();
         uri.append(URLEncoder.encode("id", StandardCharsets.UTF_8.name()))
@@ -129,7 +131,7 @@ class WarehouseControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void createWarehouseFormTest(@Autowired MockMvc mvc) throws Exception {
+    public void createWarehouseFormTest() throws Exception {
 
         mvc.perform(get("/admin/warehouses").param("form", "true")
                                             .with(user("admin").password("admin")
@@ -142,7 +144,7 @@ class WarehouseControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void createWarehouseTest(@Autowired MockMvc mvc) throws Exception {
+    public void createWarehouseTest() throws Exception {
 
         StringBuilder uri = new StringBuilder();
         uri.append(URLEncoder.encode("name", StandardCharsets.UTF_8.name()))
@@ -161,7 +163,7 @@ class WarehouseControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    public void deleteWarehouse(@Autowired MockMvc mvc) throws Exception {
+    public void deleteWarehouse() throws Exception {
 
         mvc.perform(delete("/admin/warehouses/{warehouseId}", 5L).with(user("admin").password("admin")
                                                                                     .roles("ADMIN")))
