@@ -10,6 +10,7 @@ import org.springframework.test.context.junit.jupiter.EnabledIf;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 @SpringBootTest
 class DocumentationWarehouseServiceImplTest {
 

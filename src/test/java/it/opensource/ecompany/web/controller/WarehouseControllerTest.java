@@ -2,7 +2,6 @@ package it.opensource.ecompany.web.controller;
 
 import it.opensource.ecompany.bean.CartBean;
 import it.opensource.ecompany.service.WarehouseService;
-import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +60,7 @@ class WarehouseControllerTest {
         mvc.perform(get("/admin/warehouses/all").with(user("admin").password("admin")
                                                                    .roles("ADMIN")))
            .andExpect(model().attribute("customer", notNullValue()))
-           .andExpect(model().attribute("warehouses", IsCollectionWithSize.hasSize(8)))
+           .andExpect(model().attribute("warehouses", hasProperty("content", hasSize(8))))
            .andExpect(status().isOk());
     }
 

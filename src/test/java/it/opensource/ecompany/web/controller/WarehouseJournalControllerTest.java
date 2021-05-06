@@ -1,6 +1,5 @@
 package it.opensource.ecompany.web.controller;
 
-import org.hamcrest.collection.IsCollectionWithSize;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,7 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -43,24 +41,39 @@ class WarehouseJournalControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getAllWarehouseJournalTest() throws Exception {
+    void getWarehouseJournalsHome() throws Exception {
 
-        mvc.perform(get("/admin/warehousejournal/all").with(user("admin").password("admin")
-                                                                         .roles("ADMIN")))
+        mvc.perform(get("/admin/warehousejournals/all/home").with(user("admin").password("admin")
+                                                                               .roles("ADMIN")))
            .andExpect(model().attribute("customer", notNullValue()))
-           .andExpect(model().attribute("warehouseJournal", IsCollectionWithSize.hasSize(8)))
+           .andExpect(model().attribute("warehouses", hasProperty("content", hasSize(8))))
+           .andExpect(view().name("warehousejournal/warehouseJournalsHome"))
            .andExpect(status().isOk());
     }
 
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getWarehouseByIdTest() throws Exception {
+    void getAllWarehouseJournalByPageTest() throws Exception {
 
-        mvc.perform(get("/admin/warehousejournal/{warehouseId}", 1L).with(user("admin").password("admin")
-                                                                                 .roles("ADMIN")))
+        mvc.perform(get("/admin/warehousejournals/all").param("page", "0")
+                                                       .param("size", "10")
+                                                       .with(user("admin").password("admin")
+                                                                          .roles("ADMIN")))
            .andExpect(model().attribute("customer", notNullValue()))
-           .andExpect(model().attribute("warehouse", hasProperty("name", equalTo("Antica Libreria di Bergamo"))))
+           .andExpect(model().attribute("warehouseJournals", hasProperty("content", hasSize(10))))
+           .andExpect(status().isOk());
+    }
+
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
+    @Test
+    void getWarehouseJournalsByWarehouseIdTest() throws Exception {
+
+        mvc.perform(get("/admin/warehousejournals/{warehouseId}", 1L).with(user("admin").password("admin")
+                                                                                        .roles("ADMIN")))
+           .andExpect(model().attribute("customer", notNullValue()))
+           .andExpect(model().attribute("warehouseJournals", hasProperty("content", hasSize(10))))
            .andExpect(status().isOk());
     }
 }

@@ -19,9 +19,9 @@ public class Invoice implements Serializable {
     @Column(name = "transferee_code")
     private String transfereeCode;
 
-    @JoinColumn(name = "documentation_warehouse_id", foreignKey = @ForeignKey(name = "invoices_fk_01"))
+    @JoinColumn(name = "line_item_warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_fk_02"))
     @OneToOne
-    private DocumentationWarehouse documentationWarehouse;
+    private LineItemWarehouse lineItemWarehouse;
 
     @Version
     private Long version;
@@ -54,16 +54,6 @@ public class Invoice implements Serializable {
     public void setTransfereeCode(String transfereeCode) {
 
         this.transfereeCode = transfereeCode;
-    }
-
-    public DocumentationWarehouse getDocumentationWarehouse() {
-
-        return documentationWarehouse;
-    }
-
-    public void setDocumentationWarehouse(DocumentationWarehouse documentationWarehouse) {
-
-        this.documentationWarehouse = documentationWarehouse;
     }
 
     public Long getVersion() {

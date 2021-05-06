@@ -3,6 +3,7 @@ package it.opensource.ecompany.service.impl;
 import it.opensource.ecompany.domain.WarehouseCard;
 import it.opensource.ecompany.service.ProductsService;
 import it.opensource.ecompany.service.WarehouseCardService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -22,6 +23,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Disabled
 @SpringBootTest
 class WarehouseCardServiceImplTest {
 

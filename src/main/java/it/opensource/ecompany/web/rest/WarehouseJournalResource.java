@@ -49,12 +49,12 @@ public class WarehouseJournalResource {
     }
 
     @GetMapping(path="/{warehouseId}/all")
-    public ResponseEntity<Page<WarehouseJournal>> getAllWarehouseJournalByWarehouseId(@PathVariable(name = "warehouseId") Long id,
+    public ResponseEntity<Page<WarehouseJournal>> getAllWarehouseJournalByWarehouseId(@PathVariable(name = "warehouseId") Long warehouseId,
                                                                                       @PageableDefault Pageable pageable) {
 
-        log.debug("REST request to get a page of WarehouseJournal for warehouse with id =" + id);
+        log.debug("REST request to get a page of WarehouseJournal for warehouse with id =" + warehouseId);
 
-        Page<WarehouseJournal> warehouseJournals = warehouseJournalService.getByWarehouseId(id, pageable);
+        Page<WarehouseJournal> warehouseJournals = warehouseJournalService.getWarehouseJournalsByWarehouseId(warehouseId, pageable);
 
         return ResponseEntity.ok()
                              .body(warehouseJournals); // TODO resituire contenuto e/o messaggio

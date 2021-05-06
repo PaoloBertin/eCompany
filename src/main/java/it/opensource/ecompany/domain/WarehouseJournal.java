@@ -1,7 +1,13 @@
 package it.opensource.ecompany.domain;
 
+import it.opensource.ecompany.domain.util.Causal;
+import it.opensource.ecompany.domain.util.Document;
+import it.opensource.ecompany.domain.util.UM;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Table(name = "warehouse_journal")
 @Entity
@@ -13,21 +19,30 @@ public class WarehouseJournal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "documentation_warehouse_id", foreignKey = @ForeignKey(name = "warehouse_journal_fk_01"))
+    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "warehouse_journal_fk_01"))
+    @ManyToOne
+    private Warehouse warehouse;
+
+    @Column(name = "movement_date")
+    private LocalDateTime movementDate;
+
+    @Enumerated(EnumType.STRING)
+    @Column(length = 25)
+    private Causal causal;
+
+    @JoinColumn(name = "product_id")
     @OneToOne
-    private DocumentationWarehouse documentationWarehouse;
+    private Product product;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "document_type", length = 25)
+    private Document documentType;
+
+    @Column(name = "document_number")
+    private String documentNumber;
 
     @Version
     private Long version;
-
-    public WarehouseJournal() {
-
-    }
-
-    public WarehouseJournal(DocumentationWarehouse documentationWarehouse) {
-
-        this.documentationWarehouse = documentationWarehouse;
-    }
 
     public Long getId() {
 
@@ -39,14 +54,64 @@ public class WarehouseJournal implements Serializable {
         this.id = id;
     }
 
-    public DocumentationWarehouse getDocumentationWarehouse() {
+    public Warehouse getWarehouse() {
 
-        return documentationWarehouse;
+        return warehouse;
     }
 
-    public void setDocumentationWarehouse(DocumentationWarehouse documentationWarehouse) {
+    public void setWarehouse(Warehouse warehouse) {
 
-        this.documentationWarehouse = documentationWarehouse;
+        this.warehouse = warehouse;
+    }
+
+    public LocalDateTime getMovementDate() {
+
+        return movementDate;
+    }
+
+    public void setMovementDate(LocalDateTime movementDate) {
+
+        this.movementDate = movementDate;
+    }
+
+    public Causal getCausal() {
+
+        return causal;
+    }
+
+    public void setCausal(Causal causal) {
+
+        this.causal = causal;
+    }
+
+    public Product getProduct() {
+
+        return product;
+    }
+
+    public void setProduct(Product product) {
+
+        this.product = product;
+    }
+
+    public Document getDocumentType() {
+
+        return documentType;
+    }
+
+    public void setDocumentType(Document documentType) {
+
+        this.documentType = documentType;
+    }
+
+    public String getDocumentNumber() {
+
+        return documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+
+        this.documentNumber = documentNumber;
     }
 
     public Long getVersion() {
@@ -58,5 +123,4 @@ public class WarehouseJournal implements Serializable {
 
         this.version = version;
     }
-
 }

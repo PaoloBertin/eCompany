@@ -26,20 +26,23 @@ public class DocumentationWarehouseServiceImpl implements DocumentationWarehouse
     @Override
     public Long getNumberDocumentationsBydWarehouseId(Long wareouseId) {
 
-        return documentationWarehouseRepository.countByWarehouseId(wareouseId);
+//        return documentationWarehouseRepository.countByWarehouseId(wareouseId);
+        return null;
     }
 
     @Override
     public Long getNumberDocumentationsByWarehouseIdAndLineItemProductCode(Long warehouseId, String productCode) {
 
-        return documentationWarehouseRepository.countByWarehouseIdAndLineItemWarehouseProductCode(warehouseId, productCode);
+//        return documentationWarehouseRepository.countByWarehouseIdAndLineItemWarehouseProductCode(warehouseId, productCode);
+        return null;
     }
 
     @Override
     public Page<DocumentationWarehouse> getByWarehouseIdAndLineItemProductCodeByPage(Long warehouseId, String productCode,
                                                                                    Pageable pageable) {
 
-        return documentationWarehouseRepository.findByWarehouseIdAndLineItemWarehouseProductCode(warehouseId, productCode, pageable);
+//        return documentationWarehouseRepository.countByWarehouseIdAndLineItemWarehouseProductCode(warehouseId, productCode);
+        return null;
     }
 
 }

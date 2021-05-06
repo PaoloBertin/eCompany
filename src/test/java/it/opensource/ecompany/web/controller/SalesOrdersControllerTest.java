@@ -53,7 +53,7 @@ class SalesOrdersControllerTest {
         mvc.perform(get("/admin/salesorders/all").with(user("admin").password("admin")
                                                                     .roles("ADMIN")))
            .andExpect(model().attribute("salesOrders", IsCollectionWithSize.hasSize(10)))
-           .andExpect(view().name("salesOrdersList"))
+           .andExpect(view().name("salesorders/salesOrdersList"))
            .andExpect(status().isOk());
     }
 
@@ -66,7 +66,7 @@ class SalesOrdersControllerTest {
         mvc.perform(get("/admin/salesorders/{saleorderId}", 1L).with(user("admin").password("admin")
                                                                                   .roles("ADMIN")))
            .andExpect(model().attribute("saleOrder", hasProperty("totalAmount", equalTo(169.5))))
-           .andExpect(view().name("salesOrder_show"))
+           .andExpect(view().name("salesorders/salesOrder_show"))
            .andExpect(status().isOk());
     }
 }

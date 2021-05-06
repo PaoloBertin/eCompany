@@ -6,27 +6,22 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Long> {
 
-    long countByDocumentationWarehouseWarehouseId(Long warehouseId);
+//    long countByDocumentationWarehouseWarehouseId(Long warehouseId);
 
-    long countByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
-                                                                                                       String productCode);
+//    long countByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId, String productCode);
 
-    Page<WarehouseCard> findByDocumentationWarehouseWarehouseId(Long warehouseId, Pageable pageable);
+//    Page<WarehouseCard> findByDocumentationWarehouseWarehouseId(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
-                                                                                                                     String productCode);
+//    List<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId, String productCode);
 
-    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
-                                                                                                                     String productCode,
-                                                                                                                     Pageable pageable);
+//    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
+//                                                                                                                     String productCode,
+//                                                                                                                     Pageable pageable);
 
-    //    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
-    //                                                                                                                     String productCode,
-    //                                                                                                                     Pageable pageable);
-
+//    Page<WarehouseCard> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(Long warehouseId,
+//                                                                                                                     String productCode,
+//                                                                                                                     Pageable pageable);
 }

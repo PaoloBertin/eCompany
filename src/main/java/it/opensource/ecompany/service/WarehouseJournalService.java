@@ -14,7 +14,7 @@ public interface WarehouseJournalService {
 
     Page<WarehouseJournal> getAllWarehouseJournalByPage(Pageable pageable);
 
-    Page<WarehouseJournal> getByWarehouseId(Long id, Pageable pageable);
+    Page<WarehouseJournal> getWarehouseJournalsByWarehouseId(Long warehouseId, Pageable pageable);
 
     Page<WarehouseJournal> getByWarehouseName(String name, Pageable pageable);
 

@@ -221,12 +221,17 @@ CREATE TABLE IF NOT EXISTS documentations_warehouse(
 
 CREATE TABLE IF NOT EXISTS warehouse_journal (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    documentation_warehouse_id BIGINT NOT NULL,
+    warehouse_id BIGINT NOT NULL,
+    movement_date DATE,
+    causal VARCHAR(25),
+    product_id BIGINT NOT NULL,
+    document_type VARCHAR(25) NOT NULL,
+    document_number VARCHAR(25) NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT warehouse_journal_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id)
+    CONSTRAINT warehouse_journal_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id)
 );
 
 CREATE TABLE IF NOT EXISTS warehouse_card_products (

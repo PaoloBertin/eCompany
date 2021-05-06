@@ -1,5 +1,5 @@
 package it.opensource.ecompany.domain.util;
 
 public enum Causal {
-    PURCHASE, SALE
+    LOAD_FOR_PURCHASE, UNLOADING_FOR_SALE
 }

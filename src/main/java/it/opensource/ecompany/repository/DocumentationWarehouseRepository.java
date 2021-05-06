@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DocumentationWarehouseRepository extends JpaRepository<DocumentationWarehouse, Long> {
 
-    Long countByWarehouseId(Long warehouseId);
+//    Long countByWarehouseId(Long warehouseId);
 
-    Long countByWarehouseIdAndLineItemWarehouseProductCode(Long warehouseId, String productCode);
+//    Long countByWarehouseIdAndLineItemWarehouseProductCode(Long warehouseId, String productCode);
 
-    Page<DocumentationWarehouse> findByWarehouseIdAndLineItemWarehouseProductCode(Long warehouseId, String productCode, Pageable pageable);
+//     Page<DocumentationWarehouse> findByWarehouseIdAndLineItemWarehouseProductCode(Long warehouseId, String productCode, Pageable pageable);
 
 }

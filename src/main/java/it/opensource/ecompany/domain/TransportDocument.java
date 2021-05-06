@@ -2,6 +2,7 @@ package it.opensource.ecompany.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Table(name = "transport_documents")
 @Entity
@@ -19,9 +20,12 @@ public class TransportDocument implements Serializable {
     @Column(name = "transferee_code")
     private String transfereeCode;
 
-    @JoinColumn(name = "documentation_warehouse_id", foreignKey = @ForeignKey(name = "transport_documents_fk_01"))
+    @Column(name = "movement_date")
+    private LocalDate movementDate;
+
+    @JoinColumn(name = "line_item_warehouse_id")
     @OneToOne
-    private DocumentationWarehouse documentationWarehouse;
+    private LineItemWarehouse lineItemWarehouse;
 
     @Version
     private Long version;
@@ -54,16 +58,6 @@ public class TransportDocument implements Serializable {
     public void setTransfereeCode(String transfereeCode) {
 
         this.transfereeCode = transfereeCode;
-    }
-
-    public DocumentationWarehouse getDocumentationWarehouse() {
-
-        return documentationWarehouse;
-    }
-
-    public void setDocumentationWarehouse(DocumentationWarehouse documentationWarehouse) {
-
-        this.documentationWarehouse = documentationWarehouse;
     }
 
 }

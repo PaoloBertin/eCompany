@@ -1,6 +1,7 @@
 package it.opensource.ecompany.repository;
 
 import it.opensource.ecompany.domain.WarehouseJournal;
+import it.opensource.ecompany.domain.util.Document;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,17 +13,10 @@ import java.util.List;
 @Repository
 public interface WarehouseJournalRepository extends JpaRepository<WarehouseJournal, Long> {
 
-    Page<WarehouseJournal> findByDocumentationWarehouseWarehouseId(Long id, Pageable pageable);
+    Page<WarehouseJournal> findByWarehouseId(Long warehouseId, Pageable pageable);
 
-    Page<WarehouseJournal> findByDocumentationWarehouseWarehouseName(String name, Pageable pageable);
+    Page<WarehouseJournal> findByWarehouseIdAndDocumentType(Long warehouseId, Document documentType, Pageable pageable);
 
-    List<WarehouseJournal> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(Long warehouseId,
-                                                                                                               LocalDate documentDateStart,
-                                                                                                               LocalDate documentDateEnd);
-
-    Page<WarehouseJournal> findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(Long warehouseId,
-                                                                                                               LocalDate documentDateStart,
-                                                                                                               LocalDate documentDateEnd,
-                                                                                                               Pageable pageable);
+    WarehouseJournal findByWarehouseIdAndDocumentNumber(Long warehouseId, String documentNumber);
 
 }

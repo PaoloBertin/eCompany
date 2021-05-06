@@ -12,10 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
 @Profile("html")
+@RequestMapping("/admin/salesorders")
 @Controller
 public class SalesOrdersController {
 
@@ -31,7 +33,7 @@ public class SalesOrdersController {
         this.userContext = userContext;
     }
 
-    @GetMapping("/admin/salesorders/all")
+    @GetMapping("/all")
     public String getAllSalesOrders(Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();
@@ -44,7 +46,7 @@ public class SalesOrdersController {
         return "salesorders/salesOrdersList";
     }
 
-    @GetMapping("/admin/salesorders/{saleorderId}")
+    @GetMapping("/{saleorderId}")
     public String getPurchaseOrderById(@PathVariable("saleorderId") Long id, Model uiModel) {
 
         Customer customer = userContext.getCurrentCustomer();

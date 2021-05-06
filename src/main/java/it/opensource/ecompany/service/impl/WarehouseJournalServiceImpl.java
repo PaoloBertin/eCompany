@@ -45,16 +45,17 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<WarehouseJournal> getByWarehouseId(Long id, Pageable pageable) {
+    public Page<WarehouseJournal> getWarehouseJournalsByWarehouseId(Long warehouseId, Pageable pageable) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseId(id, pageable);
+        return warehouseJournalRepository.findByWarehouseId(warehouseId,pageable);
     }
 
     @Transactional(readOnly = true)
     @Override
     public Page<WarehouseJournal> getByWarehouseName(String name, Pageable pageable) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseName(name, pageable);
+//        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseName(name, pageable);
+        return null;
     }
 
     @Transactional(readOnly = true)
@@ -62,9 +63,10 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     public List<WarehouseJournal> getAllWarehouseJournalByDocumentDateBetween(Long warehouseId, LocalDate documentDateStart,
                                                                               LocalDate documentDateEnd) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(warehouseId,
-                                                                                                                              documentDateStart,
-                                                                                                                              documentDateEnd);
+//        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(warehouseId,
+//                                                                                                                              documentDateStart,
+//                                                                                                                              documentDateEnd);
+        return null;
     }
 
     @Transactional(readOnly = true)
@@ -72,10 +74,11 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     public Page<WarehouseJournal> getAllWarehouseJournalByDocumentDateBetween(Long warehouseId, LocalDate documentDateStart,
                                                                               LocalDate documentDateEnd, Pageable pageable) {
 
-        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(warehouseId,
-                                                                                                                              documentDateStart,
-                                                                                                                              documentDateEnd,
-                                                                                                                              pageable);
+//        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(warehouseId,
+//                                                                                                                              documentDateStart,
+//                                                                                                                              documentDateEnd,
+//                                                                                                                              pageable);
+        return null;
     }
 
     @Override
