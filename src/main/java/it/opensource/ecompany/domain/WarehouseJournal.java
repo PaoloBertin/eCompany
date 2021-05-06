@@ -2,11 +2,9 @@ package it.opensource.ecompany.domain;
 
 import it.opensource.ecompany.domain.util.Causal;
 import it.opensource.ecompany.domain.util.Document;
-import it.opensource.ecompany.domain.util.UM;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Table(name = "warehouse_journal")

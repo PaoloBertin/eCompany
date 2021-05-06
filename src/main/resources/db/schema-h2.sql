@@ -17,7 +17,6 @@ DROP TABLE IF EXISTS product_prices;
 DROP TABLE IF EXISTS images_product;
 
 DROP TABLE IF EXISTS line_items_warehouse;
-DROP TABLE IF EXISTS documentations_warehouse;
 DROP TABLE IF EXISTS warehouse_card_products;
 DROP TABLE IF EXISTS warehouse_journal;
 DROP TABLE IF EXISTS warehouse_cards;
@@ -203,22 +202,6 @@ CREATE TABLE IF NOT EXISTS line_items_warehouse (
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS documentations_warehouse(
-    id BIGINT NOT NULL AUTO_INCREMENT,
-    warehouse_id BIGINT NOT NULL,
-    causal VARCHAR(25) NOT NULL,
-    document VARCHAR(25) NOT NULL,
-    document_date DATE NOT NULL,
-    document_number BIGINT NOT NULL,
-    line_item_warehouse_id BIGINT NOT NULL,
-    version BIGINT DEFAULT 0,
-
-    PRIMARY KEY(id),
-
-    CONSTRAINT documentations_warehouse_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id),
-    CONSTRAINT documentations_warehouse_fk_02 FOREIGN KEY(line_item_warehouse_id) REFERENCES line_items_warehouse(id)
-);
-
 CREATE TABLE IF NOT EXISTS warehouse_journal (
     id BIGINT NOT NULL AUTO_INCREMENT,
     warehouse_id BIGINT NOT NULL,
@@ -249,7 +232,6 @@ CREATE TABLE IF NOT EXISTS warehouse_card_products (
 
 CREATE  TABLE IF NOT EXISTS warehouse_cards (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    documentation_warehouse_id BIGINT NOT NULL,
     warehouse_card_product_id BIGINT NOT NULL,
     stock INTEGER,
     inventory_value DECIMAL(12,4),
@@ -257,7 +239,6 @@ CREATE  TABLE IF NOT EXISTS warehouse_cards (
 
     PRIMARY KEY(id),
 
-    CONSTRAINT warehouse_cards_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id),
     CONSTRAINT warehouse_cards_fk_02 FOREIGN KEY(warehouse_card_product_id) REFERENCES warehouse_card_products(id)
 );
 
@@ -265,24 +246,18 @@ CREATE TABLE IF NOT EXISTS transport_documents(
     id BIGINT NOT NULL AUTO_INCREMENT,
     transferor_code VARCHAR(25),
     transferee_code VARCHAR(25),
-    documentation_warehouse_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
-
-    CONSTRAINT transport_documents_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS invoices(
     id BIGINT NOT NULL AUTO_INCREMENT,
     transferor_code VARCHAR(25),
     transferee_code VARCHAR(25),
-    documentation_warehouse_id BIGINT NOT NULL,
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
-
-    CONSTRAINT invoices_fk_01 FOREIGN KEY(documentation_warehouse_id) REFERENCES documentations_warehouse(id)
 );
 
 CREATE TABLE IF NOT EXISTS line_items_purchase_orders (
