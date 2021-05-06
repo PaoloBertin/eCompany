@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+<head>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+
+<body>
+<div class="container-fluid p-0">
+
+    <!-- intestazione -->
+    <div th:replace="~{fragments/header :: header}">header</div>
+
+    <!-- corpo centrale -->
+    <div class="row">
+        <!--  -->
+        <div class="col-lg-2">
+            <div th:replace="~{fragments/left_side_admin :: left_side}">left side</div>
+        </div>
+
+        <div class="col-lg-10">
+            <br/>
+                <h5 th:text="'Warehouse ' + ${warehouse.name}"></h5>
+                <h4 th:text="#{label.warehouseCard}"></h4>
+            <br/>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th th:text="#{label.warehouseCard.causal}">causal</th>
+                    <th th:text="#{label.warehouseCard.productName}">product name</th>
+                    <th th:text="#{label.warehouseCard.productCode}">product code</th>
+                    <th th:text="#{label.warehouseCard.documentType}">documentType</th>
+                    <th th:text="#{label.warehouseCard.documentNumber}">document number</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="warehouseCard : ${warehouseCards.content}">
+                    <td th:text="${warehouseCard.causal}">causal</td>
+                    <td th:text="${warehouseCard.product.name}">product name</td>
+                    <td th:text="${warehouseCard.product.productCode}">product code</td>
+                    <td th:text="${warehouseCard.documentType}">document type</td>
+                    <td th:text="${warehouseCard.documentNumber}">document number</td>
+                </tr>
+                </tbody>
+            </table>
+            <br/>
+            <!-- paginazione -->
+            <div class="row justify-content-center">
+                <nav aria-label="navigation" th:if="${warehouseCards.totalPages gt 1}">
+                    <ul class="pagination" th:with="pages=${warehouseCards.totalPages}">
+                        <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+
+                            <a class="page-link" th:href="@{'/admin/warehouseCards/' + ${warehouse.id}(page=${0}, size=${size})}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <!--   -->
+                        <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                            <a class="page-link" th:href="@{'/admin/warehouseCards/' + ${warehouse.id}(page=${page - 1}, size=${size})}">
+                                <span aria-hidden="true">&lsaquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="disabled">
+                            <a class="page-link" th:text="${page + 1}">-1</a>
+                        </li>
+                        <li class="page-item" th:classappend="disabled">
+                            <a class="page-link">
+                                <span>di</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="disabled">
+                            <a class="page-link" th:text="${pages}">3</a>
+                        </li>
+
+                        <li class="page-item" th:classappend="${page eq (warehouseCards.totalPages - 1)} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{'/admin/warehouseCards/' + ${warehouse.id} (page=${page + 1}, size=${size})}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&rsaquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="${page eq (warehouseCards.totalPages - 1)} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{'/admin/warehouseCards/' + ${warehouse.id} (page=${warehouseCards.totalPages - 1}, size=${size})}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <!--
+        <div class="col-lg-2">
+            <div th:replace="~{fragments/right_side :: right_side}">right side warehouse</div>
+        </div>
+        -->
+    </div>
+
+    <!-- pie' pagina -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:replace="~{fragments/footer :: footer}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,8 +1,11 @@
 package it.opensource.ecompany.domain;
 
+import it.opensource.ecompany.domain.util.Causal;
+import it.opensource.ecompany.domain.util.Document;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Table(name = "warehouse_cards")
 @Entity
@@ -14,14 +17,32 @@ public class WarehouseCard implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "warehouse_card_product_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_02"))
+    @Column(name = "movement_date")
+    private LocalDateTime movementDate;
+
+    @JoinColumn(name = "warehouse_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_01"))
     @ManyToOne
-    private WarehouseCardProduct warehouseCardProduct;
+    private Warehouse warehouse;
 
-    private Integer stock;
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(name = "warehouse_cards_fk_02"))
+    @OneToOne
+    private Product product;
 
-    @Column(name = "inventory_value")
-    private BigDecimal inventoryValue;
+    @Enumerated(EnumType.STRING)
+    @Column(length = 25)
+    private Causal causal;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "document_type", length = 25)
+    private Document documentType;
+
+    @Column(name = "document_number")
+    private String documentNumber;
+
+    // private Integer stock; TODO
+
+    // @Column(name = "inventory_value")
+    // private BigDecimal inventoryValue; TODO
 
     @Version
     private Integer version;
@@ -36,34 +57,64 @@ public class WarehouseCard implements Serializable {
         this.id = id;
     }
 
-    public WarehouseCardProduct getWarehouseCardProduct() {
+    public LocalDateTime getMovementDate() {
 
-        return warehouseCardProduct;
+        return movementDate;
     }
 
-    public void setWarehouseCardProduct(WarehouseCardProduct warehouseCardProduct) {
+    public void setMovementDate(LocalDateTime movementDate) {
 
-        this.warehouseCardProduct = warehouseCardProduct;
+        this.movementDate = movementDate;
     }
 
-    public Integer getStock() {
+    public Warehouse getWarehouse() {
 
-        return stock;
+        return warehouse;
     }
 
-    public void setStock(Integer stock) {
+    public void setWarehouse(Warehouse warehouse) {
 
-        this.stock = stock;
+        this.warehouse = warehouse;
     }
 
-    public BigDecimal getInventoryValue() {
+    public Product getProduct() {
 
-        return inventoryValue;
+        return product;
     }
 
-    public void setInventoryValue(BigDecimal inventoryValue) {
+    public void setProduct(Product product) {
 
-        this.inventoryValue = inventoryValue;
+        this.product = product;
+    }
+
+    public Causal getCausal() {
+
+        return causal;
+    }
+
+    public void setCausal(Causal causal) {
+
+        this.causal = causal;
+    }
+
+    public Document getDocumentType() {
+
+        return documentType;
+    }
+
+    public void setDocumentType(Document documentType) {
+
+        this.documentType = documentType;
+    }
+
+    public String getDocumentNumber() {
+
+        return documentNumber;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+
+        this.documentNumber = documentNumber;
     }
 
     public Integer getVersion() {
@@ -74,12 +125,6 @@ public class WarehouseCard implements Serializable {
     public void setVersion(Integer version) {
 
         this.version = version;
-    }
-
-    @Override
-    public String toString() {
-
-        return "WarehouseCard{" + "id=" + id + ", stock=" + stock + ", inventoryValue=" + inventoryValue + ", version=" + version + '}';
     }
 
     @Override

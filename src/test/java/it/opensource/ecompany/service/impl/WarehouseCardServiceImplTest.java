@@ -19,7 +19,6 @@ import org.springframework.test.context.junit.jupiter.EnabledIf;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -59,7 +58,8 @@ class WarehouseCardServiceImplTest {
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 25,  0"})
-    void getNumberWarehouseCardsByDocumentWarehouseIdAndDocumentLineItemProductCodeTest(Long warehouseId, String productCode, Long expected) {
+    void getNumberWarehouseCardsByDocumentWarehouseIdAndDocumentLineItemProductCodeTest(Long warehouseId, String productCode,
+                                                                                        Long expected) {
 
 
         Long actual = warehouseCardService.getNumberWarehouseCardsByWarehouseIdAndLineItemProductCode(warehouseId, productCode);
@@ -75,7 +75,7 @@ class WarehouseCardServiceImplTest {
     void getWarehouseCardByWarehouseByPageTest(Long warehouseId, Long expected) {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
-        Page<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseByPage(warehouseId, pageable);
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getAllWarehouseCardsByWarehouseIdByPage(warehouseId, pageable);
 
         long actual = warehouseCards.getTotalElements();
 
@@ -86,11 +86,11 @@ class WarehouseCardServiceImplTest {
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({
-        "1, 8883780450, 1",
-        "2, 8883780450, 0",
-        "3, 8883780450, 0",
-        "4, 8883780450, 1",
-        "5, 8883780450, 0"})
+            "1, 8883780450, 1",
+            "2, 8883780450, 0",
+            "3, 8883780450, 0",
+            "4, 8883780450, 1",
+            "5, 8883780450, 0"})
     void getWarehouseCardsByWarehouseIdAndProductCodePageTest(long warehouseId, String productCode, long expected) {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
@@ -105,11 +105,12 @@ class WarehouseCardServiceImplTest {
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @ParameterizedTest
     @CsvSource({"1, 8883780450,  1"})
-    void getWarehouseCardsByWarehouseIdAndProductCodeTest(long warehouseId, String productCode, long expected) {
+    void getAllWarehouseCardsByWarehouseIdAndProductCodeTest(long warehouseId, String productCode, long expected) {
 
-        List<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseIdAndProductCode(warehouseId, productCode);
+        Pageable pageable = PageRequest.of(0, 10, Sort.by(Sort.Order.asc("id")));
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getAllWarehouseCardsByWarehouseIdAndProductCode(warehouseId, productCode, pageable);
 
-        long actual = warehouseCards.size();
+        long actual = warehouseCards.getContent().size();
         assertEquals(expected, actual);
 
     }

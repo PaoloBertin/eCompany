@@ -232,14 +232,18 @@ CREATE TABLE IF NOT EXISTS warehouse_card_products (
 
 CREATE  TABLE IF NOT EXISTS warehouse_cards (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    warehouse_card_product_id BIGINT NOT NULL,
-    stock INTEGER,
-    inventory_value DECIMAL(12,4),
+    movement_date DATE NOT NULL,
+    warehouse_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    causal VARCHAR(25),
+    document_type VARCHAR(25),
+    document_number VARCHAR(25),
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 
-    CONSTRAINT warehouse_cards_fk_02 FOREIGN KEY(warehouse_card_product_id) REFERENCES warehouse_card_products(id)
+    CONSTRAINT warehouse_cards_fk_01 FOREIGN KEY(warehouse_id) REFERENCES warehouses(id),
+    CONSTRAINT warehouse_cards_fk_02 FOREIGN KEY(product_id) REFERENCES products(id)
 );
 
 CREATE TABLE IF NOT EXISTS transport_documents(

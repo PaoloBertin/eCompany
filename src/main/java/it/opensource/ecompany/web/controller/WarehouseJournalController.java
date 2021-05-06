@@ -17,7 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Profile("html")
 @RequestMapping("/admin/warehousejournals")
@@ -50,7 +49,7 @@ public class WarehouseJournalController {
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("warehouses", warehouses);
 
-        return "warehousejournal/warehouseJournalsHome";
+        return "warehouseJournal/warehouseJournalsHome";
     }
 
     /**
@@ -72,7 +71,7 @@ public class WarehouseJournalController {
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("warehouseJournals", warehouseJournals);
 
-        return "warehousejournal/warehouseJournalsList";
+        return "warehouseJournal/warehouseJournalsList";
     }
 
     /**
@@ -96,6 +95,6 @@ public class WarehouseJournalController {
         uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("warehouseJournals", warehouseJournals);
 
-        return "warehousejournal/warehouseJournalsListByWarehouse";
+        return "warehouseJournal/warehouseJournalsListByWarehouse";
     }
 }

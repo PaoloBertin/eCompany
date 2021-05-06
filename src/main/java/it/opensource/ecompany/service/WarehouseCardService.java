@@ -21,9 +21,9 @@ public interface WarehouseCardService {
 
     Optional<WarehouseCard> getWarehouseCardById(Long warehouseCardId);
 
-    Page<WarehouseCard> getWarehouseCardsByWarehouseByPage(Long warehouseId, Pageable pageable);
+    Page<WarehouseCard> getAllWarehouseCardsByWarehouseIdByPage(Long warehouseId, Pageable pageable);
 
-    List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductCode(Long warehouseId, String productCode);
+    Page<WarehouseCard> getAllWarehouseCardsByWarehouseIdAndProductCode(Long warehouseId, String productCode, Pageable pageable);
 
     Page<WarehouseCard> getByWarehouseIdAndProductCodeByPage(Long warehouseId, String productCode, Pageable pageable);
 

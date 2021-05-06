@@ -76,12 +76,12 @@ public class WarehouseCardResource {
     }
 
     @GetMapping(path = "/{warehouseId}/all")
-    public ResponseEntity<Page<WarehouseCard>> getWarehouseCardByWarehouse(@PathVariable("warehouseId") Long id,
+    public ResponseEntity<Page<WarehouseCard>> getWarehouseCardByWarehouse(@PathVariable("warehouseId") Long warehouseId,
                                                                            @PageableDefault Pageable pageable) {
 
-        log.debug("REST request to get warehouseCard of the warehouse with id = " + id);
+        log.debug("REST request to get warehouseCard of the warehouse with id = " + warehouseId);
 
-        Page<WarehouseCard> warehouseCards = warehouseCardService.getWarehouseCardsByWarehouseByPage(id, pageable);
+        Page<WarehouseCard> warehouseCards = warehouseCardService.getAllWarehouseCardsByWarehouseIdByPage(warehouseId, pageable);
 
         return ResponseEntity.ok()
                              .body(warehouseCards);

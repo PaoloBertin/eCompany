@@ -71,18 +71,16 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
 
     @Transactional(readOnly = true)
     @Override
-    public Page<WarehouseCard> getWarehouseCardsByWarehouseByPage(Long warehouseId, Pageable pageable) {
+    public Page<WarehouseCard> getAllWarehouseCardsByWarehouseIdByPage(Long warehouseId, Pageable pageable) {
 
-        // TODO
-        return null;
+        return warehouseCardRepository.findByWarehouseId(warehouseId, pageable);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductCode(Long warehouseId, String productCode) {
+    public Page<WarehouseCard> getAllWarehouseCardsByWarehouseIdAndProductCode(Long warehouseId, String productCode, Pageable pageable) {
 
-        // TODO
-        return null;
+        return warehouseCardRepository.findByWarehouseIdAndProductProductCode(warehouseId, productCode, pageable);
     }
 
     @Transactional(readOnly = true)

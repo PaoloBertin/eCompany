@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WarehouseCardRepository extends JpaRepository<WarehouseCard, Long> {
 
+    Page<WarehouseCard> findByWarehouseId(Long warehouseId, Pageable pageable);
+
+    Page<WarehouseCard> findByWarehouseIdAndProductProductCode(Long warehouseId, String productCode, Pageable pageable);
 }

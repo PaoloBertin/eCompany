@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class WarehouseJournalControllerTest {
+class WarehouseCardControllerTest {
 
     @Autowired
     MockMvc mvc;
@@ -41,40 +41,54 @@ class WarehouseJournalControllerTest {
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getWarehouseJournalsHome() throws Exception {
+    void getWarehouseCardsHome() throws Exception {
 
-        mvc.perform(get("/admin/warehousejournals/all/home").with(user("admin").password("admin")
-                                                                               .roles("ADMIN")))
+        mvc.perform(get("/admin/warehouseCards/all/home").with(user("admin").password("admin")
+                                                                            .roles("ADMIN")))
            .andExpect(model().attribute("customer", notNullValue()))
            .andExpect(model().attribute("warehouses", hasProperty("content", hasSize(8))))
-           .andExpect(view().name("warehouseJournal/warehouseJournalsHome"))
+           .andExpect(view().name("warehousecards/warehouseCardsHome"))
            .andExpect(status().isOk());
     }
 
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getAllWarehouseJournalByPageTest() throws Exception {
+    void getAllWarehouseCardByPageTest() throws Exception {
 
-        mvc.perform(get("/admin/warehousejournals/all").param("page", "0")
-                                                       .param("size", "10")
-                                                       .with(user("admin").password("admin")
-                                                                          .roles("ADMIN")))
+        mvc.perform(get("/admin/warehouseCards/all").param("page", "0")
+                                                    .param("size", "10")
+                                                    .with(user("admin").password("admin")
+                                                                       .roles("ADMIN")))
            .andExpect(model().attribute("customer", notNullValue()))
-           .andExpect(model().attribute("warehouseJournals", hasProperty("content", hasSize(10))))
-           .andExpect(view().name("warehouseJournal/warehouseJournalsList"))
+           .andExpect(model().attribute("warehouseCards", hasProperty("content", hasSize(10))))
+           .andExpect(view().name("warehousecards/warehouseCardsList"))
            .andExpect(status().isOk());
     }
 
     @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
-    void getWarehouseJournalsByWarehouseIdTest() throws Exception {
+    void getWarehouseCardsByWarehouseIdTest() throws Exception {
 
-        mvc.perform(get("/admin/warehousejournals/{warehouseId}", 1L).with(user("admin").password("admin")
-                                                                                        .roles("ADMIN")))
+        mvc.perform(get("/admin/warehouseCards/{warehouseId}", 1L).with(user("admin").password("admin")
+                                                                                     .roles("ADMIN")))
            .andExpect(model().attribute("customer", notNullValue()))
-           .andExpect(model().attribute("warehouseJournals", hasProperty("content", hasSize(10))))
+           .andExpect(model().attribute("warehouseCards", hasProperty("content", hasSize(10))))
+           .andExpect(view().name("warehousecards/warehouseCardsListByWarehouse"))
+           .andExpect(status().isOk());
+    }
+
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
+    @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
+    @Test
+    void getWarehouseCardsByWarehouseIdAndProductCodeTest() throws Exception {
+
+        mvc.perform(get("/admin/warehouseCards/{warehouseId}/{productCode}", 1L, "8883780450").with(user("admin").password("admin")
+                                                                                                                 .roles("ADMIN")))
+           .andExpect(model().attribute("customer", notNullValue()))
+           .andExpect(model().attribute("warehouseCards", hasProperty("content", hasSize(2))))
+           .andExpect(view().name("warehousecards/warehouseCardsListByWarehouseAndProductCode"))
            .andExpect(status().isOk());
     }
 }

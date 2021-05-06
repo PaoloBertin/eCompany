@@ -15,7 +15,6 @@ public class WarehouseCardProduct implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // TODO eliminare ? presente in WarehouseJounal con attributo lineitem
     @Column(name = "product_code")
     private String productCode;
 
