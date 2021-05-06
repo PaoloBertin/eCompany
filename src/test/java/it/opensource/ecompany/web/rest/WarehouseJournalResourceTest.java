@@ -37,9 +37,6 @@ class WarehouseJournalResourceTest {
     private WarehouseService warehouseService;
 
     @Autowired
-    private DocumentationWarehouseService documentationWarehouseService;
-
-    @Autowired
     private WarehouseJournalService warehouseJournalService;
 
     private static String asJsonString(final Object obj) {
@@ -59,7 +56,6 @@ class WarehouseJournalResourceTest {
         mvc.perform(get("/api/warehouseJournal/all/{warehousejournalId}", 5).with(user("admin").password("admin")
                                                                                                .roles("ADMIN"))
                                                                             .contentType(MediaType.APPLICATION_JSON))
-           .andExpect(jsonPath("$.documentationWarehouse.id", equalTo(5)))
            .andExpect(status().isOk());
     }
 
@@ -137,17 +133,7 @@ class WarehouseJournalResourceTest {
         LineItemWarehouse lineItemWarehouse = lineItemWarehouseService.getLineItemWarehouseById(1L)
                                                                       .get(); // TODO sostituire con create
 
-        DocumentationWarehouse documentationWarehouse = new DocumentationWarehouse();
-        // documentationWarehouse.setId(1000L);
-        // documentationWarehouse.setWarehouse(warehouse);
-        // documentationWarehouse.setCausal(Causal.PURCHASE);
-        // documentationWarehouse.setDocument(Document.TRANSPORT_DOCUMENT);
-        // documentation.setDocumentDate(LocalDate.of(2018, 10, 15)); // TODO riattivare
-        // documentationWarehouse.setDocumentNumber(100L);
-        // documentationWarehouse.setLineItemWarehouse(lineItemWarehouse);
-
         WarehouseJournal warehouseJournal = new WarehouseJournal();
-        // warehouseJournal.setDocumentationWarehouse(documentationWarehouse);
 
         mvc.perform(post("/api/warehouseJournal").with(user("admin").password("admin")
                                                                     .roles("ADMIN"))
@@ -163,17 +149,14 @@ class WarehouseJournalResourceTest {
         assertEquals(expected, actual);
     }
 
-    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Disabled
+    @EnabledIf(expression = "#{environment.acceptsProfiles('h2')}", loadContext = true)
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     @Test
     void updateWarehouseJournalTest(@Autowired MockMvc mvc) throws Exception {
 
         WarehouseJournal warehouseJournal = warehouseJournalService.getWarehouseJournalById(5L)
                                                                    .get();
-//        DocumentationWarehouse documentationWarehouse = warehouseJournal.getDocumentationWarehouse();
-        // documentationWarehouse.setDocument(Document.INVOICE);
-        //warehouseJournal.setDocumentationWarehouse(documentationWarehouse);
 
         mvc.perform(put("/api/warehouseJournal").with(user("admin").password("admin")
                                                                    .roles("ADMIN"))

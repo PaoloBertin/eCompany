@@ -54,7 +54,6 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     @Override
     public Page<WarehouseJournal> getByWarehouseName(String name, Pageable pageable) {
 
-//        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseName(name, pageable);
         return null;
     }
 
@@ -62,10 +61,6 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     @Override
     public List<WarehouseJournal> getAllWarehouseJournalByDocumentDateBetween(Long warehouseId, LocalDate documentDateStart,
                                                                               LocalDate documentDateEnd) {
-
-//        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(warehouseId,
-//                                                                                                                              documentDateStart,
-//                                                                                                                              documentDateEnd);
         return null;
     }
 
@@ -74,10 +69,6 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
     public Page<WarehouseJournal> getAllWarehouseJournalByDocumentDateBetween(Long warehouseId, LocalDate documentDateStart,
                                                                               LocalDate documentDateEnd, Pageable pageable) {
 
-//        return warehouseJournalRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseDocumentDateBetween(warehouseId,
-//                                                                                                                              documentDateStart,
-//                                                                                                                              documentDateEnd,
-//                                                                                                                              pageable);
         return null;
     }
 

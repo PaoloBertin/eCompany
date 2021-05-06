@@ -33,7 +33,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Long getNumberWarehouseCardsBydWarehouseId(Long wareouseId) {
 
-//        return warehouseCardRepository.countByDocumentationWarehouseWarehouseId(wareouseId);
+        // TODO
         return null;
 
     }
@@ -42,8 +42,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Long getNumberWarehouseCardsByWarehouseIdAndLineItemProductCode(Long warehouseId, String productCode) {
 
-//        return warehouseCardRepository.countByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(
-//            warehouseId, productCode);
+        // TODO
         return null;
     }
 
@@ -51,7 +50,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Optional<WarehouseCard> getWarehouseCardById(Long warehouseCardId) {
 
-//        return warehouseCardRepository.findById(warehouseCardId);
+        // TODO
         return null;
     }
 
@@ -59,7 +58,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public List<WarehouseCard> getAllWarehouseCards() {
 
-//        return warehouseCardRepository.findAll();
+        // TODO
         return null;
     }
 
@@ -74,7 +73,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Page<WarehouseCard> getWarehouseCardsByWarehouseByPage(Long warehouseId, Pageable pageable) {
 
-//        return warehouseCardRepository.findByDocumentationWarehouseWarehouseId(warehouseId, pageable);
+        // TODO
         return null;
     }
 
@@ -82,8 +81,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public List<WarehouseCard> getWarehouseCardsByWarehouseIdAndProductCode(Long warehouseId, String productCode) {
 
-//        return warehouseCardRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(
-//            warehouseId, productCode);
+        // TODO
         return null;
     }
 
@@ -91,8 +89,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Page<WarehouseCard> getByWarehouseIdAndProductCodeByPage(Long warehouseId, String productCode, Pageable pageable) {
 
-//        return warehouseCardRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(
-//            warehouseId, productCode, pageable);
+        // TODO
         return null;
     }
 
@@ -100,10 +97,7 @@ public class WarehouseCardServiceImpl implements WarehouseCardService {
     @Override
     public Page<WarehouseCard> getByWarehouseIdAndProductIsbn(Long warehouseId, String productCode, Pageable pageable) {
 
-//        return warehouseCardRepository.findByDocumentationWarehouseWarehouseIdAndDocumentationWarehouseLineItemWarehouseProductCode(
-//            warehouseId, productCode, pageable);
+        // TODO
         return null;
     }
-
-
 }
