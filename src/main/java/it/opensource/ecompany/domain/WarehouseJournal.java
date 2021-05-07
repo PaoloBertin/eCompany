@@ -5,6 +5,7 @@ import it.opensource.ecompany.domain.util.Document;
 import it.opensource.ecompany.domain.util.UM;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 public class WarehouseJournal implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
