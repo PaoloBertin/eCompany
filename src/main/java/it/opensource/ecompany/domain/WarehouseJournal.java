@@ -2,9 +2,11 @@ package it.opensource.ecompany.domain;
 
 import it.opensource.ecompany.domain.util.Causal;
 import it.opensource.ecompany.domain.util.Document;
+import it.opensource.ecompany.domain.util.UM;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Table(name = "warehouse_journal")
@@ -38,6 +40,15 @@ public class WarehouseJournal implements Serializable {
 
     @Column(name = "document_number")
     private String documentNumber;
+
+    @Transient
+    private BigDecimal price;
+
+    @Transient
+    private Integer quantity;
+
+    @Transient
+    private UM um;
 
     @Version
     private Long version;
@@ -110,6 +121,36 @@ public class WarehouseJournal implements Serializable {
     public void setDocumentNumber(String documentNumber) {
 
         this.documentNumber = documentNumber;
+    }
+
+    public BigDecimal getPrice() {
+
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+
+        this.price = price;
+    }
+
+    public Integer getQuantity() {
+
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+
+        this.quantity = quantity;
+    }
+
+    public UM getUm() {
+
+        return um;
+    }
+
+    public void setUm(UM um) {
+
+        this.um = um;
     }
 
     public Long getVersion() {
