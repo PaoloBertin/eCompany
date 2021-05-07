@@ -31,9 +31,9 @@ public class WarehouseJournalServiceImpl implements WarehouseJournalService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<WarehouseJournal> getAllWarehouseJurnal() {
+    public long getNumberWarehouseJurnal() {
 
-        return warehouseJournalRepository.findAll();
+        return warehouseJournalRepository.count();
     }
 
     @Transactional(readOnly = true)

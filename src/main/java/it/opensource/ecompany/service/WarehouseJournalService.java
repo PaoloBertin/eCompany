@@ -10,11 +10,11 @@ import java.util.Optional;
 
 public interface WarehouseJournalService {
 
-    List<WarehouseJournal> getAllWarehouseJurnal();
+    long getNumberWarehouseJurnal();
 
-    Page<WarehouseJournal> getAllWarehouseJournalByPage(Pageable pageable);
+    Page<WarehouseJournal> getAllWarehouseJournalByPage(Pageable pageable); //
 
-    Page<WarehouseJournal> getWarehouseJournalsByWarehouseId(Long warehouseId, Pageable pageable);
+    Page<WarehouseJournal> getWarehouseJournalsByWarehouseId(Long warehouseId, Pageable pageable); //
 
     Page<WarehouseJournal> getByWarehouseName(String name, Pageable pageable);
 

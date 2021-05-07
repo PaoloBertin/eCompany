@@ -21,8 +21,8 @@ class WarehouseJournalServiceImplTest {
     @Test
     void getAllWarehouseJurnalTest() {
 
-        int expected = 100;
-        int actual = warehouseJournalService.getAllWarehouseJurnal().size();
+        long expected = 100;
+        long actual = warehouseJournalService.getNumberWarehouseJurnal();
         assertEquals(expected, actual);
     }
 

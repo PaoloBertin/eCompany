@@ -143,9 +143,8 @@ class WarehouseJournalResourceTest {
 
            .andExpect(status().is(201));
 
-        int expected = 85;
-        int actual = warehouseJournalService.getAllWarehouseJurnal()
-                                            .size();
+        long expected = 85;
+        long actual = warehouseJournalService.getNumberWarehouseJurnal();
         assertEquals(expected, actual);
     }
 
@@ -187,9 +186,8 @@ class WarehouseJournalResourceTest {
                                                                             .contentType(MediaType.APPLICATION_JSON))
            .andExpect(status().is(204));
 
-        int expected = 99;
-        int actual = warehouseJournalService.getAllWarehouseJurnal()
-                                            .size();
+        long expected = 99;
+        long actual = warehouseJournalService.getNumberWarehouseJurnal();
         assertEquals(expected, actual);
     }
 
