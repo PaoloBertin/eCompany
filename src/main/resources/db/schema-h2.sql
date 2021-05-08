@@ -22,7 +22,11 @@ DROP TABLE IF EXISTS warehouse_journal;
 DROP TABLE IF EXISTS warehouse_cards;
 
 DROP TABLE IF EXISTS warehouses;
+
 DROP TABLE IF EXISTS transport_documents;
+DROP TABLE IF EXISTS line_item_ddts;
+DROP TABLE IF EXISTS transport_documents_line_itemddts;
+
 DROP TABLE IF EXISTS invoices;
 
 DROP TABLE IF EXISTS purchase_orders;
@@ -246,16 +250,40 @@ CREATE  TABLE IF NOT EXISTS warehouse_cards (
     CONSTRAINT warehouse_cards_fk_02 FOREIGN KEY(product_id) REFERENCES products(id)
 );
 
-CREATE TABLE IF NOT EXISTS transport_documents(
+CREATE TABLE IF NOT EXISTS transport_documents (
     id BIGINT NOT NULL AUTO_INCREMENT,
     transferor_code VARCHAR(25),
     transferee_code VARCHAR(25),
+    movement_date DATE,
+
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
 );
 
-CREATE TABLE IF NOT EXISTS invoices(
+CREATE TABLE IF NOT EXISTS line_item_ddts (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    product_name VARCHAR(255),
+    product_code VARCHAR(25),
+    price DECIMAL(12,4),
+    quantity INTEGER,
+    unit_measure VARCHAR(15),
+    version BIGINT DEFAULT 0,
+
+    PRIMARY KEY(id),
+
+);
+
+CREATE TABLE IF NOT EXISTS transport_documents_line_itemddts (
+    transport_document_id BIGINT NOT NULL,
+    line_itemddt_id BIGINT NOT NULL,
+
+    CONSTRAINT transport_document_lineitemddts_uq_01 UNIQUE (line_itemddt_id),
+    CONSTRAINT transport_document_lineitemddts_fk_01 FOREIGN KEY (transport_document_id) REFERENCES transport_documents(id),
+    CONSTRAINT transport_document_lineitemddts_fk_02 FOREIGN KEY (line_itemddt_id) REFERENCES line_item_ddts(id)
+);
+
+CREATE TABLE IF NOT EXISTS invoices (
     id BIGINT NOT NULL AUTO_INCREMENT,
     transferor_code VARCHAR(25),
     transferee_code VARCHAR(25),

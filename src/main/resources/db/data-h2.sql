@@ -639,16 +639,37 @@ INSERT INTO warehouse_cards(id, movement_date, warehouse_id, product_id, causal,
            ( 99, '2018-10-09',  1,  45, 'UNLOADING_FOR_SALE',            'INVOICE', 'INV00003', 0),
            (100, '2018-10-09',  1,  46, 'UNLOADING_FOR_SALE',            'INVOICE', 'INV00003', 0);
 
-INSERT INTO transport_documents(id, transferor_code, transferee_code, version)
-    VALUES(  1, 's-00001', 'c-00001', 0),
-          (  2, 's-00001', 'c-00001', 0),
-          (  3, 's-00001', 'c-00001', 0),
-          (  4, 's-00001', 'c-00001', 0),
-          (  5, 's-00001', 'c-00001', 0),
-          (  6, 's-00001', 'c-00001', 0);
+INSERT INTO transport_documents(id, transferor_code, transferee_code, movement_date, version)
+    VALUES(  1, 's-00001', 'c-00001', '2018-10-09', 0),
+          (  2, 's-00001', 'c-00001', '2018-10-09', 0),
+          (  3, 's-00001', 'c-00001', '2018-10-09', 0),
+          (  4, 's-00001', 'c-00001', '2018-10-09', 0),
+          (  5, 's-00001', 'c-00001', '2018-10-09', 0),
+          (  6, 's-00001', 'c-00001', '2018-10-09', 0);
+
+INSERT INTO line_item_ddts(id, product_name, product_code, price, quantity, unit_measure, version)
+    VALUES ( 1, 'Da Visual Basic a Java',       '8883780450', 22.50, 10, 'PZ', 0),
+           ( 2, 'Resurrection',                 '8883780451', 30.00,  5, 'PZ', 0),
+           ( 3, 'Java Web Services',            '1449365116', 20.00,  5, 'PZ', 0),
+           ( 4, 'Enterprise JavaBeans',         '0596158025', 40.00,  2, 'PZ', 0),
+           ( 5, 'Java Server Pages',            '0596158035', 40.00,  5, 'PZ', 0),
+           ( 6, 'Falling into infinity',        '0596158085', 10.00,  4, 'PZ', 0),
+           ( 7, 'Applicare UML e i pattern', '9788891901033', 22.00, 10, 'PZ', 0),
+           ( 8,   'Cuffie iTek Taurus H300', '8032539913843', 16.00,  5, 'PZ', 0),
+           ( 9,                 'Alexander', '7321958389362',  4.50,  5, 'PZ', 0);
+
+INSERT INTO transport_documents_line_itemddts(transport_document_id, line_itemddt_id)
+    VALUES(  1,   1),
+          (  1,   2),
+          (  2,   3),
+          (  2,   4),
+          (  3,   5),
+          (  4,   6),
+          (  5,   7),
+          (  5,   8),
+          (  6,   9);
 
 INSERT INTO invoices(id, transferor_code, transferee_code, version)
-
     VALUES(  1, 's-00001', 'c-00001',  0),
           (  2, 's-00001', 'c-00001',  0),
           (  3, 's-00001', 'c-00001',  0),
