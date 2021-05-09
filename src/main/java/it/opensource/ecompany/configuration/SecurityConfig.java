@@ -87,6 +87,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/cart/**").permitAll()
             .antMatchers("/errors/**").permitAll()
             .antMatchers("/admin/purchaseorders/**").hasAnyRole("USER", "ADMIN")
+            .antMatchers("/admin/transportdocuments/**").hasAnyRole("ADMIN")
             .antMatchers("/admin/**").hasRole("ADMIN")
 //            .antMatchers("/admin/warehouse/**").hasRole("ADMIN")
 
