@@ -46,9 +46,11 @@ public class TransportDocumentControllerTest {
     void getAllTransportDocumentByTransferorCodeAndTransfereeCodeByPageTestUnit(String transferorCode, String transfereeCode,
                                                                                 int numberDocuments) throws Exception {
         // "/{transferorCode}/{transfereeCode}"
-        String url = "/admin/transportdocuments/{transferor}/{transfereeCode}";
-        mvc.perform(get(url, transferorCode, transfereeCode).with(user("admin").password("admin")
-                                                                               .roles("ADMIN")))
+        String url = "/admin/transportdocuments";
+        mvc.perform(get(url).param("transferorCode", transferorCode)
+                            .param("transfereeCode", transfereeCode)
+                            .with(user("admin").password("admin")
+                                               .roles("ADMIN")))
            .andExpect(model().attribute("transportDocuments", hasProperty("content", hasSize(numberDocuments))))
            .andExpect(status().isOk())
         ;
@@ -64,9 +66,12 @@ public class TransportDocumentControllerTest {
     @Sql({"/db/schema-h2.sql", "/db/data-h2.sql"})
     void getAllTransportDocumentByTransferorCodeByPageTestUnit(String transferorCode, int numberDocuments) throws Exception {
 
-        String url = "/admin/transportdocuments/{transferorCode}/all";
-        mvc.perform(get(url, transferorCode).with(user("admin").password("admin")
-                                                               .roles("ADMIN")))
+        String url = "/admin/transportdocuments";
+        String transfereeCode = "all";
+        mvc.perform(get(url).param("transferorCode", transferorCode)
+                            .param("transfereeCode", transfereeCode)
+                            .with(user("admin").password("admin")
+                                               .roles("ADMIN")))
            .andExpect(model().attribute("transportDocuments", hasProperty("content", hasSize(numberDocuments))))
            .andExpect(view().name("transportDocuments/transportDocumentsList"))
            .andExpect(status().isOk())
@@ -84,10 +89,12 @@ public class TransportDocumentControllerTest {
     void getAllTransportDocumentByTransfereeCodeByPageTest(String transfereeCode, int numberDocuments) throws Exception {
 
         // String url = "/admin/transportdocuments/all/{" + transfereeCode + "}";
-        String url = "/admin/transportdocuments/all/{transfereeCode}";
-
-        mvc.perform(get(url, transfereeCode).with(user("admin").password("admin")
-                                                               .roles("ADMIN")))
+        String url = "/admin/transportdocuments";
+        String transferorCode = "all";
+        mvc.perform(get(url).param("transferorCode", transferorCode)
+                            .param("transfereeCode", transfereeCode)
+                            .with(user("admin").password("admin")
+                                               .roles("ADMIN")))
            .andExpect(model().attribute("transportDocuments", hasProperty("content", hasSize(numberDocuments))))
            .andExpect(status().isOk())
         ;
@@ -107,4 +114,5 @@ public class TransportDocumentControllerTest {
            .andExpect(status().isOk())
         ;
     }
+
 }

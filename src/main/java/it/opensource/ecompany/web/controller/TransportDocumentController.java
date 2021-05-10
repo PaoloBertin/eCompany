@@ -4,6 +4,7 @@ import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.TransportDocument;
 import it.opensource.ecompany.service.TransportDocumentService;
 import it.opensource.ecompany.service.UserContext;
+import it.opensource.ecompany.web.form.TransportDocumentHomeForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -13,8 +14,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Locale;
 
 @Profile("html")
 @RequestMapping("/admin/transportdocuments")
@@ -53,6 +56,7 @@ public class TransportDocumentController {
         Customer customer = userContext.getCurrentCustomer();
 
         uiModel.addAttribute("customer", customer);
+        uiModel.addAttribute("transportDocumentHomeForm", new TransportDocumentHomeForm());
 
         return "transportDocuments/transportDocumentsHome";
     }
@@ -64,28 +68,34 @@ public class TransportDocumentController {
      * @param uiModel
      * @return
      */
-    @GetMapping("/{transferorCode}/{transfereeCode}")
-    public String getAllTransportDocumentByTransfereeCodeByPage(@PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable,
-                                                                @PathVariable("transferorCode") String transferorCode,
-                                                                @PathVariable("transfereeCode") String transfereeCode,
+    @GetMapping
+    public String getAllTransportDocumentByTransfereeCodeByPage(@RequestParam String transferorCode,
+                                                                @RequestParam String transfereeCode,
+                                                                @PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable,
                                                                 Model uiModel) {
+        Customer customer = userContext.getCurrentCustomer();
 
         log.debug("search all transport documents by transferor=" + transferorCode + " and transfereeCode=" + transfereeCode);
 
         Page<TransportDocument> transportDocuments = null;
-        if ((!transferorCode.equals("all")) && (!transfereeCode.equals("all"))) {
+        if ((!transferorCode.toLowerCase().equals("all")) && (!transfereeCode.toLowerCase().equals("all"))) {
             transportDocuments = transportDocumentService.getAllTransportDocumentByTransferorCodeAndTransfereeCodeByPage(transferorCode, transfereeCode, pageable);
             log.debug("found the transport documents by transferor and transferee");
         }
-        if ((!transferorCode.equals("all")) && (transfereeCode.equals("all"))) {
+        if ((!transferorCode.toLowerCase().equals("all")) && (transfereeCode.toLowerCase().equals("all"))) {
             transportDocuments = transportDocumentService.getAllTransportDocumentByTransferorCodeByPage(transferorCode, pageable);
             log.debug("found the transport documents by transferor");
         }
-        if ((transferorCode.equals("all")) && (!transfereeCode.equals("all"))) {
+        if ((transferorCode.toLowerCase().equals("all")) && (!transfereeCode.toLowerCase().equals("all"))) {
             transportDocuments = transportDocumentService.getAllTransportDocumentByTransfereeCodeByPage(transfereeCode, pageable);
             log.debug("found the transport documents by transferee");
         }
+        if ((transferorCode.toLowerCase().equals("all")) && (transfereeCode.toLowerCase().equals("all"))) {
+            transportDocuments = transportDocumentService.getAllTransportDocumentByPage(pageable);
+            log.debug("found the transport documents by transferee");
+        }
 
+        uiModel.addAttribute("customer", customer);
         uiModel.addAttribute("transportDocuments", transportDocuments);
 
         return "transportDocuments/transportDocumentsList";

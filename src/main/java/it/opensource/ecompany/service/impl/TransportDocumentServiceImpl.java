@@ -46,4 +46,11 @@ public class TransportDocumentServiceImpl implements TransportDocumentService {
 
         return transportDocumentRepository.findByTransfereeCode(transfereeCode, pageable);
     }
+
+    @Override
+    public Page<TransportDocument> getAllTransportDocumentByPage(Pageable pageable) {
+
+        return transportDocumentRepository.findAll(pageable);
+    }
+
 }

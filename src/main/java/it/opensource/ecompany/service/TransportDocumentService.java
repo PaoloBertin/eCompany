@@ -14,4 +14,6 @@ public interface TransportDocumentService {
     Page<TransportDocument> getAllTransportDocumentByTransferorCodeByPage(String transferorCode, Pageable pageable);
 
     Page<TransportDocument> getAllTransportDocumentByTransfereeCodeByPage(String transfereeCode, Pageable pageable);
+
+    Page<TransportDocument> getAllTransportDocumentByPage(Pageable pageable);
 }

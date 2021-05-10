@@ -22,77 +22,34 @@
             <div th:replace="~{fragments/left_side_admin :: left_side}">left side</div>
         </div>
 
-        <div class="col-lg-8">
+        <div class="col-lg-6">
             <br/>
             <h4 th:text="#{label.transportDocument.home}">Transport Dcument</h4>
             <br/>
-            <!--
-            <table class="table">
-                <thead class="thead-light">
-                <tr>
-                    <th th:text="#{label.warehouseJournal.warehouseName}">warehouse name</th>
-                    <th th:text="#{label.warehouseJournal.causal}">causal</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <tr th:each="warehouse : ${warehouses.content}">
-                    <td th:text="${warehouse.name}">warehouse name</td>
-                    <td>
-                        <a th:href="@{'/admin/warehousejournals/' + ${warehouse.id}}" th:text="warehouseJournal"></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            -->
-            <br/>
-            <!-- paginazione
-            <div class="row justify-content-center">
-                <nav aria-label="navigation" th:if="${warehouses.totalPages gt 1}">
-                    <ul class="pagination" th:with="pages=${warehouses.totalPages}">
-                        <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                            <a class="page-link" th:href="@{/admin/warehousejournals/home(page=${0}, size=${size})}">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
-                            <a class="page-link" th:href="@{/admin/warehousejournals/home(page=${page - 1}, size=${size})}">
-                                <span aria-hidden="true">&lsaquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item" th:classappend="disabled">
-                            <a class="page-link" th:text="${page + 1}">-1</a>
-                        </li>
-                        <li class="page-item" th:classappend="disabled">
-                            <a class="page-link">
-                                <span>di</span>
-                            </a>
-                        </li>
-                        <li class="page-item" th:classappend="disabled">
-                            <a class="page-link" th:text="${pages}">3</a>
-                        </li>
-                        <li class="page-item" th:classappend="${page eq (warehouseJournals.totalPages - 1)} ? 'disabled'">
-                            <a class="page-link"
-                               th:href="@{/admin/warehousejournals/home(page=${page + 1},size=${size})}"
-                               aria-label="Previous">
-                                <span aria-hidden="true">&rsaquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item" th:classappend="${page eq (warehouseJournals.totalPages - 1)} ? 'disabled'">
-                            <a class="page-link"
-                               th:href="@{/admin/warehousejournals/home(page=${warehouseJournals.totalPages - 1}, size=${size})}"
-                               aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </nav>
-            </div>
-            -->
-
+            <form name="transportDocumentForm" th:object="${transportDocumentHomeForm}" th:action="@{/admin/transportdocuments}" th:method="get">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="transferorId">Transferor</label>
+                        <select id="transferorId" class="form-control" th:field="*{transferorCode}">
+                            <option th:value="'All'">All</option>
+                            <option th:value="'S00001'" th:text="S00001">One</option>
+                            <option th:value="'S00001'" th:text="S00001">Two</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="transferee">Transferee</label>
+                        <select id="transferee" class="form-control" th:field="*{transfereeCode}">
+                            <option th:value="'All'">All</option>
+                            <option th:value="'C00001'" th:text="C00001">One</option>
+                            <option th:value="'C00002'" th:text="C00002">Two</option>
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+            </form>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-4">
             <div th:replace="~{fragments/right_side :: right_side}">right side warehouse</div>
         </div>
     </div>
