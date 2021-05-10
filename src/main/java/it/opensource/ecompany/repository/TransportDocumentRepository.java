@@ -9,5 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TransportDocumentRepository extends JpaRepository<TransportDocument, Long> {
 
+    Page<TransportDocument> findByTransferorCodeAndTransfereeCode(String transferorCode, String transfereeCode, Pageable pageable);
+
+    Page<TransportDocument> findByTransferorCode(String transferorCode, Pageable pageable);
+
     Page<TransportDocument> findByTransfereeCode(String transfereeCode, Pageable pageable);
 }

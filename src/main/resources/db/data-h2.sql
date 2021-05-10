@@ -642,10 +642,10 @@ INSERT INTO warehouse_cards(id, movement_date, warehouse_id, product_id, causal,
 INSERT INTO transport_documents(id, transferor_code, transferee_code, movement_date, version)
     VALUES(  1, 'S00001', 'C00001', '2018-10-09', 0),
           (  2, 'S00001', 'C00001', '2018-10-09', 0),
-          (  3, 'S00001', 'C00001', '2018-10-09', 0),
-          (  4, 'S00001', 'C00001', '2018-10-09', 0),
-          (  5, 'S00001', 'C00001', '2018-10-09', 0),
-          (  6, 'S00001', 'C00001', '2018-10-09', 0);
+          (  3, 'S00001', 'C00002', '2018-10-09', 0),
+          (  4, 'S00001', 'C00002', '2018-10-09', 0),
+          (  5, 'S00001', 'C00002', '2018-10-09', 0),
+          (  6, 'S00001', 'C00003', '2018-10-09', 0);
 
 INSERT INTO line_item_ddts(id, product_name, product_code, price, quantity, unit_measure, version)
     VALUES ( 1, 'Da Visual Basic a Java',       '8883780450', 22.50, 10, 'PZ', 0),

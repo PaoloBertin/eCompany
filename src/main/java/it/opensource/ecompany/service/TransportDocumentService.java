@@ -8,5 +8,10 @@ public interface TransportDocumentService {
 
     long getNumberTransportDocuments();
 
+    Page<TransportDocument> getAllTransportDocumentByTransferorCodeAndTransfereeCodeByPage(String transferorCode, String transfereeCode,
+                                                                                           Pageable pageable);
+
+    Page<TransportDocument> getAllTransportDocumentByTransferorCodeByPage(String transferorCode, Pageable pageable);
+
     Page<TransportDocument> getAllTransportDocumentByTransfereeCodeByPage(String transfereeCode, Pageable pageable);
 }

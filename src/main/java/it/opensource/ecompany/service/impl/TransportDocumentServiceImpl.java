@@ -26,6 +26,20 @@ public class TransportDocumentServiceImpl implements TransportDocumentService {
         return transportDocumentRepository.count();
     }
 
+    @Override
+    public Page<TransportDocument> getAllTransportDocumentByTransferorCodeAndTransfereeCodeByPage(String transferorCode,
+                                                                                                  String transfereeCode,
+                                                                                                  Pageable pageable) {
+
+        return transportDocumentRepository.findByTransferorCodeAndTransfereeCode(transferorCode, transfereeCode, pageable);
+    }
+
+    @Override
+    public Page<TransportDocument> getAllTransportDocumentByTransferorCodeByPage(String transferorCode, Pageable pageable) {
+
+        return transportDocumentRepository.findByTransferorCode(transferorCode, pageable);
+    }
+
     @Transactional(readOnly = true)
     @Override
     public Page<TransportDocument> getAllTransportDocumentByTransfereeCodeByPage(String transfereeCode, Pageable pageable) {

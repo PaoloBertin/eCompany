@@ -1,7 +1,9 @@
 package it.opensource.ecompany.web.controller;
 
+import it.opensource.ecompany.domain.Customer;
 import it.opensource.ecompany.domain.TransportDocument;
 import it.opensource.ecompany.service.TransportDocumentService;
+import it.opensource.ecompany.service.UserContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -21,10 +23,13 @@ public class TransportDocumentController {
 
     Logger log = LoggerFactory.getLogger(this.getClass());
 
+    private final UserContext userContext;
+
     private final TransportDocumentService transportDocumentService;
 
-    public TransportDocumentController(TransportDocumentService transportDocumentService) {
+    public TransportDocumentController(UserContext userContext, TransportDocumentService transportDocumentService) {
 
+        this.userContext = userContext;
         this.transportDocumentService = transportDocumentService;
     }
 
@@ -37,16 +42,49 @@ public class TransportDocumentController {
 
         uiModel.addAttribute("numberDocuments", numberDocuments);
 
-        return "transportDocuments/transportDocumentsList";
+        return "transportDocuments/transportDocument";
     }
 
-    @GetMapping("/{transfereeCode}")
+    @GetMapping("/all/home")
+    public String getTransportDocumentsHome(Model uiModel) {
+
+        log.debug("retrieves home page of transport documents");
+
+        Customer customer = userContext.getCurrentCustomer();
+
+        uiModel.addAttribute("customer", customer);
+
+        return "transportDocuments/transportDocumentsHome";
+    }
+
+    /**
+     * @param pageable
+     * @param transferorCode codice cedente
+     * @param transfereeCode codice cessionario
+     * @param uiModel
+     * @return
+     */
+    @GetMapping("/{transferorCode}/{transfereeCode}")
     public String getAllTransportDocumentByTransfereeCodeByPage(@PageableDefault(page = 0, size = 10, sort = "id") Pageable pageable,
-                                                                @PathVariable("transfereeCode") String transfereeCode, Model uiModel) {
+                                                                @PathVariable("transferorCode") String transferorCode,
+                                                                @PathVariable("transfereeCode") String transfereeCode,
+                                                                Model uiModel) {
 
-        log.debug("search all transport documents by transfereeCode");
+        log.debug("search all transport documents by transferor=" + transferorCode + " and transfereeCode=" + transfereeCode);
 
-        Page<TransportDocument> transportDocuments = transportDocumentService.getAllTransportDocumentByTransfereeCodeByPage(transfereeCode, pageable);
+        Page<TransportDocument> transportDocuments = null;
+        if ((!transferorCode.equals("all")) && (!transfereeCode.equals("all"))) {
+            transportDocuments = transportDocumentService.getAllTransportDocumentByTransferorCodeAndTransfereeCodeByPage(transferorCode, transfereeCode, pageable);
+            log.debug("found the transport documents by transferor and transferee");
+        }
+        if ((!transferorCode.equals("all")) && (transfereeCode.equals("all"))) {
+            transportDocuments = transportDocumentService.getAllTransportDocumentByTransferorCodeByPage(transferorCode, pageable);
+            log.debug("found the transport documents by transferor");
+        }
+        if ((transferorCode.equals("all")) && (!transfereeCode.equals("all"))) {
+            transportDocuments = transportDocumentService.getAllTransportDocumentByTransfereeCodeByPage(transfereeCode, pageable);
+            log.debug("found the transport documents by transferee");
+        }
 
         uiModel.addAttribute("transportDocuments", transportDocuments);
 
