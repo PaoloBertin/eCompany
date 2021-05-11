@@ -1,8 +1,16 @@
 package it.opensource.ecompany.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+@Setter
+@Getter
 @Table(name = "invoices")
 @Entity
 public class Invoice implements Serializable {
@@ -19,51 +27,16 @@ public class Invoice implements Serializable {
     @Column(name = "transferee_code")
     private String transfereeCode;
 
-    @JoinColumn(name = "line_item_warehouse_id", foreignKey = @ForeignKey(name = "documentations_warehouse_fk_02"))
-    @OneToOne
-    private LineItemWarehouse lineItemWarehouse;
+    @Column(name = "issuing_date")
+    private LocalDate issuingDate;
+
+    @JoinTable(name = "invoices_line_items_invoice",
+            joinColumns = @JoinColumn(name = "invoice_id"),
+            inverseJoinColumns = @JoinColumn(name = "line_item_invoice_id")
+    )
+    @OneToMany
+    private List<Invoice> lineItemsInvoice = new ArrayList<>();
 
     @Version
     private Long version;
-
-    public Long getId() {
-
-        return id;
-    }
-
-    public void setId(Long id) {
-
-        this.id = id;
-    }
-
-    public String getTransferorCode() {
-
-        return transferorCode;
-    }
-
-    public void setTransferorCode(String transferorCode) {
-
-        this.transferorCode = transferorCode;
-    }
-
-    public String getTransfereeCode() {
-
-        return transfereeCode;
-    }
-
-    public void setTransfereeCode(String transfereeCode) {
-
-        this.transfereeCode = transfereeCode;
-    }
-
-    public Long getVersion() {
-
-        return version;
-    }
-
-    public void setVersion(Long version) {
-
-        this.version = version;
-    }
-
 }

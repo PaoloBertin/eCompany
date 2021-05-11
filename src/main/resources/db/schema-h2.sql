@@ -28,6 +28,8 @@ DROP TABLE IF EXISTS line_item_ddts;
 DROP TABLE IF EXISTS transport_documents_line_itemddts;
 
 DROP TABLE IF EXISTS invoices;
+DROP TABLE IF EXISTS line_items_invoice;
+DROP TABLE IF EXISTS invoices_line_items_invoice;
 
 DROP TABLE IF EXISTS purchase_orders;
 DROP TABLE IF EXISTS purchase_orders_line_items;
@@ -270,8 +272,7 @@ CREATE TABLE IF NOT EXISTS line_item_ddts (
     unit_measure VARCHAR(15),
     version BIGINT DEFAULT 0,
 
-    PRIMARY KEY(id),
-
+    PRIMARY KEY(id)
 );
 
 CREATE TABLE IF NOT EXISTS transport_documents_line_itemddts (
@@ -285,11 +286,33 @@ CREATE TABLE IF NOT EXISTS transport_documents_line_itemddts (
 
 CREATE TABLE IF NOT EXISTS invoices (
     id BIGINT NOT NULL AUTO_INCREMENT,
+    issuing_date DATE,
     transferor_code VARCHAR(25),
     transferee_code VARCHAR(25),
     version BIGINT DEFAULT 0,
 
     PRIMARY KEY(id),
+);
+
+CREATE TABLE IF NOT EXISTS line_items_invoice (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    product_name VARCHAR(255),
+    product_code VARCHAR(25),
+    price DECIMAL(12,4),
+    quantity INTEGER,
+    unit_measure VARCHAR(15),
+    version BIGINT DEFAULT 0,
+
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS invoices_line_items_invoice (
+    invoice_id BIGINT NOT NULL,
+    line_item_invoice_id BIGINT NOT NULL,
+
+    CONSTRAINT invoices_lineitems_uq_01 UNIQUE (line_item_invoice_id),
+    CONSTRAINT invoices_lineitems_fk_01 FOREIGN KEY (invoice_id) REFERENCES invoices(id),
+    CONSTRAINT invoices_lineitems_fk_02 FOREIGN KEY (line_item_invoice_id) REFERENCES line_items_invoice(id)
 );
 
 CREATE TABLE IF NOT EXISTS line_items_purchase_orders (

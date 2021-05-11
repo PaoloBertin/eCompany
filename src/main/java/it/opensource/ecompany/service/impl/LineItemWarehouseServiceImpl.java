@@ -1,6 +1,6 @@
 package it.opensource.ecompany.service.impl;
 
-import it.opensource.ecompany.domain.LineItemWarehouse;
+import it.opensource.ecompany.domain.LineItemsInvoice;
 import it.opensource.ecompany.repository.LineItemWarehouseRepository;
 import it.opensource.ecompany.service.LineItemWarehouseService;
 import it.opensource.ecompany.service.ProductsService;
@@ -34,7 +34,7 @@ public class LineItemWarehouseServiceImpl implements LineItemWarehouseService {
     }
 
     @Override
-    public Optional<LineItemWarehouse> getLineItemWarehouseById(Long lineItemWarhouseId) {
+    public Optional<LineItemsInvoice> getLineItemWarehouseById(Long lineItemWarhouseId) {
 
         return lineItemWarehouseRepository.findById(lineItemWarhouseId);
     }

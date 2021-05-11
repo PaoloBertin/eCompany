@@ -2,8 +2,6 @@ package it.opensource.ecompany.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.opensource.ecompany.domain.*;
-import it.opensource.ecompany.domain.util.Causal;
-import it.opensource.ecompany.domain.util.Document;
 import it.opensource.ecompany.service.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -130,8 +128,8 @@ class WarehouseJournalResourceTest {
         Warehouse warehouse = warehouseService.getWarehouseById(4L)
                                               .get();
         Product product = productsService.getProductById(1L);
-        LineItemWarehouse lineItemWarehouse = lineItemWarehouseService.getLineItemWarehouseById(1L)
-                                                                      .get(); // TODO sostituire con create
+        LineItemsInvoice lineItemWarehouse = lineItemWarehouseService.getLineItemWarehouseById(1L)
+                                                                     .get(); // TODO sostituire con create
 
         WarehouseJournal warehouseJournal = new WarehouseJournal();
 

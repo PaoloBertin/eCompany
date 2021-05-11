@@ -1,6 +1,6 @@
 package it.opensource.ecompany.service;
 
-import it.opensource.ecompany.domain.LineItemWarehouse;
+import it.opensource.ecompany.domain.LineItemsInvoice;
 
 import java.util.Optional;
 
@@ -10,6 +10,6 @@ public interface LineItemWarehouseService {
 
     long getNumberLineItemWarehouseByProductCode(String productCode);
 
-    Optional<LineItemWarehouse> getLineItemWarehouseById(Long lineItemWarehouseId);
+    Optional<LineItemsInvoice> getLineItemWarehouseById(Long lineItemWarehouseId);
 
 }

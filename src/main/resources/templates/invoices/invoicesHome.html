@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+<head>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+
+<body>
+
+<div class="container-fluid p-0">
+
+    <!-- intestazione -->
+    <div th:replace="~{fragments/header :: header}">header</div>
+
+    <!-- corpo centrale -->
+    <div class="row">
+        <!--  -->
+        <div class="col-lg-2">
+            <div th:replace="~{fragments/left_side_admin :: left_side}">left side</div>
+        </div>
+
+        <div class="col-lg-6">
+            <br/>
+            <h4 th:text="#{label.invoices.home}">Transport Dcument</h4>
+            <br/>
+            <form name="invoiceForm" th:object="${invoiceHomeForm}" th:action="@{/admin/invoices}" th:method="get">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="transferorId">Transferor</label>
+                        <select id="transferorId" class="form-control" th:field="*{transferorCode}">
+                            <option th:value="'All'">All</option>
+                            <option th:value="'S00001'" th:text="S00001">One</option>
+                            <option th:value="'S00001'" th:text="S00001">Two</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="transferee">Transferee</label>
+                        <select id="transferee" class="form-control" th:field="*{transfereeCode}">
+                            <option th:value="'All'">All</option>
+                            <option th:value="'C00001'" th:text="C00001">One</option>
+                            <option th:value="'C00002'" th:text="C00002">Two</option>
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary" style="margin-right: 5px" th:text="#{label.send}"></button>
+            </form>
+        </div>
+        <div class="col-lg-4">
+            <div th:replace="~{fragments/right_side :: right_side}">right side warehouse</div>
+        </div>
+    </div>
+
+    <!-- pie' pagina -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:replace="~{fragments/footer :: footer}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

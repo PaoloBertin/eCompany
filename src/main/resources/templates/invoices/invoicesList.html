@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="lang=${#locale.language}"
+      th:lang="${lang}">
+
+<head>
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+
+<body>
+<div class="container-fluid p-0">
+
+    <!-- intestazione -->
+    <div th:replace="~{fragments/header :: header}">header</div>
+
+    <div class="row ml-0 mr-0">
+        <div class="col-lg-2">
+            <div th:replace="~{fragments/left_side_admin :: left_side}">left side</div>
+        </div>
+        <div class="col-lg-8">
+            <br/>
+            <h4 th:text="#{label.invoices.listing}">elenco fatture</h4>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th th:text="#{label.invoices.transferorCode}"></th>
+                    <th th:text="#{label.invoices.transfereeCode}"></th>
+                    <th th:text="#{label.invoices.issuingDate}"></th>
+                    <th th:text="#{label.edit}">edit</th>
+                    <th th:text="#{label.delete}">delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="invoice : ${invoices.content}">
+                    <td th:text="${invoice.transferorCode}"></td>
+                    <td th:text="${invoice.transfereeCode}"></td>
+                    <td th:text="${invoice.issuingDate}"></td>
+                    <td>
+                        <a th:href="@{'#'}">
+                            <i class="fa fa-edit fa-lg"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <form th:action="@{'#'}" th:method="delete">
+                            <input type="hidden" name="id" th:value="${0}"/>
+                            <button class="btn">
+                                <i class="fa fa-trash fa-lg"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- Paginazione -->
+            <div class="row justify-content-center">
+                <nav aria-label="navigation" th:if="${invoices.totalPages gt 1}">
+                    <ul class="pagination" th:with="pages=${invoices.totalPages}">
+                        <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{'/admin/invoices/' + ${Id} + '/all'(page=${0}, size=${size})}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="${page eq 0} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{'/admin/products/' + ${categoryId} + '/all'(page=${page - 1}, size=${size})}">
+                                <span aria-hidden="true">&lsaquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="disabled">
+                            <a class="page-link" th:text="${page + 1}">-1</a>
+                        </li>
+                        <li class="page-item" th:classappend="disabled">
+                            <a class="page-link">
+                                <span>di</span>
+                            </a>
+                        </li>
+                        <li class="page-item" th:classappend="disabled">
+                            <a class="page-link" th:text="${pages}">3</a>
+                        </li>
+                        <li class="page-item"
+                            th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{'/admin/invoices/' + ${categoryId} + '/all'(page=${page + 1}, size=${size})}">
+                                <span aria-hidden="true">&rsaquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"
+                            th:classappend="${page eq (products.totalPages - 1)} ? 'disabled'">
+                            <a class="page-link"
+                               th:href="@{'/admin/products/' + ${categoryId} + '/all'(page=${products.totalPages - 1}, size=${size})}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div th:replace="~{fragments/right_side :: right_side}">right side</div>
+        </div>
+    </div>
+
+    <!-- pie' pagina -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div th:replace="~{fragments/footer :: footer}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
