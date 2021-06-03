@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS enterprises;
+
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS authorities;
 DROP TABLE IF EXISTS groups;

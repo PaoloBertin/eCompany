@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
+// TODO portare in rest !!
+
 @Profile("rest")
 @RequestMapping("/api/customers")
 @RestController
